@@ -48,7 +48,6 @@
                 </li>
             </ul>
 
-            <!-- 변경부분 시작-->
             <div class="header_bottom">
                 <div id="category_img">
                     <img
@@ -99,7 +98,6 @@
                 <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<b>번개장터 판매자센터</b>></a>
                 
             </div>
-            <!-- 변경부분 끝 -->
         </div>
         <div class="side_barbox">
             <div class="side_bar">
