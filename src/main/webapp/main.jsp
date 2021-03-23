@@ -555,7 +555,26 @@ autoplaySpeed: 2000,
 
 
 	<footer>
-		<div class="footer_top">
+		<div class="footer1">
+			<div class="footer_11">
+				<a class="sc-hXRMBi footerA" href="/customer/notice">공지사항</a>
+				<a class="sc-hXRMBi footerA" href="/customer/faq/1">자주묻는질문</a>
+				<a href="https://terms.bunjang.co.kr/terms/service-policy.html" 
+				target="_blank" class="sc-epnACN cgGBdw">운영정책</a>
+				<a class="sc-hXRMBi footerA" href="/qna">1:1문의하기</a>
+				<a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1138645836"
+				target="_blank" class="sc-epnACN cgGBdw">사업자정보확인</a>
+				<a href="https://terms.bunjang.co.kr/terms/service.html"
+				target="_blank" class="sc-epnACN cgGBdw">이용약관</a>
+				<a href="https://terms.bunjang.co.kr/terms/privacy.html"
+				target="_blank" class="sc-epnACN cgGBdw"><b>개인정보처리방침</b></a>
+				<a href="https://terms.bunjang.co.kr/terms/youth-policy.html"
+				target="_blank" class="sc-epnACN cgGBdw">청소년보호정책</a>
+				<a href="https://terms.bunjang.co.kr/terms/location.html"
+				target="_blank" class="sc-epnACN cgGBdw">위치기반서비스 이용약관</a>
+			</div>
+		</div>
+		<!-- 		<div class="footer_top">
 			<ul class="footer_top1">
 				<li>공지사항</li>
 				<li>자주묻는질문</li>
@@ -567,7 +586,7 @@ autoplaySpeed: 2000,
 				<li>청소년보호정책</li>
 				<li>위치기반서비스 이용약관</li>
 			</ul>
-		</div>
+		</div> -->
 		<div class="footer_center">
 			<div class="footer_center1">
 				<span class="footer_logo"><img src="./img/번개장터이미지/번개장터로고.png"></span>

@@ -1,0 +1,10 @@
+diff a/src/main/webapp/css/title.css b/src/main/webapp/css/title.css	(rejected hunks)
+@@ -5403,7 +5403,7 @@
+     align-items: center;
+     margin-right: 20px;}
+ .followings_item_img img {width: 190px; height: 190px; } 
+-/*내상점 팔로워*/
++/*�궡�긽�젏 �뙏濡쒖썙*/
+ .followers_box{width: 1030px; padding: 0; margin:0; box-sizing: border-box; display: inline-block;}
+ .followers_item_box{width: 1030px; display: inline-block;}
+ .followers_item{width: 342; height: 388px; display: inline-block; margin:40px}
