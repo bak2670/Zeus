@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="category">
+
+   <select id="middle" parameterType="String" resultType="java.util.List">
+      select c_middle from tb_category where c_big=#{big_ct}
+   </select>
+   
+   <select id="small" parameterType="String" resultType="java.util.List">
+      select c_small from tb_category where c_middle=#{middle_ct}
+   </select>
+
+
+</mapper>  
