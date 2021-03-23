@@ -7,11 +7,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품등록</title>
+    <title>내 상점</title>
     <link rel="stylesheet" href="./css/title.css">
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
+    
+
+
     <style>
+    #bar5{border:1px solid black; border-bottom: white;}
+    .this_bot{width: 1030px; color: rgb(153, 148, 148); font-size: 14px; padding-top: 25px;}
+
         @font-face {
             font-family: 'GmarketSansMedium';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -31,9 +37,7 @@
             font-style: normal;
         }
             </style>
-
 </head>
-
 <body>
     <div class="mainHeader">
         <div class="topHeader">
@@ -43,7 +47,7 @@
                             width="16" height="19" alt="앱다운로드버튼 이미지">앱다운로드</a><button class="bookmark"><img
                             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNSIgdmlld0JveD0iMCAwIDE2IDE1Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggc3Ryb2tlPSIjQ0NDIiBkPSJNLTE2LjUtMTYuNWg0OXY0OWgtNDl6Ii8+CiAgICAgICAgPHBhdGggZmlsbD0iI0U5QjQ1NyIgZmlsbC1ydWxlPSJub256ZXJvIiBkPSJNOCAwbDIuNSA0LjkzNCA1LjUuNzktNCAzLjg0OC45IDUuNDI4TDggMTIuNDM0IDMuMSAxNSA0IDkuNTcyIDAgNS43MjRsNS41LS43OXoiLz4KICAgIDwvZz4KPC9zdmc+Cg=="
                             width="16" height="15" alt="즐겨찾기버튼 이미지">즐겨찾기</button></div>
-                <div class="headerMenu"><button class="loginOut">로그아웃</button>
+                <div class="headerMenu"><button class="loginOut">로그인</button>
                     <div class="noticeBox1">
                         <div class="noticeBox2"><a class="noticeBtn">알림</a>
                             <div class="noticeBox3">
@@ -66,7 +70,7 @@
         </div>
         <div class="zeusTop">
             <div class="zeusBox1">
-                <div class="zeusBox2"><a class="zeusLogo" href="./main.jsp"><img
+                <div class="zeusBox2"><a class="zeusLogo" href="./title.jsp"><img
                             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjM1IiB2aWV3Qm94PSIwIDAgMTI4IDM1Ij4KICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJhIiBkPSJNMCAzNC4wMzZoMTQyVi4wOTJIMHoiLz4KICAgIDwvZGVmcz4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggc3Ryb2tlPSIjQ0NDIiBkPSJNLTEwLjUtNy41aDE0OXY0OWgtMTQ5eiIvPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03KSI+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGNzAwMDAiIGQ9Ik0yOS4wMjUgMTYuNzAxTDE5Ljk0IDI2Ljc5N2EuNTA1LjUwNSAwIDAgMS0uNjI3LjEuNDgzLjQ4MyAwIDAgMS0uMjMtLjU3NWwyLjA2MS02LjM5MWgtMy41OThhLjUyNi41MjYgMCAwIDEtLjQwMi0uMjE1LjUyNy41MjcgMCAwIDEtLjA4NS0uNDVsMi43NzYtMTAuMDYzYy4wNjItLjIxOC4yNi0uMzM4LjQ4OC0uMzM4aDYuNTYxYy4xNyAwIC4zMjkuMDQ5LjQyMi4xOS4wOTQuMTQyLjEwOS4zOC4wNDIuNTM1bC0yLjcyNiA2LjQyMmg0LjAzYy4xOTggMCAuMzguMDQuNDYuMjIzLjA4MS4xOC4wNDcuMzE3LS4wODYuNDY2bTcuMzI2LTguODEyTDIzLjUyNC40MTRjLS41NTItLjMyLTEuMzk2LS4zMi0xLjk0OCAwTDguNTA0IDcuODg5Yy0uNTUzLjMyLTEuMTI4IDEuMTAxLTEuMTI4IDEuNzRWMjQuNThjMCAuNjM4LjYwNSAxLjQyMSAxLjE1NyAxLjc0bDEzLjAyNiA3LjQ3NWMuNTUzLjMyIDEuNDk2LjMyIDIuMDQ4IDBsMTIuNzI1LTcuNDc1Yy41NTItLjMxOS43OC0xLjEwMi43OC0xLjc0VjkuNjI4YzAtLjYzOC0uMjA4LTEuNDItLjc2LTEuNzM5TTEwMy40NTMgMjYuOTQ5Yy0xLjc3NyAwLTMuMjIyLTEuMjAzLTMuMjIyLTIuNjggMC0xLjQ2MyAxLjQ0NS0yLjY1NSAzLjIyMi0yLjY1NSAxLjgzOCAwIDMuMjc2IDEuMTY4IDMuMjc2IDIuNjU1IDAgMS41MDMtMS40MzggMi42OC0zLjI3NiAyLjY4bTAtOC4xMzVjLTMuNjEgMC02LjY2MiAyLjQ5OC02LjY2MiA1LjQ1NSAwIDMuMDIyIDIuOTkgNS40OCA2LjY2MiA1LjQ4IDMuNzE4IDAgNi43NDItMi40NTggNi43NDItNS40OCAwLTMuMDA4LTMuMDI0LTUuNDU1LTYuNzQyLTUuNDU1Ii8+CiAgICAgICAgICAgIDxtYXNrIGlkPSJiIiBmaWxsPSIjZmZmIj4KICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2EiLz4KICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICA8cGF0aCBmaWxsPSIjRjcwMDAwIiBkPSJNNDkuNTYxIDE2LjAxMmg1LjA3MnYtMy4yMjhINDkuNTZ2My4yMjh6bTguMy0yLjA3NWg0LjE1djguMjk5aDMuMjI2VjQuOTQ2SDYyLjAxdjYuMjI0aC00LjE1VjYuMWgtMy4yMjd2My45Mkg0OS41NnYtMy45MmgtMy4yMjd2MTIuNjc4SDU3Ljg2di00Ljg0ek02OC4wMDQgOS43ODhoNi40NTR2Mi4wMDJjMCAuOTQtLjExNCAxLjc2Ni0uMjYzIDIuNDU2LS4xNS42ODctLjQ4NCAxLjM1OC0uOTU4IDEuOTk0LS40NzUuNjM4LTEuMTg5IDEuMzE1LTIuMTA0IDIuMDEzLS45MTcuNy0yLjE2MyAxLjU0OS0zLjY5NiAyLjUyNGwtLjAyOS4wMTcgMS45NDggMi40ODQuMDIyLS4wMTZjMS43NjctMS4xNjQgMy4yMTEtMi4xODUgNC4yOTItMy4wMzQgMS4wODYtLjg1MSAxLjkzNy0xLjY4NiAyLjUzLTIuNDguNTkzLS43OTUuOTg2LTEuNjI3IDEuMTktMi40NzQuMjAzLS44NDUuMjk1LTEuODQ3LjI5NS0yLjk3NlY2Ljc5aC05LjY4MXYyLjk5OHpNOTguMzcyIDE0LjI4OGMuMDcuMTQzLjI2LjM0NC41NzguNjE0LjMzNy4yODYuNzk0LjYzMiAxLjM1NiAxLjAyOGE3OS4zOTIgNzkuMzkyIDAgMCAwIDMuMjcyIDIuMjA3bC4wMi4wMTUgMS44MTctMi4zNTgtLjAyNy0uMDE2YTU3Ljg5IDU3Ljg5IDAgMCAxLTMuNzctMi41NDQgNS44MTYgNS44MTYgMCAwIDEtLjg2LS43NDggNC4wMjMgNC4wMjMgMCAwIDEtLjUzLS43MWMtLjEzLS4yMy0uMjYtLjQ4LS4zMDMtLjc0My0uMDQ1LS4yNjUtLjExLS41NTYtLjExLS44NjRWOC44NjVoNC42MTFWNi4wOTlIOTEuNzQ4djIuNzY2aDQuODR2MS4zMDRjMCAuNjMxLS4xNzUgMS4xOTgtLjQyOCAxLjY4NS0uMjU1LjQ5LS42MzcuOTM2LTEuMDkzIDEuMzNhNDUuMjAyIDQ1LjIwMiAwIDAgMS00LjM5OCAzLjI2OWwtLjAzLjAxNyAyLjAwMSAyLjQzNS4wMjEtLjAxNWMuNjctLjQ0NyAxLjMwOS0uODk3IDEuOTAyLTEuMzM4LjU5NS0uNDQzIDEuMTgtLjg5MyAxLjczOS0xLjMzN2ExNi45OSAxNi45OSAwIDAgMCAxLjQ2NS0xLjIxYy4zMzYtLjMyLjUzNS0uNTU2LjYwNS0uNzE3TTEyOC40OTEgMTkuNjEyYy0xLjI1LjE2OC0yLjYxNy4zNDItNC4wNjIuNC0xLjQ0LjA2LTIuODE3LjE1LTQuMDkuMTVoLTEuODUxdi0zLjkyaDcuMzc3di0yLjc2NmgtNy4zNzdWOS41NTdoOC4yOThWNi43OWgtMTEuNzU1djE2LjEzN2g0LjUxYy44MzkgMCAxLjY3MS0uMDYgMi40Ny0uMDY4LjgzNy0uMDA4IDEuNjY0LS4wNTYgMi40Ni0uMDlhNjMuMzUgNjMuMzUgMCAwIDAgMi4zMjYtLjE1NGMuNzQtLjA2IDEuNDI5LS4xNDggMi4wNDgtLjI1bC4wMjktLjAwNi0uMzU0LTIuNzUtLjAyOS4wMDN6TTUzLjcxIDIwLjYyMmgtMy42ODhWMjkuMTUyaDE1LjQ0NXYtMi43NjdINTMuNzExek04NS4yOTMgNS4wODZ2Ny4yMzdoLTIuMDc0VjQuOTQ3SDc5Ljc2djIzLjEzOGwzLjQ1OS0uODJWMTUuMzE5aDIuMDc0djEyLjc2NmwzLjQ1Ny0uODJWNC45NDdoLTMuNDU3eiIgbWFzaz0idXJsKCNiKSIvPgogICAgICAgICAgICA8cGF0aCBmaWxsPSIjRjcwMDAwIiBkPSJNMTMwLjkzNiA0Ljk0N3Y4LjUyOWgtNC4xNVYxNi40NzRoNC4xNXYxMS42MTJsMy42ODktLjg3OVY0Ljk0N3pNMTEwLjQyIDQuOTQ3aC0zLjY4OXYxMy44MzFoMy42ODh2LTUuMzAxaDMuMjI3di0yLjc2OGgtMy4yMjd6IiBtYXNrPSJ1cmwoI2IpIi8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
                             width="136" height="40" alt="번개장터 로고"></a>
                     <div class="zeusSerach1">
@@ -161,7 +165,7 @@
                             href="./myshop1.jsp"><img
                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAwCAYAAABuZUjcAAAAAXNSR0IArs4c6QAABCNJREFUaAXtWUtS20AQtWxXJSEbZ8XWuYH4rcEnwNzALg6Q5AQJy6yAE1icIOYEmDWf6AbRispSqwSqAOU91QwetUbWSAFjqpgq10z39OdNT89P9hqPVNbW1vowtY2fr36m5RAEf8cXFxdjs6Nu26urqPVWV1cHnud9Bd3VvJI6SpJk7/LyMiiRm9ldG/jGxoZ/f38/gnVGuE4Jm83m8OzsjDNRudQCrkCfwFunssesQgzwvTrgKwMvAR0jbQKkwinqmBjR7qC9iXoA0jbQWuArAfd9v9NqtX5ZAMQAxrw9QF9hwXr4jEFwPcgBxHd3dx/DMEwHW2jA6Gga7dImQO9DSDplrvbKQNM4ZSiLZkjaKAwIbTsX54gj2l0VbdN45UhRuWjmVNQj00FR2zniAM0pzhRM+06V6dXK1KGupnVt86H7ZO0MHIp9oRycn59PBM+ZVLqBUJA+RPeUdAK+vr6+BRWZ28dTM7Vb0kZH+So16AQcB40vLT3G0W2zYfMlfZN2Ao6dQEZ7YjNWk5exZfFlNdu2cisw/4ze7DeSise+1wiXhjdfKrjJif43cAV6K2d5FiOZ1enW55QqyLtYmJvmfNKQC0yIWsisztQWRC2+LAbcczwU2h3eWcjzmt4YVSz6Z5Gx0mkoGx1TGDkemnRR2ynitv0akflEo++G1xHSZa/IQY4P2VQHHdqGKWPzZfbrthNwJRxoJVUPdNSXdm8OksQrBU8ZylJf6Q6ULV0FulFWOwPHEX0kjSFiI947yH+/e/0NMj1EfyzlyGMfZdhHHepKOZsPKaNp50sWFfCu/IGqr5VVHeJy1JN3lr+jt93rxnX8YZjNf3XBOoGuL+yMcSDtCF4hWQk4nPKG+BPW0igbVmO0h7aT0JDhwDloRjqnj8GvYPCRKT+rXQk4DfEugUcDI2YrfAgfcme4vb2NKNBut7tICx9pwMXcJU8WppHrotS6lYFTUb3sczmqjVapMdBhnRd/LeAExl0BkWTOd0nXKBFmZqfOQ5m+WjUcpipXV1e/l5eXj5DzN2D4+L11tMVHxHfkNCMdOerkxGpH3LTEnQLR44ehTfC38MstPvAmSItTzFIgdyD0LU7hInZ9FCwO6lckxRGYmePMXezDXHhzLzgHsBSKPxBZgat9mgfGs4A2ohTyQLPt8xngam/mwfLcgA3saZNfyzJfdh+AK9A8yuVWJo08Fx0D/MOX3RR4CegYSMM5o+WM2wL4AD59LKu7sRTkhYlfYIM5g07dFfzToe/xK17Bhcl6x573AIru7ryYNXFMbwtA/AKbexgImbmQ3A6JBc5i0yEx8+nWF8zDWfunKTuPNrEA6KHw1be9OSdCaBHIHCYb8EUAmsGgX1Mm80UAR7pEJmi2XwRwCfoVuC0iT817TZWnjrC0/2Ij/g8RGqgJ9UrG3gAAAABJRU5ErkJggg=="
                                 width="23" height="24" alt="내상점버튼 이미지">내상점</a><a class="sellBtn"
-                            href="/./product.jsp"><img
+                            href="./product.jsp"><img
                                 src="data:image/png;base64,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"
                                 width="23" height="26" alt="판매하기버튼 이미지">판매하기</a></div>
                 </div>
@@ -213,552 +217,218 @@
             </div>
         </div>
     </div>
-
-        <div class="sl-container full">
-            <div class="sl-menu">
-                <nav class="menu">
-                    <div class="m1">
-                        <a class="click clickView1" href="#">상품등록</a>
-                    </div>
-                    <div class="m1">
-                        <a class="clickView2" href="#">상품관리</a>
-                    </div>
-                    <div class="m2">
-                        <a href="trade.jsp" target="_black" rel="noopener noreferrer" class="m3" href="#">구매/판매 내역</a>
-                    </div>
-                </nav>
-            </div>
-            <div class="main">
-                <main class="box">
-                    <section class="info">
-                        <h2>기본정보
-                            <span>*필수항목</span>
-                        </h2>
-						<!-- 여기부터 상품 판매 위한 정보 입력 form 태그 -->
-						<form method="post" action="product_ok.jsp" enctype="multipart/form-data">
-                        <ul class="content">
-                            <li class="content-list">
-                                <div class="productimg">
-                                    상품이미지
-                                    <span>*</span>
-                                    <small>
-                                        (0/12)
-                                    </small>
-                                </div>
-                                <div class="img">
-                                    <ul class="imgsize">
-                                        <li class="imgstyle">
-                                            이미지등록
-                                            <input type="file" accept="image/jpg, imgae/jpeg, image/png" multiple>
-                                        </li>
-                                    </ul>
-                                    <div class="imgtext">
-                                        <b>* 상품 이미지는 640*640에 최적화 되어 있습니다.</b>
-                                        <br>
-                                        - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.
-                                        <br>
-                                        - 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.
-                                        <br>
-                                        - 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.
-                                        <br>
-                                        - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
-                                        <br>
-                                        최대 지원 사이즈인 640 * 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="productstitle">
-                                <div class="title">
-                                    제목
-                                    <span>*</span>
-                                </div>
-                                <div class="titlecontainer">
-                                    <div class="titlebox">
-                                        <div class="sc-grYksN titletext">
-                                            <input type="text" placeholder="상품 제목을 입력해주세요." class="titleinput" id="titleCon" value="">
-                                            <a target="_black" class="noTrade" href="https://m.bunjang.co.kr/customer/faq/2?id=220">거래금지 품목</a>
-                                            <button type="button" class="tradeCancle" style="display: none;"></button>
-                                        </div>
-                                        <div class="txtcount">
-                                            0/40
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="categorymain">
-                                <div class="categorytitle">
-                                    카테고리
-                                    <span>*</span>
-                                </div>
-                                <div class="categorytext">
-                                    <div class="categorybox">
-                                        <div class="bigcategory">
-                                            <ul class="categorylist">
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">도서/티켓/취미/애완</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스타굿즈</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">생활/문구/가구/식품</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스포츠레저</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">뷰티/미용</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">유아동/출산</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">기타</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">차량/오토바이</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">구인구직</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">재능</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">지역 서비스</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">번개나눔</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">커뮤니티</button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="bigcategory">
-                                            <ul class="categorylist">
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">도서/티켓/취미/애완</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스타굿즈</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">생활/문구/가구/식품</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스포츠레저</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">뷰티/미용</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">유아동/출산</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">기타</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">차량/오토바이</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">구인구직</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">재능</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">지역 서비스</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">번개나눔</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">커뮤니티</button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="bigcategory">
-                                            <ul class="categorylist">
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">도서/티켓/취미/애완</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스타굿즈</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">생활/문구/가구/식품</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스포츠레저</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">뷰티/미용</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">유아동/출산</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">기타</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">차량/오토바이</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">구인구직</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">재능</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">지역 서비스</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">번개나눔</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">커뮤니티</button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <h3 class="select-category">
-                                        선택한 카테고리 : 
-                                        <b></b>
-                                    </h3>
-                                </div>
-                            </li>
-                            <li class="placemain">
-                            <div class="placetitle">
-                                거래지역
-                                <span>*</span>
-                            </div>
-                            <div class="placebox">
-                                <div class="place">
-                                    <button type="button" class="placebutton">내 위치</button>
-                                    <button type="button" class="placebutton">최근지역</button>
-                                    <button type="button" class="placebutton">주소 검색</button>
-                                </div>
-                                <input readonly="" placeholder="선호 거래 지역을 검색해주세요." class="placesearch" value="">
-                            </div>
-                        </li>
-                        <li class="statemian">
-                            <div class="statetitle">
-                                상태
-                                <span>*</span>
-                            </div>
-                            <div class="statebox">
-                                <div class="state">
-                                    <input id="hisProduct" type="radio" name="condition" value="중고상품" name="state" checked>
-                                    <label for="hisProduct" class="hisProduct">
-                                        중고상품
-                                    </label>
-                                    <input id="newProduct" type="radio" name="condition" value="새상품" name="state">
-                                    <label for="newProduct" class="newProduct">
-                                        새상품
-                                    </label>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="changemain">
-                            <div class="changetitle">
-                                상태
-                                <span>*</span>
-                            </div>
-                            <div class="changebox">
-                                <div class="change">
-                                    <input id="nochange" type="radio" value=""  name="change" checked>
-                                    <label for="nochange" class="nochange">
-                                        교환불가
-                                    </label>
-                                    <input id="okchange" type="radio" value=""  name="change">
-                                    <label for="okchange" class="okchange">
-                                        교환가능
-                                    </label>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="pricemain">
-                            <div class="pricetitle">
-                                가격
-                                <span>*</span>
-                            </div>
-                            <div class="pricebox">
-                                <div class="prcie">
-                                    <input type="text" placeholder="숫자만 입력해주세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="prcienum" value="">
-                                    원
-                                </div>
-                                <div class="noNum" style="display: none;">
-                                    100원 이상 입력해주세요.
-                                </div>
-                                <div class="pricesub">
-                                    <div class="pricesubBox">
-                                        <input id="freesShipping" type="checkbox">
-                                        <label for="freesShipping" class="prciebutton">
-                                            배송비 포함
-                                        </label>
-                                    </div>
-                                    <div class="pricesubBox">
-                                        <input id="contactHope" type="checkbox">
-                                        <label for="contactHope" class="prciebutton">
-                                            가격협의 가능
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="exMain">
-                            <div class="exTitle">
-                                설명
-                            </div>
-                            <div class="ex">
-                                <textarea placeholder="상품 설명을 입력해주세요." rows="6" class="productEx" id="content" maxlength="2000"></textarea>
-                                <div class="excomment">
-                                    <span>
-                                        혹시
-                                        <a target="_blank" href="/customer/notice?id=607">카카오톡 ID</a>
-                                        를 적으셨나요?
-                                    </span>
-                                    <div class="exCnt" id="counter">
-                                        0/2000
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="tagMain">
-                            <div class="tagTitle">
-                                연관태그
-                            </div>
-                            <div class="tagbox">
-                                <div class="tagStyle1">
-                                    <div class="tagStyle2">
-                                        <ul class="tagName" id="tag-list">
-                                            <li>
-                                                <button type="button">
-    
-                                                </button>
-                                                <button type="button"></button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                        <div class="tagStyle3">
-                                        <div class="tagStyle4">
-                                            <input type="text" id="tag" placeholder="연관태그를 입력해주세요. (최대 5개)" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="tagList">
-                                    <li>
-                                        태그는 띄어쓰기로 구분되며 최대 9자까지 입력할 수 있습니다.
-                                    </li>
-                                    <li>
-                                        태그는 검색의 부가정보로 사용 되지만, 검색 결과 노출을 보장하지는 않습니다.
-                                    </li>
-                                    <li>
-                                        검색 광고는 태그정보를 기준으로 노출됩니다.
-                                    </li>
-                                    <li>
-                                        상품과 직접관련이 없는 다른 상품명,브랜드,스팸성 키워드 등을 입력하면 노출이 중단되거나 상품이 삭제될 수 있습니다.
-                                    </li>
-                                </ul>
-                            </div>
-                            </li>
-                            <li class="quantityMain"> 
-                                <div class="quantityTitle">
-                                    수량
-                                </div>
-                                <div class="quantityBox">
-                                    <div class="quantity">
-                                        <input type="text" class="quantityNum" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="1">
-                                        개
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        </form>
-                    </section>
-                    <div class="guide">
-                        <h3>
-                            꼭 읽어주세요
-                            <a href="https://pay2.bunjang.co.kr/introduce" target="_blank" rel="noopener noreferrer">이용 가이드</a>
-                        </h3>
-                        <p>
-                            상품 등록 시
-                            <b>번개페이가 자동 적용</b>
-                            됩니다. 거래완료 후 등록된 계좌로 입금되며
-                            <b>정산 확인은 '마이메뉴 &gt; 구매/판매내역</b>
-                            에서 가능합니다.
-                        </p>
-                    </div>
-                    <div class="warningGuide">
-                        <div>
-                        <b>재난 긴급생활비 거래 주의안내</b>
-                        <p>
-                            재난 긴급생활비 거래는 위법행위에 해당할 수 있습니다. 관련 키워드가 포함되어 있는 상품은 판매완료 처리됩니다.<br>
-                            이러한 상품을 판매하는 경우 서비스 이용의 제재 및 관련 법에 따라 처벌받을 수 있음에 유의하시기 바랍니다.
-                        </p>
-                    </div>
-                    </div>
-                    <div class="registMain">
-                        <div class="regist">
-                            <button type="submit" class="registbutton"></button>
-                        </div>
-                    </div>
-                </main>
-            </div>
-            <div class="mngContainer viewOn clickOff">
-                <main class="mngBox">
-                    <div class="mngBox1">
-                        <form class="srBox"><input type="text" placeholder="상품명을 입력해주세요."
-                                value=""><button type="submit" class="srButton"></button></form>
-                        <div class="filBox1">
-                            <div class="filBox2">
-                                <div class="filBox3">
-                                    <div class="filBox4">
-                                        <div class="filTxt">10개씩</div><input
-                                            id="" readonly="" tabindex="0"
-                                            aria-autocomplete="list" class="filSty" value="">
-                                    </div>
-                                    <div class="mngClick"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filBox1">
-                            <div class="filBox2">
-                                <div class="filBox3">
-                                    <div class="filBox4">
-                                        <div class="filTxt">전체</div>
-                                        <input id="" readonly="" tabindex="0"
-                                            aria-autocomplete="list" class="filSty" value="">
-                                    </div>
-                                    <div class="mngClick"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table>
-                            <tr>
-                                <th>사진</th>
-                                <th>판매상태</th>
-                                <th>상품명</th>
-                                <th>가격</th>
-                                <th>찜/댓글</th>
-                                <th>최근수정일</th>
-                                <th>기능</th>
-                            </tr>
-                        <tbody></tbody>
-                    </table>
-                    <div class="mngNO">등록된 상품이 없습니다</div>
-                </main>
-                <div class="mbnPgBox">
-                    <div class="mbnPgBox1">
-                        <a class="mbnPgA"><img
-                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiM5Qjk5QTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTMuNiAxMmEuNTk2LjU5NiAwIDAgMCAuNDQ5LS4yMDJsNC44LTUuNGEuNi42IDAgMCAwIDAtLjc5N2wtNC44LTUuNGEuNi42IDAgMSAwLS44OTcuNzk3TDcuNTk4IDYgMy4xNTIgMTFBLjYuNiAwIDAgMCAzLjYgMTIiLz4KPC9zdmc+Cg=="
-                                width="12" height="12" alt="페이징 아이콘" class="bAUmor"></a><a
-                            class="mbnPgC">1</a><a class="mbnPg">2</a><a
-                            class="mbnPg">3</a><a class="mbnPg">4</a><a
-                            class="mbnPg">5</a><a class="mbnPg">6</a><a
-                            class="mbnPg">7</a><a class="mbnPg">8</a><a
-                            class="mbnPg">9</a><a class="mbnPg">10</a><a
-                            class="mbnPgA"><img
-                                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiM5Qjk5QTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTMuNiAxMmEuNTk2LjU5NiAwIDAgMCAuNDQ5LS4yMDJsNC44LTUuNGEuNi42IDAgMCAwIDAtLjc5N2wtNC44LTUuNGEuNi42IDAgMSAwLS44OTcuNzk3TDcuNTk4IDYgMy4xNTIgMTFBLjYuNiAwIDAgMCAzLjYgMTIiLz4KPC9zdmc+Cg=="
-                                width="12" height="12" alt="페이징 아이콘"></a></div>
+        <div class="container">
+            <div class="myshop_top"> 
+                <div class="myshop_profile">
+                    <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
+                    <div class="myshop_name">상점75453212호</div>
+                    <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
+                    <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
                 </div>
+                <div class="myshop_text">
+                    <div class="myshop_text_top"> 
+                        <div class="myshop_text_top1">상점75476231호 
+                            <button id="myshop_name_change" onclick="myshop_name_change();">상점명수정</button>
+                            <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
+                        </div>
+                        
+                        <div class="myshop_text_top1_click">
+                            <input type="text" value="상점이름" id="name_text">
+                            <button type="button"onclick="myshop_name_change_ok()"; >확인</button>
+                            <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
+                        </div>
+                        
+
+                    </div>
+                    <ul class="myshop_text_center">
+                        <li class="myshop_text_center1">
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                        </li>
+                        <li class="myshop_text_center2">
+                            <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
+                        </li>
+                        <li class="myshop_text_center3">
+                            <img src="./img/번개장터이미지/상품판매.png" width="14" height="13">상품판매 0 회
+                        </li>
+                        <li class="myshop_text_center4">
+                            <img src="./img/번개장터이미지/택배발송.png" width="14" height="13">택배발송 0 회
+                        </li>
+                    </ul>
+                    <div class="myshop_text_bottom">
+                        <button onclick="Introduction()">소개글 수정</button>
+                    </div>
+                    <div class="myshop_text_bottom_click">
+                        <textarea></textarea>
+                        <button onclick="Introduction_ok()">확인</button>
+                    </div>
+                </div>
+        </div>
+
+
+            <div class="contens2">
+                <div class="menubar">
+                    <div class="bar" id="bar1">
+                        <a class="b1" href="./myshop1.jsp">
+                            상품
+                            <span class="b1_1">38</span>
+                        </a>
+                    </div>
+                    <div class="bar" id="bar2">
+                        <a class="b2" href="./myshop2.jsp">
+                            상점문의
+                            <span class="b2_1">2</span>
+                        </a>
+                    </div>
+                    <div class="bar" id="bar3">
+                        <a class="b3" href="./myshop3.jsp">
+                            찜
+                            <span class="b3_1">3</span>
+                        </a>
+                    </div>
+                    <div class="bar"  id="bar4">
+                        <a class="b4" href="./myshop4.jsp">
+                            상점후기
+                            <span class="b4_1">4</span>
+                        </a>
+                    </div>
+                    <div class="bar" id="bar5">
+                        <a class="b5" href="./myshop5.jsp">
+                            팔로잉
+                            <span class="b5_1">1</span>
+                        </a>
+                    </div>
+                    <div class="bar" id="bar6">
+                        <a class="b6" href="./myshop6.jsp">
+                            팔로워
+                            <span class="b6_1">5</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menubar2">
+                    <div class="mn1">
+                        팔로잉<span class="mn_1">0</span>
+                    </div>
+                </div>
+                <!-- <div class="this_bot">
+                    <p>아직 팔로우한 사람이 없습니다.</p>
+                </div> -->
+            </div>
+            <div class="followings_box">
+            
+                <div class="followings_item">
+                    <div class="followings_profile">
+                            <a href="#" class="followings_img">
+                                <img src="./img/번개장터이미지/dog.jpg">
+                            </a>         
+                            <a href="#" class="followings_name">상점754726254호</a>
+                            <div class="followings_menu">
+                                <a href="#" class="followings_menu_1">상품</a>
+                                <a href="#" class="followings_menu_2">팔로워</a>
+                            </div>
+                            <div class="followings_btn">
+                                <button class=><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            </div>
+                            <div class="followers_btn1">
+                                <button><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            </div>
+                    </div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                </div>
+
+                <div class="followings_item">
+                    <div class="followings_profile">
+                            <a href="#" class="followings_img">
+                                <img src="./img/번개장터이미지/dog.jpg">
+                            </a>         
+                            <a href="#" class="followings_name">상점754726254호</a>
+                            <div class="followings_menu">
+                                <a href="#" class="followings_menu_1">상품</a>
+                                <a href="#" class="followings_menu_2">팔로워</a>
+                            </div>
+                            <div class="followings_btn">
+                                <button class=><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            </div>
+                            <div class="followers_btn1">
+                                <button><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            </div>
+
+                    </div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                </div>
+
+                <div class="followings_item">
+                    <div class="followings_profile">
+                            <a href="#" class="followings_img">
+                                <img src="./img/번개장터이미지/dog.jpg">
+                            </a>         
+                            <a href="#" class="followings_name">상점754726254호</a>
+                            <div class="followings_menu">
+                                <a href="#" class="followings_menu_1">상품</a>
+                                <a href="#" class="followings_menu_2">팔로워</a>
+                            </div>
+                            <div class="followings_btn">
+                                <button><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            </div>
+                            <div class="followers_btn1">
+                                <button><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            </div>
+                    </div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                    <div class="followings_item_img"><img src="./img/번개장터이미지/dog.jpg"></div>
+                </div>
+
             </div>
         </div>
-    <footer>
-        <div class="footer_top">
-            <ul class="footer_top1">
-                <li>공지사항</li>
-                <li>자주묻는질문</li>
-                <li>운영정책</li>
-                <li>1:1문의하기</li>
-                <li>사업자정보확인</li>
-                <li>이용약관</li>
-                <li><b>개인정보처리방침</b></li>
-                <li>청소년보호정책</li>
-                <li>위치기반서비스 이용약관</li>
-            </ul>
-        </div>
-        <div class="footer_center">
-            <div class="footer_center1">
-                <span class="footer_logo"><img src="./img/번개장터이미지/번개장터로고.png"></span>
-                <span class="footer_logo2"><img src="./img/번개장터이미지/푸터쪽.png">&nbsp;회사소개</span>
+        <footer>
+            <div class="footer_top">
+                <ul class="footer_top1">
+                    <li>공지사항</li>
+                    <li>자주묻는질문</li>
+                    <li>운영정책</li>
+                    <li>1:1문의하기</li>
+                    <li>사업자정보확인</li>
+                    <li>이용약관</li>
+                    <li><b>개인정보처리방침</b></li>
+                    <li>청소년보호정책</li>
+                    <li>위치기반서비스 이용약관</li>
+                </ul>
             </div>
-            <p class="footer_center2">누구나, 무엇이든 쉽고 편하고 안전하게 거래하는 세상을 꿈꾸고 있습니다.</p>
-            <p class="footer_center3">
-                <a href="#"><img src="./img/번개장터이미지/페이스북.png"></a>
-                <a href="#"><img src="./img/번개장터이미지/블로그.png"></a>
-                <a href="#"><img src="./img/번개장터이미지/인스타.png"></a>
-            </p>
-        </div>
-        <div class="footer_bottom">
-            <p>대표이사: 이재후 | 개인정보보호담당자: 이동주 | 사업자등록정보: 113-86-45836 | 통신판매업신고: 2019-서울서초-1126</p>
-            <p>주소: 서울특별시 서초구 서초대로38길 12 마제스타시티 타워2 지하1층</p>
-            <p>고객센터 대표번호: 1670-2910 | FAX: 02-598-8241</p>
-            <p>고객센터 운영시간:전화문의 : 9시~18시(주말.공휴일 제외) | 1:1문의 : 9시~18시</p>
-            <p class="footer_bottom1">※점심시간 12~13시</p>
-            <p>고객센터 문의 help@bunjang.co.kr | 제휴문의 partner@bunjang.co.kr</p>
-            <p>호스팅서비스 제공자: Amazon Web Services (AWS)</p>
-            <br>
-            <p>“번개장터_컨시어지” 상점의 판매상품을 제외한 모든 상품들에 대하여, 번개장터㈜는 통신판매중개자로서 중고거래마켓 번개장터의 거래 당사자가 아니며, 입점판매자가 등록한 상품정보 및 거래에
-                대해 책임을 지지 않습니다.</p>
-            <br>
-            <p class="footer_bottom2"><b>우리은행 채무지급보증 안내</b></p>
-            <p>번개장터(주)는 “번개장터_컨시어지” 상점이 판매한 상품에 한해, 고객님이 현금 결제한 금액에 대해 우리은행과 채무지급보증 계약을 체결하여 안전거래를 보장하고 있습니다.</p>
-            <p class="footer_bottom3"><a href="#">서비스 가입사실 확인</a></p>
-            <br>
-            <p>Copyright ⓒ Bungaejangter Inc. All rights reserved.</p>
-        </div>
-    </footer>
-
-
-
+            <div class="footer_center">
+                <div class="footer_center1">
+                    <span class="footer_logo"><img src="./img/번개장터이미지/번개장터로고.png"></span>
+                    <span class="footer_logo2"><img src="./img/번개장터이미지/푸터쪽.png">&nbsp;회사소개</span>
+                </div>
+                <p class="footer_center2">누구나, 무엇이든 쉽고 편하고 안전하게 거래하는 세상을 꿈꾸고 있습니다.</p>
+                <p class="footer_center3">
+                    <a href="#"><img src="./img/번개장터이미지/페이스북.png"></a>
+                    <a href="#"><img src="./img/번개장터이미지/블로그.png"></a>
+                    <a href="#"><img src="./img/번개장터이미지/인스타.png"></a>
+                </p>
+            </div>
+            <div class="footer_bottom">
+                <p>대표이사: 이재후 | 개인정보보호담당자: 이동주 | 사업자등록정보: 113-86-45836 | 통신판매업신고: 2019-서울서초-1126</p>
+                <p>주소: 서울특별시 서초구 서초대로38길 12 마제스타시티 타워2 지하1층</p>
+                <p>고객센터 대표번호: 1670-2910 | FAX: 02-598-8241</p>
+                <p>고객센터 운영시간:전화문의 : 9시~18시(주말.공휴일 제외) | 1:1문의 : 9시~18시</p>
+                <p class="footer_bottom1">※점심시간 12~13시</p>
+                <p>고객센터 문의 help@bunjang.co.kr | 제휴문의 partner@bunjang.co.kr</p>
+                <p>호스팅서비스 제공자: Amazon Web Services (AWS)</p>
+                <br>
+                <p>“번개장터_컨시어지” 상점의 판매상품을 제외한 모든 상품들에 대하여, 번개장터㈜는 통신판매중개자로서 중고거래마켓 번개장터의 거래 당사자가 아니며, 입점판매자가 등록한 상품정보 및 거래에
+                    대해 책임을 지지 않습니다.</p>
+                <br>
+                <p class="footer_bottom2"><b>우리은행 채무지급보증 안내</b></p>
+                <p>번개장터(주)는 “번개장터_컨시어지” 상점이 판매한 상품에 한해, 고객님이 현금 결제한 금액에 대해 우리은행과 채무지급보증 계약을 체결하여 안전거래를 보장하고 있습니다.</p>
+                <p class="footer_bottom3"><a href="#">서비스 가입사실 확인</a></p>
+                <br>
+                <p>Copyright ⓒ Bungaejangter Inc. All rights reserved.</p>
+            </div>
+        </footer>
 
 </body>
 

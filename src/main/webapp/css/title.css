@@ -5881,7 +5881,7 @@ font-weight: bold;}
  */
  .main_category {
     top: calc(100% + 1px);
-    left: 110px;
+    left: 300px;
     border-left: 1px solid rgb(238, 238, 238);
     width: 240px;
     z-index: 10;
