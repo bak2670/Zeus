@@ -295,8 +295,10 @@
                                         <div class="bigcategory">
                                             <ul class="categorylist">
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">여성의류</button>
-                                                    	<script>
+                                                <%
+                                                	String selCate;
+                                                %>
+                                                       <script>
 															function getDownCate(cate){
 																let text = cate.innerText;
 																const xhr = new XMLHttpRequest();
@@ -306,12 +308,17 @@
 																// XMLHttpRequest.DONE : 4, xhr.status == 200
 																xhr.onreadystatechange = function(){
 																	if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
-																		//document.getElementById("text").innerHTML = xhr.responseText;
 																		console.log(xhr.responseText);
 																	}
 																}
+																return xhr.responseText;
 															}
 														</script>
+														
+                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">여성의류</button>
+
+													<%-- <button type="button" class="listbutton"><%=selCate %></button> --%>
+                                                    	
                                                 </li>
                                                 <li class="list">
                                                     <button type="button" class="listbutton"  onclick="getDownCate(this)">패션잡화</button>
@@ -636,7 +643,7 @@
                                 </div>
                             </li>
                         </ul>
-                        </form>
+                        
                     </section>
                     <div class="guide">
                         <h3>
@@ -665,6 +672,7 @@
                             <button type="submit" class="registbutton"></button>
                         </div>
                     </div>
+                    </form>
                 </main>
             </div>
             <div class="mngContainer viewOn clickOff">

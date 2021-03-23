@@ -1,3 +1,4 @@
+
 /*공용해더부분 */
 $(document).ready(function () {
     var jbOffset = $('.zeusTop').offset();
@@ -15,7 +16,7 @@ $(document).ready(function () {
 // 내상점 하위 메뉴
 $(document).ready(function(){
     $(".storeBtn").mouseenter(function(){ 
-        $(".storeView").css("display", "block"); 
+        $(".storeView").css("display", "block");
     })
 
     $(".storeView").mouseleave(function(){ 
@@ -29,6 +30,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     $(".noticeBtn").mouseenter(function(){ 
         $(".noticeBox3").css("display", "block"); 
+        
     })
 
     $(".noticeBox3").mouseleave(function(){ 
@@ -1488,20 +1490,22 @@ $(document).ready(function () {
     })
 });
 
-window.onload = function(){
+
     /*내상점 팔로우 팔로잉 */
-    $(".followings_btn").click(function() {
-        var idx = $(".followings_btn").index(this);
+
+
+	$(document).on('click','.followings_btn',function(){
+		var idx = $(".followings_btn").index(this);
         $($(".followers_btn1")[idx]).show();
         $($(".followings_btn")[idx]).hide();
-    });
-    
-    
-    $(".followers_btn1").click(function() {
-        var idx = $(".followers_btn1").index(this);
+	
+	});
+	$(document).on('click','.followers_btn1',function(){
+		var idx = $(".followers_btn1").index(this);
         $($(".followings_btn")[idx]).show();
         $($(".followers_btn1")[idx]).hide();
-    });
+	});
+
 
 
 
@@ -1518,33 +1522,33 @@ window.onload = function(){
         $($(".followings_btn1")[idx]).hide();
     });
 
-
-/*계정설정부분*/ 
-/*sns연동버튼*/
-function closeLayer( obj ) {
-    $('.Acwarp').show();
-    $('.AcSnswarp').hide();
-};
-
-var btn = document.getElementById('submit'); 
-
-btn.addEventListener('click',function(){
-    $('.Acwarp').hide();
-    $('.AcSnswarp').show();
-    
-});
-
-
-
-/*로그아웃부분*/
+window.onload = function(){
+	/*계정설정부분*/ 
+	/*sns연동버튼*/
+	function closeLayer( obj ) {
+	    $('.Acwarp').show();
+	    $('.AcSnswarp').hide();
+	};
+	
+	var btn = document.getElementById('submit'); 
+	
+	btn.addEventListener('click',function(){
+	    $('.Acwarp').hide();
+	    $('.AcSnswarp').show();
+	    
+	});
 
 
-Aclogout.addEventListener('click',function(){
-    $('.Aclogoutpage').show();
-    $('.warp2').show();
 
-});
-
+	/*로그아웃부분*/
+	
+	
+	Aclogout.addEventListener('click',function(){
+	    $('.Aclogoutpage').show();
+	    $('.warp2').show();
+	
+	});
+}
 /*내상점부분*/
 
 function myshop_name_change() {
@@ -1567,7 +1571,7 @@ function Introduction_ok(){
     $('.myshop_text_bottom').show();
 }
 
-}
+
 
 $(document).ready(function () {
     const selected = document.querySelector(".moon_selected");

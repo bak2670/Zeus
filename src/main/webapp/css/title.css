@@ -5,7 +5,7 @@
     vertical-align: baseline;}
 
     
-/*삼각도형만들기*/
+/*�궪媛곷룄�삎留뚮뱾湲�*/
 .tri{
     width: 0px;height: 0px;
     border-top:5px solid black;
@@ -14,7 +14,7 @@
     border-left: 5px solid  transparent;
     }
 
-/*공통 부분*/
+/*怨듯넻 遺�遺�*/
 .jbFixed {
     position: fixed;
     top: 0px;
@@ -112,7 +112,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
         overflow: auto;
     }
 
-/* 해더 윗부분 */
+/* �빐�뜑 �쐵遺�遺� */
 #headertop {width: 1030px; margin: 0 auto; height: 38px;}
 .headertop {font-size: 12px;  list-style: none;  float: left; ; height: 40px; width: 300px;}
 .headertop li a {text-decoration: none; color: black;}
@@ -134,7 +134,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
 
 
 
-/*해더 중앙부분*/
+/*�빐�뜑 以묒븰遺�遺�*/
 .topHeader{
     display: flex;
     -webkit-box-pack: center;
@@ -224,7 +224,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     border: 1px solid rgb(238, 238, 238);
     background: rgb(249, 249, 249);
     display: none;
-    z-index: 30;
+    z-index: 30000;
 }
 .noticeView {
     display: flex;
@@ -279,7 +279,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     left: calc(50% - 44px);
     border: 1px solid rgb(238, 238, 238);
     display: none;
-    z-index: 20;
+    z-index: 2000;
     padding: 15px 20px;
     background: rgb(255, 255, 255);
     box-sizing: border-box;
@@ -832,7 +832,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     color: rgb(102, 102, 102);
 }
 
-/* 슬라이드 이미지 */
+/* �뒳�씪�씠�뱶 �씠誘몄� */
 .visual{
     position: relative;
     width:1030px;
@@ -870,9 +870,9 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
 
 
 
-/*푸터*/
+/*�뫖�꽣*/
 
-/*푸터탑*/
+/*�뫖�꽣�깙*/
 .footer_top{width: 100%;}
 .footer_top .footer_top1 {border: 1px solid rgb(238, 238, 238); text-align: center; font-size: 13px; height: 40px;
 padding-top: 25px;}
@@ -881,7 +881,7 @@ padding-top: 25px;}
 position: relative; top:-2px;}
 .footer_top .footer_top1 li:last-child::after{content:""; display: none;}
 
-/*푸터중앙*/
+/*�뫖�꽣以묒븰*/
 .footer_center {width: 1030px; margin:0 auto; padding: 0; margin-top:35px}
 .footer_center .footer_logo img{width: 100px; height: 25px;}
 .footer_center .footer_logo2 img{width: 15px; height: 17px; }
@@ -900,7 +900,7 @@ position: relative; top:-2px;}
 .footer_bottom .footer_bottom2 {font-weight: 1000;}
 .footer_bottom .footer_bottom3 a {color: gray;}
 
-/*사이드바*/
+/*�궗�씠�뱶諛�*/
 .side_barbox{    position: absolute;
     top: 102px;
     right: calc(50% - 617px);
@@ -921,9 +921,9 @@ position: relative; top:-2px;}
     .side_bar{display: none;}
 } */
 
-/*공통 끝*/
+/*怨듯넻 �걹*/
 
-/* 내상점 서브 메뉴 */
+/* �궡�긽�젏 �꽌釉� 硫붾돱 */
 .myShopBox {
     /* position: absolute; */
     width: 88px;
@@ -945,11 +945,11 @@ position: relative; top:-2px;}
 .myshop:last-child {
     margin-bottom: 0px;
 }
-/* 내상점 서브 메뉴 끝*/
+/* �궡�긽�젏 �꽌釉� 硫붾돱 �걹*/
 
-/* 회원가입 */
+/* �쉶�썝媛��엯 */
 
-/* 회원가입 */
+/* �쉶�썝媛��엯 */
 /* .mem { width:1100px; text-align: center; margin: 0 auto;}
 .member { width: 300px; height: auto; margin-top: 100px; margin-left: 280px; text-align: left; border:1px solid #ccc; padding: 20px;}
 .member_1 {font-size: 20px; margin-bottom: 30px;}
@@ -963,11 +963,11 @@ position: relative; top:-2px;}
 padding-left: 10px;}
 .member_check input[type="checkbox"] { padding-left: 10px;}
 .member_one { line-height: 40px; font-size: 13px;
-    padding-left: 10px; background: url(../img/번개장터이미지/arrow1.png) no-repeat 0 0; background-position: right; background-size: 20px 20px;}
+    padding-left: 10px; background: url(../img/踰덇컻�옣�꽣�씠誘몄�/arrow1.png) no-repeat 0 0; background-position: right; background-size: 20px 20px;}
 .member_box { margin-right: 10px;}
 .member_next { width: 100%;  text-align: center; background: rgb(233, 97, 97); line-height: 50px; margin-top: 30px;}
 .membtn_basecolor { color:white}
-/* 핸드폰 인증번호*/
+/* �빖�뱶�룿 �씤利앸쾲�샇*/
 .ph_con { width: 500px; height: 700px; margin: 0 auto;}
 .ph { width: 400px; height: 330px; border: 1px solid #ccc;margin-top: 30px;}
 .phone { padding: 30px;}
@@ -977,7 +977,7 @@ padding-left: 10px;}
 .phone_member1 a { color: black; border-bottom: 1px solid black; 
 } 
 
-/* 로그인 팝업*/  
+/* 濡쒓렇�씤 �뙘�뾽*/  
 .modal_wrap{
     top : 0px;
     left: 0px;
@@ -1015,10 +1015,10 @@ padding-left: 10px;}
 .login_list > li { position: relative; margin-bottom: 10px; height: 35px; box-sizing: border-box; padding-left: 30px; border-radius: 5px; list-style: none; margin-left: -10px;}
 .login_list > li > a { display: block; height: 54px; box-sizing: border-box; line-height: 32px; text-align: center; font-size: 14px; color: #fff; }
 .login_list > li:last-child { margin-bottom: 0; }
-.login_list > li.kakao { background: #ffea26 url(../img/번개장터이미지/ico_katalk.png) no-repeat 15px 50%; background-size: 30px 30px;}
+.login_list > li.kakao { background: #ffea26 url(../img/踰덇컻�옣�꽣�씠誘몄�/ico_katalk.png) no-repeat 15px 50%; background-size: 30px 30px;}
 .login_list > li.kakao > a { color: #202224; }
-.login_list > li.naver { background: #00c300 url(../img/번개장터이미지/ico_naver.png) no-repeat 15px 50%; background-size: 30px 30px; }
-.login_list > li.email { background: #888 url(../img/번개장터이미지/ico_cellphone.png) no-repeat 15px 50%; background-size: 30px 30px; }
+.login_list > li.naver { background: #00c300 url(../img/踰덇컻�옣�꽣�씠誘몄�/ico_naver.png) no-repeat 15px 50%; background-size: 30px 30px; }
+.login_list > li.email { background: #888 url(../img/踰덇컻�옣�꽣�씠誘몄�/ico_cellphone.png) no-repeat 15px 50%; background-size: 30px 30px; }
 .login_list li:last-child { margin-bottom: 80px;}
 .popfoot {border-top: 1px solid #ccc; width: 90%; margin: 0 auto;}
 .popter { font-size: 11px; text-align: left; color: gray;}
@@ -1032,7 +1032,7 @@ padding-left: 10px;}
 
 
 
-/* product 스타일 시작 */
+/* product �뒪���씪 �떆�옉 */
 .full{
     background: rgb(255,255,255);
     font-size: 16px;
@@ -1094,7 +1094,7 @@ padding-left: 10px;}
     display: none;
 }
 
-/* 상품관리 css */
+/* �긽�뭹愿�由� css */
 .mngContainer{
     background: rgb(255, 255, 255);
     font-size: 16px;
@@ -1315,7 +1315,7 @@ padding-left: 10px;}
 }
 
 
-/* 상품관리 css 끝*/
+/* �긽�뭹愿�由� css �걹*/
 
 
 .main{
@@ -2197,7 +2197,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     position: relative;
 }
 .registbutton::before {
-    content: "등록하기";
+    content: "�벑濡앺븯湲�";
     width: 100%;
     height: 100%;
     position: absolute;
@@ -2305,7 +2305,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     -webkit-box-align: center;
     align-items: center;
 }
-/* 카테고리 css 테스트 */
+/* 移댄뀒怨좊━ css �뀒�뒪�듃 */
 #sido{
     display: flex;
     -webkit-box-align: center;
@@ -2358,7 +2358,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     align-items: center;
 }
 
-/* 카테고리 css 테스트 */
+/* 移댄뀒怨좊━ css �뀒�뒪�듃 */
 
 
 
@@ -2465,7 +2465,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 
 
 
-/* 리뷰 이미지 */
+/* 由щ럭 �씠誘몄� */
 .reImgModal{
     width: 100%;
     height: 100%;
@@ -2555,7 +2555,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     justify-content: center;
 }
 .reImgTxt::after {
-    content: "꼭살사람만";
+    content: "瑗��궡�궗�엺留�";
     color: rgb(234, 233, 241);
     font-size: 14px;
     font-weight: bold;
@@ -2594,7 +2594,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 
 
 
-/* 리뷰 이미지 끝*/
+/* 由щ럭 �씠誘몄� �걹*/
 
 .infoContainer{
     -webkit-box-flex: 1;
@@ -2811,7 +2811,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     color: rgb(255, 255, 255);
 }
 
-/* 신고하기 모달창 */
+/* �떊怨좏븯湲� 紐⑤떖李� */
 .rpModal {
     width: 100%;
     height: 1000px;
@@ -3067,12 +3067,12 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
         padding-right: 10px;
         font-weight: bold;
 }
-/* 무한 이미지 로딩 */
+/* 臾댄븳 �씠誘몄� 濡쒕뵫 */
 #slider {position:relative;margin:0 auto;padding:0;list-style:none;width:430px;height:430px;overflow-x:hidden}
 #slider li {display:none;position:absolute;left:0;top:0}
 #slider img {width:430px;height:430px}
-/* 이미지 로딩 끝 */
-/* 확대 이미지 슬라이더 */
+/* �씠誘몄� 濡쒕뵫 �걹 */
+/* �솗�� �씠誘몄� �뒳�씪�씠�뜑 */
 .reImgBox3{
     display: flex;
     position: relative;
@@ -3089,10 +3089,10 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     float: left;
     margin-right: 30px;
 }
-/* 확대 이미지 슬라이더 끝 */
-/* 연관 이미지 */
+/* �솗�� �씠誘몄� �뒳�씪�씠�뜑 �걹 */
+/* �뿰愿� �씠誘몄� */
 
-/* 연관 이미지 */
+/* �뿰愿� �씠誘몄� */
 
 
 .repContainer{
@@ -3278,7 +3278,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     box-sizing: border-box;
 }
 .confirm:after {
-    content: "인증";
+    content: "�씤利�";
     border: 1px solid rgb(98, 177, 217);
     font-size: 8px;
     margin-left: 5px;
@@ -3884,7 +3884,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     text-align: center;
     margin-top: 3.125rem;
 }
-/* 정산계좌 등록 부분 css */
+/* �젙�궛怨꾩쥖 �벑濡� 遺�遺� css */
 .avgBox1{
     display: none;
     overflow: hidden;
@@ -3945,7 +3945,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     left: 14px;
 }
 
-/* 계좌등록 css */
+/* 怨꾩쥖�벑濡� css */
 .aCntBox1 {
     display: block;
 }
@@ -4040,7 +4040,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     margin-right: 0.5rem;
 }
 
-/* 계좌등록 / 은행등록 */
+/* 怨꾩쥖�벑濡� / ���뻾�벑濡� */
 .aCntJBox1{
     display: block;
 }
@@ -4278,7 +4278,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 
 
 
-/* 공지사항 */
+/* 怨듭��궗�빆 */
 .box_inner{width: 1020px;}
 .noticecontainer {
     background-color:rgb(250, 250, 250);
@@ -4358,7 +4358,7 @@ line-height: 40px; background: rgb(255, 80, 88); color: rgb(255, 255, 255) !impo
 
 
 
-/* 상담 */
+/* �긽�떞 */
 .oftenBox {
     display: flex;
     width: 1020px;
@@ -4457,7 +4457,7 @@ line-height: 40px; background: rgb(255, 80, 88); color: rgb(255, 255, 255) !impo
 
 
 
-/*계정설정*/
+/*怨꾩젙�꽕�젙*/
 .Acwarp{background-color: rgb(243, 241, 241); }
 .Acboxsize {width: 540px; height: 50px;}
 .AcSetBox {width: 540px;height: 100vh;  margin:0 auto; background-color: white;}
@@ -4528,7 +4528,7 @@ line-height: 40px; background: rgb(255, 80, 88); color: rgb(255, 255, 255) !impo
     -webkit-box-pack: justify;
     justify-content: space-between;}
 
-/*계정설정 탈퇴페이지*/
+/*怨꾩젙�꽕�젙 �깉�눜�럹�씠吏�*/
 .AcOutwarp{background-color : rgb(243, 241, 241);}
 .AcOuttop{width: 940px; height: 520px; border:1px solid rgb(243, 241, 241); margin:0 auto;}
 .AcOuttop_intext{width: 695px; height: 323px;  line-height: 160%; font-size: 20px; margin:0 auto; margin-top: 140px;}
@@ -4554,7 +4554,7 @@ line-height: 40px; background: rgb(255, 80, 88); color: rgb(255, 255, 255) !impo
 .AcOut_footer p {font-size: 12px; color: #757575;}
 .AcOut_footer p b {font-weight: bold;}
 
-/*SNS연동 클릭 시 화면*/
+/*SNS�뿰�룞 �겢由� �떆 �솕硫�*/
 .AcSnswarp{background-color : rgb(243, 241, 241);  }
 .AcSnsBox{width: 540px;height: 100vh;  margin:0 auto; background-color: white; border:1px solid rgb(243, 241, 241); }
 .AcSnsBtn{    
@@ -4636,7 +4636,7 @@ color: rgb(255, 255, 255);
 .fOHdHh img {width:40px; height: 40px; position: absolute; left: 10px; border-radius: 50px;}
 .AcSnsmenu {margin: 0 auto; width: 264px;}
 .AcSnswarp {display: none;}
-/*계정설정 로그아웃페이지*/
+/*怨꾩젙�꽕�젙 濡쒓렇�븘�썐�럹�씠吏�*/
 .Aclogoutpage{width: 300px; height: 224px; border: 1px solid black; background-color: white;
 position: absolute; right: 40%; top: 35%; display: none; z-index: 1500;}
 .Aclogoutpage_top{
@@ -4681,7 +4681,7 @@ position: absolute; right: 40%; top: 35%; display: none; z-index: 1500;}
     -webkit-box-pack: center;
     justify-content: center; */}
 
-/* 연관 이미지 slick slide */
+/* �뿰愿� �씠誘몄� slick slide */
 .responsive{
     position: relative;
     width:1030px;
@@ -4741,10 +4741,10 @@ position: absolute; right: 40%; top: 35%; display: none; z-index: 1500;}
 
 }
 
-/* 연관 이미지 slick slide */
+/* �뿰愿� �씠誘몄� slick slide */
 
 
-/* 로그인 본인인증 css  */
+/* 濡쒓렇�씤 蹂몄씤�씤利� css  */
 #container { width: 640px; height: 900px; background-color: #fff; margin: 0 auto; margin-top: 50px; margin-bottom: 50px; padding: 50px 70px; box-sizing: border-box; box-shadow : 0px 0px 10px 5px #EEEEEE ; border: 1px sild #EEEEEE;  }
 #container h1 { font-size: 30px; font-weight: bold; line-height: 40px; margin-bottom: 15px; }
 #container p { font-size: 15px; font-weight: bold; line-height: 20px;  margin-bottom: 10px; }
@@ -4763,11 +4763,11 @@ table tr td:last-child { text-align: right; opacity: 0.3; }
     display: block;
     width: 25px;
     height: 25px;
-    background: url('../img/번개장터이미지/check_off.png') no-repeat;
+    background: url('../img/踰덇컻�옣�꽣�씠誘몄�/check_off.png') no-repeat;
 }
 
 #container input[type='checkbox']:checked+label {
-    background: url('../img/번개장터이미지/check_on.png') no-repeat 0 1px / contain;
+    background: url('../img/踰덇컻�옣�꽣�씠誘몄�/check_on.png') no-repeat 0 1px / contain;
 }
 
 #container input[type='submit']{ width: 100%; height: 80px; margin-top: 30px; border: none; background-color: #F72F33; color: #fff; font-size: 20px; font-weight: bold; border-radius: 3px; text-align: center;}
@@ -4851,7 +4851,7 @@ table tr td:last-child { text-align: right; opacity: 0.3; }
 
 
 
-/*메인 컨테이너*/
+/*硫붿씤 而⑦뀒�씠�꼫*/
 .container {width: 1030px; margin: 0 auto; clear: both;}
 .container .container_slide{width: 1030px; box-sizing: border-box;}
 .container .container_slide img {width: 100%;}
@@ -4884,15 +4884,15 @@ table tr td:last-child { text-align: right; opacity: 0.3; }
     display: inline-block;
 }
 .item_box .item .item_text .text_bottom1::after{
-    content: "원";
+    content: "�썝";
     font-size: 13px;
 }
 .item_box .item .item_text .text_bottom2{
 font-size: 12px; color: rgb(136, 136, 136); display: inline-block; text-align: right; margin-left: 50px;} 
 /*----------------------------------------------------*/
-/*메인 컨테이너 끝*/
+/*硫붿씤 而⑦뀒�씠�꼫 �걹*/
 
-/*내상점 시작*/ 
+/*�궡�긽�젏 �떆�옉*/ 
 .container {width: 1030px; margin: 0 auto; clear: both;}
 .myshop_container{width: 1030px; margin: 0 auto; clear: both; margin-top:30px}
 .myshop_container button:focus {outline:none;}
@@ -5122,7 +5122,7 @@ a {text-decoration: none; color: black;}
 }
 
 .goods_box:nth-child(5n){
-    margin-right: 0px;  /*5의 배수마다 적용*/
+    margin-right: 0px;  /*5�쓽 諛곗닔留덈떎 �쟻�슜*/
 }
 
 .goods_box img {
@@ -5130,7 +5130,7 @@ a {text-decoration: none; color: black;}
     width: 194px;
 }
 
-/*내상점 상점문의*/
+/*�궡�긽�젏 �긽�젏臾몄쓽*/
 .comments_box {width: 1030px; height: auto;  margin-top: 30px;}
 .comments_list {width: 1030px; height: 100px; margin-bottom: 20px;} 
 .comments_list a {width: 50px; height: 80px; }
@@ -5165,7 +5165,7 @@ clear: both;}
 
 .comments_text_bottom li img{width: 17px; height: 14px;}
 
-/*내상점 찜*/
+/*�궡�긽�젏 李�*/
 .favorites_box{width: 1030px;}
 .favorites_top{
     margin: 25px 0px 20px;
@@ -5218,7 +5218,7 @@ clear: both;}
     font-weight: bold;
     display: flex;}
     
-.favorites_list_text_price::after{content: "원"; font-size: 13px;}
+.favorites_list_text_price::after{content: "�썝"; font-size: 13px;}
 
 .favorites_list_text_time{width: 279px; height: 40px;
     display: flex;
@@ -5241,7 +5241,7 @@ clear: both;}
 }
 
 /*--------------------------------------------------------------------------------------*/
-/*내상점 후기*/
+/*�궡�긽�젏 �썑湲�*/
 .reviews_box{width: 1030px;
     margin: 0px;
     padding: 0px;
@@ -5332,7 +5332,7 @@ padding-bottom: 5px;}
 }
 .reviews_text_bottom a img {width: 14px; height: 14px; margin-right: 4px;}
 
-/*내상점 팔로잉*/
+/*�궡�긽�젏 �뙏濡쒖엵*/
 .followings_box{width: 1030px; margin: 0; padding: 0; box-sizing: border-box;}
 .followings_item{
     height: 260px;
@@ -5403,7 +5403,7 @@ padding-bottom: 5px;}
     align-items: center;
     margin-right: 20px;}
 .followings_item_img img {width: 190px; height: 190px; } 
-/*내상점 팔로워*/
+/*�궡�긽�젏 �뙏濡쒖썙*/
 .followers_box{width: 1030px; padding: 0; margin:0; box-sizing: border-box; display: inline-block;}
 .followers_item_box{width: 1030px; display: inline-block;}
 .followers_item{width: 342; height: 388px; display: inline-block; margin:40px}
@@ -5468,7 +5468,7 @@ padding-bottom: 5px;}
 .followers_item_img img {width: 190px; height: 190px; } 
 .followers_btn1{display: none;}
 
-/*  문의하기 */
+/*  臾몄쓽�븯湲� */
 input[type="radio"] {
     display: none;
 }
@@ -5516,7 +5516,7 @@ input[type="radio"] {
 }
 .moon_selected::after {
     content: "";
-    background: url("../img/번개장터이미지/arrow1.png");
+    background: url("../img/踰덇컻�옣�꽣�씠誘몄�/arrow1.png");
     background-size: contain;
     background-repeat: no-repeat;
 
@@ -5556,7 +5556,7 @@ input[type="radio"] {
 .moon_option input[type="radio"] + label { text-align: left; padding: 0px;}
 
 
-/* 카테고리 */
+/* 移댄뀒怨좊━ */
 .con_kate { display: flex;
     -webkit-box-pack: center;
     justify-content: center;
@@ -5602,7 +5602,7 @@ background: rgb(238, 238, 238); height: 2000px;}
     max-height: 300px;
 }
 .kate_snb input[id*="answer"] + label  em{
-    height: 30px; margin-top: -50px;  background:url(../img/번개장터이미지/arrow1.png)  no-repeat 0 0; margin-bottom:20px; margin-right: -12px;}
+    height: 30px; margin-top: -50px;  background:url(../img/踰덇컻�옣�꽣�씠誘몄�/arrow1.png)  no-repeat 0 0; margin-bottom:20px; margin-right: -12px;}
 .kate_ans { width: 100%; margin-top: 20px;
     display: flex;
     flex-wrap: wrap;   
@@ -5661,7 +5661,7 @@ background: rgb(238, 238, 238); height: 2000px;}
 
 
 
-/* 우리동네 */
+/* �슦由щ룞�꽕 */
 .container_sc { display: flex;
     width: 100%;
     -webkit-box-pack: justify;
@@ -5703,13 +5703,13 @@ background: rgb(238, 238, 238); height: 2000px;}
     display: inline-block;
 }
 .item_box .item .item_text .text_bottom1::after{
-    content: "원";
+    content: "�썝";
     font-size: 13px;
 }
 .item_box .item .item_text .text_bottom2{
 font-size: 12px; color: rgb(136, 136, 136); display: inline-block; text-align: right; margin-left: 50px;} 
 
- /*  검색 카테고리 토글 */
+ /*  寃��깋 移댄뀒怨좊━ �넗湲� */
 .sch_chk {  display: flex;
 font-weight: bold;}
 .sch2 {margin-right: 20px;}
@@ -5740,7 +5740,7 @@ font-weight: bold;}
     position: relative;
     display: block;}
 
-/*  키워드 알림 모달창 */
+/*  �궎�썙�뱶 �븣由� 紐⑤떖李� */
     .leftAlign { width: 410px; }
     .rightAlign { text-align: right; }
     .centerAlign { text-align: center;}
@@ -5753,12 +5753,12 @@ font-weight: bold;}
         display: block;
         width: 25px;
         height: 25px;
-        background: url('../img/번개장터이미지/check_off.png') no-repeat;
+        background: url('../img/踰덇컻�옣�꽣�씠誘몄�/check_off.png') no-repeat;
         margin-top: -50px;
     }
     
 .rightAlign input[type='checkbox']:checked+label {
-        background: url('../img/번개장터이미지/check_on.png') no-repeat 0 1px / contain;
+        background: url('../img/踰덇컻�옣�꽣�씠誘몄�/check_on.png') no-repeat 0 1px / contain;
     }
     
     .modal, .modal2, .modal3 {
@@ -5811,7 +5811,7 @@ font-weight: bold;}
     .key_location .key_h4 { border-top: 1px solid #ccc; width:100%; padding-top: 10px; margin-bottom: 25px;}
     .key_location img { margin-bottom: -6px;}
 
-    /*카테고리페이지*/
+    /*移댄뀒怨좊━�럹�씠吏�*/
 .category_container_result{
     font-size: 16px;
     margin: 50px 0px 25px;
@@ -5876,7 +5876,7 @@ font-weight: bold;}
     color: rgb(155, 153, 169);
 }
 
-/* 카테고리 메뉴 부분 시작*/
+/* 移댄뀒怨좊━ 硫붾돱 遺�遺� �떆�옉*/
 /* #category_img {float:left; height: 47px;}
  */
  .main_category {
@@ -5984,4 +5984,4 @@ font-weight: bold;}
     border-right: 1px solid rgb(238, 238, 238);
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-/* 추가한 부분 끝*/
+/* 異붽��븳 遺�遺� �걹*/
