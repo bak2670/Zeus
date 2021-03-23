@@ -295,16 +295,33 @@
                                         <div class="bigcategory">
                                             <ul class="categorylist">
                                                 <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
+                                                    <button type="button" class="listbutton" onclick="sendRequest(this)">여성의류</button>
+                                                    	<script>
+															'use strict';
+															function sendRequest(cate){
+																var text = cate.innerText;
+																const xhr = new XMLHttpRequest();
+																xhr.open("GET", "big_ok.jsp?userid="+text, true);
+																xhr.send();
+															
+																// XMLHttpRequest.DONE : 4, xhr.status == 200
+																xhr.onreadystatechange = function(){
+																	if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+																		//document.getElementById("text").innerHTML = xhr.responseText;
+																		console.log(xhr.responseText);
+																	}
+																}
+															}
+														</script>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
+                                                    <button type="button" class="listbutton"  onclick="sendRequest(this)">패션잡화</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
+                                                    <button type="button" class="listbutton" onclick="sendRequest(this)">남성의류</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
+                                                    <button type="button" class="listbutton" onclick="sendRequest(this)">디지털/가전</button>
                                                 </li>
                                                 <li class="list">
                                                     <button type="button" class="listbutton">도서/티켓/취미/애완</button>
