@@ -1,14 +1,122 @@
 /*공용해더부분 */
 $(document).ready(function () {
-    var jbOffset = $('#headertop').offset();
+    var jbOffset = $('.zeusTop').offset();
     $(window).scroll(function () {
         if ($(document).scrollTop() > jbOffset.top) {
-            $('#headertop').addClass('jbFixed');
+            $('.zeusTop').addClass('zeusTopFix');
+            // $('.header_fix').css("background-color","white")
         }
         else {
-            $('#headertop').removeClass('jbFixed');
+            $('.zeusTop').removeClass('zeusTopFix');
+            
         }
     });
+});
+// 내상점 하위 메뉴
+$(document).ready(function(){
+    $(".storeBtn").mouseenter(function(){ 
+        $(".storeView").css("display", "block"); 
+    })
+
+    $(".storeView").mouseleave(function(){ 
+        $(".storeView").css("display", "none"); 
+    })
+});
+
+// 내상점 하위 메뉴 끝
+
+// 알림 하위 메뉴
+$(document).ready(function(){
+    $(".noticeBtn").mouseenter(function(){ 
+        $(".noticeBox3").css("display", "block"); 
+    })
+
+    $(".noticeBox3").mouseleave(function(){ 
+        $(".noticeBox3").css("display", "none"); 
+    })
+});
+// 알림 하위 메뉴 끝
+
+
+// 검색창 클릭 시 하위 메뉴
+$(document).ready(function () {
+    $(".zuesViewBox3 a").click(function () { 
+        $(".zuesViewBox3 a").removeClass("srchClick"); 
+        $(this).addClass("srchClick"); 
+    })
+});
+
+$(document).ready(function(){
+    $(".zeusSerach1").click(function(){ 
+        $(".zuesViewBox1").css("display", "block"); 
+        $(".removeBtn").css("display", "block"); 
+    })
+});
+// 닫기 버튼 클릭 시
+$(document).ready(function(){
+    $(".closeBtn").click(function(){  // 확인!! 해야 함 작동 안됨
+        $(".zuesViewBox1").css("display", "none"); 
+    })
+
+    $(".zuesViewBox1").mouseleave(function(){ 
+        $(".zuesViewBox1").css("display", "none"); 
+    })
+});
+
+$(document).ready(function(){
+    $(".zuesViewBox3 a:first-child").click(function(){ 
+        $(".removeBtn").css("display", "block"); 
+        $(".searchBox2").css("display", "block"); 
+        $(".starSearch1").css("display", "none"); 
+    })
+
+    $(".zuesViewBox3 a:last-child").click(function(){ 
+        $(".removeBtn").css("display", "block"); 
+        $(".searchBox2").css("display", "none"); 
+        $(".starSearch1").css("display", "block"); 
+    })
+});
+
+// 검색 전체 삭제
+$(document).ready(function(){
+    $(".removeBtn").click(function(){ 
+        $(".serachOne").remove(); 
+        $(".searchNo").css("display", "flex"); 
+    })
+});
+
+// x 버튼 클릭 검색정보 삭제
+$(document).ready(function(){
+    $(".serachRemove").click(function(){ 
+        $(this).next("").remove(); 
+    })
+});
+
+// 검색 시 검색 화면 
+$(document).ready(function () {  // 확인!! 해야 함 정상작동 안됨
+    $('.zeusSerach1').on('keyup', function () {
+        $(".searchBox2").css("display", "none"); 
+        $(".starSearch1").css("display", "none"); 
+        $(".zuesViewBox3").css("display", "none");
+        $(".storeSrch3").css("display", "block"); 
+    });
+});
+
+// 검색창 클릭 시 하위 메뉴 끝
+
+// 찜 클릭 시
+$(document).ready(function(){
+    $(".zzim3Box2").mouseover(function(){ 
+        $(".zzim3Box3").css("display", "block"); 
+    })
+
+    $(".zzim3Box3").mouseleave(function(){ 
+        $(".zzim3Box3").css("display", "none"); 
+    })
+
+    $(".zzim3Box3Btn").click(function(){ 
+        $(".zzim3Box3").css("display", "none"); 
+    })
 });
 // 이미지 슬라이드
 $(document).ready(function () {
@@ -80,15 +188,29 @@ $(document).ready(function () {
 // 리뷰 이미지 모달창 끝
 
 // 확대 이미지 슬라이드
+// var reslides = document.querySelector('.reslides')
+// var slide = document.querySelectorAll('.reslides li')
+// var curreniIdx = 0;
+// var slideWidth = 550;
+// var slideMargin = 30;
+// var slideCount = reslides.length;
+
+// reslides.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px"; 
+
+// function moveSlide(num){
+//     reslides.style.left = -num * 550 + 'px';
+//     curreniIdx = num; 
+// }
+
 $(document).ready(function () {
 
     //좌우버튼, 동그라미 버튼 연동 //
 
-    var wid = $(".reImgBox2").width();
-    var i = $(".reSuButton button").index();
-    var len = $(".reImgBox4 img").length;
+    var wid = $(".reslides").width();
+    var i = $(".reslides img").index();
+    var len = $(".reslides img").length;
 
-    $(".reImgBox4 img").click(function () {
+    $(".reslides img").click(function () {
         if (i == 0) {
             i = len - 1;
         } else {
@@ -97,7 +219,7 @@ $(document).ready(function () {
         showSlide();
     });
 
-    $(".reImgBox4 img").click(function () {
+    $(".reslides img").click(function () {
         if (i == 3) {
             i = 0;
         } else {
@@ -106,23 +228,68 @@ $(document).ready(function () {
         showSlide();
     });
 
-    $(".reSuButton button").click(function () {
+    $(".reslides button").click(function () {
         i = $(this).index();
         showSlide();
     });
 
     function showSlide() {
-        $(".reSuButton button").removeClass("reImgCOk");
-        $(".reSuButton button").eq(i).addClass("reImgCOk");
-        $(".reImgBox4 img").stop(true, true).slideDown();
-        $(".reImgBox4 img").eq(i).stop(true, true).slideDown();
+        $(".reslides img").removeClass("reImgCOk");
+        $(".reslides img").eq(i).addClass("reImgCOk");
+        $(".reslides img").stop(true, true).slideDown();
+        $(".reslides img").eq(i).stop(true, true).slideDown();
     }
 });
 // 확대 이미지 슬라이드
 
+// 연관 이미지 슬라이드
+
+// $(document).ready(function () {
+
+//     //좌우버튼, 동그라미 버튼 연동 //
+
+//     var wid = $(".reslides").width();
+//     var i = $(".reslides img").index();
+//     var len = $(".reslides img").length;
+
+//     $(".reslides img").click(function () {
+//         if (i == 0) {
+//             i = len - 1;
+//         } else {
+//             i = i - 1;
+//         }
+//         showSlide();
+//     });
+
+//     $(".reslides img").click(function () {
+//         if (i == 3) {
+//             i = 0;
+//         } else {
+//             i = i + 1;
+//         }
+//         showSlide();
+//     });
+
+//     $(".reslides button").click(function () {
+//         i = $(this).index();
+//         showSlide();
+//     });
+
+//     function showSlide() {
+//         $(".reslides img").removeClass("reImgCOk");
+//         $(".reslides img").eq(i).addClass("reImgCOk");
+//         $(".reslides img").stop(true, true).slideDown();
+//         $(".reslides img").eq(i).stop(true, true).slideDown();
+//     }
+// });
+
+
+
+//  연관 이미지 슬라이드 끝
+
 /* 로그인 팝업 */
 $(document).ready(function () {
-    $("#modal_btn").click(function (event) {
+    $(".loginOut").click(function (event) {
 
         $(".modal_wrap").css({
             "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
@@ -821,67 +988,536 @@ $(document).ready(function(){
         $("#qaBoxList ul:nth-child(2)").addClass("qaBoxOpen"); 
 
         $(".qaBoxOpen li:first-child button").click(function(){ 
-
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
         })
-        
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(9) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(9) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(10) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(10) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(11) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(11) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(12) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(12) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(13) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(13) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(14) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(14) .aboxview").slideToggle()
+        })
 })
 
     $(".oftenBox a:nth-child(2)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(3)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(9) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(9) .aboxview").slideToggle()
+        })
     })
+
+
     $(".oftenBox a:nth-child(3)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(4)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(9) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(9) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(10) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(10) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(11) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(11) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(12) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(12) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(13) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(13) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(14) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(14) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(15) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(15) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(16) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(16) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(17) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(17) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(18) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(18) .aboxview").slideToggle()
+        })
     })
+
+
     $(".oftenBox a:nth-child(4)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(5)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(9) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(9) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(10) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(10) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(11) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(11) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(5)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(6)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(6)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(7)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(7)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(8)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(8)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(9)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(9)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(10)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(10)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(11)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:nth-child(11)").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:nth-child(12)").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(9) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(9) .aboxview").slideToggle()
+        })
     })
+
     $(".oftenBox a:last-child").click(function(){ 
         $("#qaBoxList ul").addClass("qaBox"); 
         $("#qaBoxList ul").removeClass("qaBoxOpen"); 
         $("#qaBoxList ul:last-child").addClass("qaBoxOpen"); 
+
+        $(".qaBoxOpen li:first-child button").click(function(){ 
+            $(".qaBoxOpen li:first-child .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(2) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(2) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(3) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(3) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(4) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(4) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(5) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(5) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(6) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(6) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(7) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(7) .aboxview").slideToggle()
+        })
+        $(".qaBoxOpen li:nth-child(8) button").click(function(){ 
+            $(".qaBoxOpen li:nth-child(8) .aboxview").slideToggle()
+        })
     })
 });
+
+// new Swiper('.swiper-container', {
+
+// 	slidesPerView : 3, // 동시에 보여줄 슬라이드 갯수
+// 	spaceBetween : 30, // 슬라이드간 간격
+// 	slidesPerGroup : 3, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+// 	// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+// 	// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+// 	loopFillGroupWithBlank : true,
+
+// 	loop : true, // 무한 반복
+
+// 	pagination : { // 페이징
+// 		el : '.swiper-pagination',
+// 		clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+// 	},
+// 	navigation : { // 네비게이션
+// 		nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+// 		prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+// 	},
+// });
+
+/*계정설정부분*/ 
+// 로그인(본인읹증)
+$(document).ready(function () {
+    $("#custom").click(function () {
+        if ($("#custom").prop("checked")) {
+            $("input[name=normal]").prop("checked", true);
+        } else {
+            $("input[name=normal]").prop("checked", false);
+        }
+    })
+    })
+    
+    
+    
+    function sendit(){
+        const nameCheck = RegExp(/^[가-힣]+$/);
+        const hpCheck = RegExp(/^[0-9]*$/);
+    
+    
+        // 이름
+        if(!nameCheck.test($('#userid').val())){
+            alert('이름은 한글로 입력하세요');
+            $('#username').val('');
+            $('#username').focus();
+            return false;
+        }
+    
+        // 주민번호
+        if($('#ssn1').val() == "" || $('#ssn2').val() == "" ){
+            alert('주민등록번호를 입력하세요');
+            $('#ssn1').focus();
+            return false;
+        }
+        if($('#isSsn').val() == 'n'){
+            alert('주민등록번호 유효성 체크를 눌러주세요');
+            return false;
+        }
+    
+    
+        // 휴대폰 
+        if (!hpCheck.test($('#hp').val())) {
+            alert('숫자만 입력하세요');
+            $('#hp').val('');
+            $('#hp').focus();
+            return false;
+        }
+        return true;
+    }
+    
+    
+    // 주민번호 유효성 검사
+    $(function(){ 
+        $('#ssn1').on('keyup', function(){
+            if($(this).val().length >= 6){
+                $('#ssn2').focus();
+            }
+        });
+        $("#ssnBtn").on('click', function(){
+            let ssn = $('#ssn1').val() + $('#ssn2').val();
+            let fmt = RegExp(/^\d{6}[12345]\d{6}/);
+            let arr = new Array(13);
+            if(!fmt.test(ssn)){
+                alert('주민등록번호 형식에 맞게 입력하세요');
+                $('#ssn1').val('');
+                $('#ssn2').val('');
+                $('#ssn1').focus();
+                return false;
+            }
+            for(let i=0; i<arr.length; i++){
+                arr[i] = parseInt(ssn.charAt(i))
+            }
+            const mul = [2,3,4,5,6,7,8,9,2,3,4,5];
+            let sum = 0;
+            for(let i=0; i<arr.length-1; i++){
+                sum += (arr[i] *= mul[i])
+            }
+            if((11 - (sum % 11)) % 10 != arr[12]){   
+                alert('유효하지 않은 주민등록번호입니다.');
+                $('#ssn1').val('');
+                $('#ssn2').val('');
+                $('#ssn1').focus();
+                return false;
+            }
+            alert('검증되었습니다.');
+            $('#isSsn').val('y');
+        });
+    });
+
+    //카테고리 상점 최신순,인기순,저가순,고가순 부분
+
+$(document).ready(function () {
+    $(".right a").click(function () { // m1 a 클릭 시 
+        $(".right a").removeClass("kinds");
+        $(this).addClass("kinds"); // a 클래스 click 클래스 삭제
+    })
+});
+
+window.onload = function(){
+    /*내상점 팔로우 팔로잉 */
+    $(".followings_btn").click(function() {
+        var idx = $(".followings_btn").index(this);
+        $($(".followers_btn1")[idx]).show();
+        $($(".followings_btn")[idx]).hide();
+    });
+    
+    
+    $(".followers_btn1").click(function() {
+        var idx = $(".followers_btn1").index(this);
+        $($(".followings_btn")[idx]).show();
+        $($(".followers_btn1")[idx]).hide();
+    });
+
+
+
+    $(".followers_btn").click(function() {
+        var idx = $(".followers_btn").index(this);
+        $($(".followings_btn1")[idx]).show();
+        $($(".followers_btn")[idx]).hide();
+    });
+    
+    
+    $(".followings_btn1").click(function() {
+        var idx = $(".followings_btn1").index(this);
+        $($(".followers_btn")[idx]).show();
+        $($(".followings_btn1")[idx]).hide();
+    });
+
 
 /*계정설정부분*/ 
 /*sns연동버튼*/
@@ -898,16 +1534,299 @@ btn.addEventListener('click',function(){
     
 });
 
+
+
 /*로그아웃부분*/
+
+
 Aclogout.addEventListener('click',function(){
     $('.Aclogoutpage').show();
     $('.warp2').show();
+
 });
-/*로그아웃부분*/
-logout.addEventListener('click',function(){
-    $('.Aclogoutpage').show();
-    $('.warp2').show();
-});
+
+/*내상점부분*/
+
+function myshop_name_change() {
+    $('.myshop_text_top1').hide();
+    $('.myshop_text_top1_click').show();
+};
+
+function myshop_name_change_ok() {
+    $('.myshop_text_top1').show();
+    $('.myshop_text_top1_click').hide();
+};
+
+function Introduction(){
+    $('.myshop_text_bottom_click').show();
+    $('.myshop_text_bottom').hide();
+}
+
+function Introduction_ok(){
+    $('.myshop_text_bottom_click').hide();
+    $('.myshop_text_bottom').show();
+}
+
+}
+
+$(document).ready(function () {
+    const selected = document.querySelector(".moon_selected");
+    const optionsContainer = document.querySelector(".options-container");
+    const optionsList = document.querySelectorAll(".moon_option");
+    
+    selected.addEventListener("click", () => {
+        optionsContainer.classList.toggle("active");
+    });
+    
+    optionsList.forEach(o => {
+        o.addEventListener("click", () => {
+            selected.innerHTML = o.querySelector("label").innerHTML;
+            optionsContainer.classList.remove("active");
+        });
+    });
+    });
+    
+    window.onload = function(){
+        // 키워드알람 버튼 클릭 시 모달창
+        const open = () => {
+            document.querySelector(".modal").classList.remove("hidden");
+        }
+        const close = () => {
+            document.querySelector(".modal").classList.add("hidden");
+        }
+        document.querySelector(".openBtn").addEventListener("click", open);
+        document.querySelector(".closeBtn").addEventListener("click", close);
+        document.querySelector(".closeBtn2").addEventListener("click", close);
+        document.querySelector(".bg").addEventListener("click", close);
+        
+        // 키워드 알람 > 카테고리 선택시
+        const open2 = () => {
+            document.querySelector(".modal2").classList.remove("hidden");
+        }
+        const close2 = () => {
+            document.querySelector(".modal2").classList.add("hidden");
+        }
+        document.querySelector(".categoryBtn").addEventListener("click", open2);
+        document.querySelector(".backBtn").addEventListener("click", close2);
+        document.querySelector(".trashBtn").addEventListener("click", close2);
+        
+        // 키워드 알람 > 카테고리 대분류 선택시
+        const open3 = () => {
+            document.querySelector(".key_category2").classList.remove("hidden");
+            document.querySelector(".key_category1").classList.add("hidden");
+        }
+        document.querySelector(".cateBtn1").addEventListener("click", open3);
+        
+        // 키워드 알람 > 카테고리 중분류 선택시
+        const open4 = () => {
+            document.querySelector(".key_category3").classList.remove("hidden");
+            document.querySelector(".key_category2").classList.add("hidden");
+        }
+        document.querySelector(".cateBtn2").addEventListener("click", open4);
+        
+        // 키워드 알람 > 카테고리 소분류 선택시 -> 메인 키워드 알람창으로 이동
+        const open5 = () => {
+            document.querySelector(".key_category1").classList.remove("hidden");
+            document.querySelector(".key_category3").classList.add("hidden");
+            document.querySelector(".modal").classList.remove("hidden");
+            document.querySelector(".modal2").classList.add("hidden");
+        }
+        document.querySelector(".cateBtn3").addEventListener("click", open5);
+        
+        // 키워드 알람 > 지역설정 선택시
+        const open6 = () => {
+            document.querySelector(".modal3").classList.remove("hidden");
+        }
+        const close6 = () => {
+            document.querySelector(".modal3").classList.add("hidden");
+        }
+        document.querySelector(".areaBtn").addEventListener("click", open6);
+        document.querySelector(".backBtn2").addEventListener("click", close6);
+        document.querySelector(".okBtn").addEventListener("click", close6);
+        
+      
+    }
+
+/* 메인 카테고리 추가 시작*/
+
+// 카테고리 메뉴
+
+window.onload = function(){
+    const categoryImg = document.getElementById('category_img'); 
+    const big = document.getElementById('big_category');
+    const big_lists = document.getElementsByClassName('big_list');
+
+    const middle_top = document.getElementById('middle_top');
+    const middle = document.getElementById('middle_category');
+
+    const small = document.getElementById('small_category');
+    const small_top = document.getElementById('small_top');
+
+
+    // DB에서 배열로 가져올 데이터들
+    const mid_arr_0 = ["원피스","스커트/치마","자켓","니트/스웨터","야상/점퍼/패딩"];
+    const mid_arr_1 = ["여성가방","스니커즈","주얼리/액세서리","여성화","지갑"];
+
+    const small_arr_00 = ["롱 원피스","캐주얼 원피스","미니 원피스","럭셔리 원피스","기타 원피스"];
+    const small_arr_01 = ["미니 스커트","롱 스커트","기타","청 스커트","플리츠 스커트"];
+    const small_arr_10 = ["숄더백","크로스백","토트백","기타","클러치백"];
+    const small_arr_11 = ["캐주얼화","기타","런닝화/워킹화","농구화"];
+    
+    categoryImg.addEventListener('mouseover', function(){
+        mouse_cate = 1;
+        big.style.display="block";
+    });
+    categoryImg.addEventListener('mouseleave', function(){
+        mouse_cate = 0;
+        big.style.display="none";
+    });
+    big.addEventListener('mouseover', function(){
+        mouse_big = 1;
+        big.style.display="block";
+    });
+    big.addEventListener('mouseleave', function(){
+        mouse_big = 0;
+    });
+
+    // 마우스 커서 위치 판단
+    let mouse = -1;
+
+    let bigAdd = 0;
+    let midAdd = 0;
+    let smallAdd = 0;
+
+    // 대분류 중 선택 -> 해당 중분류 나타나야 함
+    // 대분류 여성의류 선택
+    big_lists[0].addEventListener('mouseover', function(){
+        if(mouse == 2){
+            small.style.display = "none";
+        }
+        bigAdd = 1;
+        middle_top.textContent = big_lists[0].textContent;
+        middle.style.display="block";
+        
+        // 여성의류의 중분류들을 요소로 추가
+        for(var i=0;i<mid_arr_0.length;i++){
+            mouse = 1;
+            // 한 번 추가되면 더이상 추가되지 않도록 튕겨내기
+            if(midAdd != 0) break;
+            const mid_cList = document.createElement('div');
+            mid_cList.textContent = mid_arr_0[i];
+            mid_cList.setAttribute('class',"ms_non_selected");
+
+            const mid_cList_a = document.createElement('a');
+            mid_cList_a.appendChild(mid_cList);
+            mid_cList_a.setAttribute('class','ms_list');
+            mid_cList_a.setAttribute('href',"#");
+
+            middle.children[1].appendChild(mid_cList_a);
+        }
+        midAdd = 1;
+
+
+        // 소분류 추가
+        const ms_lists = document.getElementsByClassName('ms_list');
+
+        // 여성의류 중분류 중 원피스 선택
+        ms_lists[0].addEventListener('mouseover',function(){
+            
+            small_top.textContent = ms_lists[0].textContent;
+            small.style.display="block";
+            // 원피스의 소분류들을 요소로 추가
+            for(var si=0;si<small_arr_00.length;si++){
+                mouse = 2;
+                if(smallAdd != 0) break;
+                const small_cList = document.createElement('div');
+                small_cList.textContent = small_arr_00[si];
+                small_cList.setAttribute('class',"ms_non_selected");
+    
+                const small_cList_a = document.createElement('a');
+                small_cList_a.appendChild(small_cList);
+                small_cList_a.setAttribute('class','ms_list');
+                small_cList_a.setAttribute('href',"#");
+    
+                small.children[1].appendChild(small_cList_a);
+            }
+            smallAdd = 1;
+        })
+        ms_lists[0].addEventListener('mouseleave', function(){
+            console.log(mouse);
+            // 원피스의 소분류 요소 모두 삭제
+            while(small.children[1].hasChildNodes()){
+                small.children[1].removeChild(small.children[1].firstChild);
+            }
+            smallAdd = 0;
+        });
+
+        // 여성의류 중분류 중 스커트/치마 선택
+        ms_lists[1].addEventListener('mouseover',function(){
+            small_top.textContent = ms_lists[1].textContent;
+            small.style.display="block";
+            
+            for(var si=0;si<small_arr_01.length;si++){
+                if(smallAdd != 0) break;
+                const small_cList = document.createElement('div');
+                small_cList.textContent = small_arr_01[si];
+                small_cList.setAttribute('class',"ms_non_selected");
+    
+                const small_cList_a = document.createElement('a');
+                small_cList_a.appendChild(small_cList);
+                small_cList_a.setAttribute('class','ms_list');
+                small_cList_a.setAttribute('href',"#");
+    
+                small.children[1].appendChild(small_cList_a);
+            }
+            smallAdd = 1;
+        })
+        ms_lists[1].addEventListener('mouseleave', function(){
+            // 스커트/치마의 소분류 요소 모두 삭제
+            while(small.children[1].hasChildNodes()){
+                small.children[1].removeChild(small.children[1].firstChild);
+            }
+            smallAdd = 0;
+        });
+    });
+
+
+    // big_lists[0].addEventListener('mouseleave', function(){
+    //     // 요소 모두 삭제
+    //     while(middle.children[1].hasChildNodes()){
+    //         middle.children[1].removeChild(middle.children[1].firstChild);
+    //     }
+    //     midAdd = 0;
+    // });
+
+
+    // 대분류 중  선택 -> 해당 중분류 나타나야 함
+    big_lists[1].addEventListener('mouseover', function(){
+        middle_top.textContent = big_lists[1].textContent;
+        middle.style.display="block";
+        
+        for(var i=0;i<mid_arr_1.length;i++){
+            // 한 번 추가되면 더이상 추가되지 않도록 튕겨내기
+            if(midAdd != 0) break;
+            const mid_cList = document.createElement('div');
+            mid_cList.textContent = mid_arr_1[i];
+            mid_cList.setAttribute('class',"ms_non_selected");
+
+            const mid_cList_a = document.createElement('a');
+            mid_cList_a.appendChild(mid_cList);
+            mid_cList_a.setAttribute('class','ms_list');
+            mid_cList_a.setAttribute('href',"#");
+
+            middle.children[1].appendChild(mid_cList_a);
+        }
+        midAdd = 1;
+    });
+    big_lists[1].addEventListener('mouseleave', function(){
+        // 요소 모두 삭제
+        while(middle.children[1].hasChildNodes()){
+            middle.children[1].removeChild(middle.children[1].firstChild);
+        }
+        midAdd = 0;
+    });
+
+}
 
 
 
@@ -966,5 +1885,3 @@ logout.addEventListener('click',function(){
 //       </p>
 //     </div>`;
 // }
-
-
