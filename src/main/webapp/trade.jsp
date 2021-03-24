@@ -30,7 +30,7 @@
             font-weight: normal;
             font-style: normal;
         }
-            </style>
+	</style>
 </head>
 
 <body><noscript>You need to enable JavaScript to run this app.</noscript>

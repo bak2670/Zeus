@@ -882,6 +882,13 @@ position: relative; top:-2px;}
 .footer_top .footer_top1 li:last-child::after{content:""; display: none;}
 
 /* 추가한 푸터 */
+.footer {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(255, 255, 255);
+}
 .footer1 {
     width: 100%;
     display: flex;
@@ -890,6 +897,7 @@ position: relative; top:-2px;}
     border-top: 1px solid rgb(238, 238, 238);
     border-bottom: 1px solid rgb(238, 238, 238);
 }
+
 .footer11 {
     height: 64px;
     width: 1024px;
@@ -911,6 +919,22 @@ position: relative; top:-2px;}
     position: relative;
 }
 .footerA::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 1px;
+    height: 14px;
+    border-right: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+}
+.footerB {
+    display: block;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+    position: relative;
+} 
+.footerB::after {
     content: "";
     position: absolute;
     top: 0px;
