@@ -295,198 +295,144 @@
                                         <div class="bigcategory">
                                             <ul class="categorylist">
                                                 <li class="list">
-                                                <%
-                                                	String selCate;
-                                                %>
-                                                       <script>
-															function getDownCate(cate){
-																let text = cate.innerText;
-																const xhr = new XMLHttpRequest();
-																xhr.open("GET", "cate_ok.jsp?userid="+text, true);
-																xhr.send();
+                                                	<script>
+														function getDownMidCate(cate){
+															let text = cate.innerText;
+															const xhr = new XMLHttpRequest();
+															// 중분류 추가할 클래스 가져오기
+															const midCateList = document.getElementsByClassName('categorylist')
 															
-																// XMLHttpRequest.DONE : 4, xhr.status == 200
-																xhr.onreadystatechange = function(){
-																	if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
-																		console.log(xhr.responseText);
+															xhr.open("GET", "cateBig_ok.jsp?big="+text, true);
+															xhr.send();
+														
+															// XMLHttpRequest.DONE : 4, xhr.status == 200
+															xhr.onreadystatechange = function(){
+																if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+																	//console.log(xhr.responseText);
+																	// json 가져와서 js 객체로 변경하기
+																	responseObject = JSON.parse(xhr.responseText);
+																	for(var i = 0; i<responseObject.length;i++){
+																		// 원하는 중분류 텍스트만 출력됨
+																		responseObject[i]['middle']
+																		
+																		const midCate = document.createElement('li');
+																		midCate.setAttribute('class','list');
+																		
+																		const midCateBtn = document.createElement('button');
+																		midCateBtn.setAttribute('type','button');
+																		midCateBtn.setAttribute('class','listbutton');
+																		midCateBtn.setAttribute('onclick','getDownSmallCate(this)');
+																		midCateBtn.textContent = responseObject[i]['middle'];
+																		
+																		midCate.appendChild(midCateBtn);
+																		
+																		midCateList[1].append(midCate);
 																	}
 																}
-																return xhr.responseText;
 															}
-														</script>
+															
+														}
+													</script>
 														
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">여성의류</button>
-
-													<%-- <button type="button" class="listbutton"><%=selCate %></button> --%>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">여성의류</button>
                                                     	
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton"  onclick="getDownCate(this)">패션잡화</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">패션잡화</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">남성의류</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">남성의류</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">디지털/가전</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">디지털/가전</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">도서/티켓/취미/애완</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">도서/티켓/취미/애완</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">스타굿즈</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">생활/문구/가구/식품</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">생활/문구/가구/식품</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">스포츠/레저</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">스포츠레저</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">뷰티/미용</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">뷰티/미용</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">유아동/출산</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">유아동/출산</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">기타</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">기타</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">차량/오토바이</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">차량/오토바이</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">구인구직</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">구인구직</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">재능</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">재능</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">지역 서비스</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">지역 서비스</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">번개나눔</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">번개나눔</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">원룸/함께살아요</button>
                                                 </li>
                                                 <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton" onclick="getDownCate(this)">커뮤니티</button>
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">커뮤니티</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="bigcategory">
+                                        	<!-- 중분류 (스크립트로 추가)-->
                                             <ul class="categorylist">
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">도서/티켓/취미/애완</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스타굿즈</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">생활/문구/가구/식품</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스포츠레저</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">뷰티/미용</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">유아동/출산</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">기타</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">차량/오토바이</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">구인구직</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">재능</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">지역 서비스</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">번개나눔</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">커뮤니티</button>
-                                                </li>
                                             </ul>
                                         </div>
                                         <div class="bigcategory">
+											<script>
+												function getDownSmallCate(cate) {
+													let text = cate.innerText;
+													const xhr = new XMLHttpRequest();
+													// 소분류 추가할 클래스 가져오기
+													const smallCateList = document.getElementsByClassName('categorylist')
+
+													xhr.open("GET", "cateMid_ok.jsp?mid="+ text, true);
+													xhr.send();
+
+													// XMLHttpRequest.DONE : 4, xhr.status == 200
+													xhr.onreadystatechange = function() {
+														if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+															//console.log(xhr.responseText);
+															// json 가져와서 js 객체로 변경하기
+															responseObject = JSON.parse(xhr.responseText);
+															for (var i = 0; i < responseObject.length; i++) {
+																// 원하는 소분류 텍스트만 출력됨
+																//responseObject[i]['middle']
+
+																const smallCate = document.createElement('li');
+																smallCate.setAttribute('class','list');
+
+																const smallCateBtn = document.createElement('button');
+																smallCateBtn.setAttribute('type','button');
+																smallCateBtn.setAttribute('class','listbutton');
+																smallCateBtn.textContent = responseObject[i]['small'];
+
+																smallCate.appendChild(smallCateBtn);
+
+																smallCateList[2].append(smallCate);
+															}
+														}
+													}
+
+												}
+											</script>
+											<!-- 소분류 -->
                                             <ul class="categorylist">
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">여성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">패션잡화</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">남성의류</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">디지털/가전</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">도서/티켓/취미/애완</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스타굿즈</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">생활/문구/가구/식품</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">스포츠레저</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">뷰티/미용</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">유아동/출산</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">기타</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">차량/오토바이</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">구인구직</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">재능</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">지역 서비스</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">번개나눔</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">원룸/함께살아요</button>
-                                                </li>
-                                                <li class="list">
-                                                    <button type="button" class="listbutton">커뮤니티</button>
-                                                </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>

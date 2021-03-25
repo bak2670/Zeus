@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="category">
 
-   <select id="middle" parameterType="String" resultType="java.util.List">
+    <select id="middle" parameterType="string" resultType="string">
       select c_middle from tb_category where c_big=#{big_ct}
    </select>
    
-   <select id="small" parameterType="String" resultType="java.util.List">
-      select c_small from tb_category where c_middle=#{middle_ct}
+   <select id="small" parameterType="string" resultType="string">
+      select c_small from tb_category where c_middle=#{mid_ct}
    </select>
+ 
 
-
-</mapper>  
+</mapper> 
