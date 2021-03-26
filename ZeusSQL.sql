@@ -110,7 +110,7 @@ insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiv
 
 --
 create table tb_product(
-   p_idx bigint not null auto_increment primary key,
+    p_idx bigint not null auto_increment primary key,
     p_name varchar(20) not null,
     p_price varchar(20) not null,
     p_state varchar(4) not null default "판매중",
@@ -119,7 +119,7 @@ create table tb_product(
     p_regdate datetime default now(),
     p_zzim bigint not null default "0",
     p_hit bigint not null default "0",
-   foreign key(p_category) references tb_category(c_idx),
+	foreign key(p_category) references tb_category(c_idx),
     p_content text,
     foreign key(p_memdix) references tb_member(m_idx),
     p_tag varchar(100) default null,
@@ -446,3 +446,6 @@ create table tb_category(
 );
 select * from tb_category;
 drop table tb_category;
+
+use zeus;
+select * from tb_product;

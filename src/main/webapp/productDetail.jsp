@@ -877,7 +877,7 @@
                                 width="15" height="16" alt="문의등록버튼 아이콘">등록</button>
                     </div>
                 </div>
-                <!-- <div class="eoSvap">
+                <div class="eoSvap">
                                 <div class="flXkYZ">
                                     <div class="gkKJCx"><a class="qYNJr" href="/shop/1/reviews"><img
                                                 src="https://media.bunjang.co.kr/images/crop/199870305_w{res}.jpg"
@@ -952,7 +952,7 @@
                                     </div>
                                 </div>
                                 <div class="jywRSH"></div>
-                            </div>-->
+                            </div>
             </div>
         </div>
     </div>

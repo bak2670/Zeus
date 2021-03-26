@@ -236,31 +236,30 @@ div {
 										width="6" height="9" alt="화살표 아이콘">
 								</div>
 								<div class="category_list">
-									<a href="#" class="big_non_selected big_list">여성의류</a> <a
-										href="#" class="big_selected big_list">패션잡화</a> <a href="#"
-										class="big_non_selected big_list">남성의류</a> <a href="#"
-										class="big_non_selected big_list">디지털/가전</a> <a href="#"
-										class="big_non_selected big_list">도서/티켓/취미/애완</a> <a href="#"
-										class="big_non_selected big_list">스타굿즈</a> <a href="#"
-										class="big_non_selected big_list">생활/문구/가구/식품</a> <a href="#"
-										class="big_non_selected big_list">스포츠/레저</a> <a href="#"
-										class="big_non_selected big_list">뷰티/미용</a> <a href="#"
-										class="big_non_selected big_list">유아동/출산</a> <a href="#"
-										class="big_non_selected big_list">차량/오토바이</a> <a href="#"
-										class="big_non_selected big_list">기타</a> <a href="#"
-										class="big_non_selected big_list">재능</a> <a href="#"
-										class="big_non_selected big_list">구인구직</a> <a href="#"
-										class="big_non_selected big_list">번개나눔</a> <a href="#"
-										class="big_non_selected big_list">지역 서비스</a> <a href="#"
-										class="big_non_selected big_list">원룸/함께살아요</a> <a href="#"
-										class="big_non_selected big_list">커뮤니티</a>
+									<a href="#" class="big_non_selected big_list">여성의류</a>
+									<a href="#" class="big_selected big_list">패션잡화</a> 
+									<a href="#" class="big_non_selected big_list">남성의류</a> 
+									<a href="#" class="big_non_selected big_list">디지털/가전</a> 
+									<a href="#" class="big_non_selected big_list">도서/티켓/취미/애완</a> 
+									<a href="#" class="big_non_selected big_list">스타굿즈</a> 
+									<a href="#" class="big_non_selected big_list">생활/문구/가구/식품</a> 
+									<a href="#" class="big_non_selected big_list">스포츠/레저</a> 
+									<a href="#" class="big_non_selected big_list">뷰티/미용</a> 
+									<a href="#" class="big_non_selected big_list">유아동/출산</a> 
+									<a href="#" class="big_non_selected big_list">차량/오토바이</a> 
+									<a href="#" class="big_non_selected big_list">기타</a> 
+									<a href="#" class="big_non_selected big_list">재능</a> 
+									<a href="#" class="big_non_selected big_list">구인구직</a> 
+									<a href="#" class="big_non_selected big_list">번개나눔</a> 
+									<a href="#" class="big_non_selected big_list">지역 서비스</a> 
+									<a href="#" class="big_non_selected big_list">원룸/함께살아요</a> 
+									<a href="#" class="big_non_selected big_list">커뮤니티</a>
 								</div>
 							</div>
 							<!-- 중분류 -->
 							<div class="category" id="middle_category">
 								<div class="middle_category_top" id="middle_top">
-									<img
-										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
 										width="6" height="9" alt="화살표 아이콘">
 								</div>
 								<!-- 대분류 "여성의류"에 대한 중분류 -->
@@ -293,10 +292,6 @@ div {
 					</div>
 					<!-- 변경부분 끝 -->
 				</div>
-
-				<!-- <a href="https://m.bunjang.co.kr/seller"target="_blank" class="sellerCenter"><b>번개장터 판매자센터</b><img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAfZJREFUKBVtkstq21AQhi3pqCpWUllWkippCjY2WcWbLPoahS76Bl2XkscIhe7zAllkVbrMY8S0pGCwsWIS2U6ELFRfJPUbg4ubeGA0M2f+fy7nSKvX679KpVKEXmqaFsRx/D0MwwnxRtE5DYuieARcxndM06zWarUKvuSeieG6bh/wTzIf0BMIb3VdP/I874bu88FgkK+zlGEYAYA/s9lMxpCqVTpmFPEnk4lJHKIZuiRqOC9Qs9Fo7C8Wi10KfCKuQFpAGmG/lcvlsN1uPwpJ8Zmhc6XUXZZlAhoS63me70onChxMp1ODs6ngpMNKZBzd930XcoVd3hPvUeAEYsLZV+xImCspcHLmTknObds+JDYBvYNk072Nr9Y7rIhitWazuc1FHEI+B+hzNkazjXctBHQpgGmgSXeRQpZ+KobjOK8AfmThN9iXAIZcwhnE0TpBuhk8lryDy8yvAbjokDjmEm4hDVet9Var5SRJskPyM7rDY1rYCOI5e9x3Op2AgnPFclYURWaapvtU2OOwim4DHlNdFh1AlrdJ0UKROGZmj0pfSGxxeI3+Jr4gHvd6veXtCBgtKaoeYGVWGyv3PsKXV7/rdrvy28t/9E9k6VNACdV+4N/zG1xZlhX3+/2Y+L8/VVhC8Kgoo8WQHvgBH4IgSCS5Sf4Cbfj85T5s+hEAAAAASUVORK5CYII="
-            width="6" height="9" alt="화살표 아이콘"></a> -->
 
 			</div>
 		</div>

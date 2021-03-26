@@ -298,6 +298,7 @@
                                                 	<script>
 														function getDownMidCate(cate){
 															let text = cate.innerText;
+															
 															const xhr = new XMLHttpRequest();
 															// 중분류 추가할 클래스 가져오기
 															const midCateList = document.getElementsByClassName('categorylist')
