@@ -1157,7 +1157,7 @@ padding-left: 10px;}
     display: none;
 }
 
-/* 상품관리 css */
+/* 상품관리 css product.jsp */
 .mngContainer{
     background: rgb(255, 255, 255);
     font-size: 16px;
@@ -1381,6 +1381,7 @@ padding-left: 10px;}
 /* 상품관리 css 끝*/
 
 
+/* 상품등록 product.jsp */
 .main{
     background: rgb(255,255,255);
     font-size: 16px;
@@ -2274,9 +2275,22 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     justify-content: center;
 }
 
+/* 상품등록 끝 product.jsp */
 
 
+
+
+/* productDetail.jsp */
 /* productSum */
+.productDetailBox {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: rgb(255, 255, 255);
+}
+.productDetailContainer {
+	width: 1024px;
+}
 .selectContainer{
     padding: 30px 0px 20px;
     height: 30px;
@@ -2312,22 +2326,22 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 .bigSelect{
     width: 154px;
 }
-.bigSelectBox{
+.bigSelectBox {
+    border: 1px solid rgb(238, 238, 238);
     display: flex;
-    width: 170px;
+    width: 100%;
     height: 28px;
     -webkit-box-align: center;
     align-items: center;
     position: relative;
     font-size: 12px;
     color: rgb(77, 77, 77);
-
+    background: rgb(255, 255, 255);
 }
 .bigSelectTitle{
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 25px 0px 10px;
     position: relative;
     width: 100%;
 }
@@ -2673,7 +2687,6 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 }
 .infoTitleBox{
     padding-bottom: 15px;
-    border-bottom: 1px solid rgb(238, 238, 238);
     width: 100%;
 }
 .infoTilte{
@@ -3256,6 +3269,19 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     font-weight: 600;
 }
 
+/* 얘 안먹음 */
+.shopinfo:nth-child(2) {
+    border-left: 1px solid rgb(33, 33, 33);
+}
+
+
+.inBox2 {
+    padding-right: 30px;
+    border-right: 1px solid rgb(238, 238, 238);
+    height: calc(100% - 50px);
+}
+
+
 .shopQes{
     flex: 1 1 0%;
     -webkit-box-align: center;
@@ -3359,9 +3385,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
 }
 .chooseDash::after {
     content: "";
-    transform: rotate(
--45deg
-);
+    transform: rotate(-45deg);
     border-style: solid;
     border-color: rgb(136, 136, 136);
     border-image: initial;
@@ -3453,12 +3477,209 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     margin-right: 4px;
 }
 
+/* 상품문의 달린 댓글 */
 
+.productInquiry {
+    margin-top: 10px;
+}
+.inquiryContainer {
+    padding-top: 25px;
+}
+.inquiryContent {
+    display: flex;
+    width: 100%;
+}
+.inquiryImg {
+    display: block;
+    margin-right: 15px;
+}
+.inquiryImg img {
+    border-radius: 50%;
+}
+.inquiryDiv {
+    width: 100%;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+.inquiryHeader {
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(136, 136, 136);
+    margin-bottom: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.inquiryTime {
+    font-size: 13px;
+    color: rgb(204, 204, 204);
+}
+.inquiryText {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+.inquiryFooter {
+    display: flex;
+    margin-bottom: 20px;
+}
+.inquiryComment {
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    display: flex;
+    -webkit-box-align: unset;
+    align-items: unset;
+    margin-right: 25px;
+    position: relative;
+    cursor: pointer;
+}
+.inquiryComment img {
+    margin-right: 4px;
+}
+.inquiryComment::after {
+    content: "";
+    width: 1px;
+    height: 13px;
+    position: absolute;
+    border-right: 1px solid rgb(238, 238, 238);
+    top: 1px;
+    right: -14px;
+}
 
+/* 문의신고 버튼 안눌렀을 때 */
+.enquiryReport {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.enquireReportContainer {
+    padding: 60px;
+    background: rgb(255, 255, 255);
+    width: 600px;
+}
+.ReportTitle {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.ReportTitleDiv {
+    letter-spacing: 5.2px;
+    font-size: 26px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    margin-bottom: 45px;
+}
+.enquireReportList {
+    border-top: 1px solid rgb(238, 238, 238);
+}
+.ERL1 {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.ERL1 > button {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+}
 
-
-
-
+.ERL1 img {
+    transition: transform 0.4s ease-out 0s;
+}
+.ERL1_1 {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+}
+.ERL1_1_1 {
+    height: 30px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 14px;
+}
+.ERL1_1_1 a, .ERL1_1_1 button {
+    color: rgb(247, 47, 51);
+}
+.ERL1_1_2 {
+    display: flex;
+    margin-top: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+    background: rgb(255, 255, 255);
+    font-size: 13px;
+}
+.ERL1_1_2 input {
+    flex: 1 1 0%;
+    height: 36px;
+    padding: 0px 20px;
+}
+.ERL1_1_2 button {
+    border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: rgb(136, 136, 136);
+}
+.ERL1_1_Other {
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.ERL1_1_Other textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(238, 238, 238);
+}
+.ERL1_1_Other button{
+    border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    background: rgb(255, 255, 255);
+}
+.jywRSH {
+    padding: 50px 0px;
+}
 
 
 
