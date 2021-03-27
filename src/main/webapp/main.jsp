@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="UTF-8">
-
+<!-- 노트북에서 주석달기 -->
 <title>번개장터 메인</title>
 <link rel="stylesheet" href="./css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
