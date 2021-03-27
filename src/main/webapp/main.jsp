@@ -5,15 +5,9 @@
 
 <head>
 <meta charset="UTF-8">
-<!-- 데탑에서 노트북에서 주석달기 -->
 
-<!-- 데탑 주석 1 -->
 <title>번개장터 메인</title>
 
-<!-- 노트북 주석 -->
-<!-- 노트북 주석2 -->
-
-<!-- 데탑 주석 2 -->
 <link rel="stylesheet" href="./css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
