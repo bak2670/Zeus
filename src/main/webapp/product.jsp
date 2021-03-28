@@ -74,13 +74,9 @@
                     <div class="zeusSerach1">
 						<form name="searchForm" id="searchForm" method="post" action="search.jsp">
 							<div class="zeusSerach2">
-								<!-- input text에 입력한 value값을 form 태그로 넘겨야함 -->
-								
-									<input type="text" placeholder="상품명, 지역명, @상점명 입력"
-										class="zeusTxt" value="" name="searchText">
-										<a class="zeusSearchBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeZJREFUOBGVVD1PAkEQ3VlOjY0xIdGOI0BMxMSGytJE+RsWWomx8mfYWNBpZWltg1b2NCZaGBppFAzR1njsOO9gzHEfIJdws/vmvcft7OySiT2DQqUakDtipjoZ4xsyzGy6RNzy2F7mu53nmGRiKprRw7XaQm/wdU6OG2xMTvFoFPKQLTXX86tn1G7/RHM6thjArP/xeWscn8rUWqJLee/klhdW8MM4xCQHDrjQqEkivhfLF++FEvf80luvsLGXIIwB5MABF5o0HoU1M+5RkvK1Xn29+3KfRlQMpmyCOyzfM3Y7XlMbboDUjIiuZpnBFBwsH3WGVv9Io8VuYuLEUMFZUbmqjfJt2BqC5JZyT9HEtLFyVRvlhrscBeYaS4/G+VaQV4DD7+FWPJk1Vy4aPs6R+nILoBTzMJ7MmitXtVGexXFCC8j5OpzWgyoCxzEfQQOt4hot+gjHSZZOhoLraabIEQU3EEMT70HgHl44m3KcNqUm+2SCVt8vX6E1dDdRMyzTcSCXBhRSImc6o9HkW7589Pz3cpAD8CBL3oXKkj1Ze+00xxZh+DNUMHF9SQKdEL2+en7lmNmFRmmm6jVXhGl4SchF0fcrjbnEWeQ008SSs8RZuC5fjIbWW6xm8ebCYdovlg8g+gXwsu0wmCVGbgAAAABJRU5ErkJggg=="
-										width="16" height="16" alt="검색 버튼 아이콘"></a>
-								
+								<input type="text" placeholder="상품명, 지역명, @상점명 입력" class="zeusTxt" value="" name="searchText">
+								<a class="zeusSearchBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeZJREFUOBGVVD1PAkEQ3VlOjY0xIdGOI0BMxMSGytJE+RsWWomx8mfYWNBpZWltg1b2NCZaGBppFAzR1njsOO9gzHEfIJdws/vmvcft7OySiT2DQqUakDtipjoZ4xsyzGy6RNzy2F7mu53nmGRiKprRw7XaQm/wdU6OG2xMTvFoFPKQLTXX86tn1G7/RHM6thjArP/xeWscn8rUWqJLee/klhdW8MM4xCQHDrjQqEkivhfLF++FEvf80luvsLGXIIwB5MABF5o0HoU1M+5RkvK1Xn29+3KfRlQMpmyCOyzfM3Y7XlMbboDUjIiuZpnBFBwsH3WGVv9Io8VuYuLEUMFZUbmqjfJt2BqC5JZyT9HEtLFyVRvlhrscBeYaS4/G+VaQV4DD7+FWPJk1Vy4aPs6R+nILoBTzMJ7MmitXtVGexXFCC8j5OpzWgyoCxzEfQQOt4hot+gjHSZZOhoLraabIEQU3EEMT70HgHl44m3KcNqUm+2SCVt8vX6E1dDdRMyzTcSCXBhRSImc6o9HkW7589Pz3cpAD8CBL3oXKkj1Ze+00xxZh+DNUMHF9SQKdEL2+en7lmNmFRmmm6jVXhGl4SchF0fcrjbnEWeQ008SSs8RZuC5fjIbWW6xm8ebCYdovlg8g+gXwsu0wmCVGbgAAAABJRU5ErkJggg=="
+								width="16" height="16" alt="검색 버튼 아이콘"></a>
 							</div>
 						</form>
                         <div class="zuesViewBox1">
@@ -312,6 +308,15 @@
 															// 중분류 추가할 클래스 가져오기
 															const midCateList = document.getElementsByClassName('categorylist')
 															
+															// 현재 중분류/소분류에 있는 항목들 제거하기
+															
+															
+												            while(midCateList[1].hasChildNodes()){
+												            	midCateList[1].removeChild(midCateList[1].firstChild);
+												            }
+															while(midCateList[2].hasChildNodes()){
+												            	midCateList[2].removeChild(midCateList[2].firstChild);
+												            }
 															xhr.open("GET", "cateBig_ok.jsp?big="+text, true);
 															xhr.send();
 														
@@ -336,11 +341,12 @@
 																		
 																		midCate.appendChild(midCateBtn);
 																		
+																		
+																		
 																		midCateList[1].append(midCate);
 																	}
 																}
 															}
-															
 														}
 													</script>
 														
@@ -410,6 +416,10 @@
 													// 소분류 추가할 클래스 가져오기
 													const smallCateList = document.getElementsByClassName('categorylist')
 
+													while(smallCateList[2].hasChildNodes()){
+														smallCateList[2].removeChild(smallCateList[2].firstChild);
+										            }
+													
 													xhr.open("GET", "cateMid_ok.jsp?mid="+ text, true);
 													xhr.send();
 
