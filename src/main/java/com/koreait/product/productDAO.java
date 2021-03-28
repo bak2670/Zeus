@@ -34,4 +34,11 @@ public class productDAO {
 		return searchList;
 	}
 	
+	// 메인 페이지에서 상품 뿌려주기 위한 mainProduct. 입력값이 없다
+	public List<HashMap<String,String>> mainProduct() {
+		List<HashMap<String,String>> searchList = sqlsession.selectList("product.mainProduct");
+	
+		
+		return searchList;
+	}
 }

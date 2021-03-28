@@ -10,5 +10,7 @@
 
 	</select>
 
-
+	<select id="mainProduct" resultType="map">
+		select * from tb_product
+	</select>
 </mapper> 

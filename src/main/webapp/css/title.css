@@ -608,6 +608,11 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
 .category_img_div {
     margin-right: 20px;
     position: relative;
+    height: 70px;
+    align-items: center;
+}
+#category_img {
+	margin-top: 27px;
 }
 .categoryMenu {
     display: flex;
@@ -6173,7 +6178,6 @@ font-weight: bold;}
  */
  .main_category {
     top: calc(100% + 1px);
-    left: 300px;
     border-left: 1px solid rgb(238, 238, 238);
     width: 240px;
     z-index: 10;

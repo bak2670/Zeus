@@ -1656,7 +1656,7 @@ $(document).ready(function () {
 // 카테고리 메뉴
 
 window.onload = function(){
-    const categoryImg = document.getElementById('category_img'); 
+    const categoryImg = document.getElementById('category_img_div'); 
     const big = document.getElementById('big_category');
     const big_lists = document.getElementsByClassName('big_list');
 

@@ -425,11 +425,11 @@
 				<!-- product 테이블에서 검색한 문자열을 포함하는 p_name의 정보 가져와야함 -->
                 <%
                 	List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
-                	
+                	int searchCnt = searchList.size();
                 %>
                 <div class = "container_text">
                     <div class="container_sc">
-                        <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2">14,338개</span>
+                        <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2"><%=searchCnt%>개</span>
                             </div>
                             <div class="sch_chk">
                                 <span class="container_sch1"><%=searchText%>&nbsp;</span>
@@ -449,7 +449,6 @@
                 <div class="container_main">
                 <% 
                 	for(HashMap product : searchList){
-                	
                 %>
 	                <div class="item_box">
                         <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
@@ -473,7 +472,7 @@
                                         <%=product.get("p_price")%>
                                     </div>
                                     <div class="text_bottom2">
-                                        시간
+                                        <%=product.get("p_regdate")%>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
+<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <html lang="en">
 
 <head>
@@ -224,7 +228,7 @@ div {
 				</div>
 				<div class="underMenu">
 					<div class="categoryMenu">
-						<div class="category_img_div">
+						<div class="category_img_div" id="category_img_div">
 						<img id="category_img"
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAExJREFUWAnt1sEJACAMA0DrJt1/SAVXyKfI9V8Il0+qu88afHtwthdNwOkNyUeAAAECvwuUNRNWbM2EgN4JECBAgEAoYM2EgMuaSQUv1d0EPE4sEMMAAAAASUVORK5CYII="
 							width="20" height="16" alt="메뉴 버튼 아이콘">
@@ -268,10 +272,10 @@ div {
 								<!-- 대분류 "여성의류"에 대한 중분류 -->
 								<div class="category_list">
 									<!-- <a class="ms_list" href="#"><div class="ms_non_selected">원피스</div></a>                            
-                            <a class="ms_list" href="#"><div class="ms_selected">스커트/치마</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">자켓</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">니트/스웨터</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">야상/점퍼/패딩</div></a>                          -->
+			                            <a class="ms_list" href="#"><div class="ms_selected">스커트/치마</div></a>      
+			                            <a class="ms_list" href="#"><div class="ms_non_selected">자켓</div></a>      
+			                            <a class="ms_list" href="#"><div class="ms_non_selected">니트/스웨터</div></a>      
+			                            <a class="ms_list" href="#"><div class="ms_non_selected">야상/점퍼/패딩</div></a> -->
 								</div>
 							</div>
 							<!-- 소분류 -->
@@ -403,121 +407,49 @@ div {
 		</div>
 	</section>
 	<script>
-        $('.visual').slick({
-    autoplay: true,
-autoplaySpeed: 2000,
-});
-    </script>
+		$('.visual').slick({
+			autoplay : true,
+			autoplaySpeed : 2000,
+		});
+	</script>
 	<div class="container">
 		<div class="container_text">
 			<h2>오늘의 추천 상품</h2>
 		</div>
 		<div class="container_main">
+			<!-- 상품 가져와서 보여주기 -> 순서는 일단 인덱스 순서 -->
+			<%
+				List<HashMap<String, String>> productList = productDAO.mainProduct();
+				int productCnt = productList.size();
+				for(HashMap product : productList){
+			%>
 			<div class="item_box">
-				<a href="#" class="item">
+				<a href="productDetail.jsp?p_idx=<%=product.get("p_idx")%>"
+					class="item">
 					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
+						<%
+						out.print("<img src='./uploads/" + product.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
+						%>
 					</div>
 					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
+						<div class="text_top">
+							<%=product.get("p_name")%>
 						</div>
-
-					</div>
-				</a>
-			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
 						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
-						</div>
-
-					</div>
-				</a>
-			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
-						</div>
-
-					</div>
-				</a>
-			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
-						</div>
-
-					</div>
-				</a>
-			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
+							<div class="text_bottom1">
+								<%=product.get("p_price")%>
+							</div>
+							<div class="text_bottom2">
+								<%=product.get("p_regdate")%>
+							</div>
 						</div>
 					</div>
 				</a>
 			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
-						</div>
-
-					</div>
-				</a>
-			</div>
-			<div class="item_box">
-				<a href="#" class="item">
-					<div class="item_img">
-						<img src="img/번개장터이미지/댓글.png">
-					</div>
-					<div class="item_text">
-						<div class="text_top">돋보기</div>
-						<div class="text_bottom">
-							<div class="text_bottom1">888,888</div>
-							<div class="text_bottom2">시간</div>
-						</div>
-
-					</div>
-				</a>
-			</div>
-
+		<%
+			}
+		%>
+			
 		</div>
 
 	</div>
