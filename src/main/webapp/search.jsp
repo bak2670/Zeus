@@ -51,7 +51,7 @@
             font-weight: normal;
             font-style: normal;
         }
-            </style>
+	</style>
 </head>
 
 <body>
@@ -427,7 +427,6 @@
                 	List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
                 	
                 %>
-                
                 <div class = "container_text">
                     <div class="container_sc">
                         <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2">14,338개</span>
@@ -455,7 +454,15 @@
 	                <div class="item_box">
                         <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
                             <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
+                                <!-- <img src="img/번개장터이미지/댓글.png"> -->
+							<%
+								out.print("<img src='./uploads/"+product.get("p_picture")+"' alt='상품이미지'>"); // 상대경로. 얘만됨
+								
+								// 절대경로 1
+								//out.print("<img src='C:\\CODE\\zeus_uploads\\"+product.get("p_picture")+"' alt='상품이미지'>");
+								// 절대경로 2
+								//out.print("<img src='C:/CODE/zeus_uploads/"+product.get("p_picture")+"' alt='상품이미지'>");
+							%>
                             </div>
                             <div class="item_text">
                                 <div class = "text_top">
