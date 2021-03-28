@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
+<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <html lang="en">
+<%
+	request.setCharacterEncoding("UTF-8");
+
+
+	if(request.getParameter("searchText") == null || request.getParameter("searchText").equals("")){
+%>
+	<script>
+		alert('잘못된 접근입니다.');
+		location.href="./main.jsp";
+	</script>
+<%			
+	}
+	// 검색어 입력한 문자열
+	String searchText = request.getParameter("searchText");
+%>
+
 
 <head>
     <meta charset="UTF-8">
@@ -35,6 +55,7 @@
 </head>
 
 <body>
+
     <div class="mainHeader">
         <div class="topHeader">
             <div class="headerBox">
@@ -71,7 +92,7 @@
                             width="136" height="40" alt="번개장터 로고"></a>
                     <div class="zeusSerach1">
                         <div class="zeusSerach2"><input type="text" placeholder="상품명, 지역명, @상점명 입력" class="zeusTxt"
-                                value=""><a class="zeusSearchBtn"><img
+                                value=<%=searchText %>><a class="zeusSearchBtn"><img
                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeZJREFUOBGVVD1PAkEQ3VlOjY0xIdGOI0BMxMSGytJE+RsWWomx8mfYWNBpZWltg1b2NCZaGBppFAzR1njsOO9gzHEfIJdws/vmvcft7OySiT2DQqUakDtipjoZ4xsyzGy6RNzy2F7mu53nmGRiKprRw7XaQm/wdU6OG2xMTvFoFPKQLTXX86tn1G7/RHM6thjArP/xeWscn8rUWqJLee/klhdW8MM4xCQHDrjQqEkivhfLF++FEvf80luvsLGXIIwB5MABF5o0HoU1M+5RkvK1Xn29+3KfRlQMpmyCOyzfM3Y7XlMbboDUjIiuZpnBFBwsH3WGVv9Io8VuYuLEUMFZUbmqjfJt2BqC5JZyT9HEtLFyVRvlhrscBeYaS4/G+VaQV4DD7+FWPJk1Vy4aPs6R+nILoBTzMJ7MmitXtVGexXFCC8j5OpzWgyoCxzEfQQOt4hot+gjHSZZOhoLraabIEQU3EEMT70HgHl44m3KcNqUm+2SCVt8vX6E1dDdRMyzTcSCXBhRSImc6o9HkW7589Pz3cpAD8CBL3oXKkj1Ze+00xxZh+DNUMHF9SQKdEL2+en7lmNmFRmmm6jVXhGl4SchF0fcrjbnEWeQ008SSs8RZuC5fjIbWW6xm8ebCYdovlg8g+gXwsu0wmCVGbgAAAABJRU5ErkJggg=="
                                     width="16" height="16" alt="검색 버튼 아이콘"></a></div>
                         <div class="zuesViewBox1">
@@ -214,7 +235,9 @@
         </div>
     </div>
 
-    <div class="container">
+	
+	
+    <div class="searchContainer">
         <div class="con_kate">
             <div class="kate">
                 <div class="kate_sc">
@@ -275,14 +298,13 @@
                 <div class = "container_text">
                     <div class="container_sc">
                         <div class="container_sch">
-                            <span class="container_sch01"> 
-                            우리동네 </span><span class="container_sch02">역삼1동</span>
+                            <span class="container_sch01"> 우리동네 </span>
+                            <span class="container_sch02">역삼1동</span>
                             <a href="#" class="container_scmap">지역설정</a>
-                            </div>
-                            
+                        </div>
                     </div>
-                    
                 </div>
+                
                 <div class="container_main">
                     <div class="item_box">
                         <a href="#" class="item">
@@ -391,13 +413,20 @@
                     
                     
                 </div>
-
+                
+				<!-- 검색 결과 -->
+				<!-- product 테이블에서 검색한 문자열을 포함하는 p_name의 정보 가져와야함 -->
+                <%
+                	List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
+                	
+                %>
+                
                 <div class = "container_text">
                     <div class="container_sc">
-                        <div class="container_sch"><span class="container_sch1">아이패드</span>의 검색결과 <span class="container_sch2">14,338개</span>
+                        <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2">14,338개</span>
                             </div>
                             <div class="sch_chk">
-                                <span class="container_sch1">아이패드&nbsp;</span>
+                                <span class="container_sch1"><%=searchText%>&nbsp;</span>
                                 <span class="container_sch2">키워드 알림 받기</span>
                                 <button class="openBtn"> <input type="checkbox" id="chk1"><label for="chk1"><span>키워드</span></label></span></button>
                     </div>
@@ -408,105 +437,26 @@
                         <a href="#" class="sch_menu1">고가순</a>
                     </div>
                     </div>
-                    
                 </div>
+                
+                
                 <div class="container_main">
-                    <div class="item_box">
-                        <a href="#" class="item">
+                <% 
+                	for(HashMap product : searchList){
+                	
+                %>
+	                <div class="item_box">
+                        <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
                             <div class="item_img">
                                 <img src="img/번개장터이미지/댓글.png">
                             </div>
                             <div class="item_text">
                                 <div class = "text_top">
-                                    돋보기
+                                    <%=product.get("p_name")%>
                                 </div>
                                 <div class="text_bottom">
                                     <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
+                                        <%=product.get("p_price")%>
                                     </div>
                                     <div class="text_bottom2">
                                         시간
@@ -515,8 +465,9 @@
                             </div>
                         </a>
                     </div>
-                    
-                    
+                <%
+                	}
+                %>            
                 </div>
             </div>
             

@@ -1891,15 +1891,4 @@ window.onload = function(){
 // }
 
 
-
-// input text 실시간 입력값 value 적용
-$('.sys input[type=text], .sys select').on("propertychange change keyup paste input", function() {
-    var currentVal = $(this).val();
-    if(currentVal == oldVal) {
-        return;
-    }
- 
-    oldVal = currentVal;
-    alert("changed!");
-});
  

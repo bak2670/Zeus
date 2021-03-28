@@ -213,7 +213,7 @@
             </div>
         </div>
     </div>
-        <div class="container">
+        <div class="myShopContainer">
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
