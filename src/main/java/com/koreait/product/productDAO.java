@@ -41,4 +41,27 @@ public class productDAO {
 		
 		return searchList;
 	}
+	
+	public int insertData(productDTO product) {
+		HashMap<Object, Object> dataMap = new HashMap<>();   //HashMap클래스, 임포트해서 갖다쓰는거, Object:모든값을 받는다
+	     // key, value
+	      dataMap.put("p_name", product.getName());
+	      dataMap.put("p_price", product.getPrice() );
+	      dataMap.put("p_state", product.getState());
+	      dataMap.put("p_delcharge", product.getDelcharge());
+	      dataMap.put("p_deallocation", product.getDeallocation()); // 지역
+	      dataMap.put("p_category", product.getCategory());  //int
+	      dataMap.put("p_content", product.getContent());
+	      dataMap.put("p_memidx", product.getMemidx());  //int
+	      dataMap.put("p_tag", product.getTag());
+	      dataMap.put("p_picturepath", product.getPicturepath());
+	      dataMap.put("p_picture", product.getPicture());
+	      dataMap.put("p_exchange", product.getExchange());
+	      dataMap.put("p_priceConsult",product.getPriceConsult());
+	      dataMap.put("p_quantity", product.getQuantity());
+	      
+	      
+	      return sqlsession.insert("product.uploadproduct", dataMap); // 마이바티스에 데이터를 보내는 구문
+	}
+	
 }

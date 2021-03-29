@@ -32,7 +32,7 @@
             font-weight: normal;
             font-style: normal;
         }
-            </style>
+	</style>
 
 </head>
 
@@ -254,6 +254,416 @@
                                     <ul class="imgsize">
                                         <li class="imgstyle">
                                             이미지등록
+                                            <input type="file" name="p_picture" accept="image/jpg, imgae/jpeg, image/png" multiple>
+                                        </li>
+                                    </ul>
+                                    <div class="imgtext">
+                                        <b>* 상품 이미지는 640*640에 최적화 되어 있습니다.</b>
+                                        <br>
+                                        - 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.
+                                        <br>
+                                        - 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.
+                                        <br>
+                                        - 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.
+                                        <br>
+                                        - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
+                                        <br>
+                                        최대 지원 사이즈인 640 * 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="productstitle">
+                                <div class="title">
+                                    제목
+                                    <span>*</span>
+                                </div>
+                                <div class="titlecontainer">
+                                    <div class="titlebox">
+                                        <div class="sc-grYksN titletext">
+                                            <input type="text" name="p_name" placeholder="상품 제목을 입력해주세요." class="titleinput" id="titleCon" value="">
+                                            <a target="_black" class="noTrade" href="https://m.bunjang.co.kr/customer/faq/2?id=220">거래금지 품목</a>
+                                            <button type="button" class="tradeCancle" style="display: none;"></button>
+                                        </div>
+                                        <div class="txtcount">
+                                            0/40
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="categorymain">
+                                <div class="categorytitle">
+                                    카테고리
+                                    <span>*</span>
+                                </div>
+                                <div class="categorytext">
+                                    <div class="categorybox">
+                                        <div class="bigcategory">
+                                            <ul class="categorylist">
+                                                <li class="list">
+                                                	<script>
+														function getDownMidCate(cate){
+															let text = cate.innerText;
+															
+															const xhr = new XMLHttpRequest();
+															// 중분류 추가할 클래스 가져오기
+															const midCateList = document.getElementsByClassName('categorylist');
+															
+												            while(midCateList[1].hasChildNodes()){
+												            	midCateList[1].removeChild(midCateList[1].firstChild);
+												            }
+															while(midCateList[2].hasChildNodes()){
+												            	midCateList[2].removeChild(midCateList[2].firstChild);
+												            }
+															
+															xhr.open("GET", "cateBig_ok.jsp?big="+text, true);
+															xhr.send();
+														
+															// XMLHttpRequest.DONE : 4, xhr.status == 200
+															xhr.onreadystatechange = function(){
+																if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+																	//console.log(xhr.responseText);
+																	// json 가져와서 js 객체로 변경하기
+																	responseObject = JSON.parse(xhr.responseText);
+																	for(var i = 0; i<responseObject.length;i++){
+																		// 원하는 중분류 텍스트만 출력됨
+																		responseObject[i]['middle']
+																		
+																		const midCate = document.createElement('li');
+																		midCate.setAttribute('class','list');
+																		
+																		const midCateBtn = document.createElement('button');
+																		midCateBtn.setAttribute('type','button');
+																		midCateBtn.setAttribute('class','listbutton');
+																		midCateBtn.setAttribute('onclick','getDownSmallCate(this)');
+																		midCateBtn.textContent = responseObject[i]['middle'];
+																		
+																		midCate.appendChild(midCateBtn);
+																		
+																		midCateList[1].append(midCate);
+																	}
+																}
+															}
+															
+														}
+													</script>
+														
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">여성의류</button>
+                                                    	
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">패션잡화</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">남성의류</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">디지털/가전</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">도서/티켓/취미/애완</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">생활/문구/가구/식품</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">스포츠/레저</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">뷰티/미용</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">유아동/출산</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">기타</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">차량/오토바이</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">구인구직</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">재능</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">지역 서비스</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">번개나눔</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">원룸/함께살아요</button>
+                                                </li>
+                                                <li class="list">
+                                                    <button type="button" class="listbutton" onclick="getDownMidCate(this)">커뮤니티</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="bigcategory">
+                                        	<!-- 중분류 (스크립트로 추가)-->
+                                            <ul class="categorylist">
+                                            </ul>
+                                        </div>
+                                        <div class="bigcategory">
+											<script>
+												function getDownSmallCate(cate) {
+													let text = cate.innerText;
+													const xhr = new XMLHttpRequest();
+													// 소분류 추가할 클래스 가져오기
+													const smallCateList = document.getElementsByClassName('categorylist')
+													
+													while(smallCateList[2].hasChildNodes()){
+														smallCateList[2].removeChild(smallCateList[2].firstChild);
+										            }
+													
+													xhr.open("GET", "cateMid_ok.jsp?mid="+ text, true);
+													xhr.send();
+
+													// XMLHttpRequest.DONE : 4, xhr.status == 200
+													xhr.onreadystatechange = function() {
+														if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+															//console.log(xhr.responseText);
+															// json 가져와서 js 객체로 변경하기
+															responseObject = JSON.parse(xhr.responseText);
+															for (var i = 0; i < responseObject.length; i++) {
+																// 원하는 소분류 텍스트만 출력됨
+																//responseObject[i]['middle']
+
+																const smallCate = document.createElement('li');
+																smallCate.setAttribute('class','list');
+															// smallCate = <li class="list">
+															//					<input type="button" class="listbutton">롱 원피스</input>
+															//				</li>
+															// smallCateBtn = <input type="button" class="listbutton">롱 원피스</input>
+																const smallCateBtn = document.createElement('button');
+																smallCateBtn.setAttribute('type','button');
+																smallCateBtn.setAttribute('class','listbutton');
+																smallCateBtn.textContent = responseObject[i]['small'];
+
+																smallCate.appendChild(smallCateBtn);
+
+																smallCateList[2].append(smallCate);
+															}
+														}
+													}
+
+												}
+											</script>
+											<!-- 소분류 -->
+                                            <ul class="categorylist">
+                                            
+                                                <input type="hidden" name="p_category">
+                                                <script>
+                                           
+                                                /*고민,,,,안됌,,,,*/
+                                                
+                                           
+                                               </script>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <h3 class="select-category">
+                                        선택한 카테고리 : 
+                                        <b></b>
+                                    </h3>
+                                </div>
+                            </li>
+                            <li class="placemain">
+                            <div class="placetitle">
+                                거래지역
+                                <span>*</span>
+                            </div>
+                            <div class="placebox">
+                                <div class="place">
+                                    <button type="button" class="placebutton">내 위치</button>
+                                    <button type="button" class="placebutton">최근지역</button>
+                                    <button type="button" class="placebutton">주소 검색</button>
+                                </div>
+                                <input type="text" name="p_deallocation" placeholder="선호 거래 지역을 검색해주세요." class="placesearch" value="">
+                            </div>
+                        </li>
+                        <li class="statemian">
+                            <div class="statetitle">
+                                상태
+                                <span>*</span>
+                            </div>
+                            <div class="statebox">
+                                <div class="state">
+                                    <input id="hisProduct" name="p_state" type="radio" name="condition" value="중고상품" name="state" checked>
+                                    <label for="hisProduct" class="hisProduct">
+                                        중고상품
+                                    </label>
+                                    <input id="newProduct" name="p_state" type="radio" name="condition" value="새상품" name="state">
+                                    <label for="newProduct" class="newProduct">
+                                        새상품
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="changemain">
+                            <div class="changetitle">
+                                상태
+                                <span>*</span>
+                            </div>
+                            <div class="changebox">
+                                <div class="change">
+                                    <input id="nochange" name="p_exchange" type="radio" value="N"  name="change" checked>
+                                    <label for="nochange"  class="nochange">
+                                        교환불가
+                                    </label>
+                                    <input id="okchange" name="p_exchange" type="radio" value="Y"  name="change">
+                                    <label for="okchange" class="okchange">
+                                        교환가능
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="pricemain">
+                            <div class="pricetitle">
+                                가격
+                                <span>*</span>
+                            </div>
+                            <div class="pricebox">
+                                <div class="prcie">
+                                    <input type="text" name="p_price" placeholder="숫자만 입력해주세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="prcienum" value="">
+                                    원
+                                </div>
+                                <div class="noNum" style="display: none;">
+                                    100원 이상 입력해주세요.
+                                </div>
+                                <div class="pricesub">
+                                    <div class="pricesubBox">
+                                        <input id="freesShipping" name="p_delcharge" type="checkbox">
+                                        <label for="freesShipping" class="prciebutton">
+                                            배송비 포함
+                                        </label>
+                                    </div>
+                                    <div class="pricesubBox">
+                                        <input id="contactHope" name="p_priceConsult" type="checkbox">
+                                        <label for="contactHope" class="prciebutton">
+                                            가격협의 가능
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="exMain">
+                            <div class="exTitle">
+                                설명
+                            </div>
+                            <div class="ex">
+                                <textarea placeholder="상품 설명을 입력해주세요."  name="p_content" rows="6" class="productEx" id="content" maxlength="2000"></textarea>
+                                <div class="excomment">
+                                    <span>
+                                        혹시
+                                        <a target="_blank" href="/customer/notice?id=607">카카오톡 ID</a>
+                                        를 적으셨나요?
+                                    </span>
+                                    <div class="exCnt" id="counter">
+                                        0/2000
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="tagMain">
+                            <div class="tagTitle">
+                                연관태그
+                            </div>
+                            <div class="tagbox">
+                                <div class="tagStyle1">
+                                    <div class="tagStyle2">
+                                        <ul class="tagName" id="tag-list">
+                                            <li>
+                                                <button type="button">
+    
+                                                </button>
+                                                <button type="button"></button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                        <div class="tagStyle3">
+                                        <div class="tagStyle4">
+                                            <input type="text" id="tag"  name="p_tag" placeholder="연관태그를 입력해주세요. (최대 5개)" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="tagList">
+                                    <li>
+                                        태그는 띄어쓰기로 구분되며 최대 9자까지 입력할 수 있습니다.
+                                    </li>
+                                    <li>
+                                        태그는 검색의 부가정보로 사용 되지만, 검색 결과 노출을 보장하지는 않습니다.
+                                    </li>
+                                    <li>
+                                        검색 광고는 태그정보를 기준으로 노출됩니다.
+                                    </li>
+                                    <li>
+                                        상품과 직접관련이 없는 다른 상품명,브랜드,스팸성 키워드 등을 입력하면 노출이 중단되거나 상품이 삭제될 수 있습니다.
+                                    </li>
+                                </ul>
+                            </div>
+                            </li>
+                            <li class="quantityMain"> 
+                                <div class="quantityTitle">
+                                    수량
+                                </div>
+                                <div class="quantityBox">
+                                    <div class="quantity">
+                                        <input type="text" class="quantityNum" name="p_quantity" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" value="1">
+                                        개
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                    </section>
+                    <div class="guide">
+                        <h3>
+                            꼭 읽어주세요
+                            <a href="https://pay2.bunjang.co.kr/introduce" target="_blank" rel="noopener noreferrer">이용 가이드</a>
+                        </h3>
+                        <p>
+                            상품 등록 시
+                            <b>번개페이가 자동 적용</b>
+                            됩니다. 거래완료 후 등록된 계좌로 입금되며
+                            <b>정산 확인은 '마이메뉴 &gt; 구매/판매내역</b>
+                            에서 가능합니다.
+                        </p>
+                    </div>
+                    <div class="warningGuide">
+                        <div>
+                        <b>재난 긴급생활비 거래 주의안내</b>
+                        <p>
+                            재난 긴급생활비 거래는 위법행위에 해당할 수 있습니다. 관련 키워드가 포함되어 있는 상품은 판매완료 처리됩니다.<br>
+                            이러한 상품을 판매하는 경우 서비스 이용의 제재 및 관련 법에 따라 처벌받을 수 있음에 유의하시기 바랍니다.
+                        </p>
+                    </div>
+                    </div>
+                    <div class="registMain">
+                        <div class="regist">
+                            <button type="submit" class="registbutton"></button>
+                        </div>
+                    </div> 
+                    </form> <!--form 끝 -->
+						
+						
+						
+						<!-- <form method="post" action="product_ok.jsp" enctype="multipart/form-data">
+                        <ul class="content">
+                            <li class="content-list">
+                                <div class="productimg">
+                                    상품이미지
+                                    <span>*</span>
+                                    <small>
+                                        (0/12)
+                                    </small>
+                                </div>
+                                <div class="img">
+                                    <ul class="imgsize">
+                                        <li class="imgstyle">
+                                            이미지등록
                                             <input type="file" accept="image/jpg, imgae/jpeg, image/png" multiple>
                                         </li>
                                     </ul>
@@ -404,7 +814,7 @@
                                             </ul>
                                         </div>
                                         <div class="bigcategory">
-                                        	<!-- 중분류 (스크립트로 추가)-->
+                                        	중분류 (스크립트로 추가)
                                             <ul class="categorylist">
                                             </ul>
                                         </div>
@@ -450,7 +860,7 @@
 
 												}
 											</script>
-											<!-- 소분류 -->
+											소분류
                                             <ul class="categorylist">
                                                 
                                             </ul>
@@ -638,7 +1048,7 @@
                             <button type="submit" class="registbutton"></button>
                         </div>
                     </div>
-                    </form>
+                    </form> -->
                 </main>
             </div>
             <div class="mngContainer viewOn clickOff">

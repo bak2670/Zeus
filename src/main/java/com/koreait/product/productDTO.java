@@ -17,6 +17,11 @@ public class productDTO {
 	private String tag;
 	private String picturepath;
 	private String picture;
+	private String exchange;
+	private String priceConsult;
+	private int quantity;
+	
+
 	
 	
 	public int getIdx() {
@@ -85,10 +90,10 @@ public class productDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getMemdix() {
+	public int getMemidx() {
 		return memdix;
 	}
-	public void setMemdix(int memdix) {
+	public void setMemidx(int memdix) {
 		this.memdix = memdix;
 	}
 	public String getTag() {
@@ -109,6 +114,26 @@ public class productDTO {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public String getExchange() {
+		return exchange;
+	}
+	public void setExchange(String exchange) {
+		this.exchange = exchange;
+	}
+	public String getPriceConsult() {
+		return priceConsult;
+	}
+	public void setPriceConsult(String priceConsult) {
+		this.priceConsult = priceConsult;
+	}
+	
 	
 	@Override
 	public String toString() {
