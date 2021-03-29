@@ -51,5 +51,11 @@ public class categoryDAO {
 		return smallList;
 
 	}
+	
+	public int getCateIdx(String cateStr) {
+		int cateIdx = sqlsession.selectOne("category.cateIdx", cateStr);
+		
+		return cateIdx;
+	}
 
 }
