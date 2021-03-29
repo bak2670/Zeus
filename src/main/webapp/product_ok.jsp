@@ -8,6 +8,7 @@
 	request.setCharacterEncoding("UTF-8");
 %> 
 <jsp:useBean id="fs" class="com.koreait.db.FileService"/>  
+<jsp:useBean id="dao" class="com.koreait.category.categoryDAO"/> 
 <% 
 	int maxSize = 10 * 1024 * 1024;		// 10MB
 	String savePath = fs.SAVE_PATH;
@@ -30,8 +31,15 @@
 		}
 		String deallocation = multi.getParameter("p_deallocation");
 		String regdate = multi.getParameter("p_regdate");
+		
+		String cateStr = multi.getParameter("p_category");
+
+		// category가 string이니까 얘를 db에서 찾아서 인덱스를 넣어줘야함
+		int category = dao.getCateIdx(cateStr);
+		System.out.println(category);
+		
 //		int category = Integer.parseInt(multi.getParameter("p_category"));
-		int category = 10;
+//		int category = 10;
 		String content = multi.getParameter("p_content");
 //		int memidx = Integer.parseInt(multi.getParameter("p_memidx")); //로그인x
 		int memidx = 17;
@@ -53,7 +61,7 @@
 		
 		// DB에 넣기 위해서 DTO에 넣으러 가는 부분
 		// FileService의 dataUpload 메소드
-		if(fs.dataUpload(name, price, state, delcharge, deallocation , 1 , content, 1, tag, priceConsult, exchange, quantity, file)){
+		if(fs.dataUpload(name, price, state, delcharge, deallocation , category , content, 1, tag, priceConsult, exchange, quantity, file)){
  
 %>
 	<script>

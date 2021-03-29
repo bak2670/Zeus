@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/title.css">
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac74ac399318a09b850aa4a15d457f1e&libraries=services"></script>
     <style>
         @font-face {
             font-family: 'GmarketSansMedium';
@@ -301,8 +302,20 @@
                                             <ul class="categorylist">
                                                 <li class="list">
                                                 	<script>
+                                                		let select_big = "";
+                                                		let select_mid = "";
+                                                		let select_small = "";
+                                                		
+                                                		
 														function getDownMidCate(cate){
+															select_big = "";
+															
 															let text = cate.innerText;
+															select_big = select_big + text;
+															
+															let select_element = document.getElementById('select_element');
+	                                                		
+															select_element.textContent = select_big;
 															
 															const xhr = new XMLHttpRequest();
 															// 중분류 추가할 클래스 가져오기
@@ -409,6 +422,12 @@
 											<script>
 												function getDownSmallCate(cate) {
 													let text = cate.innerText;
+													
+													select_mid = "";
+													select_mid = select_mid + text;
+
+													select_element.textContent = select_big + " > " + select_mid;
+													
 													const xhr = new XMLHttpRequest();
 													// 소분류 추가할 클래스 가져오기
 													const smallCateList = document.getElementsByClassName('categorylist')
@@ -420,25 +439,17 @@
 													xhr.open("GET", "cateMid_ok.jsp?mid="+ text, true);
 													xhr.send();
 
-													// XMLHttpRequest.DONE : 4, xhr.status == 200
 													xhr.onreadystatechange = function() {
 														if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-															//console.log(xhr.responseText);
 															// json 가져와서 js 객체로 변경하기
 															responseObject = JSON.parse(xhr.responseText);
 															for (var i = 0; i < responseObject.length; i++) {
-																// 원하는 소분류 텍스트만 출력됨
-																//responseObject[i]['middle']
-
 																const smallCate = document.createElement('li');
 																smallCate.setAttribute('class','list');
-															// smallCate = <li class="list">
-															//					<input type="button" class="listbutton">롱 원피스</input>
-															//				</li>
-															// smallCateBtn = <input type="button" class="listbutton">롱 원피스</input>
 																const smallCateBtn = document.createElement('button');
 																smallCateBtn.setAttribute('type','button');
 																smallCateBtn.setAttribute('class','listbutton');
+																smallCateBtn.setAttribute('onclick','selectCategoryName(this)');
 																smallCateBtn.textContent = responseObject[i]['small'];
 
 																smallCate.appendChild(smallCateBtn);
@@ -451,22 +462,27 @@
 												}
 											</script>
 											<!-- 소분류 -->
-                                            <ul class="categorylist">
-                                            
-                                                <input type="hidden" name="p_category">
-                                                <script>
-                                           
-                                                /*고민,,,,안됌,,,,*/
-                                                
-                                           
-                                               </script>
-                                                
+											<input type="hidden" name="p_category" id="hidden_category">
+                                            <ul class="categorylist">                                                
                                             </ul>
+                                            
+                                            <script>
+												function selectCategoryName(cate) {
+													let text = cate.innerText;
+													select_small = "";
+													select_small = select_small + text;
+
+													select_element.textContent = select_big + " > " + select_mid + " > " + select_small;
+													
+													const hidden_category = document.getElementById('hidden_category');
+													hidden_category.value = text;
+												}
+											</script>
                                         </div>
                                     </div>
                                     <h3 class="select-category">
                                         선택한 카테고리 : 
-                                        <b></b>
+                                        <b id="select_element"></b>
                                     </h3>
                                 </div>
                             </li>
@@ -476,8 +492,89 @@
                                 <span>*</span>
                             </div>
                             <div class="placebox">
-                                <div class="place">
-                                    <button type="button" class="placebutton">내 위치</button>
+                            	<script>
+							        function getLocation() {
+							            if (navigator.geolocation) { // GPS를 지원하면
+							                navigator.geolocation.getCurrentPosition(function (position) {
+							                	
+							                	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+							            		
+							            		mapOption = {
+							            			center : new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude), // 지도의 중심좌표
+							            			level : 1
+							            		// 지도의 확대 레벨
+							            		};
+							
+							            		// 지도를 생성합니다    
+							            		var map = new kakao.maps.Map(mapContainer, mapOption);
+							
+							            		// 주소-좌표 변환 객체를 생성합니다
+							            		var geocoder = new kakao.maps.services.Geocoder();
+							
+							            		var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+							            		infowindow = new kakao.maps.InfoWindow({
+							            			zindex : 1
+							            		}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+							
+							            		// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+							            		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+							
+							
+							
+							            		function searchAddrFromCoords(coords, callback) {
+							            			// 좌표로 행정동 주소 정보를 요청합니다
+							            			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(),
+							            					callback);
+							            		}
+							
+							            		function searchDetailAddrFromCoords(coords, callback) {
+							            			// 좌표로 법정동 상세 주소 정보를 요청합니다
+							            			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+							            		}
+							
+							            		// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+							            		function displayCenterInfo(result, status) {
+							            			if (status === kakao.maps.services.Status.OK) {
+							            				var infoDiv = document.getElementById('centerAddr');
+														
+							            				for (var i = 0; i < result.length; i++) {
+							            					// 행정동의 region_type 값은 'H' 이므로
+							            					if (result[i].region_type === 'H') {
+							            						infoDiv.innerHTML = result[i].address_name;
+							            						// 주소 출력부분
+							            						const locationText = document.getElementsByClassName('placesearch');
+							            						locationText[0].setAttribute('value',result[i].address_name);
+							            						console.log(result[i].address_name);
+							            						break;
+							            					}
+							            				}
+							            			}
+							            		}
+							                }, function (error) {
+							                    console.error(error);
+							                }, {
+							                    enableHighAccuracy: false,
+							                    maximumAge: 0,
+							                    timeout: Infinity
+							                });
+							            } else {
+							                alert('GPS를 지원하지 않습니다');
+							            }
+							        }
+								</script>
+								<!-- 안보이는 지도 -->
+								<div class="map_wrap" style="display: none">
+									<div id="map"
+										style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+									<div class="hAddr">
+										<span class="title">지도중심기준 행정동 주소정보</span> <span
+											id="centerAddr"></span>
+									</div>
+								</div>
+									
+									
+									<div class="place">
+                                    <button type="button" class="placebutton" onclick="getLocation()">내 위치</button>
                                     <button type="button" class="placebutton">최근지역</button>
                                     <button type="button" class="placebutton">주소 검색</button>
                                 </div>
