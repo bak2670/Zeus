@@ -28,4 +28,18 @@
 	<select id="storeName" parameterType="int" resultType="string">
 		select m_store from tb_member  where m_idx = #{m_idx}
 	</select>
+	
+	<!-- 상점 idx -> 올린 상품 개수 -->
+	<select id="productCnt" parameterType="int" resultType="int">
+		select count(p_idx) as cnt from tb_product where p_memidx=#{m_idx}
+	</select>
+	
+	<!-- 팔로우 수 리턴 -->
+	<select id="followCnt" parameterType="int" resultType="int">
+		select count(f_idx) as cnt from tb_following where f_follow=#{m_idx}
+	</select>
+	
+	<select id="recentProduct" parameterType="int" resultType="map">
+		select * from tb_product where p_memidx = #{m_idx} order by p_regdate desc limit 0,2;
+	</select>
 </mapper> 

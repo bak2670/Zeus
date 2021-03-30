@@ -76,4 +76,30 @@ public class productDAO {
 		
 		return store;
 	}
+	
+	// 상품 번호 받아서 해당 상점이 올린 상품 개수 리턴
+	public int storeProductCnt(int p_idx) {
+		int m_idx = sqlsession.selectOne("product.storeIdx", p_idx);
+		
+		int productCnt = sqlsession.selectOne("product.productCnt",m_idx);
+		
+		return productCnt;
+	}
+	
+	// 상품 번호 받아서 해당 상점의 팔로워 수 리턴
+	public int storeFollwer(int p_idx) {
+		int m_idx = sqlsession.selectOne("product.storeIdx", p_idx);
+		
+		int followCnt = sqlsession.selectOne("product.followCnt",m_idx);
+		
+		return followCnt;
+	}
+	
+	public List<HashMap<String,String>> recentProduct(int p_idx){
+		int m_idx = sqlsession.selectOne("product.storeIdx", p_idx);
+		
+		List<HashMap<String, String>> productList = sqlsession.selectList("product.recentProduct", m_idx);
+		System.out.println(productList);
+		return productList;
+	}
 }
