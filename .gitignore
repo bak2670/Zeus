@@ -38,6 +38,7 @@ local.properties
 .target
 /target/
 **/target
+target/
 
 # Tern plugin
 .tern-project
