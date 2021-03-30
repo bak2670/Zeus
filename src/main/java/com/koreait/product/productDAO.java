@@ -64,4 +64,16 @@ public class productDAO {
 	      return sqlsession.insert("product.uploadproduct", dataMap); // 마이바티스에 데이터를 보내는 구문
 	}
 	
+	public String storeName(int p_idx) {
+		int m_idx = sqlsession.selectOne("product.storeIdx", p_idx);
+		
+		String store = sqlsession.selectOne("product.storeName", m_idx);
+		
+		if(store == null) {
+		
+			store = "상점" + String.valueOf(m_idx)+"호";
+		}
+		
+		return store;
+	}
 }

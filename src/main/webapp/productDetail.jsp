@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
+<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <%
 	int p_idx = 1;
 %>
@@ -1129,6 +1131,11 @@
 		                </button>
 		            </div>
 		            <!-- 오른쪽 하단 상점정보 컨테이너 -->
+<%-- 		            <%
+		            	// p_idx로 이거 올린 사람 p_memidx 가져와야함
+		            	productDAO.storeName(p_idx);
+		            
+		            %> --%>
 		            <div class="sidcContaienr">
 		                <div class="sideBox1">
 		                    <div class="sideTitle">상점정보</div>
@@ -1138,7 +1145,7 @@
 		                                    src="https://seoul-p-studio.bunjang.net/images/crop/408464257_w96.jpg" width="48"
 		                                    height="48" alt="판매자 프로필 이미지"></a>
 		                            <div class="">
-		                                <a class="sideTxt" href="/shop/1671876/products">교신꺼지라고안한다고</a>
+		                                <a class="sideTxt" href="/shop/1671876/products"><%=productDAO.storeName(p_idx)%></a>
 		                                <div class="UpBox">
 		                                    <a class="shopUp" href="/shop/1671876/products">상품518</a> <a class="shopUp"
 		                                        href="/shop/1671876/followers">팔로워329</a>
