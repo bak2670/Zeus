@@ -4,8 +4,8 @@
 <%
    request.setCharacterEncoding("UTF-8");
 %>
-<jsp:useBean class="com.koreait.member.MemberDTO" id="member"/>
-<jsp:useBean class="com.koreait.member.MemberDAO" id="dao"/>
+<jsp:useBean class="com.koreait.member.memberDTO" id="member"/>
+<jsp:useBean class="com.koreait.member.memberDAO" id="dao"/>
 <jsp:setProperty property="*" name="member"/>
 
 <%

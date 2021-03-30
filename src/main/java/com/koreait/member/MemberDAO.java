@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.koreait.db.SqlMapConfig;
 
-public class MemberDAO {
+public class memberDAO {
 
    Connection conn;
    PreparedStatement pstmt;
@@ -20,12 +20,12 @@ public class MemberDAO {
    SqlSessionFactory ssf = SqlMapConfig.getSqlMapInstance();
    SqlSession sqlsession;
    
-   public MemberDAO() {
+   public memberDAO() {
       sqlsession = ssf.openSession(true);
       System.out.println("마이바티스 설정 성공");
    }
    
-   public boolean kakaoCheck(MemberDTO member) {
+   public boolean kakaoCheck(memberDTO member) {
       HashMap<String, String> dataMap = new HashMap<>();
       dataMap.put("m_kakaoemail", member.getKakaoemail());
       System.out.println(member.getKakaoemail());
@@ -36,7 +36,7 @@ public class MemberDAO {
       return false;
    }
    
-   public boolean naverCheck(MemberDTO member) {
+   public boolean naverCheck(memberDTO member) {
 	      HashMap<String, String> dataMap = new HashMap<>();
 	      dataMap.put("m_naveremail", member.getNaveremail());
 	      System.out.println(member.getNaveremail());
@@ -47,7 +47,7 @@ public class MemberDAO {
 	      return false;
 	   }
    
-   public int join(MemberDTO member) {
+   public int join(memberDTO member) {
       HashMap<String, String> dataMap = new HashMap<>();
       
       dataMap.put("m_username", member.getUsername());
@@ -61,7 +61,7 @@ public class MemberDAO {
       
    }
    
-   public MemberDTO kakaojoin(MemberDTO member) {
+   public memberDTO kakaojoin(memberDTO member) {
 	      HashMap<String, String> dataMap = new HashMap<>();
 	      dataMap.put("m_kakaoemail", member.getKakaoemail());
 	      dataMap = sqlsession.selectOne("Member.kakaologin", dataMap);
@@ -74,7 +74,7 @@ public class MemberDAO {
 	      return null;
 	   }
    
-   public MemberDTO naverjoin(MemberDTO member) {
+   public memberDTO naverjoin(memberDTO member) {
 	      HashMap<String, String> dataMap = new HashMap<>();
 	      dataMap.put("m_naveremail", member.getNaveremail());
 	      dataMap = sqlsession.selectOne("Member.naverlogin", dataMap);

@@ -1,6 +1,6 @@
 package com.koreait.member;
 
-public class MemberDTO {
+public class memberDTO {
 
 	private int idx;
 	private String username;
