@@ -1126,6 +1126,7 @@
 		                        width="25" height="25" alt="url 공유 아이콘"><span class="urlClick">클릭하여 복사하기</span>
 		                </button>
 		            </div>
+		            <!-- 오른쪽 하단 상점정보 컨테이너 -->
 		            <div class="sidcContaienr">
 		                <div class="sideBox1">
 		                    <div class="sideTitle">상점정보</div>
@@ -1245,6 +1246,7 @@
 		                    <button class="buyBtn">바로구매</button>
 		                </div>
 		            </div>
+		            <!-- 오른쪽 하단 상점정보 컨테이너 끝-->
 		        </div>  
             </div>    
     	
