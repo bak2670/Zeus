@@ -37,7 +37,6 @@
 
 <body>
     <div id="container">
-
         <form name="regform" id="regform" method="post" action="login_ok.jsp" onsubmit="return sendit()">
 
             <input type="hidden" name="isSsn" id="isSsn" value="n">
@@ -45,11 +44,11 @@
             <p>안전한 거래를 위해 약관동의 후<br>본인인증을 완료해주세요.</p>
             <div class="login_1">
                 <div class="member_name">
-                    <input type="text" maxlength="20" name="userid" id="userid" placeholder="이름을 입력하세요.">
+                    <input type="text" maxlength="20" name="username" id="userid" placeholder="이름을 입력하세요.">
                 </div>
                 <div class="member_ssn">
-                    <input type="text" maxlength="6" placeholder="생년월일을 입력하세요." id="ssn1"> <span class="sun">-</span>
-                    <input type="password" id="ssn2" placeholder="* * * * * * *"> <input type="button" id="ssnBtn"
+                    <input type="text" maxlength="6" placeholder="생년월일을 입력하세요." name="ssn1" id="ssn1"> <span class="sun">-</span>
+                    <input type="password" name="ssn2" id="ssn2" placeholder="* * * * * * *"> <input type="button" id="ssnBtn"
                         value="검  증"></p>
                 </div>
 
@@ -113,7 +112,6 @@
             <p><input type="submit" value="다음"></p>
         </form>
     </div>
-    </form>
 </body>
 
 </html>

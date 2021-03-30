@@ -12,7 +12,7 @@
 				<property name="url"
 					value="jdbc:mysql://localhost:3306/zeus" />
 				<property name="username" value="root" />
-				<property name="password" value="1234" />
+				<property name="password" value="6936" />
 			</dataSource>
 		</environment>
 	</environments>
@@ -20,5 +20,6 @@
 		<!-- sql을 모아놓을 xml -->
 		<mapper resource="com/koreait/db/category.xml" />
 		<mapper resource="com/koreait/db/product.xml" />
+		<mapper resource="com/koreait/db/member.xml" />
 	</mappers>
 </configuration>

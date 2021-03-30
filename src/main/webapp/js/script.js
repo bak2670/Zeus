@@ -319,6 +319,7 @@ $(document).ready(function () {
 
 })
 
+
 // 신고하기 모달창
 
 $(document).ready(function () {

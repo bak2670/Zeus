@@ -1,10 +1,11 @@
 package com.koreait.member;
 
-public class memberDTO {
+public class MemberDTO {
 
 	private int idx;
 	private String username;
-	private String email;
+	private String kakaoemail;
+	private String naveremail;
 	private String hp;
 	private String ssn1;
 	private String ssn2;
@@ -29,11 +30,18 @@ public class memberDTO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getEmail() {
-		return email;
+	
+	public String getKakaoemail() {
+		return kakaoemail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setKakaoemail(String kakaoemail) {
+		this.kakaoemail = kakaoemail;
+	}
+	public String getNaveremail() {
+		return naveremail;
+	}
+	public void setNaveremail(String naveremail) {
+		this.naveremail = naveremail;
 	}
 	public String getHp() {
 		return hp;
@@ -95,13 +103,13 @@ public class memberDTO {
 	public void setZzim(String zzim) {
 		this.zzim = zzim;
 	}
-	
 	@Override
 	public String toString() {
-		return "memberDTO [idx=" + idx + ", username=" + username + ", email=" + email + ", hp=" + hp + ", ssn1=" + ssn1
-				+ ", ssn2=" + ssn2 + ", store=" + store + ", joindate=" + joindate + ", lastlogin=" + lastlogin
-				+ ", intro=" + intro + ", profilepath=" + profilepath + ", profile=" + profile + ", zzim=" + zzim + "]";
+		return "memberDTO [idx=" + idx + ", username=" + username + ", kakaoemail=" + kakaoemail + ", naveremail="
+				+ naveremail + ", hp=" + hp + ", ssn1=" + ssn1 + ", ssn2=" + ssn2 + ", store=" + store + ", joindate="
+				+ joindate + ", lastlogin=" + lastlogin + ", intro=" + intro + ", profilepath=" + profilepath
+				+ ", profile=" + profile + ", zzim=" + zzim + "]";
 	}
-	
+		
 	
 }
