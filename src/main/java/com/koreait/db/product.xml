@@ -19,10 +19,13 @@
 		  values(#{p_name}, #{p_price}, #{p_state}, #{p_delcharge}, #{p_deallocation}, #{p_category}, #{p_content}, #{p_memidx}, #{p_tag}, #{p_picturepath}, #{p_picture}, #{p_exchange}, #{p_priceConsult}, #{p_quantity})
 	</insert>
 	
+	<!-- 상품 idx -> 올린 상점 idx -->
 	<select id="storeIdx" parameterType="int" resultType="int">
 		select p_memidx from tb_product where p_idx=#{p_idx}
 	</select>
-	<select id="storeName" parameterType="int" resultType="map">
+	
+	<!-- 상점 이름 가져오는 sql -->
+	<select id="storeName" parameterType="int" resultType="string">
 		select m_store from tb_member  where m_idx = #{m_idx}
 	</select>
 </mapper> 
