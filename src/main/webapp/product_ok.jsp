@@ -36,11 +36,8 @@
 
 		// category가 string이니까 얘를 db에서 찾아서 인덱스를 넣어줘야함
 		int category = dao.getCateIdx(cateStr);
-		System.out.println(category);
-		
-//		int category = Integer.parseInt(multi.getParameter("p_category"));
-//		int category = 10;
 		String content = multi.getParameter("p_content");
+		
 //		int memidx = Integer.parseInt(multi.getParameter("p_memidx")); //로그인x
 		int memidx = 17;
 		String tag = multi.getParameter("p_tag");
