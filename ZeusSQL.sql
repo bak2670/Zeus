@@ -5,7 +5,8 @@ use Zeus;
 create table tb_member(
 	m_idx bigint not null auto_increment primary key,
     m_username varchar(20) not null,
-    m_email varchar(100),
+    m_kakaoemail varchar(100),
+    m_naveremail varchar(100),
     m_hp varchar(13) unique not null,
     m_ssn1 char(6) not null,
     m_ssn2 char(7) not null,
