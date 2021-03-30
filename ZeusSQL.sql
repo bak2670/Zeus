@@ -159,8 +159,26 @@ create table tb_oneToOne(
     o_content text not null,
     o_regdate datetime not null default now(),
 	o_answerOK char(1) not null default 'N',
-    o_answer text
+    o_answer text,
+    o_ansdate datetime
 );
+
+create table tb_recentProduct(
+	rcp_idx bigint not null auto_increment primary key, 
+	rcp_memidx bigint not null,
+    foreign key(rcp_memidx) references tb_member(m_idx),
+    rcp_productidx bigint not null,
+    foreign key(rcp_productidx) references tb_product(p_idx)
+);
+
+create table tb_recentSearch(
+	rs_idx bigint not null auto_increment primary key, 
+	rs_memidx bigint not null,
+    foreign key(rs_memidx) references tb_member(m_idx),
+    rs_search varchar(100) not null
+);
+
+
 insert into tb_member(m_username, m_email, m_hp, m_ssn1, m_ssn2) values ("김사과", "apple@apple.com", "010-1111-1111", '001011','3068518');
 insert into tb_member(m_username, m_email, m_hp, m_ssn1, m_ssn2) values ("이메론", "apple@apple.com", "010-9997-9997", '001011','3068518');
 insert into tb_member(m_username, m_email, m_hp, m_ssn1, m_ssn2) values ("제우스", "apple@apple.com", "010-9988-9988", '001011','3068518');
@@ -228,44 +246,43 @@ insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiv
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("29", "239.72.217.138", "5432", "30", "259.48.112.447", "5432", "먀먀", "아자아자", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("30", "240.72.217.138", "5432", "31", "260.48.112.447", "5432", "슈방", "파닥파닥", "C:\Users\fuck\Pictures\Saved Pictures", "N");
 
-
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("펭귄인형","1000","중고상품","Y","서울시 서초구 사당동","5","10","1","귀여워요","1","C:\Users\fuck\Pictures\Saved Pictures","펭귄인형");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("눈사람","2000","중고상품","N","서울시 강남구 역삼동","2","12","2","고급져요","2","C:\Users\fuck\Pictures\Saved Pictures","눈사람");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("머리띠","500","중고상품","Y","서울시 강서구 목동","1","10","18","귀여워요","18","C:\Users\fuck\Pictures\Saved Pictures","머리띠");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("마스크","1000","중고상품","Y","서울시 중랑구 면목동","0","42","19","잘막아줘요","19","C:\Users\fuck\Pictures\Saved Pictures","마스크");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("휴지","300","중고상품","Y","서울시 광진구 화양동","2","23","20","쓰던거아니예요","20","C:\Users\fuck\Pictures\Saved Pictures","휴지");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("초코우유","1000","중고상품","N","서울시 서초구 방배동","0","34","21","맛있어요","21","C:\Users\fuck\Pictures\Saved Pictures","초코우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("딸기우유","1000","중고상품","N","서울시 서초구 방배동","1","37","21","맛있어요","22","C:\Users\fuck\Pictures\Saved Pictures","딸기우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("바나나우유","1000","중고상품","N","서울시 서초구 방배동","2","35","21","맛있어요","23","C:\Users\fuck\Pictures\Saved Pictures","바나나우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("커피우유","1000","새상품","N","서울시 서초구 방배동","3","34","21","맛있어요","24","C:\Users\fuck\Pictures\Saved Pictures","커피우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("코코넛우유","1000","새상품","N","서울시 서초구 방배동","4","33","21","맛있어요","25","C:\Users\fuck\Pictures\Saved Pictures","코코넛우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("고구마우유","1000","새상품","Y","서울시 서초구 방배동","5","22","21","맛있어요","26","C:\Users\fuck\Pictures\Saved Pictures","고구마우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("감자우유","1000","새상품","N","서울시 서초구 방배동","6","24","21","솔직히 별로","27","C:\Users\fuck\Pictures\Saved Pictures","감자우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("당근우유","1000","중고상품","Y","서울시 서초구 방배동","5","1","21","솔직히 별로","28","C:\Users\fuck\Pictures\Saved Pictures","당근우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("헤이즐넛우유","1000","중고상품","Y","서울시 서초구 방배동","5","12","21","도전상품","29","C:\Users\fuck\Pictures\Saved Pictures","헤이즐넛우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("서울우유","1000","중고상품","N","서울시 서초구 방배동","2","65","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","서울우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("건대우유","1000","새상품","Y","서울시 서초구 방배동","5","31","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","건대우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("연세우유","1000","새상품","N","서울시 서초구 방배동","3","75","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","연세우유");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("가디건","30000","중고상품","Y","서울시 강남구 테헤란로","11","46","28","구멍없어요","30","C:\Users\fuck\Pictures\Saved Pictures","가디건");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("나이키신발","80000","새상품","N","서울시 광진구 화양동","7","34","29","중고예요","30","C:\Users\fuck\Pictures\Saved Pictures","나이키신발");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아디다스저지","70000","중고상품","N","경기도 만안구 안양동 ","2","45","50","깨끗해요","30","C:\Users\fuck\Pictures\Saved Pictures","아디다스저지");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아이폰","900000","중고상품","Y","경기도 의정부시 호원동","6","10","21","잘들려요","30","C:\Users\fuck\Pictures\Saved Pictures","아이폰");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아이폰케이스","30000","중고상품","Y","경기도 남양주시 별내동","1","12","1","박스개봉전","30","C:\Users\fuck\Pictures\Saved Pictures","아이폰케이스");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("버즈","45000","중고상품","Y","경기도 남양주시 청학리","5","10","1","헐값","30","C:\Users\fuck\Pictures\Saved Pictures","버즈");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("에어팟","210000","중고상품","Y","서울시 강동구 성내동","3","10","2","잘들릴걸","30","C:\Users\fuck\Pictures\Saved Pictures","에어팟");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("모자","15000","중고상품","N","경기도 파주시 금촌1동","2","10","16","머리가작아요","30","C:\Users\fuck\Pictures\Saved Pictures","모자");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("자라티셔츠","12000","중고상품","Y","경기도 의정부시 민락동","1","6","17","자라자라","31","C:\Users\fuck\Pictures\Saved Pictures","자라티셔츠");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("유니클로바지","10000","중고상품","N","경기도 파주시 봉암리","1","4","18","유니유니","32","C:\Users\fuck\Pictures\Saved Pictures","유니클로바지");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("보조배터리","17000","중고상품","Y","전북 익산","0","12","19","보조보조","33","C:\Users\fuck\Pictures\Saved Pictures","보조배터리");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("거북이가방","23000","중고상품","Y","함경북도 서산시","0","31","38","꼬북꼬북","34","C:\Users\fuck\Pictures\Saved Pictures","거북이가방");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("피카츄","15000","새상품","N","서울시 관악구 봉천동","0","1","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","피카츄");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("라이츄","5000","새상품","Y","서울시 관악구 봉천동","0","13","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","라이츄");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("파이리","15000","새상품","N","서울시 관악구 봉천동","7","85","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","파이리");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("꼬부기","15000","새상품","Y","서울시 관악구 봉천동","8","75","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","꼬부기");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("버터플","100","중고상품","N","서울시 관악구 봉천동","4","34","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","버터플");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("야도란","3000","중고상품","Y","서울시 관악구 봉천동","1","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","야도란");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("피존투","2000","중고상품","Y","서울시 관악구 봉천동","1","45","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","피존투");
-insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("또가스","50","새상품","N","서울시 관악구 봉천동","0","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","또가스");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("펭귄인형","1000","중고상품","Y","서울시 서초구 사당동","5","10","1","귀여워요","1","C:\Users\fuck\Pictures\Saved Pictures","펭귄인형.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("눈사람","2000","중고상품","N","서울시 강남구 역삼동","2","12","2","고급져요","2","C:\Users\fuck\Pictures\Saved Pictures","눈사람.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("머리띠","500","중고상품","Y","서울시 강서구 목동","1","10","18","귀여워요","18","C:\Users\fuck\Pictures\Saved Pictures","머리띠.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("마스크","1000","중고상품","Y","서울시 중랑구 면목동","0","42","19","잘막아줘요","19","C:\Users\fuck\Pictures\Saved Pictures","마스크.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("휴지","300","중고상품","Y","서울시 광진구 화양동","2","23","20","쓰던거아니예요","20","C:\Users\fuck\Pictures\Saved Pictures","휴지.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("초코우유","1000","중고상품","N","서울시 서초구 방배동","0","34","21","맛있어요","21","C:\Users\fuck\Pictures\Saved Pictures","초코우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("딸기우유","1000","중고상품","N","서울시 서초구 방배동","1","37","21","맛있어요","22","C:\Users\fuck\Pictures\Saved Pictures","딸기우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("바나나우유","1000","중고상품","N","서울시 서초구 방배동","2","35","21","맛있어요","23","C:\Users\fuck\Pictures\Saved Pictures","바나나우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("커피우유","1000","새상품","N","서울시 서초구 방배동","3","34","21","맛있어요","24","C:\Users\fuck\Pictures\Saved Pictures","커피우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("코코넛우유","1000","새상품","N","서울시 서초구 방배동","4","33","21","맛있어요","25","C:\Users\fuck\Pictures\Saved Pictures","코코넛우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("고구마우유","1000","새상품","Y","서울시 서초구 방배동","5","22","21","맛있어요","26","C:\Users\fuck\Pictures\Saved Pictures","고구마우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("오감자허니밀크","1000","새상품","N","서울시 서초구 방배동","6","24","21","솔직히 별로","27","C:\Users\fuck\Pictures\Saved Pictures","오감자허니밀크.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("당근주스","1000","중고상품","Y","서울시 서초구 방배동","5","1","21","솔직히 별로","28","C:\Users\fuck\Pictures\Saved Pictures","당근주스.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("헤이즐넛우유","1000","중고상품","Y","서울시 서초구 방배동","5","12","21","도전상품","29","C:\Users\fuck\Pictures\Saved Pictures","헤이즐넛우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("서울우유","1000","중고상품","N","서울시 서초구 방배동","2","65","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","서울우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("건국우유","1000","새상품","Y","서울시 서초구 방배동","5","31","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","건국우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("연세우유","1000","새상품","N","서울시 서초구 방배동","3","75","21","맛있어요","30","C:\Users\fuck\Pictures\Saved Pictures","연세우유.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("가디건","30000","중고상품","Y","서울시 강남구 테헤란로","11","46","28","구멍없어요","30","C:\Users\fuck\Pictures\Saved Pictures","가디건.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("나이키신발","80000","새상품","N","서울시 광진구 화양동","7","34","29","중고예요","30","C:\Users\fuck\Pictures\Saved Pictures","나이키신발.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아디다스저지","70000","중고상품","N","경기도 만안구 안양동 ","2","45","50","깨끗해요","30","C:\Users\fuck\Pictures\Saved Pictures","아디다스저지.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아이폰","900000","중고상품","Y","경기도 의정부시 호원동","6","10","21","잘들려요","30","C:\Users\fuck\Pictures\Saved Pictures","아이폰.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("아이폰케이스","30000","중고상품","Y","경기도 남양주시 별내동","1","12","1","박스개봉전","30","C:\Users\fuck\Pictures\Saved Pictures","아이폰케이스.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("버즈","45000","중고상품","Y","경기도 남양주시 청학리","5","10","1","헐값","30","C:\Users\fuck\Pictures\Saved Pictures","버즈.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("에어팟","210000","중고상품","Y","서울시 강동구 성내동","3","10","2","잘들릴걸","30","C:\Users\fuck\Pictures\Saved Pictures","에어팟.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("모자","15000","중고상품","N","경기도 파주시 금촌1동","2","10","16","머리가작아요","30","C:\Users\fuck\Pictures\Saved Pictures","모자.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("자라티셔츠","12000","중고상품","Y","경기도 의정부시 민락동","1","6","17","자라자라","31","C:\Users\fuck\Pictures\Saved Pictures","자라티셔츠.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("유니클로바지","10000","중고상품","N","경기도 파주시 봉암리","1","4","18","유니유니","32","C:\Users\fuck\Pictures\Saved Pictures","유니클로바지.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("보조배터리","17000","중고상품","Y","전북 익산","0","12","19","보조보조","33","C:\Users\fuck\Pictures\Saved Pictures","보조배터리.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("거북이가방","23000","중고상품","Y","함경북도 서산시","0","31","38","꼬북꼬북","34","C:\Users\fuck\Pictures\Saved Pictures","거북이가방.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("피카츄","15000","새상품","N","서울시 관악구 봉천동","0","1","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","피카츄.png");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("라이츄","5000","새상품","Y","서울시 관악구 봉천동","0","13","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","라이츄.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("파이리","15000","새상품","N","서울시 관악구 봉천동","7","85","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","파이리.png");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("꼬부기","15000","새상품","Y","서울시 관악구 봉천동","8","75","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","꼬부기.png");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("버터플","100","중고상품","N","서울시 관악구 봉천동","4","34","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","버터플.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("야도란","3000","중고상품","Y","서울시 관악구 봉천동","1","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","야도란.jpg");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("피존투","2000","중고상품","Y","서울시 관악구 봉천동","1","45","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","피존투.png");
+insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("또가스","50","새상품","N","서울시 관악구 봉천동","0","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","또가스.jpg");
 
 insert into tb_following(f_memidx,f_follow) values ("1", "4");
 insert into tb_following(f_memidx,f_follow) values ("2", "6");
