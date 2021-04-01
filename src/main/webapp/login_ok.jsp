@@ -9,12 +9,36 @@
 <jsp:setProperty property="*" name="member"/>
 
 <%
-   if(dao.join(member) == 1){
-	   session.setAttribute("username" ,member.getUsername());
-	   session.setAttribute("idx" ,member.getIdx());
+   if(dao.phoneCheck(member)){
+	   if(!dao.kakaoCheck(member)){
+		   if(dao.emailjoin(member) == 1){
+			   session.setAttribute("username" ,member.getUsername());
+				session.setAttribute("idx" ,member.getIdx());
+		   }
+	   }
+	   if(dao.phonejoin(member) != null){
+		   session.setAttribute("username" ,member.getUsername());
+			session.setAttribute("idx" ,member.getIdx());
+	   }
 %>
 <script>
-   alert('회원가입 완료되었습니다.');
+   location.href='main.jsp';
+</script>
+<%
+   }else if(dao.duplicate(member)){
+	   %>
+	   <script>
+      alert('존재하는 계정입니다.')
+      location.href='login.jsp';
+   </script>
+	<%    
+}else if(dao.join(member) == 1){
+	   if(dao.phonejoin(member) != null){
+		   session.setAttribute("username" ,member.getUsername());
+			session.setAttribute("idx" ,member.getIdx());
+	   }
+%>
+<script>
    location.href='main.jsp';
 </script>
 <%

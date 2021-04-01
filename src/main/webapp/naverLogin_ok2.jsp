@@ -16,7 +16,6 @@
 	   }
 %>
 	<script>
-
    alert('회원가입 완료되었습니다.');
    location.href='main.jsp';
 	</script>

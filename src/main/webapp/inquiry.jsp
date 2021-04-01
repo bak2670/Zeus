@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%
+	String username= null;
+	String idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+	}
+%>
 <!DOCTYPE html>
+<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <html lang="en">
 
 <head>
@@ -8,11 +19,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1:1문의하기</title>
-    <link rel="stylesheet" href="./css/title.css">
-    <script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="./js/script.js"></script>
-    <style>
+	<link rel="stylesheet" href="./css/title.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="./js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<style>
         @font-face {
             font-family: 'GmarketSansMedium';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -334,7 +348,114 @@
         </div>
     </div>
 
+	<!-- 모달창 처리 -->
+	<div class="black_bg"></div>
+	<div class="modal_wrap">
+		<div class="popup" id="pop1">
+			<div class="modal_close">
+				<a href="#a"><img src="./img/번개장터이미지/close.png"></a>
+			</div>
+			<div class="popmain">
+				<img src="./img/번개장터이미지/번개장터.png">
+			</div>
+			<div class="poptext">번개장터로 중고거래 시작하기</div>
+			<div class="poptext1">간편하게 가입하고 상품을 확인하세요</div>
+			<ul class="login_list">
+				<li class="kakao"><a href="javascript:kakaoLogin();">카카오로 이용하기</a></li>
+				<form method="post" name="kkoEmail" action="kakaoLogin_ok.jsp">
+					<input type="hidden" name="kakaoemail" id="kkoEmail" value="">
+				</form>
+                <script>
+                // ba91c3548db43f3e70c8abf19b404787
+                window.Kakao.init("ba91c3548db43f3e70c8abf19b404787");
+                function kakaoLogin() {
+                    window.Kakao.Auth.login({
+                        scope:'profile, account_email, gender',
+                        success: function(authObj){
+                            console.log(authObj);
+                            window.Kakao.API.request({
+                                url:'/v2/user/me',
+                                success: res => {
+                             	   const kakao_account = document.getElementById("kkoEmail")
+                                    kakao_account.value = res.kakao_account.email;
+                                    console.log(kakao_account);
+                                    document.kkoEmail.submit();
+                                }
+                            });
+                        }
+                    });
+                }
+                </script>
+				<li class="naver" id="naverIdLogin"><a id="naverIdLogin_loginButton" href="#">네이버로 이용하기</a></li>
+				<form method="post" name="naverForm" action="naverLogin_ok2.jsp">
+					<input type="hidden" name="naverEmail" id="naverEmail" value="">
+				</form>
+				<script type="text/javascript"> 
+	var naverLogin = new naver.LoginWithNaverId({ 
+    clientId: "RAkcajQ6qKE9eoL2H2UK", 
+    callbackUrl: "http://localhost:9090/ZeusMarket/naverLogin_ok2.jsp", 
+    isPopup: false, 
+    /* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */ }); 
+    /* (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */ 
+    naverLogin.init(); 
+    /* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */ 
+    window.addEventListener('load', function () {
+        naverLogin.getLoginStatus(function (status) {
+            if (status) { 
+                /* (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크 */ 
+                console.log(naverLogin.accessToken.accessToken)
+				var email = document.getElementById("naverEmail")
+                email.value = naverLogin.user.getEmail(); 
+                var profileImage = naverLogin.user.getProfileImage(); 
+                var name = naverLogin.user.getName(); 
+                var uniqId = naverLogin.user.getId(); 
+                console.log(email)
+                naverForm.submit();
+                if (email == undefined || email == null) { 
+                    alert("이메일은 필수정보입니다. 정보제공을 동의해주세요."); 
+                    /* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */ 
+                    naverLogin.reprompt(); 
+                    return; 
+                } else if (name == undefined || name == null) { 
+                    alert("회원이름은 필수정보입니다. 정보제공을 동의해주세요."); 
+                    naverLogin.reprompt(); return; 
+                } 
 
+                } else { 
+                	console.log("callback 처리에 실패하였습니다."); 
+
+                } 
+                }); 
+            });
+        </script>
+				<li class="email"><a href="./login.jsp">본인인증으로 이용하기</a></li>
+			</ul>
+			<div class="popfoot">
+				<div class="popter">
+					도움이 필요하면 <a href="#" class="popter_a">이메일</a> 또는 고객센터<a href="#">1670-2910</a>로
+					문의 부탁드립니다.
+				</div>
+				<div class="popter">고객센터 운영시간: 09~18시 (점심시간 12~13시, 주말/공휴일 제외)</div>
+			</div>
+		</div>
+
+	</div>
+	</div>
+	
+	
+		<div class="Aclogoutpage">
+            <div class="Aclogoutpage_top">
+            <h2 class="logoutTxt">로그아웃</h2>
+            <p class="Aclogoutpage_center">로그아웃 시 6개월 이상 경과된 번개톡
+            대화 내용이 모두 삭제됩니다.
+            계속하시겠습니까?
+            </p>
+            <div class="Aclogoutpage_bottom">
+            	<button type="button" class="Aclogoutpage_btn2" onclick="window.location.href='logout.jsp'">확인</button>
+                <button type="button" class="Aclogoutpage_btn1">취소</button>
+            </div>
+        </div>
+        </div>
 
     <footer>
 		<div class="footer1">

@@ -269,6 +269,16 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     position: relative;
     line-height: 1.4;
 }
+.storeBox{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 13px;
+    color: rgb(102, 102, 102);
+    padding: 0px 15px;
+    position: relative;
+    line-height: 1.4;
+}
 .storeBox2 {
     position: relative;
     width: 100%;
@@ -277,7 +287,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     -webkit-box-align: center;
     align-items: center;
 }
-.storeBtn{
+.storeBtn, .storeNoBtn{
     display: block;
     font-size: 13px;
     color: rgb(102, 102, 102);
@@ -561,27 +571,27 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     flex-grow: 1;
     font-size: 13px;
 }
-.zeusTalk{
+.zeusTalk, .zeusTalk1 {
     margin-left: 30px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     position: relative;
 }
-.zeusTalk > img {
+.zeusTalk > img .zeusTalk1 > img {
     margin-right: 5px;
 }
-.myShopBtn {
+.myShopBtn, .myShopBtn1 {
     margin-left: 30px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     position: relative;
 }
-.myShopBtn > img {
+.myShopBtn > img, .myShopBtn1 > img {
     margin-right: 5px;
 }
-.myShopBtn::after {
+.myShopBtn::after, .myShopBtn1::after {
     content: "";
     width: 1px;
     height: 10px;
@@ -590,17 +600,17 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     top: 8px;
     right: -15px;
 }
-.sellBtn{
+.sellBtn, .sellBtn1{
     margin-left: 30px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     position: relative;
 }
-.sellBtn > img {
+.sellBtn > img, .sellBtn1 > img {
     margin-right: 5px;
 }
-.sellBtn::after {
+.sellBtn::after, .sellBtn1::after {
     content: "";
     width: 1px;
     height: 10px;
@@ -4944,15 +4954,37 @@ color: rgb(255, 255, 255);
 .AcSnsmenu {margin: 0 auto; width: 264px;}
 .AcSnswarp {display: none;}
 /*계정설정 로그아웃페이지*/
-.Aclogoutpage{width: 300px; height: 224px; border: 1px solid black; background-color: white;
-position: absolute; right: 40%; top: 35%; display: none; z-index: 1500;}
+.Aclogoutpage{
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    }
 .Aclogoutpage_top{
-    width: 248px; height: 25px;  font-size: 18px;
-    margin:0 auto;
+	top : 0px;
+    left: 0px;
+    position: absolute;
+    width: 280px;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    padding: 1.5rem;
+    border-radius: 2px;
+    }
+.logoutTxt{
+	font-size: 18px;
     margin-bottom: 1rem;
     font-weight: bold;
     text-align: center;
-    line-height: 1.4; margin-top:25px}
+    line-height: 1.4; 
+}
 .Aclogoutpage_center{
     white-space: pre-wrap;
     word-break: keep-all;
@@ -4960,19 +4992,35 @@ position: absolute; right: 40%; top: 35%; display: none; z-index: 1500;}
     font-size: 15px;
     margin-bottom: 1.5rem;
     line-height: 1.4;}
+    
 .Aclogoutpage_btn1 {
+	box-sizing: border-box;
+	width: 135px;
     background-color: rgb(244, 244, 250);
     color: rgb(114, 112, 127);
 }
 .Aclogoutpage_btn2 {
+	box-sizing: border-box;
     color: rgb(255, 255, 255);
     background: rgb(255, 80, 88);
     font-weight: bold;
     
 }
 
-.Aclogoutpage_bottom{width: 300px; height: 50px;  text-align: center;}
-.Aclogoutpage_bottom button{width: 120px; height: 48px;margin-right: 1px; position: relative; bottom: 10px; text-align: center; }
+.Aclogoutpage_bottom{    display: flex;
+    flex-direction: row-reverse;}
+.Aclogoutpage_bottom > button:first-child {
+    margin-left: 0.5rem;
+}
+.Aclogoutpage_bottom button {
+    flex: 1 1 0%;
+}
+
+.Aclogoutpage_bottom button {
+    height: 3rem;
+    text-align: center;
+    font-size: 1rem;
+}
 
 
 .warp2{   width: 100%;
