@@ -3,7 +3,6 @@ package com.koreait.product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class productDAO {
 
 	public productDAO() {
 		sqlsession = ssf.openSession(true);	// openSession(true) 설정시 자동 commit
-		//System.out.println("마이바티스 설정 성공");
+		System.out.println("productDAO 마이바티스 설정 성공");
 	}
 	
 	// String을 db에서 찾아서 해당하는 productDTO를 여러개 리턴 받아야함
@@ -37,8 +36,6 @@ public class productDAO {
 	// 메인 페이지에서 상품 뿌려주기 위한 mainProduct. 입력값이 없다
 	public List<HashMap<String,String>> mainProduct() {
 		List<HashMap<String,String>> searchList = sqlsession.selectList("product.mainProduct");
-	
-		
 		return searchList;
 	}
 	
@@ -99,7 +96,232 @@ public class productDAO {
 		int m_idx = sqlsession.selectOne("product.storeIdx", p_idx);
 		
 		List<HashMap<String, String>> productList = sqlsession.selectList("product.recentProduct", m_idx);
-		System.out.println(productList);
 		return productList;
 	}
+	
+	
+	// 지헌님 상품상세 dao 시작
+	// select 결과 중 null도 있어서 예외 발생 가능
+	public productDTO info(String p_idx) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap = sqlsession.selectOne("product.info", p_idx);
+
+		productDTO product = new productDTO();
+		
+		// null이면 dataMap에 없음
+		
+		
+		if (dataMap != null) {
+			product.setIdx(Integer.parseInt(String.valueOf(dataMap.get("p_idx"))));
+			product.setName(dataMap.get("p_name"));
+			product.setPrice(dataMap.get("p_price"));
+			product.setState(dataMap.get("p_state"));
+			product.setDelcharge(dataMap.get("p_delcharge"));
+			product.setDeallocation(dataMap.get("p_deallocation"));
+			product.setRegdate(String.valueOf(dataMap.get("p_regdate"))); 
+			product.setZzim(Integer.parseInt(String.valueOf(dataMap.get("p_zzim"))));
+			product.setHit(Integer.parseInt(String.valueOf(dataMap.get("p_hit"))));
+			product.setCategory(Integer.parseInt(String.valueOf(dataMap.get("p_category"))));
+			product.setContent(dataMap.get("p_content"));
+			product.setMemidx(Integer.parseInt(String.valueOf(dataMap.get("p_memidx"))));
+			product.setTag(dataMap.get("p_tag"));
+			product.setPicturepath(dataMap.get("p_picturepath"));
+			product.setPicture(dataMap.get("p_picture"));
+			product.setExchange(String.valueOf(dataMap.get("p_exchange")));
+			product.setPriceConsult(dataMap.get("p_priceConsult"));
+			product.setSalesStatus(dataMap.get("p_salesStatus"));
+			product.setQuantity(Integer.parseInt(String.valueOf(dataMap.get("p_quantity"))));
+			
+			
+			
+			return product;
+		}
+		return null;
+
+	}
+	
+	
+	public void zzimUp(int p_idx, int m_idx) {
+		int zzimOk = sqlsession.update("product.productZzimUp", p_idx);
+		
+		String zzim = sqlsession.selectOne("product.selectZzim",m_idx);
+
+		// m_zzim이 null인 경우에도 string이 null로 받아와진다
+
+		if(zzim == null) {
+			zzim = (String.valueOf(p_idx)) + " "; 
+		}else {
+		
+			zzim = zzim + (String.valueOf(p_idx)) + " "; 
+		}
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("zzimStr", zzim);
+		dataMap.put("m_idx", String.valueOf(m_idx));
+		System.out.println(dataMap);
+		int upZzimOk = sqlsession.update("product.updateZzim",dataMap);
+		
+	}
+	
+	public int zzimDown(int p_idx, int m_idx) {
+		int zzimOk = sqlsession.update("product.productZzimDown", p_idx);
+		 
+		String zzim = sqlsession.selectOne("product.selectZzim",m_idx);
+		
+		String target = p_idx + " ";
+		// zzim에서 p_idx를 지워야함
+		zzim = zzim.replace(target, "");
+		System.out.println(zzim);
+		if(zzim.equals("")) {
+			zzim = null;
+		}
+		
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("zzimStr", zzim);
+		dataMap.put("m_idx", String.valueOf(m_idx));
+		System.out.println(dataMap);
+		
+		int upZzimOk = sqlsession.update("product.updateZzim",dataMap);
+		
+		return upZzimOk;
+	}
+/*	public reviewDTO rev(reviewDTO review) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("rv_idx", "5");
+		dataMap = sqlsession.selectOne("review.rev", dataMap);
+
+		if (dataMap != null) {
+			review.setIdx(Integer.parseInt(String.valueOf(dataMap.get("rv_idx"))));
+			review.setMemidx(Integer.parseInt(String.valueOf(dataMap.get("rv_memidx"))));
+			review.setProductidx(Integer.parseInt(String.valueOf(dataMap.get("rv_productidx"))));
+			review.setStoreidx(Integer.parseInt(String.valueOf(dataMap.get("rv_storeidx"))));
+			review.setContent(dataMap.get("rv_content"));
+			review.setRegdate(dataMap.get("rv_regdate"));
+
+			System.out.println("----------------------------------");
+			return review;
+		}
+		return null;
+	}
+
+	public memberDTO meminfo(memberDTO member) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("m_idx", "2");
+		dataMap = sqlsession.selectOne("member.meminfo", dataMap);
+
+		if (dataMap != null) {
+			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
+			member.setUsername(dataMap.get("m_username"));
+			member.setEmail(dataMap.get("m_email"));
+			member.setHp(dataMap.get("m_hp"));
+			member.setSsn1(dataMap.get("m_ssn1"));
+			member.setSsn2(dataMap.get("m_ssn2"));
+			member.setStore(dataMap.get("m_store"));
+			member.setJoindate(dataMap.get("m_joindate"));
+			member.setLastlogin(dataMap.get("m_lastlogin"));
+			member.setIntro(dataMap.get("m_intro"));
+			member.setProfilepath(dataMap.get("m_profilepath"));
+			member.setProfile(dataMap.get("m_profile"));
+			member.setZzim(dataMap.get("m_zzim"));
+
+			System.out.println("----------------------------------");
+			return member;
+		}
+		return null;
+
+	}
+
+	public int reply(inquireDTO inquire) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("i_memidx", "1");
+		dataMap.put("i_productidx", "1");
+		dataMap.put("i_storeidx", "1");
+		dataMap.put("i_content", inquire.getContent());
+
+		System.out.println("------------후기----------------------");
+		return sqlsession.insert("inquire.reply", dataMap);
+	}
+
+	public inquireDTO showReply(inquireDTO inquire) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("i_idx", "1");
+		dataMap = sqlsession.selectOne("inquire.rev", dataMap);
+
+		if (dataMap != null) {
+			inquire.setIdx(Integer.parseInt(String.valueOf(dataMap.get("i_idx"))));
+			inquire.setMemidx(Integer.parseInt(String.valueOf(dataMap.get("i_memidx"))));
+			inquire.setProductidx(Integer.parseInt(String.valueOf(dataMap.get("i_productidx"))));
+			inquire.setStoreidx(Integer.parseInt(String.valueOf(dataMap.get("i_storeidx"))));
+			inquire.setContent(dataMap.get("i_content"));
+			inquire.setRegdate(dataMap.get("i_regdate"));
+
+			System.out.println("----------------------------------");
+			return inquire;
+		}
+		return null;
+	}
+
+	public productDTO zzim(productDTO product) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = Dbconn.getConnection();
+			if (conn != null) {
+				sql = "update tb_product set p_zzim = p_zzim + 1 where p_idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(p_idx));
+				pstmt.executeUpdate();
+
+				sql = "select * from tb_product where p_idx=?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(p_idx));
+				rs = pstmt.executeQuery();
+
+				if (rs.next()) {
+					product.setName(rs.getString("p_name"));
+					product.setPrice(rs.getString("p_price"));
+					product.setState(rs.getString("p_state"));
+					product.setDelcharge(rs.getString("p_delcharge"));
+					product.setDeallocation(rs.getString("p_deallocation"));
+					product.setRegdate(rs.getString("p_regdate"));
+					product.setZzim(rs.getInt("p_zzim"));
+					product.setHit(rs.getInt("p_hit"));
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return product;
+
+	}
+
+	public List<inquireDTO> showReply(String i_productidx) {
+		List<inquireDTO> replyList = new ArrayList<>();
+		try {
+			conn = Dbconn.getConnection();
+
+			sql = "select * from tb_inquire where i_pruductidx = ? order by i_idx desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, i_productidx);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				inquireDTO reply = new inquireDTO();
+				reply.setIdx(rs.getInt("i_idx"));
+				reply.setMemidx(rs.getInt("i_memidx"));
+				reply.setProductidx(rs.getInt("i_productidx"));
+				reply.setStoreidx(rs.getInt("i_storeidx"));
+				reply.setContent(rs.getString("i_content"));
+				reply.setRegdate(rs.getString("i_regdate"));
+				replyList.add(reply);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return replyList;
+	}
+	 */
+	// 지헌님 상품상세 dao 끝
+	 
+
 }

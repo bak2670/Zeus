@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <%
 	String username= null;
 	if(session.getAttribute("username") != null){
@@ -9,8 +11,8 @@
 	}
 %>
 <!DOCTYPE html>
-<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
-<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+
+
 <html lang="en">
 
 <head>
@@ -739,7 +741,7 @@ autoplaySpeed: 2000,
 								<%=product.get("p_price")%>
 							</div>
 							<div class="text_bottom2">
-								<%=product.get("p_regdate")%>
+								<%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%>
 							</div>
 						</div>
 					</div>

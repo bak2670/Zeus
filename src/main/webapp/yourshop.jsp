@@ -1,38 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
-<jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
-<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <html lang="en">
 <%
-	request.setCharacterEncoding("UTF-8");
-
-
-	if(request.getParameter("searchText") == null || request.getParameter("searchText").equals("")){
+	// 사용자 번호 1 임의 지정
+	int m_idx = 1;
 %>
-	<script>
-		alert('잘못된 접근입니다.');
-		location.href="./main.jsp";
-	</script>
-<%			
-	}
-	// 검색어 입력한 문자열
-	String searchText = request.getParameter("searchText");
-%>
-
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색결과</title>
+    <title>다른사람상점</title>
     <link rel="stylesheet" href="./css/title.css">
-    <script src="https://kit.fontawesome.com/8eb5905426.js" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
-    <style>
+    <style>.menubar #bar1{border:1px solid black; border-bottom: white;}
         @font-face {
             font-family: 'GmarketSansMedium';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -51,11 +33,11 @@
             font-weight: normal;
             font-style: normal;
         }
-	</style>
+            </style>
+    
+
 </head>
-
 <body>
-
     <div class="mainHeader">
         <div class="topHeader">
             <div class="headerBox">
@@ -91,7 +73,7 @@
                             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTI4IiBoZWlnaHQ9IjM1IiB2aWV3Qm94PSIwIDAgMTI4IDM1Ij4KICAgIDxkZWZzPgogICAgICAgIDxwYXRoIGlkPSJhIiBkPSJNMCAzNC4wMzZoMTQyVi4wOTJIMHoiLz4KICAgIDwvZGVmcz4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggc3Ryb2tlPSIjQ0NDIiBkPSJNLTEwLjUtNy41aDE0OXY0OWgtMTQ5eiIvPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC03KSI+CiAgICAgICAgICAgIDxwYXRoIGZpbGw9IiNGNzAwMDAiIGQ9Ik0yOS4wMjUgMTYuNzAxTDE5Ljk0IDI2Ljc5N2EuNTA1LjUwNSAwIDAgMS0uNjI3LjEuNDgzLjQ4MyAwIDAgMS0uMjMtLjU3NWwyLjA2MS02LjM5MWgtMy41OThhLjUyNi41MjYgMCAwIDEtLjQwMi0uMjE1LjUyNy41MjcgMCAwIDEtLjA4NS0uNDVsMi43NzYtMTAuMDYzYy4wNjItLjIxOC4yNi0uMzM4LjQ4OC0uMzM4aDYuNTYxYy4xNyAwIC4zMjkuMDQ5LjQyMi4xOS4wOTQuMTQyLjEwOS4zOC4wNDIuNTM1bC0yLjcyNiA2LjQyMmg0LjAzYy4xOTggMCAuMzguMDQuNDYuMjIzLjA4MS4xOC4wNDcuMzE3LS4wODYuNDY2bTcuMzI2LTguODEyTDIzLjUyNC40MTRjLS41NTItLjMyLTEuMzk2LS4zMi0xLjk0OCAwTDguNTA0IDcuODg5Yy0uNTUzLjMyLTEuMTI4IDEuMTAxLTEuMTI4IDEuNzRWMjQuNThjMCAuNjM4LjYwNSAxLjQyMSAxLjE1NyAxLjc0bDEzLjAyNiA3LjQ3NWMuNTUzLjMyIDEuNDk2LjMyIDIuMDQ4IDBsMTIuNzI1LTcuNDc1Yy41NTItLjMxOS43OC0xLjEwMi43OC0xLjc0VjkuNjI4YzAtLjYzOC0uMjA4LTEuNDItLjc2LTEuNzM5TTEwMy40NTMgMjYuOTQ5Yy0xLjc3NyAwLTMuMjIyLTEuMjAzLTMuMjIyLTIuNjggMC0xLjQ2MyAxLjQ0NS0yLjY1NSAzLjIyMi0yLjY1NSAxLjgzOCAwIDMuMjc2IDEuMTY4IDMuMjc2IDIuNjU1IDAgMS41MDMtMS40MzggMi42OC0zLjI3NiAyLjY4bTAtOC4xMzVjLTMuNjEgMC02LjY2MiAyLjQ5OC02LjY2MiA1LjQ1NSAwIDMuMDIyIDIuOTkgNS40OCA2LjY2MiA1LjQ4IDMuNzE4IDAgNi43NDItMi40NTggNi43NDItNS40OCAwLTMuMDA4LTMuMDI0LTUuNDU1LTYuNzQyLTUuNDU1Ii8+CiAgICAgICAgICAgIDxtYXNrIGlkPSJiIiBmaWxsPSIjZmZmIj4KICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI2EiLz4KICAgICAgICAgICAgPC9tYXNrPgogICAgICAgICAgICA8cGF0aCBmaWxsPSIjRjcwMDAwIiBkPSJNNDkuNTYxIDE2LjAxMmg1LjA3MnYtMy4yMjhINDkuNTZ2My4yMjh6bTguMy0yLjA3NWg0LjE1djguMjk5aDMuMjI2VjQuOTQ2SDYyLjAxdjYuMjI0aC00LjE1VjYuMWgtMy4yMjd2My45Mkg0OS41NnYtMy45MmgtMy4yMjd2MTIuNjc4SDU3Ljg2di00Ljg0ek02OC4wMDQgOS43ODhoNi40NTR2Mi4wMDJjMCAuOTQtLjExNCAxLjc2Ni0uMjYzIDIuNDU2LS4xNS42ODctLjQ4NCAxLjM1OC0uOTU4IDEuOTk0LS40NzUuNjM4LTEuMTg5IDEuMzE1LTIuMTA0IDIuMDEzLS45MTcuNy0yLjE2MyAxLjU0OS0zLjY5NiAyLjUyNGwtLjAyOS4wMTcgMS45NDggMi40ODQuMDIyLS4wMTZjMS43NjctMS4xNjQgMy4yMTEtMi4xODUgNC4yOTItMy4wMzQgMS4wODYtLjg1MSAxLjkzNy0xLjY4NiAyLjUzLTIuNDguNTkzLS43OTUuOTg2LTEuNjI3IDEuMTktMi40NzQuMjAzLS44NDUuMjk1LTEuODQ3LjI5NS0yLjk3NlY2Ljc5aC05LjY4MXYyLjk5OHpNOTguMzcyIDE0LjI4OGMuMDcuMTQzLjI2LjM0NC41NzguNjE0LjMzNy4yODYuNzk0LjYzMiAxLjM1NiAxLjAyOGE3OS4zOTIgNzkuMzkyIDAgMCAwIDMuMjcyIDIuMjA3bC4wMi4wMTUgMS44MTctMi4zNTgtLjAyNy0uMDE2YTU3Ljg5IDU3Ljg5IDAgMCAxLTMuNzctMi41NDQgNS44MTYgNS44MTYgMCAwIDEtLjg2LS43NDggNC4wMjMgNC4wMjMgMCAwIDEtLjUzLS43MWMtLjEzLS4yMy0uMjYtLjQ4LS4zMDMtLjc0My0uMDQ1LS4yNjUtLjExLS41NTYtLjExLS44NjRWOC44NjVoNC42MTFWNi4wOTlIOTEuNzQ4djIuNzY2aDQuODR2MS4zMDRjMCAuNjMxLS4xNzUgMS4xOTgtLjQyOCAxLjY4NS0uMjU1LjQ5LS42MzcuOTM2LTEuMDkzIDEuMzNhNDUuMjAyIDQ1LjIwMiAwIDAgMS00LjM5OCAzLjI2OWwtLjAzLjAxNyAyLjAwMSAyLjQzNS4wMjEtLjAxNWMuNjctLjQ0NyAxLjMwOS0uODk3IDEuOTAyLTEuMzM4LjU5NS0uNDQzIDEuMTgtLjg5MyAxLjczOS0xLjMzN2ExNi45OSAxNi45OSAwIDAgMCAxLjQ2NS0xLjIxYy4zMzYtLjMyLjUzNS0uNTU2LjYwNS0uNzE3TTEyOC40OTEgMTkuNjEyYy0xLjI1LjE2OC0yLjYxNy4zNDItNC4wNjIuNC0xLjQ0LjA2LTIuODE3LjE1LTQuMDkuMTVoLTEuODUxdi0zLjkyaDcuMzc3di0yLjc2NmgtNy4zNzdWOS41NTdoOC4yOThWNi43OWgtMTEuNzU1djE2LjEzN2g0LjUxYy44MzkgMCAxLjY3MS0uMDYgMi40Ny0uMDY4LjgzNy0uMDA4IDEuNjY0LS4wNTYgMi40Ni0uMDlhNjMuMzUgNjMuMzUgMCAwIDAgMi4zMjYtLjE1NGMuNzQtLjA2IDEuNDI5LS4xNDggMi4wNDgtLjI1bC4wMjktLjAwNi0uMzU0LTIuNzUtLjAyOS4wMDN6TTUzLjcxIDIwLjYyMmgtMy42ODhWMjkuMTUyaDE1LjQ0NXYtMi43NjdINTMuNzExek04NS4yOTMgNS4wODZ2Ny4yMzdoLTIuMDc0VjQuOTQ3SDc5Ljc2djIzLjEzOGwzLjQ1OS0uODJWMTUuMzE5aDIuMDc0djEyLjc2NmwzLjQ1Ny0uODJWNC45NDdoLTMuNDU3eiIgbWFzaz0idXJsKCNiKSIvPgogICAgICAgICAgICA8cGF0aCBmaWxsPSIjRjcwMDAwIiBkPSJNMTMwLjkzNiA0Ljk0N3Y4LjUyOWgtNC4xNVYxNi40NzRoNC4xNXYxMS42MTJsMy42ODktLjg3OVY0Ljk0N3pNMTEwLjQyIDQuOTQ3aC0zLjY4OXYxMy44MzFoMy42ODh2LTUuMzAxaDMuMjI3di0yLjc2OGgtMy4yMjd6IiBtYXNrPSJ1cmwoI2IpIi8+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4K"
                             width="136" height="40" alt="번개장터 로고"></a>
                     <div class="zeusSerach1">
-                        <form name="searchForm" id="searchForm" method="post" action="search.jsp">
+	                    <form name="searchForm" id="searchForm" method="post" action="search.jsp">
 							<div class="zeusSerach2">
 								<!-- input text에 입력한 value값을 form 태그로 넘겨야함 -->
 								
@@ -241,441 +223,439 @@
             </div>
         </div>
     </div>
+        <div class="myShopContainer">
+            <div class="myshop_top"> 
+                <div class="myshop_profile">
+                    <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
+                    <div class="myshop_name">상점75453212호</div>
+                    <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
+                    <div class="yourshop_product"><a href="#" >상품78 | </a><a href="#" >팔로워4</a></div> 
+                    <div class="myshop_bottom yourshop_bottom"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAWNJREFUWAntVrsNwjAUxBSpYAd6FmACtqCjRKxCwzRI1BTULMAK0KJwBzzJEPvFL04kFzzpFP/u3vFsGY9GiVHX9RzYARfg9gHbHJsnyvS/DMkrYA88gFhwjmsqqwMRtPJe65kQOIpIwpdrTSZFs6tBVsUae0syEbdwpHo8c9q2ivbvl5zkMynkmMFxbALja0Cbj1HJIbeX0AwsMzLkcL/Suq+e10Hpb+hOvCFL8+6cm/oEbqXfT21rFUzVGHSdZvCakbnBRUWDITmCkxjUDB6E3OGbw01LhyNTxDWjuoXJci9qOofBsv/qPJNlPhb8/f+cyfKeW77Jf1urALZwDGyBM8AXc25Qg1rU1O5bzdZ7DgIz4AQMFdSetTsJrACRlRvSnPxo5jBXkoQNsAh473uIOZjLFDS4MjHyFptzOZQ9591ntdt4J7YJ0GCnh2SbcGyez6rYXGjcfGhDIkOO/Q3mVvcJF79v57FKjKAAAAAASUVORK5CYII=" width="20" height="14" alt="팔로우 추가" class="follow_img"><a href="#" >팔로우</a></div>
+                    <div class="myshop_bottom yourshop_bottom"><a href="#" >번개톡</a></div>
+                </div>
+                <div class="myshop_text">
+                    <div class="myshop_text_top"> 
+                        <div class="myshop_text_top1">상점75476231호 
+                            
+                            <div class="myshop_text_top2 yourshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
+                        </div>
+                        
+                        <div class="myshop_text_top1_click">
+                            <input type="text" value="상점이름" id="name_text">
+                            <button type="button"onclick="myshop_name_change_ok()" >확인</button>
+                            <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
+                        </div>
+                        
 
-	
-	
-    <div class="searchContainer">
-        <div class="con_kate">
-            <div class="kate">
-                <div class="kate_sc">
-                    <div class="kate_seach">카테고리</div>
-                    <div class="kate_gori">
-                        <div class="kate_gori1">
-                            <div class="kate_sch"><a class="kate_se" href="#">디지털/가전<img
-                                        src="./img/번개장터이미지/카테고리화살표.png">스마트폰<div class="kete_text2">11만+</div></a></div>
-                        </div>
-                        <div class="kate_gori2">
-                            <div class="kate_sch"><a class="kate_se" href="#">디지털/케이스/범퍼<img
-                                        src="./img/번개장터이미지/카테고리화살표.png">스마트폰<div class="kete_text2">8천+</div></a></div>
-                        </div>
-                        <div class="kate_gori2">
-                            <div class="kate_sch"><a class="kate_se" href="#">이어폰/헤드셋<img
-                                        src="./img/번개장터이미지/카테고리화살표.png">스마트폰<div class="kete_text2">3만+</div></a></div>
-                        </div>
-                        <div class="kate_gori2">
-                            <div class="kate_sch"><a class="kate_se" href="#">태블릿<img
-                                        src="./img/번개장터이미지/카테고리화살표.png">스마트폰<div class="kete_text2">4천+</div></a></div>
-                        </div>
-                        <div class="kate_gori3">
-                            <div class="kate_sch">카테고리<p>더보기</p>
-                                <div class="kete_text2"></div>
+                    </div>
+                    <ul class="myshop_text_center">
+                        <li class="myshop_text_center1">
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                        </li>
+                        <li class="myshop_text_center2">
+                            <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
+                        </li>
+                        <li class="myshop_text_center3">
+                            <img src="./img/번개장터이미지/상품판매.png" width="14" height="13">상품판매 0 회
+                        </li>
+                        <li class="myshop_text_center4">
+                            <img src="./img/번개장터이미지/택배발송.png" width="14" height="13">택배발송 0 회
+                        </li>
+                    </ul>
+                    <div class="yourshop_text_bottom">
+                        <button onclick="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAgtJREFUSA3tVrtOAkEUdQnKkvADFGtpIR01DYXyMLGwVisLjFEbE42FhYWJiY0YEwsqtLYwkZcFf2C3FJZuwQdIAvgAz8EdGHZZwpJIInGS3blzzzn3zty5m6wyM8Iol8tqs9lca7Vaq6CHFUUJUtZut6uYnj0ez4PP57uPRqMN+ocNZRhILJ/Pr2M6Q3BtGBebMIAfJxKJu6E8JxCn8tbr9SvgKXIQsIIpg7kUCARe6avVavPYyDLMLcyL9GHc+P3+XZz282fZ//b2L3srkQwJPuA9iMfj17C/eoyOpeOtI1m6UCjswL6AnYKW4DZf1jGwpCwjhLdMhvtZicViT1bhoHWxWFzCPT9COwvtxqDy2hKyQRqNxgtEGkT7EKVFcF3X5wzDOAW2SR/wrKZpJ6FQ6F1wsNk94JfADFVVF6yN5BFEMbMbzWQVllH4OTMZTnAIPMiHNn0yxyx9hTEYS8Zo2xKarU+MDdJ3ZwjSORlBMaw+U5MhLsUSdHtCIGGiEJa6LJeGpO3EkuW2E4Lc+ahF68tkYFl5TXuQT2hFLFljS4gSBUiIRCJvMpE2GwRde45AVT606bPyhFbEknHH71AmCdvsxiOs+Yw1bCccK4oL0X9CF8UajTr9JXX8LHK5XHu0IrljTbyk7rb3F9nKb92VUzEmfofdLk0mk7bfDaddjuMXlZz4Caf/Dr8BRaXTUmgtW58AAAAASUVORK5CYII=" class="yourshop_text_bottom_report" style="line-height:20px;" width="14" height="13">신고하기</button>
+                    </div>
+                    <div class="myshop_text_bottom_click">
+                        <textarea></textarea>
+                        <button onclick="Introduction_ok()">확인</button>
+                    </div>
+                </div>
+        </div>
+
+
+            <div class="contens2">
+                <div class="menubar">
+                    <div class="bar" id="bar1">
+                        <a class="b1" href="./myshop1.jsp">
+                            상품
+                            <span class="b1_1">38</span>
+                        </a>
+                    </div>
+                    <div class="bar">
+                        <a class="b2" href="./myshop2.jsp">
+                            상점문의
+                            <span class="b2_1">2</span>
+                        </a>
+                    </div>
+                    <div class="bar">
+                        <a class="b3" href="./myshop3.jsp">
+                            찜
+                            <span class="b3_1">3</span>
+                        </a>
+                    </div>
+                    <div class="bar">
+                        <a class="b4" href="./myshop4.jsp">
+                            상점후기
+                            <span class="b4_1">4</span>
+                        </a>
+                    </div>
+                    <div class="bar">
+                        <a class="b5" href="./myshop5.jsp">
+                            팔로잉
+                            <span class="b5_1">1</span>
+                        </a>
+                    </div>
+                    <div class="bar">
+                        <a class="b6" href="./myshop6.jsp">
+                            팔로워
+                            <span class="b6_1">5</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menubar2">
+                    <div class="mn1">
+                        상품<span class="mn_1">38</span>
+                    </div>
+                    <div class="mn2">
+                        <select>
+                            <option>전체</option>
+                            <option>패션잡화</option>
+                            <option>여성의류</option>
+                            <option>디지털/가전</option>
+                            <option>남성의류</option>
+                            <option>생활/문구/가구/식품</option>
+                            <option>도서/티켓/취미/애완</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="menubar3">
+                    <div class="left">
+                        <div class="left_cnt">전체</div>
+                        <div class="cnt">38개</div>
+                    </div>
+                    <div class="right">
+                        <a class="new" href="#">
+                            최신순
+                        </a>
+                        <a class="new" href="#">
+                            인기순
+                        </a>
+                        <a class="new" href="#">
+                            저가순
+                        </a>
+                        <a class="new" href="#">
+                            고가순
+                        </a>
+                    </div>
+                </div>
+                    <!--상품나열-->
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
                             </div>
-                        </div>
-
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
                     </div>
-                    <div class="kate_snb">
-                        <input type="checkbox" id="answer_snb">
-                        <label for="answer_snb">
-                            <p class="acco_text2"></p><em></em>
-                        </label>
-                        <div class="kate_ans">
-                            <div class="kate_text"><a class="kate_a" href="#">전체보기<img
-                                        src="./img/번개장터이미지/카테고리화살표.png"></a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">
-                                    <div class="kate_text1">여성가방</div>
-                                    <div class="kete_text2">39만+</div>
-                                </a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">운동화/캐주얼화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">주얼리/액세서리</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
-                            <div class="kate_text"><a class="kate_a" href="#">여성화</a></div>
 
-                        </div>
-
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
                     </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/dog.jpg">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                            <div class="location_box">
+                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
+                            </div>
+                        </a>
+                    </div>
+
                     
-                </div>
-                
-                <div class = "container_text">
-                    <div class="container_sc">
-                        <div class="container_sch">
-                            <span class="container_sch01"> 우리동네 </span>
-                            <span class="container_sch02">역삼1동</span>
-                            <a href="#" class="container_scmap">지역설정</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="container_main">
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </a>
-                    </div>
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/댓글.png">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                     
-                    
-                </div>
-                
-				<!-- 검색 결과 -->
-				<!-- product 테이블에서 검색한 문자열을 포함하는 p_name의 정보 가져와야함 -->
-                <%
-                	List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
-                	int searchCnt = searchList.size();
-                %>
-                <div class = "container_text">
-                    <div class="container_sc">
-                        <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2"><%=searchCnt%>개</span>
-                            </div>
-                            <div class="sch_chk">
-                                <span class="container_sch1"><%=searchText%>&nbsp;</span>
-                                <span class="container_sch2">키워드 알림 받기</span>
-                                <button class="openBtn"> <input type="checkbox" id="chk1"><label for="chk1"><span>키워드</span></label></span></button>
-                    </div>
-                    <div class="sch_menu">
-                        <a href="#" class="sch_menu1">정확도순</a>
-                        <a href="#" class="sch_menu1">최신순</a>
-                        <a href="#" class="sch_menu1">저가순</a>
-                        <a href="#" class="sch_menu1">고가순</a>
-                    </div>
-                    </div>
-                </div>
-                
-                
-                <div class="container_main">
-                <% 
-                	for(HashMap product : searchList){
-                %>
-	                <div class="item_box">
-                        <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
-                            <div class="item_img">
-                                <!-- <img src="img/번개장터이미지/댓글.png"> -->
-							<%
-								out.print("<img src='./uploads/"+product.get("p_picture")+"' alt='상품이미지'>"); // 상대경로. 얘만됨
-								
-								// 절대경로 1
-								//out.print("<img src='C:\\CODE\\zeus_uploads\\"+product.get("p_picture")+"' alt='상품이미지'>");
-								// 절대경로 2
-								//out.print("<img src='C:/CODE/zeus_uploads/"+product.get("p_picture")+"' alt='상품이미지'>");
-							%>
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    <%=product.get("p_name")%>
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        <%=product.get("p_price")%>
-                                    </div>
-                                    <div class="text_bottom2">
-                                        <%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                <%
-                	}
-                %>            
-                </div>
-            </div>
-            
-        </div>
-        
-    </div>
-<div class="modal hidden">
-        <div class="bg"></div>
-        <div class="modalBox">
-            <h2>모니터</h2>
-            <button class="closeBtn"><img src="./img/번개장터이미지/exit.png"></button>
-            <h4>하루 1회 알림</h4>
-            <div>
-                <p class="leftAlign font14">매일 오후 4시 이후 한번에 알림을 보내드릴게요.<br>상품이 등록될 때마다 알림을 받고 싶다면 이 옵션을<br>해제하세요.</p>
-                <p class="rightAlign"><input type="checkbox" id="custom" name="normal" class="image_checkbox"><label
-                    for="custom" class="image_checkbox"></label></p>
-            </div>
-            <table>
-                <tr>
-                    <td>카테고리</td>
-                    <td>모니터</td>
-                    <td><button class="categoryBtn"><img src="./img/번개장터이미지/arrowRight.png"></button></td>
-                </tr>
-                <tr>
-                    <td>선호거래지역</td>
-                    <td>역삼1동</td>
-                    <td><button class="areaBtn"><img src="./img/번개장터이미지/arrowRight.png"></button></td>
-                </tr>
-            </table>
-            <h4>가격 제한</h4>
-            <p class="key_price"><input type="text" placeholder="최저가 "> ~ <input type="text" placeholder="최고가 "></p>
-            <p><button class="closeBtn2">확인</p>
-        </div>
-    </div>
-    <div class="modal2 hidden">
-        <div class="bg"></div>
-        <div class="modalBox">
-            <button class="backBtn"><img src="./img/번개장터이미지/back.png"></button>
-            <h2>카테고리</h2>
-            <button class="trashBtn"><img src="./img/번개장터이미지/trash.png"></button>
-            <div class="key_category1">
-                <h4>&nbsp&nbsp전체 카테고리</h4>
-                <table>
-                    <tr>
-                        <th><button class="cateBtn1">&nbsp&nbsp&nbsp&nbsp디지털/가전</th>
-                        <td>13,964</button></td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp기타</th>
-                        <td>330</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp패션잡화</th>
-                        <td>149</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp생활/문구/가구/식품</th>
-                        <td>65</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp도서/티켓/취미/애완</th>
-                        <td>31</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="key_category2 hidden">
-                <h4>&nbsp&nbsp디지털/가전</h4>
-                <table>
-                    <tr>
-                        <th><button class="cateBtn2">&nbsp&nbsp&nbsp&nbsp모바일</th>
-                        <td>12,155</button></td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp노트북/넷북</th>
-                        <td>1,042</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbspPC/모니터/주변기기</th>
-                        <td>472</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp가전제품</th>
-                        <td>221</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp음반/영상/관련기기</th>
-                        <td>29</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="key_category3 hidden">
-                <h4>&nbsp&nbsp디지털/가전>모바일</h4>
-                <table>
-                    <tr>
-                        <th><button class="cateBtn3">&nbsp&nbsp&nbsp&nbsp태블릿</th>
-                        <td>10,530</button></td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp케이스/범퍼</th>
-                        <td>693</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp스마트폰</th>
-                        <td>499</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp보호필름/액세서리</th>
-                        <td>196</td>
-                    </tr>
-                    <tr>
-                        <th>&nbsp&nbsp&nbsp&nbsp케이블/거치대/주변기기</th>
-                        <td>140</td>
-                    </tr>
-                </table>
             </div>
         </div>
-    </div>
-    <div class="modal3 hidden">
-        <div class="bg"></div>
-        <div class="modalBox">
-            <button class="backBtn2"><img src="./img/번개장터이미지/back.png"></button>
-            <h2>지역설정</h2>
-            <button class="okBtn"><img src="./img/번개장터이미지/ok.png"></button>
-            <hr/>
-            <div class="key_location">
-                <h4>주소검색</h4>
-                <p>원하는 선호거래 지역을 검색하세요</p>
-                <button class="myloca">내 위치</button>
-                <button class="srchloca">주소 검색</button>
-                <hr>
-                <h4 class="key_h4">선택된 지역</h4>
-                <p>1개의 지역만 설정 가능합니다</p>
-                <p><img src="./img/번개장터이미지/minus.png">서울특별시 강남구 역삼1동</p>
-                <hr>
-                <h4 class="key_h4">이용한 지역</h4>
-                <p><img src="./img/번개장터이미지/plus.png">서울특별시 강남구 역삼동</p>
-            </div>
-        </div>
-    </div>
 
-
-
-    <footer>
-		<div class="footer1">
-			<div class="footer11">
-				<a class="footerA" href="/customer/notice">공지사항</a>
-				<a class="footerA" href="/customer/faq/1">자주묻는질문</a>
-				<a href="https://terms.bunjang.co.kr/terms/service-policy.html" 
-				target="_blank" class="footerB">운영정책</a>
-				<a class="footerA" href="/qna">1:1문의하기</a>
-				<a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1138645836"
-				target="_blank" class="footerB">사업자정보확인</a>
-				<a href="https://terms.bunjang.co.kr/terms/service.html"
-				target="_blank" class="footerB">이용약관</a>
-				<a href="https://terms.bunjang.co.kr/terms/privacy.html"
-				target="_blank" class="footerB"><b>개인정보처리방침</b></a>
-				<a href="https://terms.bunjang.co.kr/terms/youth-policy.html"
-				target="_blank" class="footerB">청소년보호정책</a>
-				<a href="https://terms.bunjang.co.kr/terms/location.html"
-				target="_blank" class="footerB">위치기반서비스 이용약관</a>
+        <footer>
+			<div class="footer1">
+				<div class="footer11">
+					<a class="footerA" href="/customer/notice">공지사항</a>
+					<a class="footerA" href="/customer/faq/1">자주묻는질문</a>
+					<a href="https://terms.bunjang.co.kr/terms/service-policy.html" 
+					target="_blank" class="footerB">운영정책</a>
+					<a class="footerA" href="/qna">1:1문의하기</a>
+					<a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=1138645836"
+					target="_blank" class="footerB">사업자정보확인</a>
+					<a href="https://terms.bunjang.co.kr/terms/service.html"
+					target="_blank" class="footerB">이용약관</a>
+					<a href="https://terms.bunjang.co.kr/terms/privacy.html"
+					target="_blank" class="footerB"><b>개인정보처리방침</b></a>
+					<a href="https://terms.bunjang.co.kr/terms/youth-policy.html"
+					target="_blank" class="footerB">청소년보호정책</a>
+					<a href="https://terms.bunjang.co.kr/terms/location.html"
+					target="_blank" class="footerB">위치기반서비스 이용약관</a>
+				</div>
 			</div>
-		</div>
-        <div class="footer_center">
-            <div class="footer_center1">
-                <span class="footer_logo"><img src="./img/번개장터이미지/번개장터로고.png"></span>
-                <span class="footer_logo2"><img src="./img/번개장터이미지/푸터쪽.png">&nbsp;회사소개</span>
+            <div class="footer_center">
+                <div class="footer_center1">
+                    <span class="footer_logo"><img src="./img/번개장터이미지/번개장터로고.png"></span>
+                    <span class="footer_logo2"><img src="./img/번개장터이미지/푸터쪽.png">&nbsp;회사소개</span>
+                </div>
+                <p class="footer_center2">누구나, 무엇이든 쉽고 편하고 안전하게 거래하는 세상을 꿈꾸고 있습니다.</p>
+                <p class="footer_center3">
+                    <a href="#"><img src="./img/번개장터이미지/페이스북.png"></a>
+                    <a href="#"><img src="./img/번개장터이미지/블로그.png"></a>
+                    <a href="#"><img src="./img/번개장터이미지/인스타.png"></a>
+                </p>
             </div>
-            <p class="footer_center2">누구나, 무엇이든 쉽고 편하고 안전하게 거래하는 세상을 꿈꾸고 있습니다.</p>
-            <p class="footer_center3">
-                <a href="#"><img src="./img/번개장터이미지/페이스북.png"></a>
-                <a href="#"><img src="./img/번개장터이미지/블로그.png"></a>
-                <a href="#"><img src="./img/번개장터이미지/인스타.png"></a>
-            </p>
-        </div>
-        <div class="footer_bottom">
-            <p>대표이사: 이재후 | 개인정보보호담당자: 이동주 | 사업자등록정보: 113-86-45836 | 통신판매업신고: 2019-서울서초-1126</p>
-            <p>주소: 서울특별시 서초구 서초대로38길 12 마제스타시티 타워2 지하1층</p>
-            <p>고객센터 대표번호: 1670-2910 | FAX: 02-598-8241</p>
-            <p>고객센터 운영시간:전화문의 : 9시~18시(주말.공휴일 제외) | 1:1문의 : 9시~18시</p>
-            <p class="footer_bottom1">※점심시간 12~13시</p>
-            <p>고객센터 문의 help@bunjang.co.kr | 제휴문의 partner@bunjang.co.kr</p>
-            <p>호스팅서비스 제공자: Amazon Web Services (AWS)</p>
-            <br>
-            <p>“번개장터_컨시어지” 상점의 판매상품을 제외한 모든 상품들에 대하여, 번개장터㈜는 통신판매중개자로서 중고거래마켓 번개장터의 거래 당사자가 아니며, 입점판매자가 등록한 상품정보 및 거래에
-                대해 책임을 지지 않습니다.</p>
-            <br>
-            <p class="footer_bottom2"><b>우리은행 채무지급보증 안내</b></p>
-            <p>번개장터(주)는 “번개장터_컨시어지” 상점이 판매한 상품에 한해, 고객님이 현금 결제한 금액에 대해 우리은행과 채무지급보증 계약을 체결하여 안전거래를 보장하고 있습니다.</p>
-            <p class="footer_bottom3"><a href="#">서비스 가입사실 확인</a></p>
-            <br>
-            <p>Copyright ⓒ Bungaejangter Inc. All rights reserved.</p>
-        </div>
-    </footer>
-
-
+            <div class="footer_bottom">
+                <p>대표이사: 이재후 | 개인정보보호담당자: 이동주 | 사업자등록정보: 113-86-45836 | 통신판매업신고: 2019-서울서초-1126</p>
+                <p>주소: 서울특별시 서초구 서초대로38길 12 마제스타시티 타워2 지하1층</p>
+                <p>고객센터 대표번호: 1670-2910 | FAX: 02-598-8241</p>
+                <p>고객센터 운영시간:전화문의 : 9시~18시(주말.공휴일 제외) | 1:1문의 : 9시~18시</p>
+                <p class="footer_bottom1">※점심시간 12~13시</p>
+                <p>고객센터 문의 help@bunjang.co.kr | 제휴문의 partner@bunjang.co.kr</p>
+                <p>호스팅서비스 제공자: Amazon Web Services (AWS)</p>
+                <br>
+                <p>“번개장터_컨시어지” 상점의 판매상품을 제외한 모든 상품들에 대하여, 번개장터㈜는 통신판매중개자로서 중고거래마켓 번개장터의 거래 당사자가 아니며, 입점판매자가 등록한 상품정보 및 거래에
+                    대해 책임을 지지 않습니다.</p>
+                <br>
+                <p class="footer_bottom2"><b>우리은행 채무지급보증 안내</b></p>
+                <p>번개장터(주)는 “번개장터_컨시어지” 상점이 판매한 상품에 한해, 고객님이 현금 결제한 금액에 대해 우리은행과 채무지급보증 계약을 체결하여 안전거래를 보장하고 있습니다.</p>
+                <p class="footer_bottom3"><a href="#">서비스 가입사실 확인</a></p>
+                <br>
+                <p>Copyright ⓒ Bungaejangter Inc. All rights reserved.</p>
+            </div>
+        </footer>
 
 </body>
 

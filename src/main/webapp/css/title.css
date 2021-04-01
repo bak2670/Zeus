@@ -6014,8 +6014,13 @@ background: rgb(249, 249, 249); height: 2000px;}
     content: "원";
     font-size: 13px;
 }
-.item_box .item .item_text .text_bottom2{
-font-size: 12px; color: rgb(136, 136, 136); display: inline-block; text-align: right; margin-left: 50px;} 
+.item_box .item .item_text .text_bottom2 {
+    font-size: 12px;
+    color: rgb(136, 136, 136);
+    display: inline-block;
+    text-align: right;
+    margin-left: 95px;
+}
 
  /*  */
 .sch_chk {  display: flex;
@@ -6292,3 +6297,14 @@ font-weight: bold;}
     border-bottom: 1px solid rgb(238, 238, 238);
 }
 /* 메인 페이지 카테고리 끝*/
+
+/* 진주님 yourshop */
+.myshop_top .myshop_profile .yourshop_bottom{ display:inline-block; }
+.myshop_top .myshop_profile .yourshop_bottom a { line-height:30px;}
+.myshop_top .myshop_profile .follow_img { position:relative; top:10px;}
+.myshop_top .myshop_profile .yourshop_product a{ font-size:12px; color:#fff; font-weight:lighter;} 
+.myshop_top .yourshop_text_bottom { position: relative; top: 138px; }
+.myshop_top .yourshop_text_bottom button { font-size: 13px; line-height:20px;}
+.myshop_top .yourshop_text_bottom_report { position:relative; top:2px; }
+
+.myShopContainer .myshop_top .myshop_text .myshop_text_top .yourshop_text_top2 { left: 384.2px; }

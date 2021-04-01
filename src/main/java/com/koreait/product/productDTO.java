@@ -13,15 +13,15 @@ public class productDTO {
 	private int hit;
 	private int category;
 	private String content;
-	private int memdix;
+	private int memidx;
 	private String tag;
 	private String picturepath;
 	private String picture;
+	
 	private String exchange;
 	private String priceConsult;
+	private String salesStatus;
 	private int quantity;
-	
-
 	
 	
 	public int getIdx() {
@@ -91,10 +91,10 @@ public class productDTO {
 		this.content = content;
 	}
 	public int getMemidx() {
-		return memdix;
+		return memidx;
 	}
-	public void setMemidx(int memdix) {
-		this.memdix = memdix;
+	public void setMemidx(int memidx) {
+		this.memidx = memidx;
 	}
 	public String getTag() {
 		return tag;
@@ -114,13 +114,6 @@ public class productDTO {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 	public String getExchange() {
 		return exchange;
 	}
@@ -133,14 +126,27 @@ public class productDTO {
 	public void setPriceConsult(String priceConsult) {
 		this.priceConsult = priceConsult;
 	}
+	public String getSalesStatus() {
+		return salesStatus;
+	}
+	public void setSalesStatus(String salesStatus) {
+		this.salesStatus = salesStatus;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "productDTO [idx=" + idx + ", name=" + name + ", price=" + price + ", state=" + state + ", delcharge="
 				+ delcharge + ", deallocation=" + deallocation + ", regdate=" + regdate + ", zzim=" + zzim + ", hit="
-				+ hit + ", category=" + category + ", content=" + content + ", memdix=" + memdix + ", tag=" + tag
-				+ ", picturepath=" + picturepath + ", picture=" + picture + "]";
+				+ hit + ", category=" + category + ", content=" + content + ", memidx=" + memidx + ", tag=" + tag
+				+ ", picturepath=" + picturepath + ", picture=" + picture + ", exchange=" + exchange + ", priceConsult="
+				+ priceConsult + ", salesStatus=" + salesStatus + ", quantity=" + quantity + "]";
 	}
 	
 }

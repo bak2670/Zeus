@@ -2,18 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Member">
+<mapper namespace="member">
 
-<select id="kakaoCheck" parameterType="String" resultType="int">select count(m_idx) from tb_member where m_kakaoemail=#{m_kakaoemail} </select>
-<select id="naverCheck" parameterType="String" resultType="int">select count(m_idx) from tb_member where m_naveremail=#{m_naveremail} </select>
+	<select id="kakaoCheck" parameterType="String" resultType="int">
+		select count(m_idx) from tb_member where m_kakaoemail=#{m_kakaoemail} 
+	</select>
+	
+	<select id="naverCheck" parameterType="String" resultType="int">
+		select count(m_idx) from tb_member where m_naveremail=#{m_naveremail} 
+	</select>
 
-<insert id="join" parameterType="map">insert into tb_member (m_username, m_naveremail, m_kakaoemail, m_ssn1, m_ssn2, m_hp) values (#{m_username}, #{m_naveremail}, #{m_kakaoemail}, #{m_ssn1}, #{m_ssn2}, #{m_hp}) </insert>
+	<insert id="join" parameterType="map">
+		insert into tb_member (m_username, m_naveremail, m_kakaoemail, m_ssn1, m_ssn2, m_hp) values (#{m_username}, #{m_naveremail}, #{m_kakaoemail}, #{m_ssn1}, #{m_ssn2}, #{m_hp}) 
+	</insert>
 
-  <select id="kakaologin" parameterType="map" resultType="map">
-  	select m_idx, m_username from tb_member where m_kakaoemail=#{m_kakaoemail}
-  </select>
-  
-    <select id="naverlogin" parameterType="map" resultType="map">
-  	select m_idx, m_username from tb_member where m_naveremail=#{m_naveremail}
-  </select>
+	<select id="kakaologin" parameterType="map" resultType="map">
+		select m_idx, m_username from tb_member where m_kakaoemail=#{m_kakaoemail}
+	</select>
+	
+	<select id="naverlogin" parameterType="map" resultType="map">
+		select m_idx, m_username from tb_member where m_naveremail=#{m_naveremail}
+	</select>
+
+	<select id="meminfo" parameterType="map" resultType="map">
+		select * from tb_member where m_idx=#{m_idx}
+	</select>
 </mapper>

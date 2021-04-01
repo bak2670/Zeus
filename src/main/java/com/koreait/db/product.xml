@@ -42,4 +42,29 @@
 	<select id="recentProduct" parameterType="int" resultType="map">
 		select * from tb_product where p_memidx = #{m_idx} order by p_regdate desc limit 0,2;
 	</select>
+
+	<!-- 지헌님 상품상세 -->
+	<select id="info" parameterType="string" resultType="map">
+		select * from tb_product where p_idx=#{p_idx}
+	</select>
+	
+	<update id="productZzimUp" parameterType="int">
+		update tb_product set p_zzim=p_zzim+1 where p_idx=#{p_idx}
+		
+	</update>
+	
+	<update id="productZzimDown" parameterType="int">
+		update tb_product set p_zzim=p_zzim-1 where p_idx=#{p_idx}
+	</update>
+	
+	<select id="selectZzim" parameterType="int" resultType="string">
+		select m_zzim from tb_member where m_idx=#{m_idx} 
+	</select>
+	
+	<update id="updateZzim" parameterType="map">
+		update tb_member set m_zzim = #{zzimStr} where m_idx=#{m_idx}
+	</update>
+	
+	
+	
 </mapper> 
