@@ -9,13 +9,13 @@
 <jsp:setProperty property="*" name="member"/>
 
 <%
-   if(dao.kakaoCheck(member)){
-	   if(dao.kakaojoin(member) != null){
-		   session.setAttribute("username" ,member.getUsername());
-			session.setAttribute("idx" ,member.getIdx());
-	   }
+	if (dao.kakaoCheck(member)) {
+		if (dao.kakaojoin(member) != null) {
+			session.setAttribute("username", member.getUsername());
+			session.setAttribute("idx", member.getIdx());
+		}
 %>
-	<script>
+<script>
    location.href='main.jsp';
 	</script>
 

@@ -290,20 +290,7 @@ $(document).ready(function () {
 //  연관 이미지 슬라이드 끝
 
 /* 로그인 팝업 */
-$(document).ready(function () {
-    $(".loginOut").click(function (event) {
-
-        $(".modal_wrap").css({
-            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
-            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
-            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-
-        });
-        $(".modal_wrap").css("display", "block");
-        $(".black_bg").css("display", "block");
-
-        $("body").css("overflow", "hidden");//body 스크롤바 없애기
-    })
+var lg = $(document).ready(function () {
 
     $(".modal_close").click(function (event) {
         $(".black_bg").css("display", "none"); //팝업창 뒷배경 display none
@@ -318,6 +305,83 @@ $(document).ready(function () {
     });
 
 })
+
+$(document).ready(function() {
+    $(".loginOut").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+    
+        $(".storeNoBtn").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+            $(".myShopBtn1").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+            $(".sellBtn1").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+            $(".zeusTalk1").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+        $(".zzim1Btn1").click(function (event) {
+        $(".modal_wrap").css({
+            "top": (($(window).height() - $(".modal_wrap").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+            "left": (($(window).width() - $(".modal_wrap").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+
+        });
+        $(".modal_wrap").css("display", "block");
+        $(".black_bg").css("display", "block");
+
+        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+    })
+    lg();
+});
 
 
 // 신고하기 모달창
@@ -1543,25 +1607,25 @@ window.onload = function(){
 }
 
 	/*로그아웃부분*/
-$(document).ready(function () {
-    $(".logOut").click(function (event) {  //팝업 Open 버튼 클릭 시 
-        $(".Aclogoutpage_top").css({
-            "top": (($(window).height() - $(".Aclogoutpage_top").outerHeight()) / 2 + $(window).scrollTop()) + "px",
-            "left": (($(window).width() - $(".Aclogoutpage_top").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
-            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
-
-        });
-        $(".Aclogoutpage").css("display", "block"); //팝업 뒷배경 display block
-        $(".Aclogoutpage_top").css("display", "block"); //팝업창 display block
-
-        $("body").css("overflow", "hidden");//body 스크롤바 없애기
-    });
-    $(".Aclogoutpage_btn1").click(function (event) {
-        $(".Aclogoutpage").css("display", "none"); //팝업창 뒷배경 display none
-        $(".Aclogoutpage_top").css("display", "none"); //팝업창 display none
-        $("body").css("overflow", "auto");//body 스크롤바 생성
-    });
-});
+	$(document).ready(function () {
+	    $(".logOut").click(function (event) {  //팝업 Open 버튼 클릭 시 
+	        $(".Aclogoutpage_top").css({
+	            "top": (($(window).height() - $(".Aclogoutpage_top").outerHeight()) / 2 + $(window).scrollTop()) + "px",
+	            "left": (($(window).width() - $(".Aclogoutpage_top").outerWidth()) / 2 + $(window).scrollLeft()) + "px"
+	            //팝업창을 가운데로 띄우기 위해 현재 화면의 가운데 값과 스크롤 값을 계산하여 팝업창 CSS 설정
+	
+	        });
+	        $(".Aclogoutpage").css("display", "block"); //팝업 뒷배경 display block
+	        $(".Aclogoutpage_top").css("display", "block"); //팝업창 display block
+	
+	        $("body").css("overflow", "hidden");//body 스크롤바 없애기
+	    });
+	    $(".Aclogoutpage_btn1").click(function (event) {
+	        $(".Aclogoutpage").css("display", "none"); //팝업창 뒷배경 display none
+	        $(".Aclogoutpage_top").css("display", "none"); //팝업창 display none
+	        $("body").css("overflow", "auto");//body 스크롤바 생성
+	    });
+	});
 
 
 /*내상점부분*/

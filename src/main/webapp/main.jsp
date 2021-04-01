@@ -6,10 +6,12 @@
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <%
 	String username= null;
-	String idx = null;
+	String m_idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
 	}
+	
 %>
 <!DOCTYPE html>
 
@@ -736,7 +738,7 @@ autoplaySpeed: 2000,
 
 	</div>
 
-		<!-- 	<!-- 모달창 처리 -->
+	<!-- 모달창 처리 -->
 	<div class="black_bg"></div>
 	<div class="modal_wrap">
 		<div class="popup" id="pop1">
