@@ -90,7 +90,7 @@ public class memberDAO {
 	public memberDTO kakaojoin(memberDTO member) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("m_kakaoemail", member.getKakaoemail());
-		dataMap = sqlsession.selectOne("member.kakaologin", dataMap);
+		dataMap = sqlsession.selectOne("Member.kakaologin", dataMap);
 
 		if (dataMap != null) {
 			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
@@ -126,14 +126,13 @@ public class memberDAO {
 		return null;
 	}
 
-	public int emailjoin(memberDTO member) {
+	public int emailupdate(memberDTO member) {
 		HashMap<String, String> dataMap = new HashMap<>();
 
 		dataMap.put("m_naveremail", member.getNaveremail());
 		dataMap.put("m_kakaoemail", member.getKakaoemail());
 		dataMap.put("m_hp", member.getHp());
 
-		return sqlsession.update("member.emailjoin", dataMap);
-
+		return sqlsession.update("member.emailupdate", dataMap);
 	}
 }

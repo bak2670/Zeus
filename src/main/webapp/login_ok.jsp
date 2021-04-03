@@ -10,11 +10,13 @@
 
 <%
    if(dao.phoneCheck(member)){
-	   if(!dao.kakaoCheck(member)){
-		   if(dao.emailjoin(member) == 1){
-			   session.setAttribute("username" ,member.getUsername());
-				session.setAttribute("idx" ,member.getIdx());
-		   }
+	   if(!dao.kakaoCheck(member) || !dao.naverCheck(member)){
+		   if(dao.emailupdate(member) == 1){
+			   if(dao.phonejoin(member) != null){
+				   session.setAttribute("username" ,member.getUsername());
+					session.setAttribute("idx" ,member.getIdx());
+			   }
+	   		}
 	   }
 	   if(dao.phonejoin(member) != null){
 		   session.setAttribute("username" ,member.getUsername());

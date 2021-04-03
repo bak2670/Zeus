@@ -688,7 +688,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     -webkit-box-pack: center;
     justify-content: center;
 }
-.zzim1Btn {
+.zzim1Btn, .zzim1Btn1 {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -696,7 +696,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     font-weight: 600;
     color: rgb(247, 0, 0);
 }
-.zzim1Btn img {
+.zzim1Btn img, .zzim1Btn1 img {
     margin-right: 5px;
 }
 .zzimSideBox3{
@@ -6283,6 +6283,7 @@ font-weight: bold;}
     border-bottom: 1px solid rgb(238, 238, 238);
     padding: 20px 0px 25px;
     overflow-y: auto;
+    display: "none";
 }
 .big_selected {
     display: flex;

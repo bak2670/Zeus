@@ -5,24 +5,39 @@
 <mapper namespace="member">
 	
 	<!-- 민우님 로그인 시작 -->
-	<select resultType="int" parameterType="String" id="kakaoCheck">select count(m_idx) from tb_member where m_kakaoemail=#{m_kakaoemail} </select>
+	<select id="kakaoCheck" parameterType="String" resultType="int">
+		select count(m_idx) from tb_member where m_kakaoemail=#{m_kakaoemail} 
+	</select>
+	<select id="naverCheck" parameterType="String" resultType="int">
+		select count(m_idx) from tb_member where m_naveremail=#{m_naveremail}
+	</select>
+	<select id="phoneCheck" parameterType="String" resultType="int">
+	 select count(m_idx) from tb_member where m_hp=#{m_hp} and m_ssn1=#{m_ssn1} 
+	 and m_ssn1=#{m_ssn1} and m_username=#{m_username} 
+	</select>
+	<select id="duplicate" parameterType="String" resultType="int">
+		select count(m_idx) from tb_member where m_hp=#{m_hp}
+	</select>
+	<insert id="join" parameterType="map">
+		insert into tb_member (m_username, m_naveremail, m_kakaoemail, m_ssn1, m_ssn2, m_hp) values
+		(#{m_username}, #{m_naveremail}, #{m_kakaoemail}, #{m_ssn1}, #{m_ssn2}, #{m_hp}) 
+	</insert>
+	<update id="emailupdate" parameterType="map">
+		update tb_member set m_kakaoemail=#{m_kakaoemail}, m_naveremail=#{m_naveremail} where m_hp=#{m_hp}
+	</update>
 
-	<select resultType="int" parameterType="String" id="naverCheck">select count(m_idx) from tb_member where m_naveremail=#{m_naveremail} </select>
-	
-	<select resultType="int" parameterType="String" id="phoneCheck">select count(m_idx) from tb_member where m_hp=#{m_hp} and m_username=#{m_username} </select>
-	
-	<select resultType="int" parameterType="String" id="duplicate">select count(m_idx) from tb_member where m_hp=#{m_hp}</select>
-	
-	<insert parameterType="map" id="join">insert into tb_member (m_username, m_naveremail, m_kakaoemail, m_ssn1, m_ssn2, m_hp) values (#{m_username}, #{m_naveremail}, #{m_kakaoemail}, #{m_ssn1}, #{m_ssn2}, #{m_hp}) </insert>
-	
-	<select resultType="map" parameterType="map" id="kakaologin">select m_idx, m_username from tb_member where m_kakaoemail=#{m_kakaoemail} </select>
-	
-	<select resultType="map" parameterType="map" id="naverlogin">select m_idx, m_username from tb_member where m_naveremail=#{m_naveremail} </select>
-	
-	<select resultType="map" parameterType="map" id="phonelogin">select m_idx, m_username from tb_member where m_hp=#{m_hp} </select>
-	
-	<update parameterType="map" id="emailjoin">update tb_member set m_kakaoemail= #{m_kakaoemail} where m_hp= #{m_hp}</update>
-	<!-- 민우님 로그인 끝 -->
+	<select id="kakaologin" parameterType="map" resultType="map">
+		select m_idx, m_username from tb_member where m_kakaoemail=#{m_kakaoemail}
+	</select>
+
+	<select id="naverlogin" parameterType="map" resultType="map">
+		select m_idx, m_username from tb_member where m_naveremail=#{m_naveremail}
+	</select>
+
+	<select id="phonelogin" parameterType="map" resultType="map">
+		select m_idx, m_username from tb_member where m_hp=#{m_hp}
+	</select>
+  <!-- 민우님 로그인 끝 -->
 
 	<!-- 누구꺼지  -->
 	<select id="meminfo" parameterType="map" resultType="map">

@@ -435,7 +435,7 @@ insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea)
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("머그컵", "18", "9","Y", "서울특별시 신길동","서울특별시 신길동" );
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("미니언즈", "19", "10","N", "서울특별시 강동구 강동지","서울특별시 강동구 강동지" );
 
-
+select * from tb_product;
 insert into tb_area(a_memidx, a_area, a_memsel) values ("1","서울특별시 노원구 공릉동", "Y");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("11","충청남도 아산시 배방읍", "N");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("12","서울특별시 노원구 상계동", "N" );
@@ -456,3 +456,9 @@ insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (4,"�
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (5,"계정문의","탈퇴","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (6,"이용방법","안전결제/번개페이","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (7,"광고","광고관리","ㅁㄴㅇㄹ");
+
+
+-- 카테고리 상품 조인 뷰
+create view PdJoinCate as select p.p_idx, p.p_name, p.p_memidx, c.c_idx, c.c_big, c.c_middle, c.c_small from tb_product as p join tb_category as c on c.c_idx = p.p_category;
+
+select * from PdJoinCate;

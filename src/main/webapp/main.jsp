@@ -237,7 +237,7 @@ div {
 								</div>
 								<div class="category_list">
 									<a href="#" class="big_non_selected big_list">여성의류</a>
-									<a href="#" class="big_selected big_list">패션잡화</a> 
+									<a href="#" class="big_non_selected big_list">패션잡화</a> 
 									<a href="#" class="big_non_selected big_list">남성의류</a> 
 									<a href="#" class="big_non_selected big_list">디지털/가전</a> 
 									<a href="#" class="big_non_selected big_list">도서/티켓/취미/애완</a> 
@@ -781,43 +781,43 @@ autoplaySpeed: 2000,
 					<input type="hidden" name="naverEmail" id="naverEmail" value="">
 				</form>
 				<script type="text/javascript"> 
-	var naverLogin = new naver.LoginWithNaverId({ 
-    clientId: "RAkcajQ6qKE9eoL2H2UK", 
-    callbackUrl: "http://localhost:9090/ZeusMarket/naverLogin_ok2.jsp", 
-    isPopup: false, 
-    /* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */ }); 
-    /* (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */ 
-    naverLogin.init(); 
-    /* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */ 
-    window.addEventListener('load', function () {
-        naverLogin.getLoginStatus(function (status) {
-            if (status) { 
-                /* (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크 */ 
-                console.log(naverLogin.accessToken.accessToken)
-				var email = document.getElementById("naverEmail")
-                email.value = naverLogin.user.getEmail(); 
-                var profileImage = naverLogin.user.getProfileImage(); 
-                var name = naverLogin.user.getName(); 
-                var uniqId = naverLogin.user.getId(); 
-                console.log(email)
-                naverForm.submit();
-                if (email == undefined || email == null) { 
-                    alert("이메일은 필수정보입니다. 정보제공을 동의해주세요."); 
-                    /* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */ 
-                    naverLogin.reprompt(); 
-                    return; 
-                } else if (name == undefined || name == null) { 
-                    alert("회원이름은 필수정보입니다. 정보제공을 동의해주세요."); 
-                    naverLogin.reprompt(); return; 
-                } 
-
-                } else { 
-                	console.log("callback 처리에 실패하였습니다."); 
-
-                } 
-                }); 
-            });
-        </script>
+					var naverLogin = new naver.LoginWithNaverId({ 
+				    clientId: "RAkcajQ6qKE9eoL2H2UK", 
+				    callbackUrl: "http://localhost:9090/ZeusMarket/naverLogin_ok2.jsp", 
+				    isPopup: false, 
+				    /* callback 페이지가 분리되었을 경우에 callback 페이지에서는 callback처리를 해줄수 있도록 설정합니다. */ }); 
+				    /* (3) 네아로 로그인 정보를 초기화하기 위하여 init을 호출 */ 
+				    naverLogin.init(); 
+				    /* (4) Callback의 처리. 정상적으로 Callback 처리가 완료될 경우 main page로 redirect(또는 Popup close) */ 
+				    window.addEventListener('load', function () {
+				        naverLogin.getLoginStatus(function (status) {
+				            if (status) { 
+				                /* (5) 필수적으로 받아야하는 프로필 정보가 있다면 callback처리 시점에 체크 */ 
+				                console.log(naverLogin.accessToken.accessToken)
+								var email = document.getElementById("naverEmail")
+				                email.value = naverLogin.user.getEmail(); 
+				                var profileImage = naverLogin.user.getProfileImage(); 
+				                var name = naverLogin.user.getName(); 
+				                var uniqId = naverLogin.user.getId(); 
+				                console.log(email)
+				                naverForm.submit();
+				                if (email == undefined || email == null) { 
+				                    alert("이메일은 필수정보입니다. 정보제공을 동의해주세요."); 
+				                    /* (5-1) 사용자 정보 재동의를 위하여 다시 네아로 동의페이지로 이동함 */ 
+				                    naverLogin.reprompt(); 
+				                    return; 
+				                } else if (name == undefined || name == null) { 
+				                    alert("회원이름은 필수정보입니다. 정보제공을 동의해주세요."); 
+				                    naverLogin.reprompt(); return; 
+				                } 
+				
+				                } else { 
+				                	console.log("callback 처리에 실패하였습니다."); 
+				
+				                } 
+				                }); 
+				            });
+	        	</script>
 				<li class="email"><a href="./login.jsp">본인인증으로 이용하기</a></li>
 			</ul>
 			<div class="popfoot">
