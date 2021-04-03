@@ -195,7 +195,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-size: 10px !important;
+    font-size: 13px !important;
     color: rgb(102, 102, 102);
     padding: 0px 15px;
     position: relative;
@@ -578,7 +578,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     align-items: center;
     position: relative;
 }
-.zeusTalk > img .zeusTalk1 > img {
+.zeusTalk > img, .zeusTalk1 > img {
     margin-right: 5px;
 }
 .myShopBtn, .myShopBtn1 {
@@ -5918,7 +5918,7 @@ input[type="radio"] {
     justify-content: center;
     padding-top: 30px;
 background: rgb(249, 249, 249); height: 2000px;}
-.kate { width: 1030px;}
+.kate { width: 1030px; }
 .kate_gori { display: flex;
     -webkit-box-align: center;
     align-items: center;}

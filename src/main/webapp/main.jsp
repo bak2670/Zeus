@@ -226,7 +226,6 @@ div {
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAExJREFUWAnt1sEJACAMA0DrJt1/SAVXyKfI9V8Il0+qu88afHtwthdNwOkNyUeAAAECvwuUNRNWbM2EgN4JECBAgEAoYM2EgMuaSQUv1d0EPE4sEMMAAAAASUVORK5CYII="
 							width="20" height="16" alt="메뉴 버튼 아이콘">
 						</div>
-						<!-- 카테고리 시작 img hover시 추가되는 div -->
 						<div class="main_category">
 							<!-- 대분류 -->
 							<div class="category" id="big_category">
@@ -500,12 +499,11 @@ div {
 				</div>
 				<div class="underMenu">
 					<div class="categoryMenu">
-						<div class="category_img_div">
+						<div class="category_img_div" id="category_img_div">
 						<img id="category_img"
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAExJREFUWAnt1sEJACAMA0DrJt1/SAVXyKfI9V8Il0+qu88afHtwthdNwOkNyUeAAAECvwuUNRNWbM2EgN4JECBAgEAoYM2EgMuaSQUv1d0EPE4sEMMAAAAASUVORK5CYII="
 							width="20" height="16" alt="메뉴 버튼 아이콘">
 						</div>
-						<!-- 카테고리 시작 img hover시 추가되는 div -->
 						<div class="main_category">
 							<!-- 대분류 -->
 							<div class="category" id="big_category">
@@ -516,7 +514,7 @@ div {
 								</div>
 								<div class="category_list">
 									<a href="#" class="big_non_selected big_list">여성의류</a>
-									<a href="#" class="big_selected big_list">패션잡화</a> 
+									<a href="#" class="big_non_selected big_list">패션잡화</a> 
 									<a href="#" class="big_non_selected big_list">남성의류</a> 
 									<a href="#" class="big_non_selected big_list">디지털/가전</a> 
 									<a href="#" class="big_non_selected big_list">도서/티켓/취미/애완</a> 
@@ -543,11 +541,6 @@ div {
 								</div>
 								<!-- 대분류 "여성의류"에 대한 중분류 -->
 								<div class="category_list">
-									<!-- <a class="ms_list" href="#"><div class="ms_non_selected">원피스</div></a>                            
-                            <a class="ms_list" href="#"><div class="ms_selected">스커트/치마</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">자켓</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">니트/스웨터</div></a>      
-                            <a class="ms_list" href="#"><div class="ms_non_selected">야상/점퍼/패딩</div></a>                          -->
 								</div>
 							</div>
 							<!-- 소분류 -->
@@ -555,15 +548,9 @@ div {
 								<div class="small_category_top" id="small_top"></div>
 								<!-- 여성의류 -> 원피스 -->
 								<div class="category_list">
-									<!-- <a class="ms_list" href="#"><div class="ms_non_selected">롱 원피스</div></a>
-                            <a class="ms_list" href="#"><div class="ms_selected">캐주얼 원피스</div></a>
-                            <a class="ms_list" href="#"><div class="ms_non_selected">미니 원피스</div></a>
-                            <a class="ms_list" href="#"><div class="ms_non_selected">럭셔리 원피스</div></a>
-                            <a class="ms_list" href="#"><div class="ms_non_selected">기타 원피스</div></a> -->
 								</div>
 							</div>
 						</div>
-						<!-- <a href="#">&nbsp;&nbsp;&nbsp;&nbsp;<b>번개장터 판매자센터</b>></a> -->
 						<a href="https://m.bunjang.co.kr/seller" target="_blank"
 							class="sellerCenter"><b>번개장터 판매자센터</b><img
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAfZJREFUKBVtkstq21AQhi3pqCpWUllWkippCjY2WcWbLPoahS76Bl2XkscIhe7zAllkVbrMY8S0pGCwsWIS2U6ELFRfJPUbg4ubeGA0M2f+fy7nSKvX679KpVKEXmqaFsRx/D0MwwnxRtE5DYuieARcxndM06zWarUKvuSeieG6bh/wTzIf0BMIb3VdP/I874bu88FgkK+zlGEYAYA/s9lMxpCqVTpmFPEnk4lJHKIZuiRqOC9Qs9Fo7C8Wi10KfCKuQFpAGmG/lcvlsN1uPwpJ8Zmhc6XUXZZlAhoS63me70onChxMp1ODs6ngpMNKZBzd930XcoVd3hPvUeAEYsLZV+xImCspcHLmTknObds+JDYBvYNk072Nr9Y7rIhitWazuc1FHEI+B+hzNkazjXctBHQpgGmgSXeRQpZ+KobjOK8AfmThN9iXAIZcwhnE0TpBuhk8lryDy8yvAbjokDjmEm4hDVet9Var5SRJskPyM7rDY1rYCOI5e9x3Op2AgnPFclYURWaapvtU2OOwim4DHlNdFh1AlrdJ0UKROGZmj0pfSGxxeI3+Jr4gHvd6veXtCBgtKaoeYGVWGyv3PsKXV7/rdrvy28t/9E9k6VNACdV+4N/zG1xZlhX3+/2Y+L8/VVhC8Kgoo8WQHvgBH4IgSCS5Sf4Cbfj85T5s+hEAAAAASUVORK5CYII="

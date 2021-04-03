@@ -15,4 +15,8 @@
 	<select id="cateIdx" parameterType="string" resultType="int">
 		select c_idx from tb_category where c_big=#{cateStr} or c_middle=#{cateStr} or c_small=#{cateStr};
 	</select>
+	
+	<select id="searchCateIdx" parameterType="map" resultType="int">
+		select c_idx from tb_category where c_big=#{big} and c_middle=#{mid} and c_small=#{small};
+	</select>
 </mapper> 

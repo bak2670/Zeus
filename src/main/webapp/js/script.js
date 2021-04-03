@@ -1765,9 +1765,11 @@ function slideSmallCate(cate, bigCate) {
 
 				const smallCate = document.createElement('a');
 				smallCate.setAttribute('class', 'ms_list');
+				
 				const smallCateDiv = document.createElement('div');
 				smallCateDiv.setAttribute('class', 'ms_non_selected');
 				smallCateDiv.textContent = responseObject[i]['small'];
+				smallCate.setAttribute('href', "./categoryClick.jsp?big="+bigCate+"&mid="+text+"&small="+responseObject[i]['small']);
 
 				smallCate.appendChild(smallCateDiv);
 
@@ -1912,7 +1914,6 @@ window.onload = function() {
 	});
 
 	categoryImg.addEventListener('mouseover', function() {
-		console.log('asedf10');
 		mouse_cate = 1;
 		big.style.display = "block";
 	});

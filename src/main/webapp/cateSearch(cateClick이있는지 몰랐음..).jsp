@@ -841,15 +841,15 @@ div {
 				<!-- 검색 결과 -->
 				<!-- product 테이블에서 검색한 문자열을 포함하는 p_name의 정보 가져와야함 -->
                 <%
-                	List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
-                	int searchCnt = searchList.size();
+                	//List<HashMap<String,String>> searchList = productDAO.searchProduct(searchText);
+                	//int searchCnt = searchList.size();
                 %>
                 <div class = "container_text">
                     <div class="container_sc">
-                        <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2"><%=searchCnt%>개</span>
+                        <div class="container_sch"><span class="container_sch1"><%-- <%=searchText%> --%></span>의 검색결과 <span class="container_sch2"><%-- <%=searchCnt%> --%>개</span>
                             </div>
                             <div class="sch_chk">
-                                <span class="container_sch1"><%=searchText%>&nbsp;</span>
+                                <span class="container_sch1"><%-- <%=searchText%> --%>&nbsp;</span>
                                 <span class="container_sch2">키워드 알림 받기</span>
                                 <button class="openBtn"> <input type="checkbox" id="chk1"><label for="chk1"><span>키워드</span></label></span></button>
                     </div>
@@ -864,15 +864,15 @@ div {
                 
                 
                 <div class="container_main">
-                <% 
+<%--                 <% 
                 	for(HashMap product : searchList){
-                %>
+                %> --%>
 	                <div class="item_box">
-                        <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
+                        <a href="productDetail.jsp?p_idx=<%-- <%=product.get("p_idx") %> --%>" class="item">
                             <div class="item_img">
                                 <!-- <img src="img/번개장터이미지/댓글.png"> -->
 							<%
-								out.print("<img src='./uploads/"+product.get("p_picture")+"' alt='상품이미지'>"); // 상대경로. 얘만됨
+								//out.print("<img src='./uploads/"+product.get("p_picture")+"' alt='상품이미지'>"); // 상대경로. 얘만됨
 								
 								// 절대경로 1
 								//out.print("<img src='C:\\CODE\\zeus_uploads\\"+product.get("p_picture")+"' alt='상품이미지'>");
@@ -882,21 +882,21 @@ div {
                             </div>
                             <div class="item_text">
                                 <div class = "text_top">
-                                    <%=product.get("p_name")%>
+                                    <%-- <%=product.get("p_name")%> --%>
                                 </div>
                                 <div class="text_bottom">
                                     <div class="text_bottom1">
-                                        <%=product.get("p_price")%>
+                                        <%-- <%=product.get("p_price")%> --%>
                                     </div>
                                     <div class="text_bottom2">
-                                        <%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%>
+                                        <%-- <%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%> --%>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                 <%
-                	}
+                	//}
                 %>            
                 </div>
             </div>

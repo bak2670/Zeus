@@ -113,6 +113,11 @@ public class productDAO {
 		return productList;
 	}
 	
+	public List<HashMap<String, String>> cateProduct(int c_idx){
+		List<HashMap<String, String>> productList = sqlsession.selectList("product.cateProduct", c_idx);
+		
+		return productList;
+	}
 	
 	
 	// 지헌님 상품상세 dao 시작

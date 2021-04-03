@@ -13,7 +13,6 @@
 	// 중분류 문자열 넘어온 경우
 	String mid_category = request.getParameter("mid");
 	String big_category = request.getParameter("big");		// 대분류도 받아옴
-	System.out.println(big_category);
 	// mid_category로 sql돌리기
 	List<String> smallList = cateDAO.selectSmall(mid_category, big_category);
 

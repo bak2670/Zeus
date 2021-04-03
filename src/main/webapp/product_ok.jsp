@@ -7,6 +7,15 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %> 
+<%
+	String username= null;
+	String m_idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
+	}
+	System.out.println(m_idx);
+%>
 <jsp:useBean id="fs" class="com.koreait.db.FileService"/>  
 <jsp:useBean id="dao" class="com.koreait.category.categoryDAO"/> 
 <% 
@@ -38,8 +47,7 @@
 		int category = dao.getCateIdx(cateStr);
 		String content = multi.getParameter("p_content");
 		
-//		int memidx = Integer.parseInt(multi.getParameter("p_memidx")); //로그인x
-		int memidx = 17;
+		int memidx = Integer.parseInt(m_idx);
 		String tag = multi.getParameter("p_tag");
 		String priceConsult = multi.getParameter("p_priceConsult");
 		if(priceConsult == null || priceConsult.equals("")){
@@ -58,7 +66,7 @@
 		
 		// DB에 넣기 위해서 DTO에 넣으러 가는 부분
 		// FileService의 dataUpload 메소드
-		if(fs.dataUpload(name, price, state, delcharge, deallocation , category , content, 1, tag, priceConsult, exchange, quantity, file)){
+		if(fs.dataUpload(name, price, state, delcharge, deallocation , category , content, memidx, tag, priceConsult, exchange, quantity, file)){
  
 %>
 	<script>

@@ -62,5 +62,15 @@ public class categoryDAO {
 		
 		return cateIdx;
 	}
+	
+	public int searchCateIdx(String big, String mid, String small) {
+		HashMap<String, String> cateMap = new HashMap<>();
+		cateMap.put("big", big);
+		cateMap.put("mid", mid);
+		cateMap.put("small", small);
+		int cateIdx = sqlsession.selectOne("category.searchCateIdx",cateMap);
+		System.out.println(cateIdx);
+		return cateIdx;
+	}
 
 }

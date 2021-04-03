@@ -46,6 +46,10 @@
 	<select id="recentProduct" parameterType="int" resultType="map">
 		select * from tb_product where p_memidx = #{m_idx} order by p_regdate desc limit 0,2;
 	</select>
+	
+	<select id="cateProduct" parameterType="int" resultType="map">
+		select * from tb_product where p_category = #{c_idx};
+	</select>
 
 	<!-- 지헌님 상품상세 -->
 	<select id="info" parameterType="string" resultType="map">

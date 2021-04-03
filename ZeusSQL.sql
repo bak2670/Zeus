@@ -155,7 +155,8 @@ select * from tb_product;
 
 select * from tb_product where p_name LIKE '%우유%' and p_deallocation='경기도 부천시 상동';
 select * from tb_category where c_middle='자켓';
-
+select * from tb_following;
+select f_follow from tb_following where f_memidx=1;
 
 create table tb_oneToOne(
 	o_idx bigint not null auto_increment primary key,
@@ -291,6 +292,11 @@ insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_z
 insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("또가스","50","새상품","N","서울시 관악구 봉천동","0","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","또가스.jpg");
 
 insert into tb_following(f_memidx,f_follow) values ("1", "4");
+insert into tb_following(f_memidx,f_follow) values ("1", "5");
+insert into tb_following(f_memidx,f_follow) values ("1", "7");
+insert into tb_following(f_memidx,f_follow) values ("1", "3");
+insert into tb_following(f_memidx,f_follow) values ("1", "11");
+insert into tb_following(f_memidx,f_follow) values ("1", "15");
 insert into tb_following(f_memidx,f_follow) values ("2", "6");
 insert into tb_following(f_memidx,f_follow) values ("12", "3");
 insert into tb_following(f_memidx,f_follow) values ("13", "10");

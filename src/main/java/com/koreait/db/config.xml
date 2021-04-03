@@ -21,6 +21,7 @@
  		<mapper resource="com/koreait/db/category.xml" />
 		<mapper resource="com/koreait/db/product.xml" />
 		<mapper resource="com/koreait/db/member.xml" />
+		<mapper resource="com/koreait/db/follow.xml" />
 <!--  		<mapper resource="com.koreait/db/inquire.xml" />
 		<mapper resource="com.koreait/db/review.xml" /> -->
 	</mappers>
