@@ -9,9 +9,17 @@
 <jsp:setProperty property="*" name="member"/>
 
 <%
-   if(dao.phoneCheck(member)){
-	   if(!dao.kakaoCheck(member) || !dao.naverCheck(member)){
-		   if(dao.emailupdate(member) == 1){
+if(dao.phoneCheck(member)){
+	   if(member.getKakaoemail() != null){
+		   if(dao.kakaoupdate(member) == 1){
+			   if(dao.phonejoin(member) != null){
+				   session.setAttribute("username" ,member.getUsername());
+					session.setAttribute("idx" ,member.getIdx());
+			   }
+	   		}
+	   }
+	   if(member.getNaveremail() != null){
+		   if(dao.naverupdate(member) == 1){
 			   if(dao.phonejoin(member) != null){
 				   session.setAttribute("username" ,member.getUsername());
 					session.setAttribute("idx" ,member.getIdx());

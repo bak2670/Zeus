@@ -30,7 +30,7 @@ public class memberDAO {
 		dataMap.put("m_kakaoemail", member.getKakaoemail());
 		System.out.println(member.getKakaoemail());
 
-		if ((Integer) sqlsession.selectOne("member.kakaoCheck", dataMap) == 1) {
+		if ((Integer) sqlsession.selectOne("Member.kakaoCheck", dataMap) == 1) {
 			return true;
 		}
 		return false;
@@ -41,7 +41,7 @@ public class memberDAO {
 		dataMap.put("m_naveremail", member.getNaveremail());
 		System.out.println(member.getNaveremail());
 
-		if ((Integer) sqlsession.selectOne("member.naverCheck", dataMap) == 1) {
+		if ((Integer) sqlsession.selectOne("Member.naverCheck", dataMap) == 1) {
 			return true;
 		}
 		return false;
@@ -56,7 +56,7 @@ public class memberDAO {
 		dataMap.put("m_hp", member.getHp());
 		System.out.println(member.getHp());
 
-		if ((Integer) sqlsession.selectOne("member.phoneCheck", dataMap) == 1) {
+		if ((Integer) sqlsession.selectOne("Member.phoneCheck", dataMap) == 1) {
 			return true;
 		}
 		return false;
@@ -67,7 +67,7 @@ public class memberDAO {
 		dataMap.put("m_hp", member.getHp());
 		System.out.println(member.getHp());
 
-		if ((Integer) sqlsession.selectOne("member.duplicate", dataMap) == 1) {
+		if ((Integer) sqlsession.selectOne("Member.duplicate", dataMap) == 1) {
 			return true;
 		}
 		return false;
@@ -83,7 +83,7 @@ public class memberDAO {
 		dataMap.put("m_ssn2", member.getSsn2());
 		dataMap.put("m_hp", member.getHp());
 
-		return sqlsession.insert("member.join", dataMap);
+		return sqlsession.insert("Member.join", dataMap);
 
 	}
 
@@ -103,7 +103,7 @@ public class memberDAO {
 	public memberDTO naverjoin(memberDTO member) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("m_naveremail", member.getNaveremail());
-		dataMap = sqlsession.selectOne("member.naverlogin", dataMap);
+		dataMap = sqlsession.selectOne("Member.naverlogin", dataMap);
 
 		if (dataMap != null) {
 			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
@@ -116,7 +116,7 @@ public class memberDAO {
 	public memberDTO phonejoin(memberDTO member) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("m_hp", member.getHp());
-		dataMap = sqlsession.selectOne("member.phonelogin", dataMap);
+		dataMap = sqlsession.selectOne("Member.phonelogin", dataMap);
 
 		if (dataMap != null) {
 			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
@@ -126,13 +126,21 @@ public class memberDAO {
 		return null;
 	}
 
-	public int emailupdate(memberDTO member) {
+	public int kakaoupdate(memberDTO member) {
 		HashMap<String, String> dataMap = new HashMap<>();
 
-		dataMap.put("m_naveremail", member.getNaveremail());
 		dataMap.put("m_kakaoemail", member.getKakaoemail());
 		dataMap.put("m_hp", member.getHp());
 
-		return sqlsession.update("member.emailupdate", dataMap);
+		return sqlsession.update("Member.kakaoupdate", dataMap);
+	}
+
+	public int naverupdate(memberDTO member) {
+		HashMap<String, String> dataMap = new HashMap<>();
+
+		dataMap.put("m_naveremail", member.getNaveremail());
+		dataMap.put("m_hp", member.getHp());
+
+		return sqlsession.update("Member.naverupdate", dataMap);
 	}
 }

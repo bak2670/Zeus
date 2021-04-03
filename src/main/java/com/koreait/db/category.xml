@@ -8,8 +8,8 @@
 		select c_middle from tb_category where c_big=#{big_ct}
 	</select>
 
-	<select id="small" parameterType="string" resultType="string">
-		select c_small from tb_category where c_middle=#{mid_ct}
+	<select id="small" parameterType="map" resultType="string">
+		select c_small from tb_category where c_middle=#{mid_ct} and c_big=#{big_ct}
 	</select>
 
 	<select id="cateIdx" parameterType="string" resultType="int">

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,9 +46,13 @@ public class categoryDAO {
 
 	}
 
-	public List<String> selectSmall(String mid_ct) {
+	//
+	public List<String> selectSmall(String mid_ct, String big_ct) {
+		HashMap<String, String> cateMap = new HashMap<>();
+		cateMap.put("mid_ct", mid_ct);
+		cateMap.put("big_ct", big_ct);
 		List<String> smallList = new ArrayList<>();
-		smallList = sqlsession.selectList("category.small", mid_ct);
+		smallList = sqlsession.selectList("category.small", cateMap);
 		return smallList;
 
 	}

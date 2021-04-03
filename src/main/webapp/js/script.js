@@ -1736,9 +1736,9 @@ window.onload = function() {
 
 
 
-function slideSmallCate(cate) {
+function slideSmallCate(cate, bigCate) {
 	let text = cate.innerText;
-
+	
 	// select_mid = "";
 	// select_mid = select_mid + text;
 
@@ -1754,7 +1754,7 @@ function slideSmallCate(cate) {
 		smallCateList[2].removeChild(smallCateList[2].firstChild);
 	}
 
-	xhr.open("GET", "cateMid_ok.jsp?mid=" + text, true);
+	xhr.open("GET", "cateMid_ok.jsp?mid=" + text + "&big=" + bigCate, true);
 	xhr.send();
 
 	xhr.onreadystatechange = function() {
@@ -1829,70 +1829,68 @@ function slideMideCate(cate) {
 			
 			}
 		}
+		const middle = document.getElementById('middle_category');
 		const mid_lists = document.getElementsByClassName('mid_list');
 	
 		const small = document.getElementById('small_category');
 
 		mid_lists[0].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[0]);
+			slideSmallCate(mid_lists[0], text);
 			small.style.display = "block";
 		})
 		mid_lists[1].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[1]);
+			slideSmallCate(mid_lists[1], text);
 			small.style.display = "block";
 		})
 		mid_lists[2].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[2]);
+			slideSmallCate(mid_lists[2], text);
 			small.style.display = "block";
 		})
 		mid_lists[3].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[3]);
+			slideSmallCate(mid_lists[3], text);
 			small.style.display = "block";
 		})
 		mid_lists[4].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[4]);
+			slideSmallCate(mid_lists[4], text);
 			small.style.display = "block";
 		})
 		mid_lists[5].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[5]);
+			slideSmallCate(mid_lists[5], text);
 			small.style.display = "block";
 		})
 		mid_lists[6].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[6]);
+			slideSmallCate(mid_lists[6], text);
 			small.style.display = "block";
 		})
 		mid_lists[7].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[7]);
+			slideSmallCate(mid_lists[7], text);
 			small.style.display = "block";
 		})
 		mid_lists[8].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[8]);
+			slideSmallCate(mid_lists[8], text);
 			small.style.display = "block";
 		})
 		mid_lists[9].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[9]);
+			slideSmallCate(mid_lists[9], text);
 			small.style.display = "block";
 		})
 		mid_lists[10].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[10]);
+			slideSmallCate(mid_lists[10], text);
 			small.style.display = "block";
 		})
 		mid_lists[11].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[11]);
+			slideSmallCate(mid_lists[11], text);
 			small.style.display = "block";
 		})
 		mid_lists[12].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[12]);
+			slideSmallCate(mid_lists[12], text);
 			small.style.display = "block";
 		})
 		mid_lists[13].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[13]);
+			slideSmallCate(mid_lists[13], text);
 			small.style.display = "block";
 		})
-		mid_lists[14].addEventListener('mouseover',function(){
-			slideSmallCate(mid_lists[14]);
-			small.style.display = "block";
-		})
+
 	}
 }
 function selectCategoryName(cate) {
@@ -1921,16 +1919,8 @@ window.onload = function() {
 	const small_top = document.getElementById('small_top');
 
 
-	// DB에서 배열로 가져올 데이터들
-	const mid_arr_0 = ["원피스", "스커트/치마", "자켓", "니트/스웨터", "야상/점퍼/패딩"];
-	const mid_arr_1 = ["여성가방", "스니커즈", "주얼리/액세서리", "여성화", "지갑"];
-
-	const small_arr_00 = ["롱 원피스", "캐주얼 원피스", "미니 원피스", "럭셔리 원피스", "기타 원피스"];
-	const small_arr_01 = ["미니 스커트", "롱 스커트", "기타", "청 스커트", "플리츠 스커트"];
-	const small_arr_10 = ["숄더백", "크로스백", "토트백", "기타", "클러치백"];
-	const small_arr_11 = ["캐주얼화", "기타", "런닝화/워킹화", "농구화"];
-
 	categoryImg.addEventListener('mouseover', function() {
+		console.log('asedf10');
 		mouse_cate = 1;
 		big.style.display = "block";
 	});
@@ -1946,13 +1936,6 @@ window.onload = function() {
 		mouse_big = 0;
 	});
 
-	// 마우스 커서 위치 판단
-	let mouse = -1;
-
-	let bigAdd = 0;
-	let midAdd = 0;
-	let smallAdd = 0;
-
 
 	big_lists[0].addEventListener('mouseover',function(){
 		slideMideCate(big_lists[0]);
@@ -1967,7 +1950,70 @@ window.onload = function() {
 		slideMideCate(big_lists[2]);
 		middle.style.display = "block";
 	})
-
+	big_lists[3].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[3]);
+		middle.style.display = "block";
+	})
+	big_lists[4].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[4]);
+		middle.style.display = "block";
+	})
+	big_lists[5].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[5]);
+		middle.style.display = "block";
+	})
+	big_lists[6].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[6]);
+		middle.style.display = "block";
+	})
+	big_lists[7].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[7]);
+		middle.style.display = "block";
+	})
+	big_lists[8].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[8]);
+		middle.style.display = "block";
+	})
+	big_lists[9].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[9]);
+		middle.style.display = "block";
+	})
+	big_lists[10].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[10]);
+		middle.style.display = "block";
+	})
+	big_lists[11].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[11]);
+		middle.style.display = "block";
+	})
+	big_lists[12].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[12]);
+		middle.style.display = "block";
+	})
+	big_lists[13].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[13]);
+		middle.style.display = "block";
+	})
+	big_lists[14].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[14]);
+		middle.style.display = "block";
+	})
+	big_lists[15].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[15]);
+		middle.style.display = "block";
+	})
+	big_lists[16].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[16]);
+		middle.style.display = "block";
+	})
+	big_lists[17].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[17]);
+		middle.style.display = "block";
+	})
+	big_lists[18].addEventListener('mouseover',function(){
+		slideMideCate(big_lists[18]);
+		middle.style.display = "block";
+	})
 	// 대분류 중 선택 -> 해당 중분류 나타나야 함
 	// 대분류 여성의류 선택
 /*	big_lists[0].addEventListener('mouseover', function() {

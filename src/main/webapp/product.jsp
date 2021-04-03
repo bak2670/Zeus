@@ -846,7 +846,6 @@
 													select_mid = select_mid + text;
 
 													select_element.textContent = select_big + " > " + select_mid;
-													
 													const xhr = new XMLHttpRequest();
 													// 소분류 추가할 클래스 가져오기
 													const smallCateList = document.getElementsByClassName('categorylist')
@@ -855,7 +854,7 @@
 														smallCateList[2].removeChild(smallCateList[2].firstChild);
 										            }
 													
-													xhr.open("GET", "cateMid_ok.jsp?mid="+ text, true);
+													xhr.open("GET", "cateMid_ok.jsp?mid="+ text + "&big="+select_big, true);
 													xhr.send();
 
 													xhr.onreadystatechange = function() {
