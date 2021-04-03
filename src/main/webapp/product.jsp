@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac74ac399318a09b850aa4a15d457f1e&libraries=services"></script>
 	<style>
 	@font-face {
 		font-family: 'GmarketSansMedium';
@@ -989,8 +990,8 @@
 											id="centerAddr"></span>
 									</div>
 								</div>
-									
-									
+
+
 									<div class="place">
                                     <button type="button" class="placebutton" onclick="getLocation()">내 위치</button>
                                     <button type="button" class="placebutton">최근지역</button>

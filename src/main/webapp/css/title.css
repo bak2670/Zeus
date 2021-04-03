@@ -6027,6 +6027,10 @@ background: rgb(249, 249, 249); height: 2000px;}
 .container_text {margin-top:50px; margin-bottom: 20px;}
 .container_text .container_sch{ font-size: 18px; font-weight: bold; margin-right: 170px; }
 .container_scmap { border: 2px solid #ccc; border-radius: 25px; color:black; font-size: 12px; padding: 8px 20px 8px 20px;}
+.container_scmap::before{
+	content : "지역내검색";
+}
+
 
 .container_text .container_sch1{ color:red;}
 .container_text .container_sch2{ color: rgb(136, 136, 136); margin-right: 10px;}

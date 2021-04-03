@@ -74,6 +74,7 @@ create table tb_review(
 	rv_content text not null,
 	rv_regdate datetime default now()
 );
+
 create table tb_block(
 	b_idx bigint not null auto_increment primary key,
 	b_memidx bigint not null,
@@ -150,6 +151,11 @@ create table tb_area (
 	a_area varchar(20) not null,
 	a_memsel char(1) not null DEFAULT 'N'
 );
+select * from tb_product;
+
+select * from tb_product where p_name LIKE '%우유%' and p_deallocation='경기도 부천시 상동';
+select * from tb_category where c_middle='자켓';
+
 
 create table tb_oneToOne(
 	o_idx bigint not null auto_increment primary key,
@@ -436,6 +442,7 @@ insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea)
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("미니언즈", "19", "10","N", "서울특별시 강동구 강동지","서울특별시 강동구 강동지" );
 
 select * from tb_product;
+select * from tb_block;
 insert into tb_area(a_memidx, a_area, a_memsel) values ("1","서울특별시 노원구 공릉동", "Y");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("11","충청남도 아산시 배방읍", "N");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("12","서울특별시 노원구 상계동", "N" );
@@ -457,7 +464,7 @@ insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (5,"�
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (6,"이용방법","안전결제/번개페이","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (7,"광고","광고관리","ㅁㄴㅇㄹ");
 
-
+select * from tb_block;
 -- 카테고리 상품 조인 뷰
 create view PdJoinCate as select p.p_idx, p.p_name, p.p_memidx, c.c_idx, c.c_big, c.c_middle, c.c_small from tb_product as p join tb_category as c on c.c_idx = p.p_category;
 

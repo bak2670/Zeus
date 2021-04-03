@@ -1893,16 +1893,6 @@ function slideMideCate(cate) {
 
 	}
 }
-function selectCategoryName(cate) {
-	let text = cate.innerText;
-	select_small = "";
-	select_small = select_small + text;
-
-	select_element.textContent = select_big + " > " + select_mid + " > " + select_small;
-	
-	const hidden_category = document.getElementById('hidden_category');
-	hidden_category.value = text;
-}
 
 
 window.onload = function() {
@@ -1910,14 +1900,16 @@ window.onload = function() {
 	const big = document.getElementById('big_category');
 	const big_lists = document.getElementsByClassName('big_list');
 
-	const middle_top = document.getElementById('middle_top');
 	const middle = document.getElementById('middle_category');
-	const mid_lists = document.getElementsByClassName('mid_list');
 
 
 	const small = document.getElementById('small_category');
 	const small_top = document.getElementById('small_top');
-
+	small.addEventListener('mouseleave', function(){
+		big.style.display = "none";
+		middle.style.display = "none";
+		small.style.display = "none";
+	});
 
 	categoryImg.addEventListener('mouseover', function() {
 		console.log('asedf10');

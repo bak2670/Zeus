@@ -33,6 +33,20 @@ public class productDAO {
 		return searchList;
 	}
 	
+	// 검색어랑 지역 입력받아서 해당 상품들 리턴하기
+	public List<HashMap<String, String>> searchProductArea(String searchText, String cLocation){
+		
+		HashMap<String, String> conditionMap = new HashMap<>();
+		conditionMap.put("searchText", searchText);
+		conditionMap.put("cLocation", cLocation);
+		
+		List<HashMap<String, String>> LocSearchList = sqlsession.selectList("product.searchProductArea", conditionMap);
+		
+		return LocSearchList;
+		
+		
+	}
+	
 	// 메인 페이지에서 상품 뿌려주기 위한 mainProduct. 입력값이 없다
 	public List<HashMap<String,String>> mainProduct() {
 		List<HashMap<String,String>> searchList = sqlsession.selectList("product.mainProduct");
@@ -98,6 +112,7 @@ public class productDAO {
 		List<HashMap<String, String>> productList = sqlsession.selectList("product.recentProduct", m_idx);
 		return productList;
 	}
+	
 	
 	
 	// 지헌님 상품상세 dao 시작

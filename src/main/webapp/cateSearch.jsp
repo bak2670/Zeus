@@ -8,13 +8,19 @@
 <html lang="en">
 <%
 	request.setCharacterEncoding("UTF-8");
-	
 	String username= null;
 	String idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
 	}
-
+	
+	// 선택한 카테고리
+	String bigCate = request.getParameter("bigCate");
+	String midCate = request.getParameter("midCate");
+	String smallCate = request.getParameter("smallCate");
+%>
+<%--
+<%
 	if(request.getParameter("searchText") == null || request.getParameter("searchText").equals("")){
 %>
 	<script>
@@ -25,10 +31,8 @@
 	}
 	// 검색어 입력한 문자열
 	String searchText = request.getParameter("searchText");
-	String cLocation = request.getParameter("cLocation");
-
 %>
-
+ --%>
 
 <head>
     <meta charset="UTF-8">
@@ -36,14 +40,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>검색결과</title>
     <link rel="stylesheet" href="./css/title.css">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="./js/script.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ac74ac399318a09b850aa4a15d457f1e&libraries=services"></script>
-	
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="./js/script.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <style>
 @font-face {
 	font-family: 'GmarketSansMedium';
@@ -74,91 +76,6 @@ div {
 </head>
 
 <body>
-	<script>
-        function getLocation() {
-            if (navigator.geolocation) { // GPS를 지원하면
-                navigator.geolocation.getCurrentPosition(function (position) {
-                	
-                	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            		
-            		mapOption = {
-            			center : new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude), // 지도의 중심좌표
-            			level : 1
-            		// 지도의 확대 레벨
-            		};
-
-            		// 지도를 생성합니다    
-            		var map = new kakao.maps.Map(mapContainer, mapOption);
-
-            		// 주소-좌표 변환 객체를 생성합니다
-            		var geocoder = new kakao.maps.services.Geocoder();
-
-            		var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-            		infowindow = new kakao.maps.InfoWindow({
-            			zindex : 1
-            		}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-            		// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-            		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-
-
-            		function searchAddrFromCoords(coords, callback) {
-            			// 좌표로 행정동 주소 정보를 요청합니다
-            			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(),
-            					callback);
-            		}
-
-            		function searchDetailAddrFromCoords(coords, callback) {
-            			// 좌표로 법정동 상세 주소 정보를 요청합니다
-            			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-            		}
-
-            		// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-            		function displayCenterInfo(result, status) {
-            			if (status === kakao.maps.services.Status.OK) {
-            				var infoDiv = document.getElementById('centerAddr');
-							
-            				for (var i = 0; i < result.length; i++) {
-            					// 행정동의 region_type 값은 'H' 이므로
-            					if (result[i].region_type === 'H') {
-            						infoDiv.innerHTML = result[i].address_name;
-            						// 주소 출력부분
-            						const locationText = document.getElementsByClassName('container_sch02');
-            						//locationText[0].setAttribute('value',result[i].address_name);
-            						locationText[0].innerText = result[i].address_name;
-            						//console.log(result[i].address_name);
-            						
-            						const cLocation = document.getElementById('cLocation');
-            						cLocation.value = result[i].address_name;
-            						break;
-            					}
-            				}
-            			}
-            		}
-                }, function (error) {
-                    console.error(error);
-                }, {
-                    enableHighAccuracy: false,
-                    maximumAge: 0,
-                    timeout: Infinity
-                });
-            } else {
-                alert('GPS를 지원하지 않습니다');
-            }
-            
-        }
-	</script>
-	<!-- 안보이는 지도 -->
-	<div class="map_wrap" style="display: none">
-		<div id="map"
-			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-		<div class="hAddr">
-			<span class="title">지도중심기준 행정동 주소정보</span> <span id="centerAddr"></span>
-		</div>
-	</div>
-	<script> getLocation(); </script>
-
 	<div class="mainHeader">
 		<div class="topHeader">
 			<div class="headerBox">
@@ -802,58 +719,121 @@ div {
                     
                 </div>
                 
-                <%
-                	// 검색한 텍스트와 현재 지역으로 리스트 가져오기
-                	List<HashMap<String,String>> LocSearchList = productDAO.searchProductArea(searchText, cLocation);
-                	int LocSearchSize = LocSearchList.size();
-                %>
-				<div class="container_text">
-					<div class="container_sc">
-						<form method="post" action="search.jsp">
-							<div class="container_sch">
-								<input type="hidden" name="searchText" value=<%=searchText%>>
-								<input type="hidden" id="cLocation" name="cLocation">
-								<span class="container_sch01"> 우리동네 </span> 
-								<span class="container_sch02"></span> <!-- 현재 위치 지역 (도 시 동) -->
-								<button type="submit" class="container_scmap"></button>
-	
-							</div>
-						</form>
-					</div>
-				</div>
-
-				<div class="container_main">
-				<%
-					for(HashMap product : LocSearchList){
-				%>
+                <div class = "container_text">
+                    <div class="container_sc">
+                        <div class="container_sch">
+                            <span class="container_sch01"> 우리동네 </span>
+                            <span class="container_sch02">역삼1동</span>
+                            <a href="#" class="container_scmap">지역설정</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="container_main">
                     <div class="item_box">
-                        <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>" class="item">
+                        <a href="#" class="item">
                             <div class="item_img">
-	                            <%
-									out.print("<img src='./uploads/"+product.get("p_picture")+"' alt='상품이미지'>"); // 상대경로. 얘만됨
-								%>
-                                <!-- <img src="img/번개장터이미지/댓글.png"> -->
+                                <img src="img/번개장터이미지/댓글.png">
                             </div>
                             <div class="item_text">
                                 <div class = "text_top">
-                                    <%=product.get("p_name")%>
+                                    돋보기
                                 </div>
                                 <div class="text_bottom">
                                     <div class="text_bottom1">
-                                        <%=product.get("p_price")%>
+                                        888,888
                                     </div>
                                     <div class="text_bottom2">
-                                        <%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%>
+                                        시간
                                     </div>
                                 </div>
         
                             </div>
                         </a>
                     </div>
-				<%
-					}
-				%>
-
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/댓글.png">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/댓글.png">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/댓글.png">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item_box">
+                        <a href="#" class="item">
+                            <div class="item_img">
+                                <img src="img/번개장터이미지/댓글.png">
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    돋보기
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        888,888
+                                    </div>
+                                    <div class="text_bottom2">
+                                        시간
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                     
                     
                 </div>
