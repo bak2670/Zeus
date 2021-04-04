@@ -19,7 +19,7 @@
 <jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 <%
-	if(dao.myshop(member) != null){
+	if(dao.myshop(member, idx) != null){
 	         
 %>
 <html lang="en">
@@ -633,13 +633,13 @@ div {
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                    <div class="myshop_name"><%=member.getStore() %></div>
+                    <div class="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                     <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
-                        <div class="myshop_text_top1"><%=member.getStore()%>
+                        <div class="myshop_text_top1"><%=dao.storeName(member.getIdx())%> 
                         
                         <script>
                         function myshop_name_change_ok(){
@@ -685,7 +685,16 @@ div {
                         </li>
                     </ul>
                     <div class="myshop_text_bottom">
-                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
+                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro">
+                    <%
+                    	if(member.getIntro() != null){
+                    %>		
+                    	out.println(member.getIntro());
+                    <%
+                    	}
+                    
+                    %>
+					</div>
                     	<button onclick="Introduction()">소개글 수정</button>
                             <script>
                             function Introduction_ok(){

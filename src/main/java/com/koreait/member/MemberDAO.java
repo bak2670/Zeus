@@ -208,15 +208,23 @@ public class memberDAO {
 		int cnt = sqlsession.selectOne("product.productCnt", Integer.parseInt(m_idx));
 		return cnt;
 	}
+	// 회원번호 입력받아서 상점명 리턴(null이라면 인덱스로 호 붙여주기)
+	public String storeName(int m_idx) {
+		String store = sqlsession.selectOne("product.storeName", m_idx);
+		if(store == null) {
+		
+			store = "상점" + String.valueOf(m_idx)+"호";
+		}
+		
+		return store;
+	}
 	
 	
-	
-	public memberDTO myshop(memberDTO member) {
+	public memberDTO myshop(memberDTO member, String m_idx) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		try {
 			
-			// 입력하는거 다시 
-			dataMap.put("m_idx", "11");
+			dataMap.put("m_idx", m_idx);
 			System.out.print(dataMap);
 			dataMap = sqlsession.selectOne("member.myshop", dataMap);
 		} catch (Exception e) {

@@ -6377,6 +6377,13 @@ font-weight: bold;}
 
 
 /* 승철님 내상점 myshop2 */
+.this_bot {
+    width: 1024px;
+    height: 131px;
+    border: 1px solid rgb(223, 215, 215);
+    font-size: 13px;
+    border-top: none;
+}
 .this_bot textarea{width: 100%; height: 60%; border-style: none; border-bottom: 1px solid rgb(238, 238, 238);}
 .this_bot2 button{border: 1px solid rgb(238, 238, 238);
     height: 32px;

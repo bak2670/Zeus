@@ -18,7 +18,7 @@
 <jsp:useBean id="reviewDTO" class="com.koreait.review.reviewDTO" scope="page"/>
 <jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
 <%
-	if(dao.myshop(member) != null){
+	if(dao.myshop(member, idx) != null){
 		System.out.println("데이터왔어");
 	}else{
 		System.out.println("데이터없어");
@@ -648,13 +648,13 @@ div {
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                    <div class="myshop_name"><%=member.getStore() %></div>
+                    <div class="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                     <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
-                        <div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%>
+                        <div class="myshop_text_top1" id ="myshop_title"><%=dao.storeName(member.getIdx())%> 
                         <script>
                         function myshop_name_change_ok(){
                         	let name_text = document.getElementById("name_text");
@@ -701,7 +701,16 @@ div {
                         </li>
                     </ul>
                     <div class="myshop_text_bottom">
-                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
+                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro">
+                    <%
+                    	if(member.getIntro() != null){
+                    %>		
+                    	out.println(member.getIntro());
+                    <%
+                    	}
+                    
+                    %>
+					</div>
                     
                         <button onclick="Introduction()">소개글 수정</button>
                         <script>
@@ -785,19 +794,15 @@ div {
                     <a href="#" class="reviews_item_img"><img src="./img/번개장터이미지/dog.jpg"></a>
                     <div class="reviews_text">
                         <div class="reviews_text_1">
-                            <a href="#" class="reviews_text_1_1"><%=reviewDAO.myshop_question3(String.valueOf(review.get("rv_memidx")))%>
+                            <a href="#" class="reviews_text_1_1"><%=dao.storeName(Integer.parseInt(String.valueOf(review.get("rv_memidx"))))%>
                                 <div class="reviews_text_1_2">인증 </div>
                             </a>
                         </div>
-                    
-                        <a href="#" class="reviews_btn_box">
-                            <button class="reviews_btn">마가렛호텔<img src="./img/번개장터이미지/우측화살표.png"></button>
-                        </a>
                         <div class="reviews_text_content"><%=review.get("rv_content")%></div>
                         <div class="reviews_text_bottom">
                             <a href="#"><img src="./img/번개장터이미지/신고.png">신고하기</a>
                         </div>
-                        
+                        <%-- <%=reviewDAO.myshop_question3(String.valueOf(review.get("rv_memidx")))%> --%>
                     </div>
                 </div>
 <%

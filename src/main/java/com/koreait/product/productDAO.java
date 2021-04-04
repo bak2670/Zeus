@@ -219,16 +219,12 @@ public class productDAO {
 	public productDTO myshop_product(productDTO product) {
 		 
 		HashMap<String, String> dataMap = new HashMap<>();
-		try{
-			// 임의 인덱스 제거하기
-			dataMap.put("p_idx","1");
-			dataMap = sqlsession.selectOne("member.myshop_product",dataMap);
-		}catch(Exception e) {
-			e.printStackTrace();
-		}System.out.println("---------------");
-
+		
+		// 임의 인덱스 제거하기
+		dataMap.put("p_idx","1");
+		dataMap = sqlsession.selectOne("member.myshop_product",dataMap);
+	
 		if(dataMap != null) {
-			System.out.println("---------------");
 			product.setIdx(Integer.parseInt(String.valueOf(dataMap.get("p_idx"))));
 			product.setName(dataMap.get("p_name"));
 			product.setPrice(dataMap.get("p_price"));
@@ -396,5 +392,4 @@ public class productDAO {
 	 */
 	// 지헌님 상품상세 dao 끝
 	 
-
 }

@@ -18,7 +18,7 @@
 <jsp:useBean id="inquireDTO" class="com.koreait.inquire.inquireDTO" scope="page"/>
 <jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
 <%
-	if(dao.myshop(member) != null){
+	if(dao.myshop(member, idx) != null){
 		System.out.println("데이터왔어");
 	}else{
 		System.out.println("데이터없어");
@@ -41,6 +41,8 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <style>
+    #bar2{border:1px solid black; border-bottom: white;}
+    .this_bot{width: 1030px; color: rgb(153, 148, 148); font-size: 14px; padding-top: 25px;}
 @font-face {
 	font-family: 'GmarketSansMedium';
 	src:
@@ -634,13 +636,13 @@ div {
         <div class="myshop_top"> 
             <div class="myshop_profile">
                 <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                <div class="myshop_name"><%=member.getStore() %></div>
+                <div class="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                 <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                 <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
             </div>
             <div class="myshop_text">
                 <div class="myshop_text_top"> 
-                	<div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%>
+                	<div class="myshop_text_top1" id ="myshop_title"><%=dao.storeName(member.getIdx())%> 
                         <script>
                         function myshop_name_change_ok(){
                         	let name_text = document.getElementById("name_text");
@@ -684,7 +686,16 @@ div {
                     </li>
                 </ul>
                 <div class="myshop_text_bottom">
-                <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
+                <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro">
+                <%
+                	if(member.getIntro() != null){
+                %>		
+                	out.println(member.getIntro());
+                <%
+                	}
+                
+                %>
+				</div>
                     <button onclick="Introduction()">소개글 수정</button>
 					<script>
                     	function Introduction_ok(){
@@ -770,12 +781,12 @@ div {
 			List<HashMap<String, String>> inquireList = inquireDAO.myshop_inquire("1");
 			int inquireCnt = inquireList.size();
 			for(HashMap inquire : inquireList){
-				System.out.println(inquireCnt);
+				//System.out.println(inquireCnt);
 		%>
             <div class="comments_list">
                 <a href="#"><img src="./img/번개장터이미지/흑백로고.png"></a>
                 <div class="comments_text">
-                    <div class="comments_text_top"><%=inquireDAO.myshop_inquire1(String.valueOf(inquire.get("i_memidx")))%></div>
+                    <div class="comments_text_top"><%=dao.storeName(Integer.parseInt(String.valueOf(inquire.get("i_memidx"))))%></div>
                     <div class="comments_text_center"><%=inquire.get("i_content") %> </div>
                     <ul class="comments_text_bottom">
                         <li><img src="./img/번개장터이미지/댓글.png">댓글달기</li>
