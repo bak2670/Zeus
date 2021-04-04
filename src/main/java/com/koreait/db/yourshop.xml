@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!-- 상품 관련 xml -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!--이게 있어야 마이바티스랑 연결됨 -->
+
+
+<mapper namespace="Yourshop">
+
+	<select id="select_storename" parameterType="int" resultType="String">
+		select m_store from tb_member where m_idx=#{m_idx}
+	</select>
+
+	<select id="select_pCount" parameterType="int" resultType="int">
+		select count(p_idx) from tb_product where p_memidx=#{m_idx}
+	</select>
+
+	<select id="select_fCount" parameterType="int" resultType="int">
+		select count(f_idx) from tb_following where f_follow=#{m_idx}
+	</select>
+
+</mapper>

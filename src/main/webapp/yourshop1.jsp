@@ -1,16 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<jsp:useBean id="yourshopdao" class="com.koreait.yourshop.YourshopDAO"/>
+<jsp:useBean id="yourshopdto" class="com.koreait.yourshop.YourshopDTO"/>  <!-- 객체생성 -->
+<jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="followingDAO" class="com.koreait.following.followingDAO"/>
+<jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="storeMember" class="com.koreait.member.memberDTO"/>
 <%
-	// 사용자 번호 1 임의 지정
-	int m_idx = 1;
+	request.setCharacterEncoding("UTF-8");
+	
+	// 로그인 정보
+	String username= null;
+	String m_idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx")); // 
+	}
+	
+	// 상점 번호
+	String mem_idx = request.getParameter("m_idx");
+	storeMember = memberDAO.info(mem_idx);
+	
+	//yourshopdto = yourshopdao.selectData(mem_idx);
+
 %>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>다른사람상점</title>
+    <title>내 상점</title>
     <link rel="stylesheet" href="./css/title.css">
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
@@ -227,15 +248,15 @@
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                    <div class="myshop_name">상점75453212호</div>
+                    <div class="myshop_name"><%=followingDAO.storeName(storeMember.getIdx())%></div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
-                    <div class="yourshop_product"><a href="#" >상품78 | </a><a href="#" >팔로워4</a></div> 
+                    <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=mem_idx%>" >상품 <%=memberDAO.memProductCnt(mem_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=mem_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(mem_idx))%></a></div> 
                     <div class="myshop_bottom yourshop_bottom"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAWNJREFUWAntVrsNwjAUxBSpYAd6FmACtqCjRKxCwzRI1BTULMAK0KJwBzzJEPvFL04kFzzpFP/u3vFsGY9GiVHX9RzYARfg9gHbHJsnyvS/DMkrYA88gFhwjmsqqwMRtPJe65kQOIpIwpdrTSZFs6tBVsUae0syEbdwpHo8c9q2ivbvl5zkMynkmMFxbALja0Cbj1HJIbeX0AwsMzLkcL/Suq+e10Hpb+hOvCFL8+6cm/oEbqXfT21rFUzVGHSdZvCakbnBRUWDITmCkxjUDB6E3OGbw01LhyNTxDWjuoXJci9qOofBsv/qPJNlPhb8/f+cyfKeW77Jf1urALZwDGyBM8AXc25Qg1rU1O5bzdZ7DgIz4AQMFdSetTsJrACRlRvSnPxo5jBXkoQNsAh473uIOZjLFDS4MjHyFptzOZQ9591ntdt4J7YJ0GCnh2SbcGyez6rYXGjcfGhDIkOO/Q3mVvcJF79v57FKjKAAAAAASUVORK5CYII=" width="20" height="14" alt="팔로우 추가" class="follow_img"><a href="#" >팔로우</a></div>
                     <div class="myshop_bottom yourshop_bottom"><a href="#" >번개톡</a></div>
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
-                        <div class="myshop_text_top1">상점75476231호 
+                        <div class="myshop_text_top1 yourshop_text_top1"><%=followingDAO.storeName(storeMember.getIdx())%> 
                             
                             <div class="myshop_text_top2 yourshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
@@ -275,38 +296,32 @@
 
             <div class="contens2">
                 <div class="menubar">
-                    <div class="bar" id="bar1">
-                        <a class="b1" href="./myshop1.jsp">
+                    <div class="yourshopbar" id="bar1">
+                        <a class="b1" href="./yourshop1.jsp?m_idx=<%=mem_idx%>">
                             상품
                             <span class="b1_1">38</span>
                         </a>
                     </div>
-                    <div class="bar">
-                        <a class="b2" href="./myshop2.jsp">
+                    <div class="yourshopbar">
+                        <a class="b2" href="./yourshop2.jsp?m_idx=<%=mem_idx%>">
                             상점문의
                             <span class="b2_1">2</span>
                         </a>
                     </div>
-                    <div class="bar">
-                        <a class="b3" href="./myshop3.jsp">
-                            찜
-                            <span class="b3_1">3</span>
-                        </a>
-                    </div>
-                    <div class="bar">
-                        <a class="b4" href="./myshop4.jsp">
+                    <div class="yourshopbar">
+                        <a class="b4" href="./yourshop4.jsp?m_idx=<%=mem_idx%>">
                             상점후기
                             <span class="b4_1">4</span>
                         </a>
                     </div>
-                    <div class="bar">
-                        <a class="b5" href="./myshop5.jsp">
+                    <div class="yourshopbar">
+                        <a class="b5" href="./yourshop5.jsp?m_idx=<%=mem_idx%>">
                             팔로잉
                             <span class="b5_1">1</span>
                         </a>
                     </div>
-                    <div class="bar">
-                        <a class="b6" href="./myshop6.jsp">
+                    <div class="yourshopbar">
+                        <a class="b6" href="./yourshop6.jsp?m_idx=<%=mem_idx%>">
                             팔로워
                             <span class="b6_1">5</span>
                         </a>

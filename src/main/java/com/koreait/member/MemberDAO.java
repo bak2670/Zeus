@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.koreait.db.SqlMapConfig;
+import com.koreait.product.productDTO;
 
 public class memberDAO {
 
@@ -166,7 +167,41 @@ public class memberDAO {
 		}
 		
 		return 0;
-
+	}
+	
+	// 회원번호 입력 받아서 회원 정보 DTO 리턴
+	public memberDTO info(String m_idx) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap = sqlsession.selectOne("member.meminfo", m_idx);
 		
+		memberDTO member = new memberDTO();
+		
+		// null이면 dataMap에 없음
+		
+		if (dataMap != null) {
+			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
+			member.setUsername(dataMap.get("m_username"));
+			member.setKakaoemail(dataMap.get("m_kakaoemail"));
+			member.setNaveremail(dataMap.get("m_naveremail"));
+			member.setHp(dataMap.get("m_hp"));
+			member.setSsn1(dataMap.get("m_ssn1"));
+			member.setSsn2(dataMap.get("m_ssn2"));
+			member.setStore(dataMap.get("m_store"));
+			member.setIntro(dataMap.get("m_intro"));
+			
+			return member;
+		}
+		return null;
+	}
+	
+	// 회원번호 입력받아서 해당 회원이 올린 상품 개수 리턴
+	public int memProductCnt(String m_idx) {
+		int cnt = sqlsession.selectOne("product.productCnt", Integer.parseInt(m_idx));
+		return cnt;
+	}
+	// 회원번호 입력받아서 해당 회원의 팔로워 수 리턴
+	public int memFollowerCnt(String m_idx) {
+		int cnt = sqlsession.selectOne("product.productCnt", Integer.parseInt(m_idx));
+		return cnt;
 	}
 }

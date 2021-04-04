@@ -384,7 +384,7 @@ $(document).ready(function() {
 });
 
 
-// 신고하기 모달창
+// 신고하기 모달창 -> 안뜸
 
 $(document).ready(function() {
 

@@ -39,12 +39,12 @@
 	<!-- 민우님 로그인 끝 -->
 
 	<!-- 누구꺼지 -->
-	<select id="meminfo" parameterType="map" resultType="map">
-		select *
-		from tb_member where m_idx=#{m_idx}
+	<select id="meminfo" parameterType="string" resultType="map">
+		select * from tb_member where m_idx=#{m_idx}
 	</select>
 	
 	<select id="zzimString" parameterType="string" resultType="string">
 		select m_zzim from tb_member where m_idx=#{m_idx}
-	</select>	
+	</select>
+	
 </mapper>
