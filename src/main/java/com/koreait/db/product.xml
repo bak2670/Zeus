@@ -73,6 +73,9 @@
 		update tb_member set m_zzim = #{zzimStr} where m_idx=#{m_idx}
 	</update>
 	
+	<select id="zzimCnt" parameterType="int" resultType="int">
+		select p_zzim from tb_product where p_idx = #{p_idx}
+	</select>
 	
 	
 </mapper> 

@@ -143,4 +143,30 @@ public class memberDAO {
 
 		return sqlsession.update("member.naverupdate", dataMap);
 	}
+	
+	
+	// 10이 들어있는데 1이 포함된다고 판단되서 갈아엎어야함
+	public int zzimYN(int p_idx, String m_idx) {
+		
+		// m_idx가 찜한 리스트 스트링으로 받아오기
+		String zzimStr = sqlsession.selectOne("member.zzimString",m_idx);
+		
+		System.out.println(zzimStr);
+		
+		String[] zzimArr = zzimStr.split(" ");
+
+		if(zzimStr != null) {
+			for(String str : zzimArr) {
+				if(str.equals(String.valueOf(p_idx))) {
+					return 1;
+				}
+				
+			}
+			return 0;
+		}
+		
+		return 0;
+
+		
+	}
 }

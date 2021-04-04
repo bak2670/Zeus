@@ -8,16 +8,25 @@
 <jsp:useBean id="pDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="pDAO" class="com.koreait.product.productDAO"/>
 <%
-	String p_idx = request.getParameter("p_idx");
 
+	String p_idx = request.getParameter("p_idx");
+	String username= null;
+	String m_idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
+	}
 	// 찜 +1
 	
-	// 회원 번호는 임의 지정
-	int m_idx = 1;	
+	if(m_idx == null){
+	%>
+	<script>
+		alert('로그인이 필요한 서비스입니다.')
+	</script>
+	<%
+	}else {
+		out.println(pDAO.zzimDown(Integer.parseInt(p_idx), Integer.parseInt(m_idx)));
 	
-	if(pDAO.zzimDown(Integer.parseInt(p_idx), m_idx) == 1){
-		
-	}else{
-		
 	}
+
 %>

@@ -43,4 +43,8 @@
 		select *
 		from tb_member where m_idx=#{m_idx}
 	</select>
+	
+	<select id="zzimString" parameterType="string" resultType="string">
+		select m_zzim from tb_member where m_idx=#{m_idx}
+	</select>	
 </mapper>

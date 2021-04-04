@@ -152,12 +152,13 @@ create table tb_area (
 	a_memsel char(1) not null DEFAULT 'N'
 );
 select * from tb_product;
-
+select * from tb_category;
 select * from tb_product where p_name LIKE '%우유%' and p_deallocation='경기도 부천시 상동';
 select * from tb_category where c_middle='자켓';
 select * from tb_following;
 select f_follow from tb_following where f_memidx=1;
-
+select * from tb_following where f_follow=1;
+select * from tb_member;
 create table tb_oneToOne(
 	o_idx bigint not null auto_increment primary key,
     o_memidx bigint not null,

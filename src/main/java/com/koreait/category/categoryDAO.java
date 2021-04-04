@@ -69,7 +69,7 @@ public class categoryDAO {
 		cateMap.put("mid", mid);
 		cateMap.put("small", small);
 		int cateIdx = sqlsession.selectOne("category.searchCateIdx",cateMap);
-		System.out.println(cateIdx);
+		//System.out.println(cateIdx);
 		return cateIdx;
 	}
 

@@ -161,36 +161,45 @@ public class productDAO {
 	}
 	
 	
-	public void zzimUp(int p_idx, int m_idx) {
+	public int zzimUp(int p_idx, int m_idx) {
 		int zzimOk = sqlsession.update("product.productZzimUp", p_idx);
 		
+		// 현재 유저의 찜 리스트를 받아와야함
 		String zzim = sqlsession.selectOne("product.selectZzim",m_idx);
 
+		System.out.println("before zzim : " + zzim);
+		
 		// m_zzim이 null인 경우에도 string이 null로 받아와진다
 
 		if(zzim == null) {
 			zzim = (String.valueOf(p_idx)) + " "; 
 		}else {
-		
 			zzim = zzim + (String.valueOf(p_idx)) + " "; 
 		}
+		System.out.println("after zzim : " + zzim);
+		
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("zzimStr", zzim);
 		dataMap.put("m_idx", String.valueOf(m_idx));
-		System.out.println(dataMap);
-		int upZzimOk = sqlsession.update("product.updateZzim",dataMap);
+		//System.out.println(dataMap);
+		sqlsession.update("product.updateZzim",dataMap);
+		
+		return sqlsession.selectOne("product.zzimCnt", p_idx);
 		
 	}
 	
 	public int zzimDown(int p_idx, int m_idx) {
 		int zzimOk = sqlsession.update("product.productZzimDown", p_idx);
-		 
+		
+		// 현재 유저의 찜 리스트를 받아와야함
 		String zzim = sqlsession.selectOne("product.selectZzim",m_idx);
 		
 		String target = p_idx + " ";
 		// zzim에서 p_idx를 지워야함
+		System.out.println("before : " + zzim);
 		zzim = zzim.replace(target, "");
-		System.out.println(zzim);
+		System.out.println("after : " + zzim);
+		//System.out.println(zzim);
 		if(zzim.equals("")) {
 			zzim = null;
 		}
@@ -200,9 +209,10 @@ public class productDAO {
 		dataMap.put("m_idx", String.valueOf(m_idx));
 		System.out.println(dataMap);
 		
-		int upZzimOk = sqlsession.update("product.updateZzim",dataMap);
+		sqlsession.update("product.updateZzim",dataMap);
 		
-		return upZzimOk;
+		return sqlsession.selectOne("product.zzimCnt", p_idx);
+		
 	}
 /*	public reviewDTO rev(reviewDTO review) {
 		HashMap<String, String> dataMap = new HashMap<>();

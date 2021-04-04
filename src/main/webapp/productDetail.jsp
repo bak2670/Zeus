@@ -8,6 +8,14 @@
 <%@ page import="com.koreait.product.productDTO"%>
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	String username= null;
+	String m_idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
+	}
+	
 	if(request.getParameter("p_idx") == null || request.getParameter("p_idx").equals("")){
 %>
 	<script>
@@ -19,6 +27,7 @@
 %>
 <%-- <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/> --%>
 <jsp:useBean id="pDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <%
 	String p_idx = request.getParameter("p_idx");
 	productDTO product = new productDTO();
@@ -472,47 +481,107 @@
 	                        
 	                        <!-- 찜 스크립트 -->
 	                        <script>
+								function zzimY(){
+									$(".zzimButton1").hide()
+									$(".zzimButton2").show()
+								}
+								function zzimN(){
+									$(".zzimButton2").hide()
+									$(".zzimButton1").show()
+								}
 								function up(){
-									const httpRequest = new XMLHttpRequest();
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'zzim_up.jsp?p_idx=<%=product.getIdx()%>', true);
+									xhr.send();
 									
-									httpRequest.open('GET', 'zzim_up.jsp?p_idx=<%=product.getIdx()%>', true);
-									httpRequest.send();
 									
-									
-									httpRequest.onreadystatechange = function(){
-										if(httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200){
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
 											//alert('좋아요!');
-											document.getElementById('zzim').innerHTML = httpRequest.responseText;	
+											//document.getElementById('zzim').innerHTML = httpRequest.responseText;	
+											let zzimCnt = xhr.responseText;
+											console.log(zzimCnt);
+											document.getElementById('zzim').innerHTML = zzimCnt;
 										}
 									}
 								}
 		                        
 								function down(){
-									const httpRequest = new XMLHttpRequest();
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'zzim_down.jsp?p_idx=<%=product.getIdx()%>', true);
+									xhr.send();
 									
-									httpRequest.open('GET', 'zzim_down.jsp?p_idx=<%=product.getIdx()%>', true);
-									httpRequest.send();
 									
-									
-									httpRequest.onreadystatechange = function(){
-										if(httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200){
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											let zzimCnt = xhr.responseText;
+											console.log(zzimCnt);
 											//alert('좋아요!');
-											document.getElementById('zzim').innerHTML = httpRequest.responseText;	
+											document.getElementById('zzim').innerHTML = zzimCnt;	
 										}
 									}
 									
 								}
+
 							</script> 
+	                      
+	                    <%
+	                        // 해당 상품을 찜 했는지 안했는지 판단하기
+	                        int zzimYN = memberDAO.zzimYN(product.getIdx(), m_idx);
+	                    %>
+	                    	<div class="zzimContainer">
+	                            <div class="zzimBox">
+ 	                    <%
+	                        if(zzimYN == 1){
+	                        	// 현재 사용자가 해당 상품 찜한 상태
+	                        	System.out.println("찜o");
+						%>
+	                                <button class="zzimButton1" style="display: none;" onclick="up()">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
+	                                        width="16" height="16" alt="찜 아이콘"> 
+	                                    <span>찜</span>
+	                                    <span id="zzim"><%=product.getZzim()%></span>
+	                                </button>	  
+	                                <button class="zzimButton2" onclick="down()">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
+	                                        width="16" height="16" class="yesC" alt="찜 아이콘"> <span>찜</span><span id="zzim"><%=product.getZzim()%></span>
+	                                </button>
+	                                <div class="zzimNo">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo="
+	                                        width="14" height="14" alt="찜 아이콘"> <span class="zzimNoTxt"></span> 되었습니다
+	                                </div>                      
+	                    <%
+	                    	}else{
+	                        	// 현재 사용자가 해당 상품 찜하지 않은 상태
+	                        	System.out.println("찜x");
+						%>
+	                                <button class="zzimButton1" onclick="up()">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
+	                                        width="16" height="16" alt="찜 아이콘"> 
+	                                    <span>찜</span>
+	                                    <span id="zzim"><%=product.getZzim()%></span>
+	                                </button>	  
+	                                <button class="zzimButton2" style="display: none;" onclick="down()">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
+	                                        width="16" height="16" class="yesC" alt="찜 아이콘"> <span>찜</span><span id="zzim"><%=product.getZzim()%></span>
+	                                </button>
+	                                <div class="zzimNo">
+	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo="
+	                                        width="14" height="14" alt="찜 아이콘"> <span class="zzimNoTxt"></span> 되었습니다
+	                                </div>
+						
+						<%
+	                        }
+	                    %>
 	                        
 	                        
-	                        
-	                        <div class="zzimContainer">
+<%--  	                        <div class="zzimContainer">
 	                            <div class="zzimBox">
 	                                <button class="zzimButton1"  id="zzim" onclick="up()">
 	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
 	                                        width="16" height="16" alt="찜 아이콘"> 
 	                                    <span>찜</span>
-	                                    <span><%=product.getZzim()%></span>
+	                                    <span id=""><%=product.getZzim()%></span>
 	                                </button>
 	
 	                                <button class="zzimButton2" style="display: none;" id="zzim" onclick="down()">
@@ -522,11 +591,13 @@
 	                                <div class="zzimNo">
 	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo="
 	                                        width="14" height="14" alt="찜 아이콘"> <span class="zzimNoTxt"></span> 되었습니다
-	                                </div>
+	                                </div> --%>
 	                            </div>
 	                            <button class="callButton">연락하기</button>
 	                            <button class="buyButton">바로구매</button>
 	                        </div>
+	                        
+	                        
 	                        <div class="rpModal"></div>
 	                        <div class="reBox1">
 	                            <div class="reBox2">

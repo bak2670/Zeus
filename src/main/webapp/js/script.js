@@ -743,21 +743,23 @@ $(document).ready(function() {
 
 
 // 찜 클릭 시 배경
-$(document).ready(function() {
-	$(".zzimButton1").click(function() {
-		$(".zzimButton1").hide()
-		$(".zzimButton2").show()
-		$(".zzimNo").fadeIn()
-		$(".zzimNoTxt").show().html("상품이 찜")
-		$(".zzimNo").fadeOut(2000)
-	})
-	$(".zzimButton2").click(function() {
-		$(".zzimButton2").hide()
-		$(".zzimButton1").show()
-		$(".zzimNo").fadeIn()
-		$(".zzimNoTxt").show().html("찜이 해제")
-		$(".zzimNo").fadeOut(2000)
-	})
+
+// 스크립트 올라가는 코드
+
+$(document).on('click', '.zzimButton1', function() {
+	$(".zzimButton1").hide()
+	$(".zzimButton2").show()
+	$(".zzimNo").fadeIn()
+	$(".zzimNoTxt").show().html("상품이 찜")
+	$(".zzimNo").fadeOut(2000)
+});
+
+$(document).on('click', '.zzimButton2', function() {
+	$(".zzimButton2").hide()
+	$(".zzimButton1").show()
+	$(".zzimNo").fadeIn()
+	$(".zzimNoTxt").show().html("찜이 해제")
+	$(".zzimNo").fadeOut(2000)
 });
 
 
