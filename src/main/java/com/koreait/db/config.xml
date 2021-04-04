@@ -23,7 +23,8 @@
 		<mapper resource="com/koreait/db/member.xml" />
 		<mapper resource="com/koreait/db/follow.xml" />
 		<mapper resource="com/koreait/db/yourshop.xml" />
-<!--  		<mapper resource="com.koreait/db/inquire.xml" />
-		<mapper resource="com.koreait/db/review.xml" /> -->
+  		<!--<mapper resource="com.koreait/db/review.xml" />
+
+	   <mapper resource="com.koreait/db/inquire.xml" /> -->
 	</mappers>
 </configuration>

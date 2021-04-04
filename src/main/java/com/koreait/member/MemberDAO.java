@@ -3,13 +3,14 @@ package com.koreait.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.koreait.db.SqlMapConfig;
-import com.koreait.product.productDTO;
 
 public class memberDAO {
 
@@ -18,6 +19,9 @@ public class memberDAO {
 	String sql = "";
 	ResultSet rs;
 
+	List<memberDTO> memberList = new ArrayList<>();
+	List<memberDTO> memberList1 = new ArrayList<>();
+	
 	SqlSessionFactory ssf = SqlMapConfig.getSqlMapInstance();
 	SqlSession sqlsession;
 
@@ -204,4 +208,103 @@ public class memberDAO {
 		int cnt = sqlsession.selectOne("product.productCnt", Integer.parseInt(m_idx));
 		return cnt;
 	}
+	
+	
+	
+	public memberDTO myshop(memberDTO member) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		try {
+			
+			// 입력하는거 다시 
+			dataMap.put("m_idx", "11");
+			System.out.print(dataMap);
+			dataMap = sqlsession.selectOne("member.myshop", dataMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (dataMap != null) {
+			member.setIdx(Integer.parseInt(String.valueOf(dataMap.get("m_idx"))));
+			member.setUsername(dataMap.get("m_name"));
+			member.setKakaoemail(dataMap.get("m_kakaoemail"));
+			member.setNaveremail(dataMap.get("m_naveremail"));
+			member.setHp(dataMap.get("m_hp"));
+			member.setSsn1(dataMap.get("m_ss1"));
+			member.setSsn2(dataMap.get("m_ssn2"));
+			member.setStore(dataMap.get("m_store"));
+			member.setJoindate(String.valueOf(dataMap.get("m_joindate")));
+			member.setLastlogin(String.valueOf(dataMap.get("m_lastlogin")));
+			member.setIntro(dataMap.get("m_intro"));
+			member.setProfilepath(dataMap.get("m_profilepath"));
+			member.setProfile(dataMap.get("m_profile"));
+			member.setZzim(dataMap.get("m_zzim"));
+			return member;
+		}
+		return null;
+	}
+
+	public List<memberDTO> getMemberList() {
+
+		memberList = sqlsession.selectList("member.update_myshop");
+
+		return memberList;
+	}
+
+	// 받아온 데이터로 update 시키고 return 해주자
+	public int member_edit(memberDTO member) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("m_idx", String.valueOf(member.getIdx()));
+		dataMap.put("m_username", member.getUsername());
+		dataMap.put("m_kakaoemail", member.getKakaoemail());
+		dataMap.put("m_naveremail", member.getNaveremail());
+		dataMap.put("m_hp", member.getHp());
+		dataMap.put("m_ssn1", member.getSsn1());
+		dataMap.put("m_ssn2", member.getSsn2());
+		dataMap.put("m_store", member.getStore());
+		dataMap.put("m_joindate", String.valueOf(member.getJoindate()));
+		dataMap.put("m_lastlogin", String.valueOf(member.getLastlogin()));
+		dataMap.put("m_intro", (member.getIntro()));
+		dataMap.put("m_profilepath", member.getProfilepath());
+		dataMap.put("m_profile", (member.getProfile()));
+		dataMap.put("m_zzim", (member.getZzim()));
+		return sqlsession.update("member.update_myshop", dataMap);
+	}
+
+	public List<memberDTO> getMemberList1() {
+
+		memberList1 = sqlsession.selectList("member.update_intro_myshop");
+
+		return memberList1;
+	}
+
+	// 받아온 데이터로 update 시키고 return 해주자
+	public int member_edit1(memberDTO member1) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("m_idx", String.valueOf(member1.getIdx()));
+		dataMap.put("m_username", member1.getUsername());
+		dataMap.put("m_kakaoemail", member1.getKakaoemail());
+		dataMap.put("m_naveremail", member1.getNaveremail());
+		dataMap.put("m_hp", member1.getHp());
+		dataMap.put("m_ssn1", member1.getSsn1());
+		dataMap.put("m_ssn2", member1.getSsn2());
+		dataMap.put("m_store", member1.getStore());
+		dataMap.put("m_joindate", String.valueOf(member1.getJoindate()));
+		dataMap.put("m_lastlogin", String.valueOf(member1.getLastlogin()));
+		dataMap.put("m_intro", (member1.getIntro()));
+		dataMap.put("m_profilepath", member1.getProfilepath());
+		dataMap.put("m_profile", (member1.getProfile()));
+		dataMap.put("m_zzim", (member1.getZzim()));
+		return sqlsession.update("member.update_intro_myshop", dataMap);
+	}
+
+	// 데이터를 삭제시켜주자
+	public int del(memberDTO member) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("m_idx", String.valueOf(member.getIdx()));
+
+		return sqlsession.delete("member.update_myshop", dataMap);
+	}
+	
+	
+	
 }

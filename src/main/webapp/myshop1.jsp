@@ -7,11 +7,32 @@
 	String idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
+		idx = String.valueOf(session.getAttribute("idx"));
 	}
 %>
 <!DOCTYPE html>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<%
+	if(dao.myshop(member) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+                 
+	if(productDAO.myshop_product(productDTO) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+%>
+<%
+	//상품갯수가져오는 변수
+	List<HashMap<String, String>> productList1 = productDAO.mainProduct();
+	int productCnt1 = productList1.size();
+%>
 <html lang="en">
 
 <head>
@@ -616,24 +637,40 @@ div {
 					<%
 				}
 					%>
-        <div class="myShopContainer">
+        <div class="myShopContainer"><!-- 승철님이랑 여기 좀 다름 -->
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                    <div class="myshop_name">상점75453212호</div>
+                    <div class="myshop_name"><%=member.getStore() %></div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                     <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
-                        <div class="myshop_text_top1">상점75476231호 
+                        <div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%> 
+                        <script>
+                        function myshop_name_change_ok(){
+                        	let name_text = document.getElementById("name_text");
+                        	let name_value = name_text.value;
+                        		const xhr = new XMLHttpRequest();
+                        		xhr.open("GET","myshop_ok.jsp?idx=11&name_value="+name_value, true);
+                        		xhr.send();
+                        		xhr.onreadystatechange= function(){
+                    				if(xhr.readyState==XMLHttpRequest.DONE && xhr.status == 200){
+                    					document.getElementById("myshop_title").textContent = xhr.responseText;
+                    					document.getElementById("myshop_name").textContent = xhr.responseText;
+                    					location.reload();
+                    				}
+                    			}
+                        	}
+                        </script>
                             <button id="myshop_name_change" onclick="myshop_name_change();">상점명수정</button>
                             <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
                         
                         <div class="myshop_text_top1_click">
                             <input type="text" value="상점이름" id="name_text">
-                            <button type="button"onclick="myshop_name_change_ok()"; >확인</button>
+                            <button type="button"onclick="myshop_name_change_ok()" >확인</button>
                             <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
                         
@@ -641,7 +678,7 @@ div {
                     </div>
                     <ul class="myshop_text_center">
                         <li class="myshop_text_center1">
-                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10)%>
                         </li>
                         <li class="myshop_text_center2">
                             <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -654,10 +691,27 @@ div {
                         </li>
                     </ul>
                     <div class="myshop_text_bottom">
+                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
                         <button onclick="Introduction()">소개글 수정</button>
+                        <script>
+                            function Introduction_ok(){
+                    		let myshop_intro_text =  document.getElementById("myshop_intro_text");
+                    		let intro_value = myshop_intro_text.value;
+                    		const xhr1 = new XMLHttpRequest();
+                    		xhr1.open("GET","myshop_intro_ok.jsp?idx=11&intro_value="+intro_value, true);
+                    		xhr1.send();
+                    		xhr1.onreadystatechange= function(){
+                				if(xhr1.readyState==XMLHttpRequest.DONE && xhr1.status == 200){
+                					document.getElementById("myshop_text_bottom_intro").textContent = xhr1.responseText;
+                					location.reload();
+                				}
+                			}
+                    	}
+                    
+                    </script>
                     </div>
                     <div class="myshop_text_bottom_click">
-                        <textarea></textarea>
+                        <textarea id="myshop_intro_text"></textarea>
                         <button onclick="Introduction_ok()">확인</button>
                     </div>
                 </div>
@@ -669,7 +723,7 @@ div {
                     <div class="bar" id="bar1">
                         <a class="b1" href="./myshop1.jsp">
                             상품
-                            <span class="b1_1">38</span>
+                            <span class="b1_1"><%=productCnt1 %></span>
                         </a>
                     </div>
                     <div class="bar">
@@ -681,7 +735,7 @@ div {
                     <div class="bar">
                         <a class="b3" href="./myshop3.jsp">
                             찜
-                            <span class="b3_1">3</span>
+                            <span class="b3_1"><%=member.getZzim() %></span>
                         </a>
                     </div>
                     <div class="bar">
@@ -705,7 +759,7 @@ div {
                 </div>
                 <div class="menubar2">
                     <div class="mn1">
-                        상품<span class="mn_1">38</span>
+                        상품<span class="mn_1"><%=productCnt1 %></span>
                     </div>
                     <div class="mn2">
                         <select>
@@ -723,7 +777,7 @@ div {
                 <div class="menubar3">
                     <div class="left">
                         <div class="left_cnt">전체</div>
-                        <div class="cnt">38개</div>
+                        <div class="cnt"><%=productCnt1 %>개</div>
                     </div>
                     <div class="right">
                         <a class="new" href="#">
@@ -741,257 +795,41 @@ div {
                     </div>
                 </div>
                     <!--상품나열-->
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="item_box">
-                        <a href="#" class="item">
-                            <div class="item_img">
-                                <img src="img/번개장터이미지/dog.jpg">
-                            </div>
-                            <div class="item_text">
-                                <div class = "text_top">
-                                    돋보기
-                                </div>
-                                <div class="text_bottom">
-                                    <div class="text_bottom1">
-                                        888,888
-                                    </div>
-                                    <div class="text_bottom2">
-                                        시간
-                                    </div>
-                                </div>
-        
-                            </div>
-                            <div class="location_box">
-                                <img src="img/번개장터이미지/위치.png"> <span>주소지</span>
-                            </div>
-                        </a>
-                    </div>
-
                     
+                    <!-- 상품 가져와서 보여주기 -> 순서는 일단 인덱스 순서 -->
+				<%
+					List<HashMap<String, String>> productList = productDAO.mainProduct();
+					int productCnt = productList.size();
+					for(HashMap product : productList){
+						System.out.println(productCnt);
+				%>
+			
+                    <div class="item_box">
+                        <a href="productDetail.jsp?p_idx=<%=product.get("p_idx")%>" class="item">
+                            <div class="item_img">
+							<%
+								out.print("<img src='./uploads/" + product.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
+							%>
+                            </div>
+                            <div class="item_text">
+                                <div class = "text_top">
+                                    <%=product.get("p_name")%>
+                                </div>
+                                <div class="text_bottom">
+                                    <div class="text_bottom1">
+                                        <%=product.get("p_price")%>
+                                    </div>
+                                    <div class="text_bottom2">
+                                        <%=(String.valueOf(product.get("p_regdate"))).substring(0,10)%>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </a>
+                    </div>
+				<%
+					}
+				%>
                     
             </div>
         </div>

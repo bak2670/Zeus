@@ -3,13 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="follow">
-	<select id="followingList" parameterType="string" resultType="string">
-		select f_follow from tb_following where f_memidx=#{f_memidx}
+	<select id="followingList" parameterType="string"
+		resultType="string">
+		select f_follow from tb_following where
+		f_memidx=#{f_memidx}
 	</select>
-	
-	<select id="followingInfo" parameterType="string" resultType="map">
+
+	<select id="followingInfo" parameterType="string"
+		resultType="map">
 		select * from tb_member where m_idx = #{m_idx}
 	</select>
-	
-	
+
+ 
+	<!-- 승철님 내상점 -->
+<!--	<select id="followingcnt" parameterType="String"
+		resultType="int">select count(f_follow) from tb_following where
+		f_memidx=#{idx}
+	</select>
+
+	<select id="followcnt" parameterType="String" resultType="int">
+		select count(f_memidx) from tb_following where f_follow=#{idx}
+	</select>
+	<select id="youfollow" parameterType="int" resultType="String">select
+		count(f_memidx) from tb_following where f_follow=#{m_idx}
+	</select>
+
+
+	<select resultType="string" parameterType="string"
+		id="followingList">select f_follow from tb_following where f_memidx=#{f_memidx}
+	</select>
+	<select resultType="map" parameterType="string"
+		id="followingInfo">select * from tb_member where m_idx = #{m_idx} </select>
+
+	<select resultType="string" parameterType="string"
+		id="followList">select f_memidx from tb_following where f_follow=#{f_memidx}
+	</select>
+
+	<select resultType="map" parameterType="string"
+		id="followingphoto">select * from tb_product where p_memidx= #{m_idx} </select>
+
+
+	<select id="productcnt" parameterType="int" resultType="string">select
+		count(p_idx) from tb_product where p_memidx=#{m_idx}
+	</select>
+
+
+	<delete id="followingdel" parameterType="map">
+		delete from tb_following where f_follow=#{m_idx}
+	</delete> -->
 </mapper>

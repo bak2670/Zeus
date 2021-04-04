@@ -47,4 +47,53 @@
 		select m_zzim from tb_member where m_idx=#{m_idx}
 	</select>
 	
+	<!-- 승철님 내상점 -->
+	<select id="myshop" parameterType="map" resultType="map">
+		select * from tb_member where m_idx=#{m_idx}
+	</select>
+	<select id="update_myshop" parameterType="map" resultType="map">
+		update tb_member set m_store=#{m_store} where m_idx=#{m_idx}
+	</select>
+	<select id="update_intro_myshop" parameterType="map" resultType="map">
+		update tb_member set m_intro=#{m_intro} where m_idx=#{m_idx}
+	</select>
+
+	<!-- 내상품 -->
+	<select id="myshop_product" parameterType="map" resultType="map">
+		select * from tb_product where p_idx=#{p_idx}
+	</select>
+
+
+	<!-- 상점후기 -->
+	<select id="myshop_question" parameterType="string" resultType="map">
+		select * from tb_review where rv_idx LIKE CONCAT('%', #{questionText}, '%')
+	</select>
+
+	<select id="myshop_question1" parameterType="string"
+		resultType="map">
+		select * from tb_review where rv_storeidx=#{rv_storeidx}
+	</select>
+
+	<select id="myshop_question3" parameterType="string" resultType="string">
+		select m_store from tb_member where m_idx=#{m_idx}
+	</select>
+
+	<!-- 상점문의 -->
+
+	<select id="myshop_inquire" parameterType="string"
+		resultType="map">
+		select * from tb_inquire where i_storeidx=#{i_storeidx}
+	</select>
+
+	<select id="myshop_inquire2" parameterType="string"
+		resultType="string">
+		select m_store from tb_member where m_idx=#{m_idx}
+	</select>
+
+
+	<insert id="myshop_inquire3" parameterType="map">
+		insert into tb_inquire (i_memidx, i_productidx, i_storeidx, i_content)
+		values (#{i_memidx},#{i_productidx},#{i_storeidx},#{i_content})
+	</insert>
+ 
 </mapper>

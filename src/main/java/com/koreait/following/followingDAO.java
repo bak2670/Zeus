@@ -41,4 +41,56 @@ public class followingDAO {
 		
 		return store;
 	}
+
+	public int followingcnt(String idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>();
+		int followcnt = sqlsession.selectOne("follow.followingcnt",idx);
+		System.out.println(idx);
+		return followcnt;
+	}
+	
+	public int followcnt(String idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>();
+		int followcnt = sqlsession.selectOne("follow.followcnt",idx);
+		System.out.println(idx);
+		return followcnt;
+	}
+	
+	public List<HashMap<String,String>> followingphoto(String m_idx){
+		List<HashMap<String,String>> followingphoto = sqlsession.selectList("follow.followingphoto", m_idx);
+		
+		
+		return followingphoto;
+	}
+	
+	public String productcnt(int m_idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>();
+		String followcnt = sqlsession.selectOne("follow.productcnt",m_idx);
+		
+		return followcnt;
+	}
+	
+	public String youfollow(int m_idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>();
+		String youfollow = sqlsession.selectOne("follow.youfollow",m_idx);
+
+		return youfollow;
+	}
+	
+
+	
+	public int followingdel(int m_idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>(); 
+		dataMap.put("f_follow",m_idx);
+
+		
+		return sqlsession.delete("follow.followingdel", dataMap); 
+	}
+	
+	public List<String> followIdx(String m_idx){
+		List<String> followList = sqlsession.selectList("follow.followList", m_idx);
+		
+		return followList;
+	}
+
 }

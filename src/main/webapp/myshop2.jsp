@@ -7,11 +7,25 @@
 	String idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
+		idx = String.valueOf(session.getAttribute("idx"));
 	}
 %>
 <!DOCTYPE html>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="inquireDTO" class="com.koreait.inquire.inquireDTO" scope="page"/>
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<%
+	if(dao.myshop(member) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+	List<HashMap<String, String>> inquireList1 = inquireDAO.myshop_inquire("1");
+	int inquireCnt1 = inquireList1.size();                
+%>
 <html lang="en">
 
 <head>
@@ -620,13 +634,29 @@ div {
         <div class="myshop_top"> 
             <div class="myshop_profile">
                 <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                <div class="myshop_name">상점75453212호</div>
+                <div class="myshop_name"><%=member.getStore() %></div>
                 <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                 <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
             </div>
             <div class="myshop_text">
                 <div class="myshop_text_top"> 
-                    <div class="myshop_text_top1">상점75476231호 
+                	<div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%>
+                        <script>
+                        function myshop_name_change_ok(){
+                        	let name_text = document.getElementById("name_text");
+                        	let name_value = name_text.value;
+                        		const xhr = new XMLHttpRequest();
+                        		xhr.open("GET","myshop_ok.jsp?idx=11&name_value="+name_value, true);
+                        		xhr.send();
+                        		xhr.onreadystatechange= function(){
+                    				if(xhr.readyState==XMLHttpRequest.DONE && xhr.status == 200){
+                    					document.getElementById("myshop_title").textContent = xhr.responseText;
+                    					document.getElementById("myshop_name").textContent = xhr.responseText;
+                    					location.reload();
+                    				}
+                    			}
+                        	}
+                        </script>
                         <button id="myshop_name_change" onclick="myshop_name_change();">상점명수정</button>
                         <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                     </div>
@@ -641,7 +671,7 @@ div {
                 </div>
                 <ul class="myshop_text_center">
                     <li class="myshop_text_center1">
-                        <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                        <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10) %>
                     </li>
                     <li class="myshop_text_center2">
                         <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -654,10 +684,27 @@ div {
                     </li>
                 </ul>
                 <div class="myshop_text_bottom">
+                <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
                     <button onclick="Introduction()">소개글 수정</button>
-                </div>
+					<script>
+                    	function Introduction_ok(){
+                    		let myshop_intro_text =  document.getElementById("myshop_intro_text");
+                    		let intro_value = myshop_intro_text.value;
+                    		const xhr1 = new XMLHttpRequest();
+                    		xhr1.open("GET","myshop_intro_ok.jsp?idx=11&intro_value="+intro_value, true);
+                    		xhr1.send();
+                    		xhr1.onreadystatechange= function(){
+                				if(xhr1.readyState==XMLHttpRequest.DONE && xhr1.status == 200){
+                					document.getElementById("myshop_text_bottom_intro").textContent = xhr1.responseText;
+                					location.reload();
+                				}
+                			}
+                    	}
+                    
+                    </script>
+				</div>
                 <div class="myshop_text_bottom_click">
-                    <textarea></textarea>
+                    <textarea id="myshop_intro_text"></textarea>
                     <button onclick="Introduction_ok()">확인</button>
                 </div>
             </div>
@@ -675,7 +722,7 @@ div {
                 <div class="bar" id="bar2">
                     <a class="b2" href="./myshop2.jsp">
                         상점문의
-                        <span class="b2_1">2</span>
+                        <span class="b2_1"><%=inquireCnt1 %></span>
                     </a>
                 </div>
                 <div class="bar" id="bar3">
@@ -705,52 +752,42 @@ div {
             </div>
             <div class="menubar2">
                 <div class="mn1">
-                    상점문의<span class="mn_1">0</span>
-                </div>
-            </div>
-            <div class="this_bot">
-                <div class="this_bot1"><span>상품문의 입력</span></div>
-                <div class="this_bot2"><span>0/100</span></div>
-            </div>
-        </div>
-
-        <div class="comments_box">
-            <div class="comments_list">
-                <a href="#"><img src="./img/번개장터이미지/흑백로고.png"></a>
-                <div class="comments_text">
-                    <div class="comments_text_top">상점ID</div>
-                    <div class="comments_text_center">텍스트내용</div>
-                    <ul class="comments_text_bottom">
-                        <li><img src="./img/번개장터이미지/댓글.png">댓글달기</li>
-                        <li><img src="./img/번개장터이미지/신고.png">신고하기</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="comments_list">
-                <a href="#"><img src="./img/번개장터이미지/흑백로고.png"></a>
-                <div class="comments_text">
-                    <div class="comments_text_top">상점ID</div>
-                    <div class="comments_text_center">텍스트내용</div>
-                    <ul class="comments_text_bottom">
-                        <li><img src="./img/번개장터이미지/댓글.png">댓글달기</li>
-                        <li><img src="./img/번개장터이미지/신고.png">신고하기</li>
-                    </ul>
+                    상점문의<span class="mn_1"><%=inquireCnt1 %></span>
                 </div>
             </div>
             
+            <form action="myshop_inquire_ok.jsp">
+                <div class="this_bot">
+                    <textarea id ="myshop2_content"  name="content"></textarea>
+                    <div class="this_bot2"><span id="myshop2_counter">0/100</span> <button><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAgCAYAAAAFQMh/AAAAAXNSR0IArs4c6QAABFdJREFUSA3Nl11MVEcUgPfnIj8B1kRi4AFI9cEiITFGfZXUYNWKxJ9CtBqC0WCMuoEGgfIPBsVsU7MpVdRV0qZpgkZLjU2qrYD6oCTw4A+YoGktTQhiIE1hC7td8Dsb7ua6ruxd2IdOMsy5Z84535wzM/cuRkOYW0tLS8zw8PCR6enpfKPRaCH865mZmRuKolysrKx8qeKMqhCO0WazJUxMTNwBlAF0gJjXkBGNHzN+wHi4pqbme2GFDexwOOIGBwf/JHgccW0pKSm1BQUFkwKRVl9fv4cqnDWZTNbq6urWsIA7OjqUrq6uH4DmwFDI7nRtbW2Zl6j509DQ8JHH42k3m83rzBr9vMS2tjZzT0+PlG9LVFTURrJahvxZZmZmdGdn56/aoCzwd/Qr0a0yaSdClQXa39//HRlm4fvH5ORkc0xMzKdk3kU/Ttan/GOS7RXsc+YNxtnU19fXSuBNERERWfHx8euBucfHx38LAv8PO8u8wAKtq6u7TIBsMthYUVHRW1xcPBoZGbmBhTjngrMVW7F5FfLhAmrkhDoYd3I3s7ib3QTytebm5tiRkZGbKBbHxsZucDqdUtr19NMs9CH6K4zHQgLjLNALOOdKpkAf+IgaQV4iQ0ND7aiW+sE9QG+npaVl6y61QCnvOcY8oJveBxV+YWGhMzU1NRvxLyk75e0Wf9rfsv+5ubkeXRnPQr8h0F7KuxnofQEEa5z6RZz6XvzTgV7nuuWXlpb+I3667jFvm69xzAf6CdB7wYDqfEZGRgnQ3QJNTEzMs1qt/6pzQUtNee04FwDfCvSu6hhsxK+EEp9UoZTfrfWZE8wL4CuMD7Cn2VVVVZ1ax7lkDmAxi5VT7M3UHyq+7wWzYhvzh+g5QO+IsZ6Gn5VMv5wLKnGUQMHItAn9EZxz+IzdDmQTSAf0KJmeCQYV33cyBir7YmVuO9BfAgEC6SjvYaB2PVDxf+s6seITOJfgvAOovH10NfwKMTxL/1FOb6A99Q/kKzWZ1jF5nIO0iz3VDSXTAyw2JKgswpsxH+hdHIg2AoyQ7QDjIAu4zAJu+a9U+wx0P7YX0enOVPX37jHQJBQu+nkCyX3bhq5SNQo0Ut58bC4wFzJU4nlLDWwNcj/lrhIlmXxB0OUiB2rM72X+EtVp17un/nHUPRZwrzpJ0BUEnZJSIqch/8xh65B5dHtYaOtCoBLHJN9Pxg8J9EQUs20ZwQ8CdaDfhywfCAPlzUP+FvGn+WY6G9+gjI2NreaBV7HpqU+pKJ8DSIiOju52u92LXS7XM6C7BcpCFgwVjkJWUmYDXx5fxnwMfL8q7Ha7a2pqygxQoDcWmqmwpAl4LeN4WVnZy/LyckNTU1McoJVkJz9D00dHR9PFkOfepKQkXS8HsQ/WjJzkAYwS6A/IKB1Asjghexie0x+he2GxWOxFRUVDMheOJqd6EV3usMhX2etHjI+Tk5Ofav8FQRfe1tjYuCS8Ef/n0d4Ah7Y0Xn+VgFMAAAAASUVORK5CYII=">등록</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="comments_box">
+        <%
+			List<HashMap<String, String>> inquireList = inquireDAO.myshop_inquire("1");
+			int inquireCnt = inquireList.size();
+			for(HashMap inquire : inquireList){
+				System.out.println(inquireCnt);
+		%>
             <div class="comments_list">
                 <a href="#"><img src="./img/번개장터이미지/흑백로고.png"></a>
                 <div class="comments_text">
-                    <div class="comments_text_top">상점ID</div>
-                    <div class="comments_text_center">텍스트내용</div>
+                    <div class="comments_text_top"><%=inquireDAO.myshop_inquire1(String.valueOf(inquire.get("i_memidx")))%></div>
+                    <div class="comments_text_center"><%=inquire.get("i_content") %> </div>
                     <ul class="comments_text_bottom">
                         <li><img src="./img/번개장터이미지/댓글.png">댓글달기</li>
                         <li><img src="./img/번개장터이미지/신고.png">신고하기</li>
                     </ul>
                 </div>
             </div>
-
+              
+        <%
+			}
+        %>
+            
         </div>
     </div>
 	<!-- 모달창 처리 -->

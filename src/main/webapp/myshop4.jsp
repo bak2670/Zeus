@@ -7,11 +7,25 @@
 	String idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
+		idx = String.valueOf(session.getAttribute("idx"));
 	}
 %>
 <!DOCTYPE html>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="reviewDTO" class="com.koreait.review.reviewDTO" scope="page"/>
+<jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
+<%
+	if(dao.myshop(member) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+	List<HashMap<String, String>> reviewList1 = reviewDAO.myshop_question1("1");
+	int questionCnt1 = reviewList1.size();
+%>
 <html lang="en">
 
 <head>
@@ -634,13 +648,32 @@ div {
             <div class="myshop_top"> 
                 <div class="myshop_profile">
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                    <div class="myshop_name">상점75453212호</div>
+                    <div class="myshop_name"><%=member.getStore() %></div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                     <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
-                        <div class="myshop_text_top1">상점75476231호 
+                        <div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%>
+                        <script>
+                        function myshop_name_change_ok(){
+                        	let name_text = document.getElementById("name_text");
+                        	let name_value = name_text.value;
+                        		const xhr = new XMLHttpRequest();
+                        		xhr.open("GET","myshop_ok.jsp?idx=11&name_value="+name_value, true);
+                        		xhr.send();
+                        		xhr.onreadystatechange= function(){
+                    				if(xhr.readyState==XMLHttpRequest.DONE && xhr.status == 200){
+                    					document.getElementById("myshop_title").textContent = xhr.responseText;
+                    					document.getElementById("myshop_name").textContent = xhr.responseText;
+                    					location.reload();
+                    				}
+                    			}
+                        	}
+                        </script>    
+                            
+                            
+                            
                             <button id="myshop_name_change" onclick="myshop_name_change();">상점명수정</button>
                             <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
@@ -655,7 +688,7 @@ div {
                     </div>
                     <ul class="myshop_text_center">
                         <li class="myshop_text_center1">
-                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10) %>
                         </li>
                         <li class="myshop_text_center2">
                             <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -668,10 +701,28 @@ div {
                         </li>
                     </ul>
                     <div class="myshop_text_bottom">
+                    <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
+                    
                         <button onclick="Introduction()">소개글 수정</button>
+                        <script>
+                            function Introduction_ok(){
+                    		let myshop_intro_text =  document.getElementById("myshop_intro_text");
+                    		let intro_value = myshop_intro_text.value;
+                    		const xhr1 = new XMLHttpRequest();
+                    		xhr1.open("GET","myshop_intro_ok.jsp?idx=11&intro_value="+intro_value, true);
+                    		xhr1.send();
+                    		xhr1.onreadystatechange= function(){
+                				if(xhr1.readyState==XMLHttpRequest.DONE && xhr1.status == 200){
+                					document.getElementById("myshop_text_bottom_intro").textContent = xhr1.responseText;
+                					location.reload();
+                				}
+                			}
+                    	}
+                    
+                    </script>
                     </div>
                     <div class="myshop_text_bottom_click">
-                        <textarea></textarea>
+                        <textarea id="myshop_intro_text"></textarea>
                         <button onclick="Introduction_ok()">확인</button>
                     </div>
                 </div>
@@ -701,7 +752,7 @@ div {
                     <div class="bar" id="bar4">
                         <a class="b4" href="./myshop4.jsp">
                             상점후기
-                            <span class="b4_1">4</span>
+                            <span class="b4_1"><%=questionCnt1%> </span>
                         </a>
                     </div>
                     <div class="bar" id="bar5">
@@ -719,85 +770,40 @@ div {
                 </div>
                 <div class="menubar2">
                     <div class="mn1">
-                        상점후기<span class="mn_1">0</span>
+                        상점후기<span class="mn_1"><%=questionCnt1 %></span>
                     </div>
                 </div>
             </div>
             <div class="reviews_box">
+            <%
+				List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1("1");
+				int questionCnt = reviewList.size();
+				for(HashMap review : reviewList){
+					System.out.println(questionCnt);
+			%>
                 <div class="reviews_item">
                     <a href="#" class="reviews_item_img"><img src="./img/번개장터이미지/dog.jpg"></a>
                     <div class="reviews_text">
                         <div class="reviews_text_1">
-                            <a href="#" class="reviews_text_1_1">상점명
+                            <a href="#" class="reviews_text_1_1"><%=reviewDAO.myshop_question3(String.valueOf(review.get("rv_memidx")))%>
                                 <div class="reviews_text_1_2">인증 </div>
                             </a>
                         </div>
                     
-                        <a href="#" class="reviews_star">
-                            <div class="reviews_star_box">
-                                <img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지">
-                            </div>
-                        </a>
                         <a href="#" class="reviews_btn_box">
                             <button class="reviews_btn">마가렛호텔<img src="./img/번개장터이미지/우측화살표.png"></button>
                         </a>
-                        <div class="reviews_text_content">잘받았네요</div>
+                        <div class="reviews_text_content"><%=review.get("rv_content")%></div>
                         <div class="reviews_text_bottom">
                             <a href="#"><img src="./img/번개장터이미지/신고.png">신고하기</a>
                         </div>
                         
                     </div>
                 </div>
-
-                <div class="reviews_item">
-                    <a href="#" class="reviews_item_img"><img src="./img/번개장터이미지/dog.jpg"></a>
-                    <div class="reviews_text">
-                        <div class="reviews_text_1">
-                            <a href="#" class="reviews_text_1_1">상점명
-                                <div class="reviews_text_1_2">인증 </div>
-                            </a>
-                        </div>
-                    
-                        <a href="#" class="reviews_star">
-                            <div class="reviews_star_box">
-                                <img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지">
-                            </div>
-                        </a>
-                        <a href="#" class="reviews_btn_box">
-                            <button class="reviews_btn">마가렛호텔<img src="./img/번개장터이미지/우측화살표.png"></button>
-                        </a>
-                        <div class="reviews_text_content">잘받았네요</div>
-                        <div class="reviews_text_bottom">
-                            <a href="#"><img src="./img/번개장터이미지/신고.png">신고하기</a>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <div class="reviews_item">
-                    <a href="#" class="reviews_item_img"><img src="./img/번개장터이미지/dog.jpg"></a>
-                    <div class="reviews_text">
-                        <div class="reviews_text_1">
-                            <a href="#" class="reviews_text_1_1">상점명
-                                <div class="reviews_text_1_2">인증 </div>
-                            </a>
-                        </div>
-                    
-                        <a href="#" class="reviews_star">
-                            <div class="reviews_star_box">
-                                <img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지"><img src="./img/번개장터이미지/star.png" width="15" height="14" alt="작은 별점 2점 이미지">
-                            </div>
-                        </a>
-                        <a href="#" class="reviews_btn_box">
-                            <button class="reviews_btn">마가렛호텔<img src="./img/번개장터이미지/우측화살표.png"></button>
-                        </a>
-                        <div class="reviews_text_content">잘받았네요</div>
-                        <div class="reviews_text_bottom">
-                            <a href="#"><img src="./img/번개장터이미지/신고.png">신고하기</a>
-                        </div>
-                        
-                    </div>
-                </div>
+<%
+				}
+%>
+                
             </div>
 
         </div>

@@ -12,6 +12,8 @@
 <!DOCTYPE html>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 <html lang="en">
 
 <head>
@@ -19,39 +21,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 상점</title>
-<link rel="stylesheet" href="./css/title.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="./js/script.js"></script>
-<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
-<style>
-@font-face {
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-div {
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-* {
-	font-family: 'GmarketSansMedium';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-</style>
+	<link rel="stylesheet" href="./css/title.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="./js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	<script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<style>
+    #bar3{border:1px solid black; border-bottom: white;}
+    .this_bot{width: 1030px; color: rgb(153, 148, 148); font-size: 14px; padding-top: 25px;}
+	@font-face {
+		font-family: 'GmarketSansMedium';
+		src:
+			url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+			format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	div {
+		font-family: 'GmarketSansMedium';
+		src:
+			url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+			format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	* {
+		font-family: 'GmarketSansMedium';
+		src:
+			url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+			format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	</style>
 
 </head>
 
@@ -620,13 +624,30 @@ div {
         <div class="myshop_top"> 
             <div class="myshop_profile">
                 <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                <div class="myshop_name">상점75453212호</div>
+                <div class="myshop_name"><%=member.getStore() %></div>
                 <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                 <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
             </div>
             <div class="myshop_text">
                 <div class="myshop_text_top"> 
-                    <div class="myshop_text_top1">상점75476231호 
+                    <div class="myshop_text_top1" id ="myshop_title"><%=member.getStore()%>
+                    
+                    <script>
+                        function myshop_name_change_ok(){
+                        	let name_text = document.getElementById("name_text");
+                        	let name_value = name_text.value;
+                        		const xhr = new XMLHttpRequest();
+                        		xhr.open("GET","myshop_ok.jsp?idx=11&name_value="+name_value, true);
+                        		xhr.send();
+                        		xhr.onreadystatechange= function(){
+                    				if(xhr.readyState==XMLHttpRequest.DONE && xhr.status == 200){
+                    					document.getElementById("myshop_title").textContent = xhr.responseText;
+                    					document.getElementById("myshop_name").textContent = xhr.responseText;
+                    					location.reload();
+                    				}
+                    			}
+                        	}
+                    </script>    
                         <button id="myshop_name_change" onclick="myshop_name_change();">상점명수정</button>
                         <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                     </div>
@@ -641,7 +662,7 @@ div {
                 </div>
                 <ul class="myshop_text_center">
                     <li class="myshop_text_center1">
-                        <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                        <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10) %>
                     </li>
                     <li class="myshop_text_center2">
                         <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -654,10 +675,28 @@ div {
                     </li>
                 </ul>
                 <div class="myshop_text_bottom">
+                <div class="myshop_text_bottom_intro" id="myshop_text_bottom_intro"><%=member.getIntro() %></div>
+                    
                     <button onclick="Introduction()">소개글 수정</button>
+                   	<script>
+                    function Introduction_ok(){
+                   		let myshop_intro_text =  document.getElementById("myshop_intro_text");
+                   		let intro_value = myshop_intro_text.value;
+                   		const xhr1 = new XMLHttpRequest();
+                   		xhr1.open("GET","myshop_intro_ok.jsp?idx=11&intro_value="+intro_value, true);
+                   		xhr1.send();
+                   		xhr1.onreadystatechange= function(){
+               				if(xhr1.readyState==XMLHttpRequest.DONE && xhr1.status == 200){
+               					document.getElementById("myshop_text_bottom_intro").textContent = xhr1.responseText;
+               					location.reload();
+               				}
+               			}
+                   	}
+                    
+                    </script>
                 </div>
                 <div class="myshop_text_bottom_click">
-                    <textarea></textarea>
+                    <textarea id="myshop_intro_text"></textarea>
                     <button onclick="Introduction_ok()">확인</button>
                 </div>
             </div>

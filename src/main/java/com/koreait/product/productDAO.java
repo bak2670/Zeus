@@ -214,6 +214,49 @@ public class productDAO {
 		return sqlsession.selectOne("product.zzimCnt", p_idx);
 		
 	}
+
+	/* 승철님 내상점 */
+	public productDTO myshop_product(productDTO product) {
+		 
+		HashMap<String, String> dataMap = new HashMap<>();
+		try{
+			// 임의 인덱스 제거하기
+			dataMap.put("p_idx","1");
+			dataMap = sqlsession.selectOne("member.myshop_product",dataMap);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}System.out.println("---------------");
+
+		if(dataMap != null) {
+			System.out.println("---------------");
+			product.setIdx(Integer.parseInt(String.valueOf(dataMap.get("p_idx"))));
+			product.setName(dataMap.get("p_name"));
+			product.setPrice(dataMap.get("p_price"));
+			product.setState(dataMap.get("p_state"));
+			product.setDelcharge(dataMap.get("p_delcharge"));
+			product.setDeallocation(dataMap.get("p_deallocation"));
+			product.setRegdate(String.valueOf(dataMap.get("p_regdate")));
+			product.setZzim(Integer.parseInt(String.valueOf(dataMap.get("p_zzim"))));
+			product.setHit(Integer.parseInt(String.valueOf(dataMap.get("p_hit"))));
+			product.setCategory(Integer.parseInt(String.valueOf(dataMap.get("p_category"))));
+			product.setContent(dataMap.get("p_content"));
+			product.setMemidx(Integer.parseInt(String.valueOf(dataMap.get("p_memidx"))));
+			product.setTag(dataMap.get("p_tag"));
+			product.setPicturepath(dataMap.get("p_picturepath"));
+			product.setPicture(dataMap.get("p_picture"));
+			product.setExchange(dataMap.get("p_exchange"));
+			product.setPriceConsult(dataMap.get("p_priceConsult"));
+			product.setSalesStatus(dataMap.get("p_salesStatus"));
+			product.setQuantity(Integer.parseInt(String.valueOf(dataMap.get("p_quantity"))));
+			
+			
+			return product;
+		}
+		return null;
+	}
+	
+	
+	
 /*	public reviewDTO rev(reviewDTO review) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("rv_idx", "5");

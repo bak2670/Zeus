@@ -2200,4 +2200,15 @@ window.onload = function() {
 //     </div>`;
 // }
 
+/*내상점 상품문의 글자수 */
+$(document).ready(function () {
+    $('#myshop2_content').on('keyup', function () {
+        $('#myshop2_counter').html($(this).val().length + "/100");
 
+        if ($(this).val().length > 100) {
+            $(this).val($(this).val().substring(0, 100));
+            $('#myshop2_counter').html("100/100");
+        }
+    });
+    
+});
