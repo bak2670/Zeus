@@ -668,11 +668,11 @@ div {
                     <div class="myshop_text_top"> 
                         <div class="myshop_text_top1" id ="myshop_title"><%=dao.storeName(member.getIdx())%> 
                         <script>
-                        function myshop_name_change_ok(){
+                        function myshop_name_change_ok(idx){
                         	let name_text = document.getElementById("name_text");
                         	let name_value = name_text.value;
                         		const xhr = new XMLHttpRequest();
-                        		xhr.open("GET","myshop_ok.jsp?idx=11&name_value="+name_value, true);
+                        		xhr.open("GET","myshop_ok.jsp?idx="+idx+"&name_value="+name_value, true);
                         		xhr.send();
                         		xhr.onreadystatechange= function(){
                     				if(xhr.readyState==XMLHttpRequest.DONE && xhr.status == 200){
@@ -692,7 +692,7 @@ div {
                         
                         <div class="myshop_text_top1_click">
                             <input type="text" value="상점이름" id="name_text">
-                            <button type="button"onclick="myshop_name_change_ok()"; >확인</button>
+                            <button type="button"onclick="myshop_name_change_ok(<%=idx%>)" >확인</button>
                             <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
                         
@@ -726,11 +726,11 @@ div {
                     
                         <button onclick="Introduction()">소개글 수정</button>
                         <script>
-                            function Introduction_ok(){
+                            function Introduction_ok(idx){
                     		let myshop_intro_text =  document.getElementById("myshop_intro_text");
                     		let intro_value = myshop_intro_text.value;
                     		const xhr1 = new XMLHttpRequest();
-                    		xhr1.open("GET","myshop_intro_ok.jsp?idx=11&intro_value="+intro_value, true);
+                    		xhr1.open("GET","myshop_intro_ok.jsp?idx="+idx+"&intro_value="+intro_value, true);
                     		xhr1.send();
                     		xhr1.onreadystatechange= function(){
                 				if(xhr1.readyState==XMLHttpRequest.DONE && xhr1.status == 200){
@@ -744,7 +744,7 @@ div {
                     </div>
                     <div class="myshop_text_bottom_click">
                         <textarea id="myshop_intro_text"></textarea>
-                        <button onclick="Introduction_ok()">확인</button>
+                        <button onclick="Introduction_ok(<%=idx%>)">확인</button>
                     </div>
                 </div>
         </div>
