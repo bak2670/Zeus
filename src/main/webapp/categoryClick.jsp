@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String username= null;
 	String idx = null;
 	if(session.getAttribute("username") != null){

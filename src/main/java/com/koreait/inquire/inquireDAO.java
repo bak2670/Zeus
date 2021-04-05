@@ -30,7 +30,7 @@ public class inquireDAO {
 	
 	
 	
-	
+	// 상점문의
 	public List<HashMap<String,String>> myshop_inquire(String idx) {
 		List<HashMap<String,String>> inquireList = sqlsession.selectList("member.myshop_inquire", idx);
 	

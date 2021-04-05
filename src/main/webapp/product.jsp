@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	String username= null;
 	String m_idx = null;
 	if(session.getAttribute("username") != null){
@@ -981,7 +983,7 @@
 	                        </li>
 	                        <li class="statemian">
 	                            <div class="statetitle">
-	                                상태
+	                                상태 
 	                                <span>*</span>
 	                            </div>
 	                            <div class="statebox">
@@ -999,7 +1001,7 @@
 	                        </li>
 	                        <li class="changemain">
 	                            <div class="changetitle">
-	                                상태
+	                               	교환 
 	                                <span>*</span>
 	                            </div>
 	                            <div class="changebox">

@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	String username= null;
 	String idx = null;
 	if(session.getAttribute("username") != null){
@@ -17,14 +19,28 @@
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="inquireDTO" class="com.koreait.inquire.inquireDTO" scope="page"/>
 <jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
+<jsp:useBean id="followingDTO" class="com.koreait.following.followingDTO" />
+<jsp:useBean id="followingDAO" class="com.koreait.following.followingDAO"/>
 <%
 	if(dao.myshop(member, idx) != null){
 		System.out.println("데이터왔어");
 	}else{
 		System.out.println("데이터없어");
 	}
-	List<HashMap<String, String>> inquireList1 = inquireDAO.myshop_inquire("1");
-	int inquireCnt1 = inquireList1.size();                
+	List<HashMap<String, String>> inquireList1 = inquireDAO.myshop_inquire(idx);
+	int inquireCnt1 = inquireList1.size();    
+	
+	
+	List<HashMap<String, String>> productList = productDAO.myshop_product(idx);
+	int productCnt = productList.size();
+	
+	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(idx);
+	int questionCnt = reviewList.size();
+	
+	followingDTO.setMemidx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
+	int followingCnt = followingDAO.followingcnt(idx);
+	int followCnt = followingDAO.followcnt(idx);
 %>
 <html lang="en">
 
@@ -32,7 +48,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 상점</title>
+    <title>번개장터</title>
     <link rel="stylesheet" href="./css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="./js/script.js"></script>
@@ -42,7 +58,7 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <style>
     #bar2{border:1px solid black; border-bottom: white;}
-    .this_bot{width: 1030px; color: rgb(153, 148, 148); font-size: 14px; padding-top: 25px;}
+    .this_bot{width: 1030px; color: rgb(153, 148, 148); font-size: 14px; padding: 10px;}
 @font-face {
 	font-family: 'GmarketSansMedium';
 	src:
@@ -690,7 +706,7 @@ div {
                 <%
                 	if(member.getIntro() != null){
                 %>		
-                	out.println(member.getIntro());
+                	<%=member.getIntro() %>
                 <%
                 	}
                 
@@ -727,7 +743,7 @@ div {
                 <div class="bar" id="bar1">
                     <a class="b1" href="./myshop1.jsp">
                         상품
-                        <span class="b1_1">38</span>
+                        <span class="b1_1"><%=productCnt%></span>
                     </a>
                 </div>
                 <div class="bar" id="bar2">
@@ -739,25 +755,25 @@ div {
                 <div class="bar" id="bar3">
                     <a class="b3" href="./myshop3.jsp">
                         찜
-                        <span class="b3_1">3</span>
+                        <span class="b3_1"><%=member.getZzim() %></span>
                     </a>
                 </div>
                 <div class="bar" id="bar4">
                     <a class="b4" href="./myshop4.jsp">
                         상점후기
-                        <span class="b4_1">4</span>
+                        <span class="b4_1"><%=questionCnt%></span>
                     </a>
                 </div>
                 <div class="bar" id="bar5">
                     <a class="b5" href="./myshop5.jsp">
                         팔로잉
-                        <span class="b5_1">1</span>
+                        <span class="b5_1"><%=followingCnt%></span>
                     </a>
                 </div>
                 <div class="bar" id="bar6">
                     <a class="b6" href="./myshop6.jsp">
                         팔로워
-                        <span class="b6_1">5</span>
+                        <span class="b6_1"><%=followCnt%></span>
                     </a>
                 </div>
             </div>
@@ -781,7 +797,6 @@ div {
 			List<HashMap<String, String>> inquireList = inquireDAO.myshop_inquire("1");
 			int inquireCnt = inquireList.size();
 			for(HashMap inquire : inquireList){
-				//System.out.println(inquireCnt);
 		%>
             <div class="comments_list">
                 <a href="#"><img src="./img/번개장터이미지/흑백로고.png"></a>

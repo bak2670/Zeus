@@ -5,6 +5,7 @@
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 
 <% 
+request.setCharacterEncoding("UTF-8");
 String memberIdx = request.getParameter("idx");
 String intro_value = request.getParameter("intro_value");
 

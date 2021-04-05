@@ -5,6 +5,8 @@
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	String username= null;
 	String m_idx = null;
 	if(session.getAttribute("username") != null){

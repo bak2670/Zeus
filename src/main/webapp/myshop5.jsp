@@ -3,6 +3,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+
 	String username= null;
 	String idx = null;
 	if(session.getAttribute("username") != null){
@@ -18,7 +20,24 @@
 <jsp:useBean id="followingDAO" class="com.koreait.following.followingDAO"/>
 <jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
 <%
+
+	List<HashMap<String, String>> productList = productDAO.myshop_product(idx);
+	int productCnt = productList.size();
+	
+	List<HashMap<String, String>> inquireList1 = inquireDAO.myshop_inquire(idx);
+	int inquireCnt1 = inquireList1.size();  
+	
+	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(idx);
+	int questionCnt = reviewList.size();
+	
+	followingDTO.setMemidx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
+	int followingCnt = followingDAO.followingcnt(idx);
+	int followCnt = followingDAO.followcnt(idx);
+	
+	
 	if(dao.myshop(member, idx) != null){
 	         
 %>
@@ -28,7 +47,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 상점</title>
+    <title>번개장터</title>
     <link rel="stylesheet" href="./css/title.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="./js/script.js"></script>
@@ -689,7 +708,7 @@ div {
                     <%
                     	if(member.getIntro() != null){
                     %>		
-                    	out.println(member.getIntro());
+                    	<%=member.getIntro() %>
                     <%
                     	}
                     
@@ -719,24 +738,20 @@ div {
                         <button onclick="Introduction_ok()">확인</button>
                     </div>
                 </div>
-        </div>
-<%
-	followingDTO.setMemidx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
-	int followCnt = followingDAO.followingcnt(idx);
-%>
+        	</div>
 
             <div class="contens2">
                 <div class="menubar">
                     <div class="bar" id="bar1">
                         <a class="b1" href="./myshop1.jsp">
                             상품
-                            <span class="b1_1">38</span>
+                            <span class="b1_1"><%=productCnt%></span>
                         </a>
                     </div>
                     <div class="bar" id="bar2">
                         <a class="b2" href="./myshop2.jsp">
                             상점문의
-                            <span class="b2_1">2</span>
+                            <span class="b2_1"><%=inquireCnt1%></span>
                         </a>
                     </div>
                     <div class="bar" id="bar3">
@@ -748,19 +763,19 @@ div {
                     <div class="bar"  id="bar4">
                         <a class="b4" href="./myshop4.jsp">
                             상점후기
-                            <span class="b4_1">4</span>
+                            <span class="b4_1"><%=questionCnt%></span>
                         </a>
                     </div>
                     <div class="bar" id="bar5">
                         <a class="b5" href="./myshop5.jsp">
                             팔로잉
-                            <span class="b5_1"><%=followCnt%></span>
+                            <span class="b5_1"><%=followingCnt%></span>
                         </a>
                     </div>
                     <div class="bar" id="bar6">
                         <a class="b6" href="./myshop6.jsp">
                             팔로워
-                            <span class="b6_1">5</span>
+                            <span class="b6_1"><%=followCnt%></span>
                         </a>
                     </div>
                 </div>
@@ -779,7 +794,7 @@ div {
             		for(String following : followingList){
             			List<HashMap<String,String>> followingMember = followingDAO.followingInfo(following);
             			for(HashMap fMember : followingMember){
-            				System.out.println(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
+            				//System.out.println(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
             	%>
                 <div class="followings_item">
                     <div class="followings_profile">

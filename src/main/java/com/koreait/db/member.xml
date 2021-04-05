@@ -59,8 +59,8 @@
 	</select>
 
 	<!-- 내상품 -->
-	<select id="myshop_product" parameterType="map" resultType="map">
-		select * from tb_product where p_idx=#{p_idx}
+	<select id="myshop_product" parameterType="string" resultType="map">
+		select * from tb_product where p_memidx=#{p_memidx}
 	</select>
 
 
@@ -80,11 +80,11 @@
 
 	<!-- 상점문의 -->
 
-	<select id="myshop_inquire" parameterType="string"
-		resultType="map">
+	<select id="myshop_inquire" parameterType="string" resultType="map">
 		select * from tb_inquire where i_storeidx=#{i_storeidx}
 	</select>
 
+	
 	<select id="myshop_inquire2" parameterType="string"
 		resultType="string">
 		select m_store from tb_member where m_idx=#{m_idx}

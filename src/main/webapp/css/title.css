@@ -1737,11 +1737,14 @@ small{
     border-bottom: 1px solid rgb(220, 219, 228);
 }
 .statetitle{
-    width: 10.5rem;
+	width: 10.5rem;
+    font-size: 18px;
+    padding-top: 14px;
+/*     width: 10.5rem;
     font-size: 18px;
     display: flex;
     -webkit-box-align: center;
-    align-items: center;
+    align-items: center; */
 }
 .statetitle > span{
     color: rgb(255, 80, 88);
@@ -1832,9 +1835,12 @@ input[type="radio"]#newProduct:checked + .newProduct::before{
 .changetitle {
     width: 10.5rem;
     font-size: 18px;
+    padding-top: 14px;
+/*     width: 10.5rem;
+    font-size: 18px;
     display: flex;
     -webkit-box-align: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .changetitle > span {

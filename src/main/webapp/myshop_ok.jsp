@@ -5,6 +5,8 @@
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 
 <% 
+request.setCharacterEncoding("UTF-8");
+
 String memberIdx = request.getParameter("idx");
 String name_value = request.getParameter("name_value");
 
@@ -25,8 +27,6 @@ System.out.println(memberIdx);
 		
 		
 		out.println(name_value);
-
-
 	}
 
 	
