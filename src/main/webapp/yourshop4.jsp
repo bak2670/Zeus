@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
 <jsp:useBean id="yourshopdao" class="com.koreait.yourshop.YourshopDAO"/>
 <jsp:useBean id="yourshopdto" class="com.koreait.yourshop.YourshopDTO"/>  <!-- 객체생성 -->
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="followingDAO" class="com.koreait.following.followingDAO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="storeMember" class="com.koreait.member.memberDTO"/>
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 	
@@ -19,11 +23,19 @@
 	}
 	
 	// 상점 번호
-	String mem_idx = request.getParameter("m_idx");
-	storeMember = memberDAO.info(mem_idx);
+	String store_idx = request.getParameter("m_idx");
+	storeMember = memberDAO.info(store_idx);
 	
 	//yourshopdto = yourshopdao.selectData(mem_idx);
+	
+	List<HashMap<String, String>> productList = productDAO.myshop_product(store_idx);
+	int productCnt = productList.size();
 
+	List<HashMap<String, String>> inquireList = inquireDAO.myshop_inquire(store_idx);
+	int inquireCnt = inquireList.size();
+	
+	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(store_idx);
+	int questionCnt = reviewList.size();
 %>
 <html lang="en">
 
@@ -35,7 +47,7 @@
     <link rel="stylesheet" href="./css/title.css">
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
-    <style>.menubar #bar1{border:1px solid black; border-bottom: white;}
+    <style>.menubar #bar4{border:1px solid black; border-bottom: white;}
         @font-face {
             font-family: 'GmarketSansMedium';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -625,7 +637,7 @@
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
                     <div class="myshop_name"><%=followingDAO.storeName(storeMember.getIdx())%></div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
-                    <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=mem_idx%>" >상품 <%=memberDAO.memProductCnt(mem_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=mem_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(mem_idx))%></a></div> 
+                    <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=store_idx%>" >상품 <%=memberDAO.memProductCnt(store_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=store_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(store_idx))%></a></div> 
                     <div class="myshop_bottom yourshop_bottom"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAWNJREFUWAntVrsNwjAUxBSpYAd6FmACtqCjRKxCwzRI1BTULMAK0KJwBzzJEPvFL04kFzzpFP/u3vFsGY9GiVHX9RzYARfg9gHbHJsnyvS/DMkrYA88gFhwjmsqqwMRtPJe65kQOIpIwpdrTSZFs6tBVsUae0syEbdwpHo8c9q2ivbvl5zkMynkmMFxbALja0Cbj1HJIbeX0AwsMzLkcL/Suq+e10Hpb+hOvCFL8+6cm/oEbqXfT21rFUzVGHSdZvCakbnBRUWDITmCkxjUDB6E3OGbw01LhyNTxDWjuoXJci9qOofBsv/qPJNlPhb8/f+cyfKeW77Jf1urALZwDGyBM8AXc25Qg1rU1O5bzdZ7DgIz4AQMFdSetTsJrACRlRvSnPxo5jBXkoQNsAh473uIOZjLFDS4MjHyFptzOZQ9591ntdt4J7YJ0GCnh2SbcGyez6rYXGjcfGhDIkOO/Q3mVvcJF79v57FKjKAAAAAASUVORK5CYII=" width="20" height="14" alt="팔로우 추가" class="follow_img"><a href="#" >팔로우</a></div>
                     <div class="myshop_bottom yourshop_bottom"><a href="#" >번개톡</a></div>
                 </div>
@@ -672,31 +684,31 @@
             <div class="contens2">
                 <div class="menubar">
                     <div class="yourshopbar" id="bar1">
-                        <a class="b1" href="./yourshop1.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b1" href="./yourshop1.jsp?m_idx=<%=store_idx%>">
                             상품
-                            <span class="b1_1">38</span>
+                            <span class="b1_1"><%=productCnt %></span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar2">
-                        <a class="b2" href="./yourshop2.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b2" href="./yourshop2.jsp?m_idx=<%=store_idx%>">
                             상점문의
-                            <span class="b2_1">2</span>
+                            <span class="b2_1"><%=inquireCnt %></span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar4">
-                        <a class="b4" href="./yourshop4.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b4" href="./yourshop4.jsp?m_idx=<%=store_idx%>">
                             상점후기
-                            <span class="b4_1">4</span>
+                            <span class="b4_1"><%=questionCnt %></span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar5">
-                        <a class="b5" href="./yourshop5.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b5" href="./yourshop5.jsp?m_idx=<%=store_idx%>">
                             팔로잉
                             <span class="b5_1">1</span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar6">
-                        <a class="b6" href="./yourshop6.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b6" href="./yourshop6.jsp?m_idx=<%=store_idx%>">
                             팔로워
                             <span class="b6_1">5</span>
                         </a>
@@ -704,46 +716,35 @@
                 </div>
                 <div class="menubar2">
                     <div class="mn1">
-                        상품<span class="mn_1">38</span>
+                        상점후기<span class="mn_1"><%=questionCnt %></span>
                     </div>
-<!--                     <div class="mn2">
-                        <select>
-                            <option>전체</option>
-                            <option>패션잡화</option>
-                            <option>여성의류</option>
-                            <option>디지털/가전</option>
-                            <option>남성의류</option>
-                            <option>생활/문구/가구/식품</option>
-                            <option>도서/티켓/취미/애완</option>
-                        </select>
-                    </div> -->
-
-                </div>
-                <!-- <div class="menubar3">
-                    <div class="left">
-                        <div class="left_cnt">전체</div>
-                        <div class="cnt">38개</div>
-                    </div>
-                    <div class="right">
-                        <a class="new" href="#">
-                            최신순
-                        </a>
-                        <a class="new" href="#">
-                            인기순
-                        </a>
-                        <a class="new" href="#">
-                            저가순
-                        </a>
-                        <a class="new" href="#">
-                            고가순
-                        </a>
-                    </div>
-                </div> -->
-                    
-
-                    
-                    
+                </div>                 
             </div>
+            <div class="reviews_box">
+            <%
+				for(HashMap review : reviewList){
+			%>
+                <div class="reviews_item">
+                    <a href="#" class="reviews_item_img"><img src="./img/번개장터이미지/dog.jpg"></a>
+                    <div class="reviews_text">
+                        <div class="reviews_text_1">
+                            <a href="#" class="reviews_text_1_1"><%=memberDAO.storeName(Integer.parseInt(String.valueOf(review.get("rv_memidx"))))%>
+                                <div class="reviews_text_1_2">인증 </div>
+                            </a>
+                        </div>
+                        <div class="reviews_text_content"><%=review.get("rv_content")%></div>
+                        <div class="reviews_text_bottom">
+                            <a href="#"><img src="./img/번개장터이미지/신고.png">신고하기</a>
+                        </div>
+                    </div>
+                </div>
+<%
+				}
+%>
+                
+            </div>
+            
+            
         </div>
 <!-- 모달창 처리 -->
 	<div class="black_bg"></div>

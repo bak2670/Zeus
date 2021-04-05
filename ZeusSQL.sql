@@ -2,6 +2,13 @@ drop database zeus;
 create database Zeus;
 use Zeus;
 
+create table tb_category(
+    c_idx bigint not null auto_increment primary key,
+    c_big varchar(20) not null,
+    c_middle varchar(20) not null,
+    c_small varchar(20)
+);
+
 create table tb_member(
 	m_idx bigint not null auto_increment primary key,
     m_username varchar(20) not null,
@@ -18,175 +25,6 @@ create table tb_member(
     m_profile varchar(100) default null,
     m_zzim varchar(255) default null
 );
-
-create table tb_category(
-    c_idx bigint not null auto_increment primary key,
-    c_big varchar(20) not null,
-    c_middle varchar(20) not null,
-    c_small varchar(20)
-);
-create table tb_product(
-    p_idx bigint not null auto_increment primary key,
-    p_name varchar(20) not null,
-    p_price varchar(20) not null,
-    p_state varchar(4) not null default "중고상품",
-    p_delcharge char(1) not null default "N",
-    p_deallocation varchar(100) not null,
-    p_regdate datetime default now(),
-    p_zzim bigint not null default "0",
-    p_hit bigint not null default "0",
-    p_category bigint not null,
-	foreign key(p_category) references tb_category(c_idx),
-    p_content text,
-    p_memidx bigint not null,
-    foreign key(p_memidx) references tb_member(m_idx),
-    p_tag varchar(100) default null,
-    p_picturepath varchar(100) not null,
-    p_picture varchar(100) not null,
-    p_exchange char(1) not null default "N",
-    p_priceConsult char(1) not null default "N", 
-    p_salesStatus varchar(100) not null default "판매중",
-    p_quantity int not null default 1
-);
-create table tb_following(
-	f_idx bigint not null auto_increment primary key,
-	f_memidx bigint not null,
-	foreign key(f_memidx) references tb_member(m_idx), 
-	f_follow bigint not null,
-	foreign key(f_follow) references tb_member(m_idx)
-);
-
-create table tb_notice(
-   n_idx bigint not null auto_increment primary key,
-    n_title varchar(50) not null,
-    n_content text not null,
-    n_regdate datetime not null default now()
-);
-
-create table tb_review(
-	rv_idx bigint not null auto_increment primary key,
-	rv_memidx bigint not null,
-	foreign key(rv_memidx) references tb_member(m_idx),
-	rv_productidx bigint not null,
-	foreign key(rv_productidx) references tb_product(p_idx),
-	rv_storeidx bigint not null,
-	foreign key(rv_storeidx) references tb_member(m_idx),
-	rv_content text not null,
-	rv_regdate datetime default now()
-);
-
-create table tb_block(
-	b_idx bigint not null auto_increment primary key,
-	b_memidx bigint not null,
-	foreign key(b_memidx) references tb_member(m_idx),
-	b_blockdate datetime default now(),
-	b_blockreason varchar(50) not null
-);
-
-create table tb_inquire (
-	i_idx bigint not null auto_increment primary key,
-	i_memidx bigint not null,
-	foreign key(i_memidx) references tb_member(m_idx),
-	i_productidx bigint not null,
-	foreign key(i_productidx) references tb_product(p_idx),
-	i_storeidx bigint not null,
-	foreign key(i_storeidx) references tb_member(m_idx),
-	i_content text not null,
-	i_regdate datetime default now()
-);
-
-create table tb_report (
-	rp_idx bigint not null auto_increment primary key,
-	rp_memidx bigint not null,
-	foreign key(rp_memidx) references tb_member(m_idx),
-	rp_reporteridx bigint not null,
-	foreign key(rp_reporteridx) references tb_member(m_idx),
-	rp_reason varchar(20) not null,
-	rp_productidx bigint not null,
-	foreign key(rp_productidx) references tb_product(p_idx),
-	rp_regdate datetime default now(),
-	rp_count int not null
-);
-
-create table tb_talk(
-	t_idx bigint not null auto_increment primary key,
-	t_sendidx bigint not null,
-	foreign key(t_sendidx) references tb_member(m_idx),
-	t_senderIP varchar(20) not null,
-	t_senderPort varchar(20) not null,
-	t_receiveridx bigint not null,
-	foreign key(t_receiveridx) references tb_member(m_idx),
-	t_receiverIP varchar(20) not null,
-	t_receiverPort varchar(20) not null,
-	t_content text,
-	t_file varchar(50),
-	t_filepath varchar(50),
-	t_time datetime default now(),
-	t_read char(1) not null default 'N'
-);
-
-create table tb_withdraw (
-	w_idx bigint not null auto_increment primary key,
-	w_memidx bigint not null,
-	foreign key(w_memidx) references tb_member(m_idx),
-	w_wdate datetime default now(),
-	w_reason varchar(50) not null
-);
-create table tb_keyword (
-	k_idx bigint not null auto_increment primary key,
-	k_name varchar(20) not null,
-	k_memidx bigint not null,
-	foreign key(k_memidx) references tb_member(m_idx),
-	k_cateidx bigint,
-	foreign key(k_cateidx) references tb_category(c_idx),
-	k_alert char(1) DEFAULT 'N',
-	k_lists varchar(100),
-	k_selarea varchar(20)
-);
-
-create table tb_area (
-	a_idx bigint not null auto_increment primary key,
-	a_memidx bigint not null,
-	foreign key(a_memidx) references tb_member(m_idx),
-	a_area varchar(20) not null,
-	a_memsel char(1) not null DEFAULT 'N'
-);
-select * from tb_product;
-select * from tb_category;
-select * from tb_product where p_name LIKE '%우유%' and p_deallocation='경기도 부천시 상동';
-select * from tb_category where c_middle='자켓';
-select * from tb_following;
-select f_follow from tb_following where f_memidx=1;
-select * from tb_following where f_follow=1;
-select * from tb_member;
-create table tb_oneToOne(
-	o_idx bigint not null auto_increment primary key,
-    o_memidx bigint not null,
-    foreign key(o_memidx) references tb_member(m_idx),
-    o_bigCate varchar(100) not null,
-    o_midCate varchar(100),
-    o_content text not null,
-    o_regdate datetime not null default now(),
-	o_answerOK char(1) not null default 'N',
-    o_answer text,
-    o_ansdate datetime
-);
-
-create table tb_recentProduct(
-	rcp_idx bigint not null auto_increment primary key, 
-	rcp_memidx bigint not null,
-    foreign key(rcp_memidx) references tb_member(m_idx),
-    rcp_productidx bigint not null,
-    foreign key(rcp_productidx) references tb_product(p_idx)
-);
-
-create table tb_recentSearch(
-	rs_idx bigint not null auto_increment primary key, 
-	rs_memidx bigint not null,
-    foreign key(rs_memidx) references tb_member(m_idx),
-    rs_search varchar(100) not null
-);
-
 
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("이메론", "apple@apple.com", "010-9997-9997", '001011','3068518');
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("제우스", "apple@apple.com", "010-9988-9988", '001011','3068518');
@@ -232,27 +70,30 @@ insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("�
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("뽀로로", "Po@roro.com", "010-2222-2221", '001011','3068518');
 
 
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("1", "220.72.217.138", "5432", "2", "240.48.112.447", "5432", "안녕", "꼬부기", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("2", "221.72.217.138", "5432", "12", "241.48.112.447", "5432", "바이", "파이리", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("12", "222.72.217.138", "5432", "13", "242.48.112.447", "5432", "꼬룩", "거북왕", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("13", "223.72.217.138", "5432", "14", "243.48.112.447", "5432", "까륵", "어니부기", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("14", "224.72.217.138", "5432", "15", "244.48.112.447", "5432", "꼬륵", "리자드", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("15", "225.72.217.138", "5432", "16", "245.48.112.447", "5432", "햐햐", "리자몽", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("16", "226.72.217.138", "5432", "17", "246.48.112.447", "5432", "냐냐", "이브이", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("17", "227.72.217.138", "5432", "18", "247.48.112.447", "5432", "뱌뱌", "고라파덕", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("18", "228.72.217.138", "5432", "19", "248.48.112.447", "5432", "샤샤", "골덕", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("19", "229.72.217.138", "5432", "20", "249.48.112.447", "5432", "갸갸", "타이레롤", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("20", "230.72.217.138", "5432", "21", "250.48.112.447", "5432", "비비", "배아파", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("21", "231.72.217.138", "5432", "22", "251.48.112.447", "5432", "꺄꺄", "너도아파", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("22", "232.72.217.138", "5432", "23", "252.48.112.447", "5432", "꾜꾜", "나도아파", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("23", "233.72.217.138", "5432", "24", "253.48.112.447", "5432", "쀼쀼", "언제", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("24", "234.72.217.138", "5432", "25", "254.48.112.447", "5432", "뺘뺘", "끝내지", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("25", "235.72.217.138", "5432", "26", "255.48.112.447", "5432", "뀨뀨", "할수가", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("26", "236.72.217.138", "5432", "27", "256.48.112.447", "5432", "쓔쓔", "있는가", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("27", "237.72.217.138", "5432", "28", "257.48.112.447", "5432", "쌰쌰", "해야지", "C:\Users\fuck\Pictures\Saved Pictures", "N");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("28", "238.72.217.138", "5432", "29", "258.48.112.447", "5432", "미미", "어쩌겠어", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("29", "239.72.217.138", "5432", "30", "259.48.112.447", "5432", "먀먀", "아자아자", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
-insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("30", "240.72.217.138", "5432", "31", "260.48.112.447", "5432", "슈방", "파닥파닥", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+
+create table tb_product(
+    p_idx bigint not null auto_increment primary key,
+    p_name varchar(20) not null,
+    p_price varchar(20) not null,
+    p_state varchar(4) not null default "중고상품",
+    p_delcharge char(1) not null default "N",
+    p_deallocation varchar(100) not null,
+    p_regdate datetime default now(),
+    p_zzim bigint not null default "0",
+    p_hit bigint not null default "0",
+    p_category bigint not null,
+	foreign key(p_category) references tb_category(c_idx) on delete cascade,
+    p_content text,
+    p_memidx bigint not null,
+    foreign key(p_memidx) references tb_member(m_idx) on delete cascade,
+    p_tag varchar(100) default null,
+    p_picturepath varchar(100) not null,
+    p_picture varchar(100) not null,
+    p_exchange char(1) not null default "N",
+    p_priceConsult char(1) not null default "N", 
+    p_salesStatus varchar(100) not null default "판매중",
+    p_quantity int not null default 1
+);
 
 insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("펭귄인형","1000","중고상품","Y","서울시 서초구 사당동","5","10","1","귀여워요","1","C:\Users\fuck\Pictures\Saved Pictures","펭귄인형.jpg");
 insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("눈사람","2000","중고상품","N","서울시 강남구 역삼동","2","12","2","고급져요","2","C:\Users\fuck\Pictures\Saved Pictures","눈사람.jpg");
@@ -292,6 +133,14 @@ insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_z
 insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("피존투","2000","중고상품","Y","서울시 관악구 봉천동","1","45","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","피존투.png");
 insert into tb_product(p_name,p_price, p_state, p_delcharge, p_deallocation, p_zzim, p_hit, p_category,p_content,p_memidx,p_picturepath,p_picture)values ("또가스","50","새상품","N","서울시 관악구 봉천동","0","12","40","귀여워요","35","C:\Users\fuck\Pictures\Saved Pictures","또가스.jpg");
 
+create table tb_following(
+	f_idx bigint not null auto_increment primary key,
+	f_memidx bigint not null,
+	foreign key(f_memidx) references tb_member(m_idx) on delete cascade, 
+	f_follow bigint not null,
+	foreign key(f_follow) references tb_member(m_idx) on delete cascade
+);
+
 insert into tb_following(f_memidx,f_follow) values ("1", "4");
 insert into tb_following(f_memidx,f_follow) values ("1", "5");
 insert into tb_following(f_memidx,f_follow) values ("1", "7");
@@ -330,6 +179,13 @@ insert into tb_following(f_memidx,f_follow) values ("39", "13");
 insert into tb_following(f_memidx,f_follow) values ("40", "23");
 insert into tb_following(f_memidx,f_follow) values ("41", "21");
 
+create table tb_notice(
+   n_idx bigint not null auto_increment primary key,
+    n_title varchar(50) not null,
+    n_content text not null,
+    n_regdate datetime not null default now()
+);
+
 insert into tb_notice(n_title, n_content) values ('번개장터 개인정보처리방침 개정 안내','안녕하세요 번개장터입니다.<br> <br>번개장터 개인정보처리방침이 아래와 같이 변경됨에 따라 변경 내역을 공지하오니 참고하여 주시기 바랍니다.<br> <br>1. 변경일시 : 2019년 12월 13일부터<br>2. 변경사유 : 본문내용 변경, 제3자  제공항목 추가, 개인정보 위탁업체 추가 및 변경, 처리하는 개인정보 항목의 추가, 개인정보보호 책임자 변경, 광고식별자 처리 사업자 추가<br>3. 개인정보 처리방침 버전 : V7.1 → V7.2');
 insert into tb_notice(n_title, n_content) values ('내폰팔기 서비스 종료 안내',"안녕하세요. 번개장터입니다.<br>  <br>유감스럽게도 번개장터의 ‘내폰팔기' 서비스가 2020년 4월 23일(목)부로 종료하게 되어 서비스 종료 및 중단 일정에 대해 안내드립니다.<br>  <br>안타까운 소식을 전하게되어 진심으로 ‘내폰팔기’ 서비스를 이용해주신 모든 유저분들께 사과드리며, *2020년 4월 23일(목)*부로 모든 스마트폰 매입 진행이 불가능하며 이후에 진행중인 매입은 번개톡으로 대화는 가능하나 다른 기능은 사용 불가합니다.<br>  <br>번개장터의 ‘내폰팔기'를 통해 스마트폰을 매입자분들에게 판매하는 방법은 사라지지만 번개장터의 ‘디지털/가전>모바일’카테고리를 통하여 일반 유저들에게 스마트폰을 판매 가능합니다.<br>  <br>추가적으로 궁금한 사항이 있으시다면 번개장터 어플리케이션에서 “1:1문의<기타신고”로 문의 부탁드립니다.<br>  <br>지금까지 ‘내폰팔기’ 서비스에 많은 관심과 사랑을 보내주신 모든 번개장터 유저분들께 다시한번 감사의 말씀을 드리며, 더 나은 서비스와 좋은 소식으로 찾아 뵙도록 하겠습니다.<br>  <br>내폰팔기 서비스 종료 공지 : 2020년 3월 23일 (월요일)<br>  <br>내폰팔기 서비스 종료 일시 : 2020년 4월 23일 (목요일)<br>  <br>서비스 종료후 ‘내폰팔기’ 서비스에 등록되었던 모든 스마트폰 내용이 삭제 처리되어 매입과 관련된 해당 기능들을 더 이상 사용 불가합니다.<br>  <br>감사합니다.");
 insert into tb_notice(n_title, n_content) values ('개인정보처리방침 개정 공지',"안녕하세요 번개장터입니다.<br> <br>제목: 번개장터 개인정보처리방침 개정 안내<br>내용: 번개장터 개인정보처리방침이 아래와 같이 변경됨에 따라 변경 내역을 공지하오니 참고하여 주시기 바랍니다.<br>1. 변경일시: 2020년 4월 6일부터<br>2. 변경사유: 개인정보 위탁업체 삭제, 처리하는 개인저보 항목의 삭제 및 추가<br>3. 개인정보 처리방침 버전 : v7.2  v7.3");
@@ -361,6 +217,18 @@ insert into tb_notice(n_title, n_content) values ('번개장터 운영정책 개
 insert into tb_notice(n_title, n_content) values ('[공지] 미인증 전자제품 중고거래 시 유의사항',"안녕하세요? 번개장터입니다.<br> <br>미인증 전자제품(적합성평가를받지않은전자제품) 중고거래시 유의할 사항에대해 안내드리니 거래시참고 부탁드립니다.");
 insert into tb_notice(n_title, n_content) values ('[공지] 졸업앨범 거래 시 제재 정책 강화 안내',"안녕하세요? 번개장터입니다.<br> <br>최근 졸업앨범 거래로 발생할 수 있는 개인정보 노출에 대해 사회적으로 우려가 높아지고 있습니다.<br>이에 따라 개인정보가 포함되어 있는 졸업앨범 거래를 금지품목으로 지정하여 관리하고자 하니 고객님들의 협조 부탁 드립니다.<br> <br>&lt;거래금지품목 추가&gt;<br>- 금지품목 : 졸업앨범<br>- 제재적용 일시 : 21년 4월 1일부터 ~<br> <br>※ 3월 31일까지는 별도의 모니터링을 통해 상품 삭제 및 거래금지품목에 대한 안내가 진행될 예정입니다.<br> <br>깨끗한 거래 환경이 유지될 수 있도록 최선을 다 하겠습니다.<br>감사합니다.");
 
+create table tb_review(
+	rv_idx bigint not null auto_increment primary key,
+	rv_memidx bigint not null,
+	foreign key(rv_memidx) references tb_member(m_idx) on delete cascade,
+	rv_productidx bigint not null,
+	foreign key(rv_productidx) references tb_product(p_idx) on delete cascade,
+	rv_storeidx bigint not null,
+	foreign key(rv_storeidx) references tb_member(m_idx) on delete cascade,
+	rv_content text not null,
+	rv_regdate datetime default now()
+);
+
 insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("1", "3","3","감사합니다");
 insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("1", "4","5","감사합니다");
 insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("2", "2","1","감사합니다");
@@ -373,6 +241,13 @@ insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("2
 insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("25", "1","4","감사합니다");
 insert into tb_review(rv_memidx,rv_productidx,rv_storeidx,rv_content) values ("26", "2","11","감사합니다");
 
+create table tb_block(
+	b_idx bigint not null auto_increment primary key,
+	b_memidx bigint not null,
+	foreign key(b_memidx) references tb_member(m_idx) on delete cascade,
+	b_blockdate datetime default now(),
+	b_blockreason varchar(50) not null
+);
 insert into tb_block(b_memidx,b_blockreason) values ("1", "악질유저");
 insert into tb_block(b_memidx,b_blockreason) values ("2", "나쁜유저");
 insert into tb_block(b_memidx,b_blockreason) values ("12", "바보유저");
@@ -401,6 +276,17 @@ insert into tb_block(b_memidx,b_blockreason) values ("34", "사기");
 insert into tb_block(b_memidx,b_blockreason) values ("35", "사기");
 insert into tb_block(b_memidx,b_blockreason) values ("36", "사기");
 
+create table tb_inquire (
+	i_idx bigint not null auto_increment primary key,
+	i_memidx bigint not null,
+	foreign key(i_memidx) references tb_member(m_idx) on delete cascade,
+	i_productidx bigint not null,
+	foreign key(i_productidx) references tb_product(p_idx) on delete cascade,
+	i_storeidx bigint not null,
+	foreign key(i_storeidx) references tb_member(m_idx) on delete cascade,
+	i_content text not null,
+	i_regdate datetime default now()
+);
 
 insert into tb_inquire(i_memidx, i_productidx, i_storeidx, i_content) values ("1","1","3","상품 판매하는법을 모르곘어요");
 insert into tb_inquire(i_memidx, i_productidx, i_storeidx, i_content) values ("14","2","15","상품 판매하는법을 모르곘어요");
@@ -414,6 +300,18 @@ insert into tb_inquire(i_memidx, i_productidx, i_storeidx, i_content) values ("2
 insert into tb_inquire(i_memidx, i_productidx, i_storeidx, i_content) values ("22","10","23","상품 판매하는법을 모르곘어요");
 insert into tb_inquire(i_memidx, i_productidx, i_storeidx, i_content) values ("23","11","24","상품 판매하는법을 모르곘어요");
 
+create table tb_report (
+	rp_idx bigint not null auto_increment primary key,
+	rp_memidx bigint not null,
+	foreign key(rp_memidx) references tb_member(m_idx) on delete cascade,
+	rp_reporteridx bigint not null,
+	foreign key(rp_reporteridx) references tb_member(m_idx) on delete cascade,
+	rp_reason varchar(20) not null,
+	rp_productidx bigint not null,
+	foreign key(rp_productidx) references tb_product(p_idx) on delete cascade,
+	rp_regdate datetime default now(),
+	rp_count int not null
+);
 insert into tb_report(rp_memidx, rp_reporteridx, rp_reason, rp_productidx, rp_count) values ("1","3","낚시글","1","1");
 insert into tb_report(rp_memidx, rp_reporteridx, rp_reason, rp_productidx, rp_count) values ("13","15","낚시글","2","1");
 insert into tb_report(rp_memidx, rp_reporteridx, rp_reason, rp_productidx, rp_count) values ("14","16","낚시글","3","1");
@@ -425,7 +323,30 @@ insert into tb_report(rp_memidx, rp_reporteridx, rp_reason, rp_productidx, rp_co
 insert into tb_report(rp_memidx, rp_reporteridx, rp_reason, rp_productidx, rp_count) values ("20","22","낚시글","9","1");
 
 
+create table tb_talk(
+	t_idx bigint not null auto_increment primary key,
+	t_sendidx bigint not null,
+	foreign key(t_sendidx) references tb_member(m_idx) on delete cascade,
+	t_senderIP varchar(20) not null,
+	t_senderPort varchar(20) not null,
+	t_receiveridx bigint not null,
+	foreign key(t_receiveridx) references tb_member(m_idx) on delete cascade,
+	t_receiverIP varchar(20) not null,
+	t_receiverPort varchar(20) not null,
+	t_content text,
+	t_file varchar(50),
+	t_filepath varchar(50),
+	t_time datetime default now(),
+	t_read char(1) not null default 'N'
+);
 
+create table tb_withdraw (
+	w_idx bigint not null auto_increment primary key,
+	w_memidx bigint not null,
+	foreign key(w_memidx) references tb_member(m_idx) on delete cascade,
+	w_wdate datetime default now(),
+	w_reason varchar(50) not null
+);
 insert into tb_withdraw(w_memidx, w_reason) values ("1", "사기당해서하기싫어요");
 insert into tb_withdraw(w_memidx, w_reason) values ("2", "사기당해서하기싫어요");
 insert into tb_withdraw(w_memidx, w_reason) values ("10", "사기당해서하기싫어요");
@@ -436,6 +357,17 @@ insert into tb_withdraw(w_memidx, w_reason) values ("14", "사기당해서하기
 insert into tb_withdraw(w_memidx, w_reason) values ("15", "사기당해서하기싫어요");
 insert into tb_withdraw(w_memidx, w_reason) values ("16", "사기당해서하기싫어요");
 
+create table tb_keyword (
+	k_idx bigint not null auto_increment primary key,
+	k_name varchar(20) not null,
+	k_memidx bigint not null,
+	foreign key(k_memidx) references tb_member(m_idx) on delete cascade,
+	k_cateidx bigint,
+	foreign key(k_cateidx) references tb_category(c_idx) on delete cascade,
+	k_alert char(1) DEFAULT 'N',
+	k_lists varchar(100),
+	k_selarea varchar(20)
+);
 
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("애플워치", "2", "7","N", "서울특별시 노원구 상계동","서울특별시 노원구 상계동");
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("애플", "11", "2","Y", "서울특별시 노원구 공릉동","서울특별시 노원구 공릉동" );
@@ -448,8 +380,14 @@ insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea)
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("머그컵", "18", "9","Y", "서울특별시 신길동","서울특별시 신길동" );
 insert into tb_keyword(k_name, k_memidx, k_cateidx, k_alert, k_lists, k_selarea) values ("미니언즈", "19", "10","N", "서울특별시 강동구 강동지","서울특별시 강동구 강동지" );
 
-select * from tb_product;
-select * from tb_block;
+create table tb_area (
+	a_idx bigint not null auto_increment primary key,
+	a_memidx bigint not null,
+	foreign key(a_memidx) references tb_member(m_idx) on delete cascade,
+	a_area varchar(20) not null,
+	a_memsel char(1) not null DEFAULT 'N'
+);
+
 insert into tb_area(a_memidx, a_area, a_memsel) values ("1","서울특별시 노원구 공릉동", "Y");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("11","충청남도 아산시 배방읍", "N");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("12","서울특별시 노원구 상계동", "N" );
@@ -463,6 +401,19 @@ insert into tb_area(a_memidx, a_area, a_memsel) values ("19","부산광역시 �
 insert into tb_area(a_memidx, a_area, a_memsel) values ("20","서울특별시 노원구 하계동", "N");
 insert into tb_area(a_memidx, a_area, a_memsel) values ("21","서울특별시 강남구 대치동", "Y" );
 
+create table tb_oneToOne(
+	o_idx bigint not null auto_increment primary key,
+    o_memidx bigint not null,
+    foreign key(o_memidx) references tb_member(m_idx) on delete cascade,
+    o_bigCate varchar(100) not null,
+    o_midCate varchar(100),
+    o_content text not null,
+    o_regdate datetime not null default now(),
+	o_answerOK char(1) not null default 'N',
+    o_answer text,
+    o_ansdate datetime
+);
+
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (1,"계정문의","가입/재가입","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (2,"계정문의","탈퇴","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (3,"거래신고","상품 미발송","ㅁㄴㅇㄹ");
@@ -471,8 +422,44 @@ insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (5,"�
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (6,"이용방법","안전결제/번개페이","ㅁㄴㅇㄹ");
 insert into tb_oneToOne(o_memidx, o_bigCate, o_midCate, o_content) values (7,"광고","광고관리","ㅁㄴㅇㄹ");
 
-select * from tb_block;
--- 카테고리 상품 조인 뷰
-create view PdJoinCate as select p.p_idx, p.p_name, p.p_memidx, c.c_idx, c.c_big, c.c_middle, c.c_small from tb_product as p join tb_category as c on c.c_idx = p.p_category;
+create table tb_recentProduct(
+	rcp_idx bigint not null auto_increment primary key, 
+	rcp_memidx bigint not null,
+    foreign key(rcp_memidx) references tb_member(m_idx) on delete cascade,
+    rcp_productidx bigint not null,
+    foreign key(rcp_productidx) references tb_product(p_idx) on delete cascade
+);
 
-select * from PdJoinCate;
+create table tb_recentSearch(
+	rs_idx bigint not null auto_increment primary key, 
+	rs_memidx bigint not null,
+    foreign key(rs_memidx) references tb_member(m_idx) on delete cascade,
+    rs_search varchar(100) not null
+);
+
+
+
+
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("1", "220.72.217.138", "5432", "2", "240.48.112.447", "5432", "안녕", "꼬부기", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("2", "221.72.217.138", "5432", "12", "241.48.112.447", "5432", "바이", "파이리", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("12", "222.72.217.138", "5432", "13", "242.48.112.447", "5432", "꼬룩", "거북왕", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("13", "223.72.217.138", "5432", "14", "243.48.112.447", "5432", "까륵", "어니부기", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("14", "224.72.217.138", "5432", "15", "244.48.112.447", "5432", "꼬륵", "리자드", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("15", "225.72.217.138", "5432", "16", "245.48.112.447", "5432", "햐햐", "리자몽", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("16", "226.72.217.138", "5432", "17", "246.48.112.447", "5432", "냐냐", "이브이", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("17", "227.72.217.138", "5432", "18", "247.48.112.447", "5432", "뱌뱌", "고라파덕", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("18", "228.72.217.138", "5432", "19", "248.48.112.447", "5432", "샤샤", "골덕", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("19", "229.72.217.138", "5432", "20", "249.48.112.447", "5432", "갸갸", "타이레롤", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("20", "230.72.217.138", "5432", "21", "250.48.112.447", "5432", "비비", "배아파", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("21", "231.72.217.138", "5432", "22", "251.48.112.447", "5432", "꺄꺄", "너도아파", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("22", "232.72.217.138", "5432", "23", "252.48.112.447", "5432", "꾜꾜", "나도아파", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("23", "233.72.217.138", "5432", "24", "253.48.112.447", "5432", "쀼쀼", "언제", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("24", "234.72.217.138", "5432", "25", "254.48.112.447", "5432", "뺘뺘", "끝내지", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("25", "235.72.217.138", "5432", "26", "255.48.112.447", "5432", "뀨뀨", "할수가", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("26", "236.72.217.138", "5432", "27", "256.48.112.447", "5432", "쓔쓔", "있는가", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("27", "237.72.217.138", "5432", "28", "257.48.112.447", "5432", "쌰쌰", "해야지", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("28", "238.72.217.138", "5432", "29", "258.48.112.447", "5432", "미미", "어쩌겠어", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("29", "239.72.217.138", "5432", "30", "259.48.112.447", "5432", "먀먀", "아자아자", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
+insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("30", "240.72.217.138", "5432", "31", "260.48.112.447", "5432", "슈방", "파닥파닥", "C:\Users\fuck\Pictures\Saved Pictures", "N");
+
+

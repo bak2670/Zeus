@@ -216,6 +216,7 @@ public class productDAO {
 	}
 
 	/* 승철님 내상점 */
+	// 회원 인덱스 -> 회원이 올린 상품 리스트
 	public List<HashMap<String,String>> myshop_product(String m_idx) {
 		List<HashMap<String,String>> dataMap = sqlsession.selectList("member.myshop_product", m_idx);
 		return dataMap;

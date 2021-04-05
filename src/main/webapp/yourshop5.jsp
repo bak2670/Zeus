@@ -10,6 +10,8 @@
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="storeMember" class="com.koreait.member.memberDTO"/>
 <jsp:useBean id="followingDTO" class="com.koreait.following.followingDTO" />
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 	
@@ -22,13 +24,19 @@
 	}
 	
 	// 상점 번호
-	String mem_idx = request.getParameter("m_idx");
-	storeMember = memberDAO.info(mem_idx);
+	String store_idx = request.getParameter("m_idx");
+	storeMember = memberDAO.info(store_idx);
 	
 	//yourshopdto = yourshopdao.selectData(mem_idx);
+	List<HashMap<String, String>> productList = productDAO.myshop_product(store_idx);
+	int productCnt = productList.size();
 
-%>
-<%
+	List<HashMap<String, String>> inquireList = inquireDAO.myshop_inquire(store_idx);
+	int inquireCnt = inquireList.size();
+	
+	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(store_idx);
+	int questionCnt = reviewList.size();
+	
 	if(memberDAO.myshop(storeMember, m_idx) != null){
 	         
 %>
@@ -42,7 +50,7 @@
     <link rel="stylesheet" href="./css/title.css">
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
-    <style>.menubar #bar1{border:1px solid black; border-bottom: white;}
+    <style>.menubar #bar5{border:1px solid black; border-bottom: white;}
         @font-face {
             font-family: 'GmarketSansMedium';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -632,7 +640,7 @@
                     <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
                     <div class="myshop_name"><%=followingDAO.storeName(storeMember.getIdx())%></div>
                     <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
-                    <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=mem_idx%>" >상품 <%=memberDAO.memProductCnt(mem_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=mem_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(mem_idx))%></a></div> 
+                    <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=store_idx%>" >상품 <%=memberDAO.memProductCnt(store_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=store_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(store_idx))%></a></div> 
                     <div class="myshop_bottom yourshop_bottom"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAWNJREFUWAntVrsNwjAUxBSpYAd6FmACtqCjRKxCwzRI1BTULMAK0KJwBzzJEPvFL04kFzzpFP/u3vFsGY9GiVHX9RzYARfg9gHbHJsnyvS/DMkrYA88gFhwjmsqqwMRtPJe65kQOIpIwpdrTSZFs6tBVsUae0syEbdwpHo8c9q2ivbvl5zkMynkmMFxbALja0Cbj1HJIbeX0AwsMzLkcL/Suq+e10Hpb+hOvCFL8+6cm/oEbqXfT21rFUzVGHSdZvCakbnBRUWDITmCkxjUDB6E3OGbw01LhyNTxDWjuoXJci9qOofBsv/qPJNlPhb8/f+cyfKeW77Jf1urALZwDGyBM8AXc25Qg1rU1O5bzdZ7DgIz4AQMFdSetTsJrACRlRvSnPxo5jBXkoQNsAh473uIOZjLFDS4MjHyFptzOZQ9591ntdt4J7YJ0GCnh2SbcGyez6rYXGjcfGhDIkOO/Q3mVvcJF79v57FKjKAAAAAASUVORK5CYII=" width="20" height="14" alt="팔로우 추가" class="follow_img"><a href="#" >팔로우</a></div>
                     <div class="myshop_bottom yourshop_bottom"><a href="#" >번개톡</a></div>
                 </div>
@@ -682,31 +690,31 @@
             <div class="contens2">
                 <div class="menubar">
                     <div class="yourshopbar" id="bar1">
-                        <a class="b1" href="./yourshop1.jsp?m_idx=<%=mem_idx%>">
+                        <a class="b1" href="./yourshop1.jsp?m_idx=<%=store_idx%>">
                             상품
-                            <span class="b1_1">38</span>
+                            <span class="b1_1"><%=productCnt %></span>
                         </a>
                     </div>
-                    <div class="yourshopbar">
-                        <a class="b2" href="./yourshop2.jsp?m_idx=<%=mem_idx%>">
+                    <div class="yourshopbar" id="bar2">
+                        <a class="b2" href="./yourshop2.jsp?m_idx=<%=store_idx%>">
                             상점문의
-                            <span class="b2_1">2</span>
+                            <span class="b2_1"><%=inquireCnt %></span>
                         </a>
                     </div>
-                    <div class="yourshopbar">
-                        <a class="b4" href="./yourshop4.jsp?m_idx=<%=mem_idx%>">
+                    <div class="yourshopbar" id="bar4">
+                        <a class="b4" href="./yourshop4.jsp?m_idx=<%=store_idx%>">
                             상점후기
-                            <span class="b4_1">4</span>
+                            <span class="b4_1"><%=questionCnt %></span>
                         </a>
                     </div>
-                    <div class="yourshopbar">
-                        <a class="b5" href="./yourshop5.jsp?m_idx=<%=mem_idx%>">
+                    <div class="yourshopbar" id="bar5">
+                        <a class="b5" href="./yourshop5.jsp?m_idx=<%=store_idx%>">
                             팔로잉
                             <span class="b5_1">1</span>
                         </a>
                     </div>
-                    <div class="yourshopbar">
-                        <a class="b6" href="./yourshop6.jsp?m_idx=<%=mem_idx%>">
+                    <div class="yourshopbar" id="bar6">
+                        <a class="b6" href="./yourshop6.jsp?m_idx=<%=store_idx%>">
                             팔로워
                             <span class="b6_1">5</span>
                         </a>
