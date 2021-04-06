@@ -156,12 +156,9 @@ public class memberDAO {
 		// m_idx가 찜한 리스트 스트링으로 받아오기
 		String zzimStr = sqlsession.selectOne("member.zzimString",m_idx);
 		
-		System.out.println(zzimStr);
-		
-		
-
 		if(zzimStr != null) {
 			String[] zzimArr = zzimStr.split(" ");
+			
 			for(String str : zzimArr) {
 				if(str.equals(String.valueOf(p_idx))) {
 					return 1;
@@ -209,6 +206,7 @@ public class memberDAO {
 		int cnt = sqlsession.selectOne("product.productCnt", Integer.parseInt(m_idx));
 		return cnt;
 	}
+	
 	// 회원번호 입력받아서 상점명 리턴(null이라면 인덱스로 호 붙여주기)
 	public String storeName(int m_idx) {
 		String store = sqlsession.selectOne("product.storeName", m_idx);
@@ -313,7 +311,6 @@ public class memberDAO {
 
 		return sqlsession.delete("member.update_myshop", dataMap);
 	}
-	
 	
 	
 }

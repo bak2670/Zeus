@@ -1,12 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	request.setCharacterEncoding("UTF-8");
-
-%>
+<jsp:useBean id="paymentDAO" class="com.koreait.payment.paymentDAO"/>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="en">
+<%
+	request.setCharacterEncoding("UTF-8");
+	String username= null;
+	String m_idx = null;
+	
+	if(session.getAttribute("username") == null){
+%>
+	<script>
+		alert('로그인이 필요한 서비스 입니다.');
+		history.back();
+	</script>
+<%
+	}else{
 
+		m_idx = String.valueOf(session.getAttribute("idx"));
+	
+		String p_idx = request.getParameter("p_idx");
+
+%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,32 +65,12 @@
                 <main class="tradeBody">
                     <nav class="tradeBox">
                         <ul class="tradeList">
-                            <li class="selected"><button type="button" data-index="0">구매</button></li>
-                            <li class=""><button type="button" data-index="1">판매</button></li>
-                            <li class=""><button type="button" data-index="2">정산</button></li>
+                            <li class="selected"><button type="button" data-index="0" id="btnBuy">구매</button></li>
+                            <li class=""><button type="button" data-index="1" id="btnSell">판매</button></li>
                         </ul>
-                        <div class="avgBox1">
-                            <a class="avgLink" href="./accountManage.jsp">
-                                <mark class="avgTitle">정산계좌
-                                    <div class="avgJoin">
-                                        정산계좌를 등록하세요.
-                                    </div>
-                                </mark>
-                            </a>
-                            <div class="avgBox2">
-                                <div class="avgBox3">
-                                    <div class="avgContent">정산 내역이 없습니다.</div>
-                                </div>
-                            </div>
-                            <div class="avgTxt">
-                                판매 대금은 등록한 계좌번호로 정산일에 지급됩니다.
-                                <br>
-                                정산일 이후 미지급 상태인 경우 계좌번호를 다시 한 번 확인해주세요.
-                            </div>
-                        </div>
                         <div class="filterBox">
-                            <nav class="tradeFilter">
-                                <div><button
+                             <!-- <nav class="tradeFilter"> 
+                                <div> <button
                                         data-filter="{&quot;key&quot;:&quot;all&quot;,&quot;label&quot;:&quot;전체 상태&quot;}"
                                         class="tradeButton checkButton">전체 상태</button>
                                         <button
@@ -83,24 +81,87 @@
                                         class="tradeButton">완료</button>
                                         <button
                                         data-filter="{&quot;key&quot;:&quot;cancelled&quot;,&quot;label&quot;:&quot;취소/환불&quot;}"
-                                        class="tradeButton">취소/환불</button></div>
+                                        class="tradeButton">취소/환불</button>
+                                </div> 
+                                
+                    		</nav> -->
+                            <div class="tradeContent" id="tradeBuy">
                                 <div>
-                                    <!-- 확인 할 것!!-->
-                                    <div class="SimpleDropDown"><svg width="20" height="20" 
-                                            viewBox="0 0 20 20" fill="#fefefe">
-                                            <g fill="none" fill-rule="evenodd">
-                                                <g fill="#1E1D29">
-                                                    <path
-                                                        d="M0 3c0-.552.448-1 1-1h3.185C4.605.805 5.733.004 7 0c1.267.004 2.394.805 2.815 2H19c.552 0 1 .448 1 1s-.448 1-1 1H9.815C9.395 5.195 8.267 5.996 7 6c-1.267-.004-2.394-.805-2.815-2H1c-.552 0-1-.448-1-1zm20 14c0 .552-.448 1-1 1H9.815c-.42 1.195-1.548 1.996-2.815 2-1.267-.004-2.394-.805-2.815-2H1c-.552 0-1-.448-1-1s.448-1 1-1h3.185c.42-1.195 1.548-1.996 2.815-2 1.267.004 2.394.805 2.815 2H19c.552 0 1 .448 1 1zm0-7c0 .552-.448 1-1 1h-3.185c-.42 1.195-1.548 1.996-2.815 2-1.267-.004-2.394-.805-2.815-2H1c-.552 0-1-.448-1-1s.448-1 1-1h9.185c.42-1.195 1.548-1.996 2.815-2 1.267.004 2.394.805 2.815 2H19c.552 0 1 .448 1 1zM6 3c0 .552.448 1 1 1s1-.448 1-1-.448-1-1-1-1 .448-1 1zm2 14c0-.552-.448-1-1-1s-1 .448-1 1 .448 1 1 1 1-.448 1-1zm6-7c0-.552-.448-1-1-1s-1 .448-1 1 .448 1 1 1 1-.448 1-1z"
-                                                        transform="translate(-322 -140) translate(322 140)"></path>
-                                                </g>
-                                            </g>
-                                        </svg></div>
+                                	<!-- 거래내역 보여지는 부분 -->
+                                	<%
+                                		String select = "구매";
+	                                	List<HashMap<String, String>> tradeList = paymentDAO.tradeList(select, m_idx);
+                                	
+                                    	if(tradeList.isEmpty()){
+                                    %>
+                                    	구매내역이 없습니다.
+                                    <%
+                                    	}else{
+                                    		for(HashMap<String, String> trade : tradeList){
+                                    %>
+                                    
+                                    <div class="tradeText">
+
+	                                    	<!-- 가져온 리스트 보여줘야해 -->
+											<div class="tradeListBox">
+												<div class="tradeInnerBox">
+													<div class="tradeImgBox">
+														<img src='./uploads/<%=trade.get("p_picture") %>' alt='상품이미지'>
+													</div>
+													<aside class="tradeAsideBox">
+														<span class="tradeProductName">
+															<%=trade.get("p_name") %>
+														</span>
+														<span class="tradeProductPrice tradeProductPriceee"><strong><%=trade.get("p_price") %></strong>원</span>
+														<span class="tradeProductUserName hfRDV"><%=trade.get("seller") %></span>
+														<span class="tradeProductDate dCroum"><time datetime="1615020591000"><%=String.valueOf(trade.get("pm_regdate")) %></time></span>
+													</aside>
+												</div>
+											</div>
+                                    </div>
+                                    <%
+                                    		}
+                                    	}
+                                    %>
                                 </div>
-                            </nav>
-                            <div>
+                            </div>
+                            <div class="tradeContent" id="tradeSell" style="display:none">
                                 <div>
-                                    <div class="tradeText">구매내역이 없습니다.</div>
+                                	<!-- 거래내역 보여지는 부분 -->
+                                	<%
+                                		select = "판매";
+	                                	tradeList = paymentDAO.tradeList(select, m_idx);
+                                    	if(tradeList.isEmpty()){
+                                    %>
+                                    	판매내역이 없습니다.
+                                    <%
+                                    	}else{
+                                    		for(HashMap<String, String> trade : tradeList){
+                                    %>
+                                    
+                                    <div class="tradeText">
+
+	                                    	<!-- 가져온 리스트 보여줘야해 -->
+											<div class="tradeListBox">
+												<div class="tradeInnerBox">
+													<div class="tradeImgBox">
+														<img src='./uploads/<%=trade.get("p_picture") %>' alt='상품이미지'>
+													</div>
+													<aside class="tradeAsideBox">
+														<span class="tradeProductName">
+															<%=trade.get("p_name") %>
+														</span>
+														<span class="tradeProductPrice tradeProductPriceee"><strong><%=trade.get("p_price") %></strong>원</span>
+														<span class="tradeProductUserName hfRDV"><%=trade.get("buyer") %></span>
+														<span class="tradeProductDate dCroum"><time datetime="1615020591000"><%=String.valueOf(trade.get("pm_regdate")) %></time></span>
+													</aside>
+												</div>
+											</div>
+                                    </div>
+                                    <%
+                                    		}
+                                    	}
+                                    %>
                                 </div>
                             </div>
                         </div>
@@ -118,3 +179,6 @@
 </body>
 
 </html>
+<%
+	}
+%>

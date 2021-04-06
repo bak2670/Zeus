@@ -25,7 +25,6 @@
 <%			
 	}else{
 %>
-<%-- <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/> --%>
 <jsp:useBean id="pDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <%
@@ -594,7 +593,7 @@
 	                                </div> --%>
 	                            </div>
 	                            <button class="callButton">연락하기</button>
-	                            <button class="buyButton">바로구매</button>
+	                            <a class="buyButton" href="buy.jsp?p_idx=<%=p_idx%>">바로구매</a>
 	                        </div>
 	                        
 	                        
@@ -1387,7 +1386,7 @@
 		                </div>
 		                <div class="sideButton">
 		                    <button class="callBtn">연락하기</button>
-		                    <button class="buyBtn">바로구매</button>
+		                    <a class="buyBtn" href="buy.jsp?p_idx=<%=p_idx%>">바로구매</a>
 		                </div>
 		            </div>
 		            <!-- 오른쪽 하단 상점정보 컨테이너 끝-->

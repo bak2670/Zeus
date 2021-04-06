@@ -607,6 +607,18 @@ $(document).ready(function() {
 		$(this).addClass("selected");
 	})
 });
+
+$(document).ready(function(){
+	$("#btnBuy").click(function(){
+		$("#tradeSell").css('display','none');
+		$("#tradeBuy").css('display','block');
+	})
+	$("#btnSell").click(function(){
+		$("#tradeSell").css('display','block');
+		$("#tradeBuy").css('display','none');
+	})
+});
+
 $(document).ready(function() {
 	$(".tradeFilter button").click(function() {
 		$(".tradeFilter button").removeClass("checkButton");

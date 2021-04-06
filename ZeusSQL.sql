@@ -462,7 +462,6 @@ insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiv
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("29", "239.72.217.138", "5432", "30", "259.48.112.447", "5432", "먀먀", "아자아자", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("30", "240.72.217.138", "5432", "31", "260.48.112.447", "5432", "슈방", "파닥파닥", "C:\Users\fuck\Pictures\Saved Pictures", "N");
 
-use zeus;
 create table tb_faq (
    q_idx bigint not null auto_increment primary key,
    q_category varchar(20) not null,
@@ -476,3 +475,11 @@ insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "특
 insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "기기 버전과 호환이 안되어 번개장터 앱 설치/업데이트 안되요.","번개장터 앱 최소 지원 OS버전<br> <br>- 안드로이드버전: 5<br>- IOS버전: 11<br>디바이스별 최소 OS버전까지만 번개장터 앱의 최신버전 업데이트가 가능합니다. <br>OS 업데이트가 불가능하여 번개장터 앱 이용이 어려운 경우,  번개장터 웹사이트를 통해서만 번개장터 서비스 이용이 가능한 점 양해 부탁드립니다.");
 insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "[찜]찜 취소는 어덯게 하나요?","찜하신것을 취소하고 싶으신가요?<br>찜 취소는 찜한 상품을 들어가 찜을 한번 더 눌러주면 찜하신 것이 해제됩니다.");
 insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "사진 업로드 시 최적 사이즈는 어떻게 되나요?","[사진 업로드 시 최적 사이즈]<br>- 640*640 사이즈로 사진 등록 시 보다 깨끗한 사진 등록이 가능합니다.");
+
+create table tb_payment (
+	pm_idx bigint not null auto_increment primary key,
+    pm_sellerIdx bigint not null,
+	pm_buyerIdx bigint not null,
+    pm_productIdx bigint not null
+    pm_regdate datetime default now()    
+);

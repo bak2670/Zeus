@@ -4144,7 +4144,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     border-bottom: 2px solid rgb(30, 29, 41);
 }
 .tradeList li {
-    width: calc(33.3333%);
+    width: calc(50%);
     height: 2.875rem;
     border-bottom: 1px solid rgb(234, 233, 241);
 }
@@ -4202,11 +4202,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     -webkit-box-pack: center;
     justify-content: center;
 }
-.tradeText {
-    font-size: 1rem;
-    text-align: center;
-    margin-top: 3.125rem;
-}
+
 /* 정산계좌 등록 부분 css */
 .avgBox1{
     display: none;
@@ -5113,7 +5109,8 @@ color: rgb(255, 255, 255);
 #table2 { margin-top: 10px;}
 table {  width: 100%; border-collapse: collapse; }
 table tr { height: 45px; }
-table tr td:first-child { width: 40px; padding-left: 20px; }
+/* table tr td:first-child { width: 40px; padding-left: 20px; } */
+table tr td:first-child { width: 40px; padding-left: 20px; padding-top:20px; position:relative; top:8px;}
 #table1 tr td:first-child {padding-top: 20px}
 #table1 tr td:nth-child(2) {padding-bottom: 25px;}
 table tr td:last-child { text-align: right; opacity: 0.3; }
@@ -5156,8 +5153,31 @@ table tr td:last-child { text-align: right; opacity: 0.3; }
     border: none;
     border-bottom: 1px solid #EEEEEE;
 }
-#ssnBtn { height: 28px; width: 94px; margin: 0; background-color: #EEEEEE;
-    font-size: 12.7px; color: black ; border: none; font-weight: bold; text-align: center;}
+
+/* #ssnBtn {
+	height: 28px;
+	width: 94px;
+	margin: 0;
+	background-color: #EEEEEE;
+	font-size: 12.7px;
+	color: black;
+	border: none;
+	font-weight: bold;
+	text-align: center;
+} */
+
+#ssnBtn {
+	height: 28px;
+	width: 94px;
+	margin: 0;
+	background-color: #EEEEEE;
+	margin-left: 3px;
+	font-size: 12.7px;
+	color: black;
+	border: none;
+	font-weight: bold;
+	text-align: center;
+}
 
 .sun { font-size: 30px; 
     margin-left: 4px; 
@@ -5206,7 +5226,19 @@ table tr td:last-child { text-align: right; opacity: 0.3; }
     border: none;
     font-weight: bold;
     display: inline-block;
+    text-align: center !important;
 }
+/* #injeung_check {
+    height: 28px;
+    width: 94px;
+    margin: 0;
+    background-color: #EEEEEE;
+    font-size: 12.7px;
+    color: black;
+    border: none;
+    font-weight: bold;
+    display: inline-block;
+} */
 #container select { width: 120px; height: 28px; border: none; border-bottom: 1px solid #EEEEEE; font-size: 12.7px; color: #636060;}
 
 
@@ -6403,3 +6435,85 @@ font-weight: bold;}
     position: relative; left: 930px; bottom: 10px;
 }
 .this_bot2 button img{width: 15px; height: 16px;}
+
+
+/* trade.jsp 거래내역 css 추가부분 */
+.tradeContent {
+    display: flex;
+    flex-direction: column;
+}	
+
+/* 원래 이거였음 */
+/* .tradeText {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 3.125rem;
+} */
+.tradeText {
+    margin-top: 1rem;
+    padding: 0px 1rem;
+
+}
+.tradeListBox {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 6rem;
+}
+.tradeInnerBox {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 6rem;
+}
+.tradeImgBox {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(234, 233, 241);
+    border-radius: 2px;
+}
+.tradeImgBox > img {
+    width: 6rem;
+    height: 6rem;
+}
+.tradeAsideBox {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    overflow: hidden;
+}
+.tradeAsideBox .tradeProductName, .tradeAsideBox .tradeProductPrice {
+    color: rgb(30, 29, 41);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.tradeProductPriceee {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 4px 0px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+}
+
+.tradeProductPriceee strong {
+    margin-right: 2px;
+    font-weight: bold;
+    font-size: 1rem;
+    color: rgb(30, 29, 41);
+}
+.tradeAsideBox .tradeProductUserName, .tradeAsideBox .tradeProductDate time{
+    line-height: 1rem;
+    color: rgb(94, 92, 107);
+}
+
+.tradeProductDate
+
+.dCroum {
+    line-height: 1rem;
+}

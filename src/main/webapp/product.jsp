@@ -630,8 +630,13 @@
                     <div class="m1">
                         <a class="clickView2" href="#">상품관리</a>
                     </div>
+                    <script>
+                    	function popupp(){
+                    		window.open('trade.jsp','asdf','location=yes');
+                    	}
+                    </script>
                     <div class="m2">
-                        <a href="trade.jsp" target="_black" rel="noopener noreferrer" class="m3" href="#">구매/판매 내역</a>
+                        <a href="javascript:popupp();" target="_black" rel="noopener noreferrer" class="m3">구매/판매 내역</a>
                     </div>
                 </nav>
             </div>
