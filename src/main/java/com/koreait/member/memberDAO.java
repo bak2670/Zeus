@@ -158,9 +158,10 @@ public class memberDAO {
 		
 		System.out.println(zzimStr);
 		
-		String[] zzimArr = zzimStr.split(" ");
+		
 
 		if(zzimStr != null) {
+			String[] zzimArr = zzimStr.split(" ");
 			for(String str : zzimArr) {
 				if(str.equals(String.valueOf(p_idx))) {
 					return 1;

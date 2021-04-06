@@ -2,6 +2,7 @@ drop database zeus;
 create database Zeus;
 use Zeus;
 
+
 create table tb_category(
     c_idx bigint not null auto_increment primary key,
     c_big varchar(20) not null,
@@ -68,7 +69,6 @@ insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("�
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("장난", "jo@ke.com", "010-4454-5457", '001011','3068518');
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("꾸러기", "Pack@Pack.com", "010-2221-2221", '001011','3068518');
 insert into tb_member(m_username, m_kakaoemail, m_hp, m_ssn1, m_ssn2) values ("뽀로로", "Po@roro.com", "010-2222-2221", '001011','3068518');
-
 
 
 create table tb_product(
@@ -462,4 +462,17 @@ insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiv
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("29", "239.72.217.138", "5432", "30", "259.48.112.447", "5432", "먀먀", "아자아자", "C:\Users\fuck\Pictures\Saved Pictures", "Y");
 insert into tb_talk(t_sendidx, t_senderIP, t_senderPort, t_receiveridx, t_receiverIP, t_receiverPort, t_content, t_file, t_filepath, t_read) values ("30", "240.72.217.138", "5432", "31", "260.48.112.447", "5432", "슈방", "파닥파닥", "C:\Users\fuck\Pictures\Saved Pictures", "N");
 
+use zeus;
+create table tb_faq (
+   q_idx bigint not null auto_increment primary key,
+   q_category varchar(20) not null,
+   q_title varchar(50) not null,
+   q_content  text not null
+);
 
+insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "상점명 정책은 어떻게 되나요?","1. 상점명 등록 제한 수: 최소 2자, 최대 10자 (가입시 기본으로 생성되는 상점명 제외)<br> <br>2. 상점명 입력 가능 문자: 한글, 영문, 숫자만 가능 (특수기호 및 띄어쓰기 불가)<br> <br>3.상점명 등록 불가 금지<br>- 번개장터 관리자 상점으로 오인할 수 있는 단어 예) 번개장터, 번장, sellit, 셀잇, bunjang 등<br>- 욕설, 음담패설 등의 비속어<br>- 거래금지품목 관련 단어<br>- 사용 불가 형식: 번개장터 기본 생성 상점명 형식<br> <br>예) 상점12345호 등과 같이 상점 + 숫자 + 호 의 형식
+");
+insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "특정공간에서 앱 접속이 안되요. 어떻게 하나요?","이동 중이거나 건물 지하와 같은 특정 공간에서는 네트워 연결이 원할하지 않을 수 있습니다.<br> <br>만약 지속적으로 오류가 발생한다면 '내상점 > 1:1문의'로 접수 부탁드립니다.<br> <br>문의 TIP<br>- 포털 사이트 > '내 IP' 검색시 조회되는 IP를 기재하여 문의하시면 원할한 상담이 가능합니다.");
+insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "기기 버전과 호환이 안되어 번개장터 앱 설치/업데이트 안되요.","번개장터 앱 최소 지원 OS버전<br> <br>- 안드로이드버전: 5<br>- IOS버전: 11<br>디바이스별 최소 OS버전까지만 번개장터 앱의 최신버전 업데이트가 가능합니다. <br>OS 업데이트가 불가능하여 번개장터 앱 이용이 어려운 경우,  번개장터 웹사이트를 통해서만 번개장터 서비스 이용이 가능한 점 양해 부탁드립니다.");
+insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "[찜]찜 취소는 어덯게 하나요?","찜하신것을 취소하고 싶으신가요?<br>찜 취소는 찜한 상품을 들어가 찜을 한번 더 눌러주면 찜하신 것이 해제됩니다.");
+insert into tb_faq(q_category, q_title, q_content) values ("상점/상품", "사진 업로드 시 최적 사이즈는 어떻게 되나요?","[사진 업로드 시 최적 사이즈]<br>- 640*640 사이즈로 사진 등록 시 보다 깨끗한 사진 등록이 가능합니다.");

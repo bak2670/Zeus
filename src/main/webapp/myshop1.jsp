@@ -679,7 +679,7 @@
                         </div>
                         
                         <div class="myshop_text_top1_click" >
-                            <input type="text" value="상점이름" id="name_text">
+                            <input type="text" value=<%=dao.storeName(member.getIdx())%> id="name_text">
                             <button type="button"onclick="myshop_name_change_ok(<%=idx %>)" >확인</button>
                             <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                         </div>
@@ -731,7 +731,7 @@
                     </script>
                     </div>
                     <div class="myshop_text_bottom_click">
-                        <textarea id="myshop_intro_text"></textarea>
+                        <textarea id="myshop_intro_text"><%=member.getIntro() %></textarea>
                         <button onclick="Introduction_ok(<%=idx%>)">확인</button>
                     </div>
                 </div>

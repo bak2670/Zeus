@@ -652,7 +652,7 @@ div {
         <div class="myshop_top"> 
             <div class="myshop_profile">
                 <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
-                <div class="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
+                <div class="myshop_name" id="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                 <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
                 <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
             </div>
@@ -679,14 +679,14 @@ div {
                         <div class="myshop_text_top2"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                     </div>
                     
-                    <div class="myshop_text_top1_click">
-                        <input type="text" value="상점이름" id="name_text">
-                        <button type="button"onclick="myshop_name_change_ok(<%=idx%>)"; >확인</button>
+                     <div class="myshop_text_top1_click">
+                        <input type="text" value=<%=dao.storeName(member.getIdx())%> id="name_text">
+                        <button type="button" onclick="myshop_name_change_ok(<%=idx%>)">확인</button>
                         <div class="myshop_text_top3"><img src="./img/번개장터이미지/ok.png">본인인증완료</div>
                     </div>
-                    
 
-                </div>
+
+				</div>
                 <ul class="myshop_text_center">
                     <li class="myshop_text_center1">
                         <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10) %>
@@ -731,7 +731,7 @@ div {
                     </script>
 				</div>
                 <div class="myshop_text_bottom_click">
-                    <textarea id="myshop_intro_text"></textarea>
+                    <textarea id="myshop_intro_text"><%=member.getIntro() %></textarea>
                     <button onclick="Introduction_ok(<%=idx%>)">확인</button>
                 </div>
             </div>
