@@ -2,15 +2,36 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="com.koreait.block.blockDTO"%>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="memberDTO" class="com.koreait.member.memberDTO"/>
 <jsp:useBean id="recentproductDAO" class="com.koreait.recentProduct.recentProductDAO"/>
 <jsp:useBean id="recentproductDTO" class="com.koreait.recentProduct.recentProductDTO"/>
-
+<jsp:useBean id="blockDAO" class="com.koreait.block.blockDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");
+
+	String b_memidx = String.valueOf(session.getAttribute("idx"));
+	if(blockDAO.blockidx(b_memidx) == 1){
+		blockDTO block = new blockDTO();
+		block = blockDAO.blockinfo(b_memidx);
+		String Blockreason;
+		String b_blockdate;
+		Blockreason = block.getBlockreason();
+		b_blockdate = block.getBlockdate();
+		 out.println("<script type='text/javascript'>");
+		 out.println("alert('계정이 차단당했습니다. \\n 차단사유 : " + Blockreason + "\\n 차단일 : " +b_blockdate+ "');");
+		 out.println("</script>");
+	%>
+	<script>
+	location.href="logout.jsp"
+	</script>
+
+	<%
+	}
+
 
 	String username= null;
 	String m_idx = null;
@@ -372,18 +393,18 @@ div {
 	
 			if(recentIdx.size() == 0){
 				%>
-				<div class="zzimSideBox1">
+				<!-- <div class="zzimSideBox1">
 				<div class="zzimSideBox2">
 					<div class="zzim1">
 						<div class="zzim1Txt">찜한상품</div>
-						<div class="zzim1Num"><!--img src 경로 수정(20210405)-->
+						<div class="zzim1Num">img src 경로 수정(20210405)
 							<a class="zzim1Btn1" href="#"><img
 								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAX1JREFUOBGdk7FLw0AUxnPXFhdHRdBdVJBCGgedBP8GoYJQHMRBRNBF1EGnTkopXcRBBEFB/A+cnNuIhEBHQcFBnHRolsTfqwZiWmLSg8t733vf++7d5U4Zv8NxnDHP846Ai8xxpdRDEAT7lmU5YKPZbE5hlonPYfPknrB18m9YQ8nHtu0l3/dvcEcER8ZnLpcrUzTLPGYORXLifmity6Zp3ivXdYc7nU4b0kSMlArS4Tu1MxqR7UFFZCVqRxE71DjzqZZOJi1o1CaTOamy0xraSypqAoldPcvWHhM4aVO2LhQKNbb3lbYizqPWI1bVxWLxla4O4oQMeI9L2ZYzMnDqXKxqhuIuVWpKpVJNQPdmhwI8gxP8nRD/Y09pYDfk/BGSYKvVarDVzZDQz3IuDTrZiuZ6hBBRvL0z7HqUGPqInPO2NrBBGBPbIyRBEaOzC9yK4Mi4pJO1uIjk+wpJAjGN2BXuimDGNSKriPg/MMMXsTw/4BbBO/EzlA5O/QbfD5IxtG4t8AAAAABJRU5ErkJggg=="
 								width="9" height="9" alt="찜 아이콘">0</a>
 						</div>
 					</div>
 					<div class="zzimSideBox3">
-						<div class="zzim2Txt">최근본상품</div>
+						<div class="zzim2Txt">최근본상품</div> -->
 						<div class="zzim2NumBox">
 							<div class="zzim2Num"></div>
 						</div>

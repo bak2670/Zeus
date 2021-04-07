@@ -33,6 +33,8 @@
 		<mapper resource="com/koreait/db/yourshop.xml" />
 		<mapper resource="com/koreait/db/payment.xml" />
 		<mapper resource="com/koreait/db/recentproduct.xml" />
+		<mapper resource="com/koreait/db/report.xml" />
+		<mapper resource="com/koreait/db/block.xml" />
   		<!--<mapper resource="com.koreait/db/review.xml" />
 
 	   <mapper resource="com.koreait/db/inquire.xml" /> -->

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="onetoone">
+  
+    <!-- 문의한사람 idx   -->
+ <select id="oneName" parameterType="int" resultType="int">
+		select o_memidx from tb_onetoone where o_idx=#{o_idx}
+	</select>
+	
+	<!-- 문의한사람 이름 가져오는 sql -->
+	<select id="oneMemName" parameterType="int" resultType="string">
+		select m_username from tb_member  where m_idx = #{m_idx}
+	</select>
+	
+	<select id="oneMemStore" parameterType="int" resultType="string">
+		select m_store from tb_member  where m_idx = #{m_idx}
+	</select>
+	
+	<select id="oneMemHp" parameterType="int" resultType="string">
+		select m_hp from tb_member  where m_idx = #{m_idx}
+	</select>
+	
+	<select id="oneMemEmail1" parameterType="int" resultType="string">
+		select m_kakaoemail from tb_member  where m_idx = #{m_idx}
+	</select>
+	
+	<select id="oneMemEmail2" parameterType="int" resultType="string">
+		select m_naveremail from tb_member  where m_idx = #{m_idx}
+	</select>
+	
+</mapper>

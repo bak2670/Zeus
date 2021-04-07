@@ -1022,20 +1022,20 @@
 	                                    </div>
 	                                    <div class="reSubBox reSubBox1">
 	                                        <div class="reButton">
-	                                            <button type="button">상점홍보</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'상점홍보')">상점홍보</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">낚시글</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'낚시글')">낚시글</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">도배글</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'도배글')">도배글</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">타사이트,어플 광고</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'타사이트,어플 광고')">타사이트,어플 광고</button>
 	                                        </div>
 	                                        <div class="reJoin">
-	                                            <input type="text" placeholder="기타(사유)">
-	                                            <button type="button">등록</button>
+	                                            <input type="text" class="reprotTT1" placeholder="기타(사유)">
+	                                            <button type="button" onclick="report1(<%=product.getIdx()%>,<%=product.getMemidx()%>)">등록</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -1049,20 +1049,20 @@
 	                                    </div>
 	                                    <div class="reSubBox reSubBox2">
 	                                        <div class="reButton">
-	                                            <button type="button">카테고리가 잘못됨</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'카테고리가 잘못됨')">카테고리가 잘못됨</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">가격이 잘못됨</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'가격이 잘못됨')">가격이 잘못됨</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">사진이 잘못됨</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'사진이 잘못됨')">사진이 잘못됨</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">상품명이 잘못됨</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'상품명이 잘못됨')">상품명이 잘못됨</button>
 	                                        </div>
 	                                        <div class="reJoin">
-	                                            <input type="text" placeholder="기타(사유)">
-	                                            <button type="button">등록</button>
+	                                            <input type="text" class="reprotTT2" placeholder="기타(사유)">
+	                                            <button type="button" onclick="report2(<%=product.getIdx()%>,<%=product.getMemidx()%>)">등록</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -1076,20 +1076,20 @@
 	                                    </div>
 	                                    <div class="reSubBox reSubBox3">
 	                                        <div class="reButton">
-	                                            <button type="button">담배/주류</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'담배/주류')">담배/주류</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">장물(분실폰,분실노트북, ..)</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'장물(분시폰,분실노트북...)')">장물(분실폰,분실노트북, ..)</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">의약품류</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'의약품류')">의약품류</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">콘택트 렌즈</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'콘택트 렌즈')">콘택트 렌즈</button>
 	                                        </div>
 	                                        <div class="reJoin">
-	                                            <input type="text" placeholder="기타(사유)">
-	                                            <button type="button">등록</button>
+	                                            <input type="text" class="reprotTT3" placeholder="기타(사유)">
+	                                            <button type="button" onclick="report3(<%=product.getIdx()%>,<%=product.getMemidx()%>)">등록</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -1103,14 +1103,14 @@
 	                                    </div>
 	                                    <div class="reSubBox reSubBox4">
 	                                        <div class="reButton">
-	                                            <button type="button">비방/욕설</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'비방/욕설')">비방/욕설</button>
 	                                        </div>
 	                                        <div class="reButton">
-	                                            <button type="button">성희롱</button>
+	                                            <button type="button" onclick="report(<%=product.getIdx()%>,<%=product.getMemidx()%>,'성희롱')">성희롱</button>
 	                                        </div>
 	                                        <div class="reJoin">
-	                                            <input type="text" placeholder="기타(사유)">
-	                                            <button type="button">등록</button>
+	                                            <input type="text" class="reprotTT4" placeholder="기타(사유)">
+	                                            <button type="button" onclick="report4(<%=product.getIdx()%>,<%=product.getMemidx()%>)">등록</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -1124,8 +1124,8 @@
 	                                    </div>
 	                                    <div class="reSubBox reSubBox5">
 	                                        <div class="rsTxa">
-	                                            <textarea></textarea>
-	                                            <button type="button">등록</button>
+	                                            <textarea id="reprotTT5"></textarea>
+	                                            <button type="button" onclick="report5(<%=product.getIdx()%>,<%=product.getMemidx()%>)">등록</button>
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -1142,6 +1142,93 @@
 	                </div>
 	            </div>
 	        </div>
+	        <script>
+								function report(a,b,c){
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+c, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+	
+										}
+									}
+								}
+								
+								function report1(a,b){
+									const xhr = new XMLHttpRequest();
+									var re_reason = $('.reprotTT1').val();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+re_reason, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+
+										}
+									}
+								}
+								function report2(a,b){
+									const xhr = new XMLHttpRequest();
+									var re_reason = $('.reprotTT2').val();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+re_reason, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+
+										}
+									}
+								}
+								function report3(a,b){
+									const xhr = new XMLHttpRequest();
+									var re_reason = $('.reprotTT3').val();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+re_reason, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+
+										}
+									}
+								}
+								function report4(a,b){
+									const xhr = new XMLHttpRequest();
+									var re_reason = $('.reprotTT4').val();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+re_reason, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+
+										}
+									}
+								}
+								function report5(a,b){
+									const xhr = new XMLHttpRequest();
+									var re_reason = $("textarea#reprotTT5").val();
+									xhr.open('GET', 'report_ok.jsp?rp_productidx='+a+'&rp_memidx='+b+'&rp_reason='+re_reason, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert('신고되었습니다.')
+
+										}
+									}
+								}
+
+	        </script>
     
 	        <div class="relationContainer">
 	            <div class="relationBox">

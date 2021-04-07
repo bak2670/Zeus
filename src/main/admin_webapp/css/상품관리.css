@@ -1,0 +1,28 @@
+* { font-size: 12px; }
+#container { width: 800px; margin: 0 auto;}
+a:link { text-decoration: none; color: black;}
+.redtxt { color: red;}
+.clear { clear: both;}
+
+#productsTop { border-bottom: 1px solid #ccc;}
+#productsTop .slide { padding: 0 20px; }
+#productsManage p { float: left; margin: 30px 0; }
+#productsManage p input { width: 300px; height: 40px; padding: 5px 15px; margin-right: 15px; background: url(../images/search.png) no-repeat 10px; background-size: 20px; background-position-x: 95%; }
+#productsManage p select { width: 90px; height: 40px; padding: 5px; margin-right: 15px; }
+#productsList {  width: 100%; border-top: 1px solid #000;border-bottom: 1px solid #ccc; text-align: center; }
+#productsList tr th { padding-right: 5px; }
+#productsList tr th:nth-child(1) { width: 130px; }
+#productsList tr th:nth-child(2) { width: 50px; }
+#productsList tr th:nth-child(3) { width: 200px; }
+#productsList tr th:nth-child(4) { width: 80px; }
+#productsList tr td:first-child img { width: 130px; }
+#productsList tr td { padding: 10px; }
+#productsList tr td select { width: 90px; height: 40px; padding: 5px; }
+#productsList tr td a { color: blue; letter-spacing: -1px; }
+#productsList tr td input { width: 40px; height: 30px; margin: 2px; background-color: #fff; border: 1px solid #ccc; border-radius: 2px;}
+#productsList tr td input[value="UP"] {color: red;}
+#productsList tr td input[value="수정"] {color: blue;}
+
+.pageNum p { font-size: 18px; text-align: center; }
+.pageNum p .currentPage{ font-size: 18px; padding: 5px;  background-color: red; color: #fff; }
+

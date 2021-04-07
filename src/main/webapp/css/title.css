@@ -3148,6 +3148,7 @@ input[type="checkbox"]#contactHope:checked + .prciebutton::before{
     padding: 10px 20px;
     margin-bottom: 10px;
     border: 1px solid rgb(238, 238, 238);
+    box-sizing: border-box;
 }
 
 

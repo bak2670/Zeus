@@ -380,7 +380,7 @@ $(document).ready(function() {
 
 		$("body").css("overflow", "hidden");//body 스크롤바 없애기
 	})
-	lg();
+
 });
 
 

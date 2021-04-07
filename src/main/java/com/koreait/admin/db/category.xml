@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="category">
+  
+    <!-- 상품 idx -> 올린 상점 idx -->
+ <select id="categoryIdx" parameterType="int" resultType="int">
+		select p_category from tb_product where p_idx=#{p_idx}
+	</select>
+	
+	<!-- 카테고리 이름 가져오는 sql -->
+	<select id="categoryBig" parameterType="int" resultType="string">
+		select c_big from tb_category  where c_idx = #{c_idx}
+	</select>
+
+	<select id="categoryMiddle" parameterType="int" resultType="string">
+		select c_middle from tb_category  where c_idx = #{c_idx}
+	</select>
+	<select id="categorySmall" parameterType="int" resultType="string">
+		select c_small from tb_category  where c_idx = #{c_idx}
+	</select>
+
+</mapper>
