@@ -32,7 +32,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="./js/script.js"></script>
-    <title>Document</title>
+    <title>계정설정</title>
     <style>
         @font-face {
             font-family: 'GmarketSansMedium';

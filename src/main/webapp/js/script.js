@@ -1634,11 +1634,18 @@ $(document).on('click','.logOut', function() {  //팝업 Open 버튼 클릭 시
 
 	$("body").css("overflow", "hidden");//body 스크롤바 없애기
 });
-$(".Aclogoutpage_btn1").click(function() {
+$(document).on('click','.Aclogoutpage_btn1', function(){
 	$(".Aclogoutpage").css("display", "none"); //팝업창 뒷배경 display none
 	$(".Aclogoutpage_top").css("display", "none"); //팝업창 display none
 	$("body").css("overflow", "auto");//body 스크롤바 생성
 });
+
+
+/*$(".Aclogoutpage_btn1").click(function() {
+	$(".Aclogoutpage").css("display", "none"); //팝업창 뒷배경 display none
+	$(".Aclogoutpage_top").css("display", "none"); //팝업창 display none
+	$("body").css("overflow", "auto");//body 스크롤바 생성
+});*/
 
 
 

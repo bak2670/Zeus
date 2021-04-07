@@ -242,18 +242,7 @@
 					memberDAO.lastlogin(m_idx);
 					%>
 					<button class="logOut">로그아웃</button>
-					<div class="noticeBox1">
-						<div class="noticeBox2">
-							<a class="noticeBtn">알림</a>
-							<div class="noticeBox3">
-								<div class="noticeView">
-									<img
-										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAuCAYAAABap1twAAAAAXNSR0IArs4c6QAABSBJREFUWAnVmVtoXEUYx/eSaLZsYyVKRI2y0lhDJCHZGFBbvDwU9KExFArF10q9UaEX34S0AcE++CIRvBQVpIUqiIg+WEEwfZFmNxeKGKK1GDWNoHU11LoJWX//dM422Zw9M2fPijow+c7MfN9//vN9c93EY3VIuVzucWCGSqXSZuR0PB4/lM1mP6oDdCweFWR8fPy+5eXlUcglPCwIFhsaGrLd3d1nvbpaZRm0VgDI7TPkhvv6+uAWH6F8zdLS0oFaMVfbRSYImX4BNjY2vmWAR4y838hIIjJBer9VDLq6umYlIfyNJOn2KyLa33oQbBQFQrskSZgXJRVmyagp0iKZmJjoZ659aUhcgOT1EJunfJup64Dw11FI1kRwcnJyC8RehczDDp2fSCQSB3t7e39y0F2nEppgPp/fCbHjJoSX8drHoJ6i/EMymbzIqm6lLkN5gPptSPVRgOQOSH6xjoGlIhRBNuRddHgczCQk3m5qajrQ2dn5a7U+5OnFxcVjtGtFXyYPEPJPq+n71TsTnJqauoPOJiGYhtyTnBSv+QFW1qGfwOuaDntp+wVPdoUJt/MqLhaLxwy5F13JiSyDWYbQ03x+SG4B403VuyYngjrOAHyQfK65ufmIK7inJ5J8P0X+A4KP4NE+r80mnQgy8Z8TEB0dbW9v/8sG6tfO3JvD/hW1QfKgn45fnZUgYEmNGvAix9lJP5AQdSvHIXiPkhtc7KwECW8PQBvJeY6ziy6g1XSYuzoGtXFvdA2zlSAjzZoO89U6DlNPJM5IH1wN3JqsBAG80aD8aEVzU/jWqHm4gVZWgoy0xSAUApEcG8HzpskNLiYuBNMCwpM6CeqRLhmQDS5gVoKArFyn2GpWrlMuoBadleuYh2vRjVkJ4rkmA+KN3IYZ2M5R5+2jdfPgdabHes3B34THwDcFjsQ0Wj3IpL7JAF5wAbTpgPez0bnZpqt2K0F0MlLkDD4vGTWlUqnzwoCo7oxJG14gQV2xAFCIv+MM/t0G5tKu+yPh1Z6a4pS622YTSJD73w4BAPiJDShMO577TPrsDDttdoEEAdotAAhGvSSs4QHe+wZ3N30EcqjayGH+ACD9gH3V09MzuqaHiAWeCrr2z0FuM2HeFQTnSxDDOHlYhhAcJpeCQMK2MQ+LYB6VHWE+PDMzc201DF+CjOpZCG7DKI/36hpejwj4r/P9PfnOQqEw5NVXynUEebl1MKqXGOEyu/5eyUqjepS5YV/imbrHYB3CKff44a4hODs7m2Jk76IoOcJjZ8zPqF51ROcUWHpEJXHKO4S6uRK7TBBCyfn5+RMo9OK1My0tLc9XKv8T5dbW1n30l6P/DkL9HnLNU6BMkFU7AoEB8hyuH8xkMvW6XgWOq62t7U9+7HwMJR2l2w2Pss3Kw31sbOwINS+Ua//lDzx6mPfLkGgkWBT6+C+RI8qlZ/DklUNCLF0TntaLbAs5yyoM9YjCthe7HHka27uQTqk8B520Y7HTRm/QUX+1mmfjYaxuq/odlqC3ae9n32qvilrRYHT3m2oPo0LLvxiKIKHRGSoPbNC+xVyx3uekI13ZyNZg8OmWQhE0kE8gC3R8LxN5NMiTapOOdGXDTyd73Ghd1XL+ffCqSSzGhH+I8gdkXWb1mHpZ5XQ6PYOMLSwsKPyacwqrPKf3zCDe+xwZKtVEUD1AUivxDfJWlQPSaXmO/zpNB+hUbaqZoIcI0e186063lQ32FtUTUl3pNVdPhp1zsv9fpb8BJA31DAFoy+sAAAAASUVORK5CYII="
-										width="20" height="23" alt="빈 알림 이미지">최근 알림이 없습니다.
-								</div>
-							</div>
-						</div>
-					</div>
+					
 					<div class="storeBox1">
 						<div class="storeBox2">
 							<a class="storeBtn" href="./myshop1.jsp">내 상점</a>

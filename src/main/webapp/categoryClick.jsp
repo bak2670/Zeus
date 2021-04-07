@@ -4,10 +4,12 @@
 <%@ page import="java.util.HashMap" %>
 <%
 	request.setCharacterEncoding("UTF-8");
+	
 	String username= null;
-	String idx = null;
+	String m_idx = null;
 	if(session.getAttribute("username") != null){
 		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
 	}
 	
 	String big = request.getParameter("big");
@@ -18,6 +20,10 @@
 <jsp:useBean id="productDTO" class="com.koreait.product.productDTO"/>
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="categoryDAO" class="com.koreait.category.categoryDAO"/>
+<jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="memberDTO" class="com.koreait.member.memberDTO"/>
+<jsp:useBean id="recentproductDAO" class="com.koreait.recentProduct.recentProductDAO"/>
+
 <html lang="en">
 
 <head>
@@ -107,116 +113,9 @@ div {
 								width="16" height="16" alt="검색 버튼 아이콘"></a>
 							</div>
 						</form>
-						<div class="zuesViewBox1">
-							<div class="zuesViewBox2">
-								<div class="zuesViewBox3">
-									<a class="lastSearch srchClick">최근검색어</a>
-									<a class="popularSearch">인기검색어</a>
-								</div>
-								<div class="searchBox1">
-									<div class="searchBox2">
-										<div class="searchBox3">
-											<div class="searchBox4">
-												<div class="serachOne">
-													<button type="button">아이폰</button>
-													<button type="button" class="serachRemove">
-													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">파워뱅크</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">캠핑카</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">ㅁ</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-											</div>
-											<div class="searchNo">
-												<img
-													src="data:image/png;base64,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"
-													width="52" height="45" alt="검색어 없음 이미지">
-												<div>최근 검색어가 없습니다.</div>
-											</div>
-										</div>
-									</div>
-									<div class="starSearch1">
-										<div class="starSearch2">
-											<div class="starRank">
-												<a class="starBtn"><span class="starNum">1</span>냉장고</a><a
-													class="starBtn"><span class="starNum">2</span>그래픽카드</a><a
-													class="starBtn"><span class="starNum">3</span>아크테릭스</a><a
-													class="starBtn"><span class="starNum">4</span>노트10</a><a
-													class="starBtn"><span class="starNum">5</span>방탄</a><a
-													class="starBtn"><span class="starNum">6</span>pcx</a><a
-													class="starBtn"><span class="starNum">7</span>자전거</a><a
-													class="starBtn"><span class="starNum">8</span>로드자전거</a><a
-													class="starBtn"><span class="starNum">9</span>스쿠터</a><a
-													class="starBtn"><span class="starNum">10</span>루프탑텐트</a>
-											</div>
-											<div class="starRank">
-												<a class="starBtn"><span class="starNum">11</span>나이키</a><a
-													class="starBtn"><span class="starNum">12</span>스톤아일랜드</a><a
-													class="starBtn"><span class="starNum">13</span>주술회전</a><a
-													class="starBtn"><span class="starNum">14</span>캠핑카</a><a
-													class="starBtn"><span class="starNum">15</span>pxg</a><a
-													class="starBtn"><span class="starNum">16</span>골프백</a><a
-													class="starBtn"><span class="starNum">17</span>mcm</a><a
-													class="starBtn"><span class="starNum">18</span>아이폰</a><a
-													class="starBtn"><span class="starNum">19</span>tv</a><a
-													class="starBtn"><span class="starNum">20</span>에어팟프로</a>
-											</div>
-										</div>
-									</div>
-									<div class="storeSrch1">
-										<div class="storeSrch2">
-											<div class="storeSrch3"></div>
-											<a class="storeSrch"><img
-												src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAcCAYAAAAJKR1YAAAAAXNSR0IArs4c6QAAAZdJREFUSA3tVktuwjAQTRz2LFlWYlWpu8IBULvhIPlcoTfoGfLpBXKBXoCKDazoortKnCCsoyR9Y2WQEzWJkLAVJCzBjGfMzPObsY1tKSOKol1VVQvFpFUVQiw9z9urSYQ6ueu3wIDNIMMwfIf+xnNTEn00Rx/9cr5zD9m2/cpGw/JFzTehCdiZQjzjcwyC4IFsukeSJOuiKD5xqomID84nGQJtKzgcsPTFDt0SYLbIUeLTYEgCKsuSjRvdQDg+KnGCfgARM9x/T2yXgLh/II0BIgBckbpsEpOI43gGAyE8ua77La2GvpgASK6QRQzxZAsH1dTYcBxHVgSErNI0dSixUOha47RVYMzIW0bvZp7nx3r30yzL6JQ3GJI+AHysF+kWjTxMzMT3/Tll5pceZfvRjaSOT3kW7RefemhUQ97UXYiYtS6/urtL1nbFI/ttMcQ7UZkgWx8bl6zl+KocHUN3QGp5/tN7Txn/AP8GdrjFeWrhEjvr11ZGV7JehnCLL6/NwFC88TPU7pehHbF/qK/acbvWj46hP8RApehW+HAaAAAAAElFTkSuQmCC"
-												width="18" height="14" alt="추천 상점 아이콘">상점검색 &gt;<span
-												class="storeSrchTxt"></span><span class="storeSrchGo">상점명으로
-													검색</span></a>
-										</div>
-										<div class="storeSrchEx">
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="closeBox">
-								<a class="closeBtn">닫기</a><a class="removeBtn"><img
-									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAAAAXNSR0IArs4c6QAAAOBJREFUSA3tVgEOwyAInEsf0Yf4lX2jj+k39hX/0f5i41xHWiI2rNY0iyYmciJwQILupqwQwoOuRtq9oiLhmYDBe/+UF5DvKXDBLE7wBAHhTXJ1SfQDRiYUocvo8BVl4EWCyj7HiI2UOLgfamH1G2sHR1OOstWqoj+jRqZaKIZU+Fu7ajX6P0fVmgGpG2ijBc9asb3ZOLpj6RDGjhykves0g4xsT9aycB1GWoRWvDGyZoz1W+o4FdZDS501Y6yf+9dFJfmv25PZsjhUq9GaEQZUX3ImkT0eqGtGpSftZrK+AWoUS5rz8CTIAAAAAElFTkSuQmCC"
-									width="13" height="15" alt="쓰레기통 아이콘">검색어 전체삭제</a>
-							</div>
-						</div>
+						
 					</div>
 					<div class="rightMenu">
-						<button class="zeusTalk1">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAwCAYAAABuZUjcAAAAAXNSR0IArs4c6QAAA59JREFUaAXtmU1S2zAUxyWnDaawSJfAJj1BzddMl2TXpblBQg9QOAFwAth2QZ0bQJddkWVn+GiOQDfADnemfIROrP6fx8o4Tkw86AnSTjWTSHqSpZ/+fnpyHCmS5HletVQqbaLq41PR9jHKm91ud7vdbp8Rk6SvhYWFupRyB8VxBCZEnUKl1Mbp6WlTJkp/R8u4Q/fgofx8aW5ujpR+p61/Qe46jlORi4uLKgNLvrQBXwoz9meppvZePQ0wAA7o1+MCrUEBX0HguNJ1yp10hcrjBp3HNACeXci41v+DF7kzt4FbpU+RvqP6PJniv4KXHg6P/cnG3dkoqCLtL4p0Mu1zu+fWAR3gdK6ZjqWvt6749Z67paQKMGELarf0xKa5NcWvAlEpi/KOVKpOkFC7YQqbvt4KOEFPqIlDTOTFk0mxy+XbGp4dnDahoxyC1g9tYUd0tvWEXDkr+HVQ9qWS5M8aWgglWq50vVuyJqkruuF043db1x+Ts4Hf7E2sA5KeNPuTFD4iip8ynuFXwGqq/qgiCziUDgBdL0DQ6sjO6uuGCAv0fbCLMThOwpUoEj+UELEfS6HeQtG0wjEAQmJzqnHPFlmMwZPY3NLy3HyOo4muxjn8vvFqrdPsMxpWjMHT89PmhMuspGxhJKPa9JrZRkyN1yuynZwUu6FsenO24c9vTKNHjzRTYAMvR+46xq7S+OTPgK5xbEIab1hicRV6VEXI+xhPoMTG1Nr97rDJOG0s4JGINiVCCZReBfQBJ2DeWMbgFA6hthdvQsPTMA9ymN0YXESi2nHs+rMV8MkPd81hA9u2sUUV26DZ8f8dcHprlF3dc9eHMQ0ojlddO8M6Phd88votfSLHKPTucB8lnwGseXJyMvLpb2lpicIn/UIySQd4Y+vEj6MmoyTX1kmEp7hbxOwcHR21ocBIpQouzIerHdqEJ1Zijn2c/prAKuYBx3Fce5bgyT3miZVElPRlkpaXl70oishns9EoxEQ1Usdk/LxrB6JKXsc8e3zbAIj2LGCFFkQLy7vWxG6suJ48CVukfBa090+Z7suRs4ETzAPwgjaV9k8O8BLHIHqMy8vLu4uLi0+zs7NV2PqUx7tDf2Zm5ifav+n+JjkruAYB3Jcc+Pf4e7Jyfn7+Vfd9bG68OfMmplMUKm9n2+EyfXci2160bg2cAI6Pj7cYD7e+NVkFp5loQ9qAtw6u4eE2FOtDqnOkJwEnULhNi05SFFng/wBaR0Y/O/3CZQAAAABJRU5ErkJggg=="
-								width="23" height="24" alt="번개톡버튼 이미지">번개톡
-						</button>
 						<a class="myShopBtn1" href="#"><img
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAwCAYAAABuZUjcAAAAAXNSR0IArs4c6QAABCNJREFUaAXtWUtS20AQtWxXJSEbZ8XWuYH4rcEnwNzALg6Q5AQJy6yAE1icIOYEmDWf6AbRispSqwSqAOU91QwetUbWSAFjqpgq10z39OdNT89P9hqPVNbW1vowtY2fr36m5RAEf8cXFxdjs6Nu26urqPVWV1cHnud9Bd3VvJI6SpJk7/LyMiiRm9ldG/jGxoZ/f38/gnVGuE4Jm83m8OzsjDNRudQCrkCfwFunssesQgzwvTrgKwMvAR0jbQKkwinqmBjR7qC9iXoA0jbQWuArAfd9v9NqtX5ZAMQAxrw9QF9hwXr4jEFwPcgBxHd3dx/DMEwHW2jA6Gga7dImQO9DSDplrvbKQNM4ZSiLZkjaKAwIbTsX54gj2l0VbdN45UhRuWjmVNQj00FR2zniAM0pzhRM+06V6dXK1KGupnVt86H7ZO0MHIp9oRycn59PBM+ZVLqBUJA+RPeUdAK+vr6+BRWZ28dTM7Vb0kZH+So16AQcB40vLT3G0W2zYfMlfZN2Ao6dQEZ7YjNWk5exZfFlNdu2cisw/4ze7DeSise+1wiXhjdfKrjJif43cAV6K2d5FiOZ1enW55QqyLtYmJvmfNKQC0yIWsisztQWRC2+LAbcczwU2h3eWcjzmt4YVSz6Z5Gx0mkoGx1TGDkemnRR2ynitv0akflEo++G1xHSZa/IQY4P2VQHHdqGKWPzZfbrthNwJRxoJVUPdNSXdm8OksQrBU8ZylJf6Q6ULV0FulFWOwPHEX0kjSFiI947yH+/e/0NMj1EfyzlyGMfZdhHHepKOZsPKaNp50sWFfCu/IGqr5VVHeJy1JN3lr+jt93rxnX8YZjNf3XBOoGuL+yMcSDtCF4hWQk4nPKG+BPW0igbVmO0h7aT0JDhwDloRjqnj8GvYPCRKT+rXQk4DfEugUcDI2YrfAgfcme4vb2NKNBut7tICx9pwMXcJU8WppHrotS6lYFTUb3sczmqjVapMdBhnRd/LeAExl0BkWTOd0nXKBFmZqfOQ5m+WjUcpipXV1e/l5eXj5DzN2D4+L11tMVHxHfkNCMdOerkxGpH3LTEnQLR44ehTfC38MstPvAmSItTzFIgdyD0LU7hInZ9FCwO6lckxRGYmePMXezDXHhzLzgHsBSKPxBZgat9mgfGs4A2ohTyQLPt8xngam/mwfLcgA3saZNfyzJfdh+AK9A8yuVWJo08Fx0D/MOX3RR4CegYSMM5o+WM2wL4AD59LKu7sRTkhYlfYIM5g07dFfzToe/xK17Bhcl6x573AIru7ryYNXFMbwtA/AKbexgImbmQ3A6JBc5i0yEx8+nWF8zDWfunKTuPNrEA6KHw1be9OSdCaBHIHCYb8EUAmsGgX1Mm80UAR7pEJmi2XwRwCfoVuC0iT817TZWnjrC0/2Ij/g8RGqgJ9UrG3gAAAABJRU5ErkJggg=="
 							width="23" height="24" alt="내상점버튼 이미지">내상점</a><a
@@ -236,8 +135,8 @@ div {
 							<!-- 대분류 -->
 							<div class="category" id="big_category">
 								<div class="big_category_top">
-									전체 카테고리 
-									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+									전체 카테고리 <img
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
 										width="6" height="9" alt="화살표 아이콘">
 								</div>
 								<div class="category_list">
@@ -289,64 +188,41 @@ div {
 
 			</div>
 		</div>
+		
 		<div class="zzimSideBox1">
 			<div class="zzimSideBox2">
 				<div class="zzim1">
 					<div class="zzim1Txt">찜한상품</div>
-					<div class="zzim1Num">
+					<div class="zzim1Num"><!--img src 경로 수정(20210405)-->
 						<a class="zzim1Btn1" href="#"><img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAAEhyb7BAAAAAXNSR0IArs4c6QAAAhBJREFUOBGdVL9v01AQvjs7cRp1QiDBhFClqFsS7AwBIVWABJWYGCohRsTA1LFTgYkBCdQFxMDE1KlCqH9BJyBOkyxIpWLq0IEfGRroC2193Nn1i5sQQfsGv/u+++587+7ZAJmFplKbZ46WLLdb9lkBmnKwAcifXAYuAUPJSlA0a4KuWEb1CkzZP5BoUnui00Rk3z9n9vE5OrlFjPbuamicXhW6YmliJs84j1URXY9pZpZSg6cKkGdmJk13ZycJEAJxXwTuAMMXMt3eZkronhUkGKaSmiv+T2YoZsWpjTmcjkUpYQtTAuH+RLv5OvWBqQavpAM/uHrpvJL9sr8gRb/lev2UYjl8sC2VnFXwt1Uo5ovSkPECDer/+r060rXhbIww/U8RAj4hx3Hrw9EWI3wrtMMXlF//8J4I71jHoSG96UsLziiMX+e1wmUieJgVFjrNQhZbW9rx5khDDz3JFajWrgFHy3LzTtsINRC2yYEbHMFl8T0bHR1uOUS3862PIe5Wgscy+UdHEhwTyLkWdXLfZTDxGI8ZP5BLN0nO1howJ7OQMSTP5VkZ4OeTpdCPBppe6cIte73NxdpNiKJ30tDc/ySVwB4hXc23Gw3V20RpsKn6D2RKL1M8vMtne4CEc956YyXrG0mUOk3FX5Lq5lOsOyEueO0w/jFkebXHJlKn/ETcfre3IqKvXie8p9y49QcxxqrZMCDi2QAAAABJRU5ErkJggg=="
-							width="9" height="9" alt="찜 아이콘">15</a>
+							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAX1JREFUOBGdk7FLw0AUxnPXFhdHRdBdVJBCGgedBP8GoYJQHMRBRNBF1EGnTkopXcRBBEFB/A+cnNuIhEBHQcFBnHRolsTfqwZiWmLSg8t733vf++7d5U4Zv8NxnDHP846Ai8xxpdRDEAT7lmU5YKPZbE5hlonPYfPknrB18m9YQ8nHtu0l3/dvcEcER8ZnLpcrUzTLPGYORXLifmity6Zp3ivXdYc7nU4b0kSMlArS4Tu1MxqR7UFFZCVqRxE71DjzqZZOJi1o1CaTOamy0xraSypqAoldPcvWHhM4aVO2LhQKNbb3lbYizqPWI1bVxWLxla4O4oQMeI9L2ZYzMnDqXKxqhuIuVWpKpVJNQPdmhwI8gxP8nRD/Y09pYDfk/BGSYKvVarDVzZDQz3IuDTrZiuZ6hBBRvL0z7HqUGPqInPO2NrBBGBPbIyRBEaOzC9yK4Mi4pJO1uIjk+wpJAjGN2BXuimDGNSKriPg/MMMXsTw/4BbBO/EzlA5O/QbfD5IxtG4t8AAAAABJRU5ErkJggg=="
+							width="9" height="9" alt="찜 아이콘">0</a>
 					</div>
 				</div>
 				<div class="zzimSideBox3">
 					<div class="zzim2Txt">최근본상품</div>
 					<div class="zzim2NumBox">
-						<div class="zzim2Num">3</div>
+						<div class="zzim2Num"></div>
 					</div>
-					<div class="zzim3Box1">
-						<a class="zzim3Btn"
-							href="/products/149157703?content_position=0&amp;content_owner=7918163"><img
-							src="https://media.bunjang.co.kr/product/149157703_1_1616050689_w140.jpg"
-							alt="상품 이미지">
-							<div class="zzim3Box2"></div>
-							<div class="zzim3Box3">
-								<button class="zzim3Box3Btn">
-									<img
-										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-										width="10" height="12" alt="삭제 버튼 이미지">
-								</button>
-								<div class="zzim3Box3Txt">갤럭시폴더2판매합니다</div>
-								<div class="zzim3Box3P">80,000원</div>
-							</div>
+					<div class="zzimnobox"> <!--img src 경로 수정(20210405), div class명 변경 및 삭제-->
+						<img width="28" height="16" src="data:image/png;base64,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"
+							alt="빈 최근본상품 아이콘"> 
+							<div>최근 본 상품이 없습니다.</div>
 					</div>
-					</a>
-				</div>
-				<div class="zzim4Box">
-					<button disabled="" class="zzim4BoxBtn1">
-						<img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAAEVsH/dAAAAAXNSR0IArs4c6QAAAWZJREFUKBVjYACChoaG7SBiIYgDBo2NjftgbGQaqOgkiM8EFZRDloSwZ86cycXQ3t6ugCnV2dnJiyIKtObG/v37WcCCIFf09PSIoKgACn5FEYBxgNawAiWvgviMMEEQDbRaiYWF5SVcrLu7Wwxo0Qa4AMgZQIEjcIFVq1axwcyCCwJVvIBzoAwmRkbGCU1NTZboEgxA1TOANqtgk9jS1tYmDJJAcSfQwtNCQkI2KILI2oHOlPn+/fthoNix+vr6WAyFQPsEf/78eQDoqJeCgoK+eXl5P1Gs6evr4/z8+fP2////83JwcDhVVFR8RLaBEehx5mvXrq0CChpwcnLalpeXP0NWAGOzXL9+PQ3I8WFmZvbFpQikGO5GoO86gfw0VlZW++rq6ksgSWQAVwgSBLqPCRiAS4FMC2DU2dTU1DyFKUZRCBOcP38+x6NHj3YA+VxAjzkDnfQZq0KYBlAM/P79eynQ9HgA91p/71jKrhEAAAAASUVORK5CYII="
-							width="5" height="9" alt="화살표 아이콘">
-					</button>
-					<div class="zzim4Txt">1/1</div>
-					<button disabled="" class="zzim4BoxBtn2">
-						<img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAAEVsH/dAAAAAXNSR0IArs4c6QAAAVhJREFUKBVtUC1Pw0AYvtJ2mRkYRAVYkhrAkjASxPYDCFTjZhBYmjb9TGiTOhAoSkKCWAIa12SC4HB0CQqNwC0touW5pnespSfu3ufj3i/iOM4tYQfgmeA6YUT7tW37k3IrtfDQNJRlKXAmiqL1ypfn+QbxPO+YS0jzzcFyEMdxH+Ib5f4yAaCpu16v51Zm13XPQBxWgF4AIw7qgJYewrnTFggK3Pu+v9klJEEQrFGhXf1dVdVdNjapB13VNO2Hp/k3FdpacJUGcOQNAkBAj+fI54uiODYM46VtYJh3hCxXIDV82DdN84MZ2MuNlEiSRJrNZk8It2RZHuq6/tVpZGQYhoMsyxLgTFGU8WQyWTQyMiN9p9OpmKbpI8JtSZL2Oo1YwzUMGsofoPycfmwYsQG9KIoLZBhhA6/UwI5EAxhOsaIbQRCOMP2AicuvBOESprllWf1loR3/AksYejyOGFk5AAAAAElFTkSuQmCC"
-							width="5" height="9" alt="화살표 아이콘">
-					</button>
 				</div>
 			</div>
-			<div class="zzimTop">
-				<button class="zzimTopBtn">TOP</button>
+			<div class="zzimTop"> <!--화살표 div 삭제-->
+				<a href="#" class="zzimTopBtn">TOP</a>
 			</div>
 		</div>
 	</div>
 	</div>
 					<%
-				}else{					
+				}else{	
+					memberDAO.lastlogin(m_idx);
 					%>
 					<button class="logOut">로그아웃</button>
-					<div class="noticeBox1">
+					<!-- <div class="noticeBox1">
 						<div class="noticeBox2">
 							<a class="noticeBtn">알림</a>
 							<div class="noticeBox3">
@@ -357,7 +233,7 @@ div {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="storeBox1">
 						<div class="storeBox2">
 							<a class="storeBtn" href="./myshop1.jsp">내 상점</a>
@@ -387,116 +263,8 @@ div {
 								width="16" height="16" alt="검색 버튼 아이콘"></a>
 							</div>
 						</form>
-						<div class="zuesViewBox1">
-							<div class="zuesViewBox2">
-								<div class="zuesViewBox3">
-									<a class="lastSearch srchClick">최근검색어</a>
-									<a class="popularSearch">인기검색어</a>
-								</div>
-								<div class="searchBox1">
-									<div class="searchBox2">
-										<div class="searchBox3">
-											<div class="searchBox4">
-												<div class="serachOne">
-													<button type="button">아이폰</button>
-													<button type="button" class="serachRemove">
-													<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">파워뱅크</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">캠핑카</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-												<div class="serachOne">
-													<button type="button">ㅁ</button>
-													<button type="button" class="serachRemove">
-														<img
-															src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
-															width="10" height="12" alt="최근검색어 삭제 버튼 아이콘">
-													</button>
-												</div>
-											</div>
-											<div class="searchNo">
-												<img
-													src="data:image/png;base64,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"
-													width="52" height="45" alt="검색어 없음 이미지">
-												<div>최근 검색어가 없습니다.</div>
-											</div>
-										</div>
-									</div>
-									<div class="starSearch1">
-										<div class="starSearch2">
-											<div class="starRank">
-												<a class="starBtn"><span class="starNum">1</span>냉장고</a><a
-													class="starBtn"><span class="starNum">2</span>그래픽카드</a><a
-													class="starBtn"><span class="starNum">3</span>아크테릭스</a><a
-													class="starBtn"><span class="starNum">4</span>노트10</a><a
-													class="starBtn"><span class="starNum">5</span>방탄</a><a
-													class="starBtn"><span class="starNum">6</span>pcx</a><a
-													class="starBtn"><span class="starNum">7</span>자전거</a><a
-													class="starBtn"><span class="starNum">8</span>로드자전거</a><a
-													class="starBtn"><span class="starNum">9</span>스쿠터</a><a
-													class="starBtn"><span class="starNum">10</span>루프탑텐트</a>
-											</div>
-											<div class="starRank">
-												<a class="starBtn"><span class="starNum">11</span>나이키</a><a
-													class="starBtn"><span class="starNum">12</span>스톤아일랜드</a><a
-													class="starBtn"><span class="starNum">13</span>주술회전</a><a
-													class="starBtn"><span class="starNum">14</span>캠핑카</a><a
-													class="starBtn"><span class="starNum">15</span>pxg</a><a
-													class="starBtn"><span class="starNum">16</span>골프백</a><a
-													class="starBtn"><span class="starNum">17</span>mcm</a><a
-													class="starBtn"><span class="starNum">18</span>아이폰</a><a
-													class="starBtn"><span class="starNum">19</span>tv</a><a
-													class="starBtn"><span class="starNum">20</span>에어팟프로</a>
-											</div>
-										</div>
-									</div>
-									<div class="storeSrch1">
-										<div class="storeSrch2">
-											<div class="storeSrch3"></div>
-											<a class="storeSrch"><img
-												src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAcCAYAAAAJKR1YAAAAAXNSR0IArs4c6QAAAZdJREFUSA3tVktuwjAQTRz2LFlWYlWpu8IBULvhIPlcoTfoGfLpBXKBXoCKDazoortKnCCsoyR9Y2WQEzWJkLAVJCzBjGfMzPObsY1tKSOKol1VVQvFpFUVQiw9z9urSYQ6ueu3wIDNIMMwfIf+xnNTEn00Rx/9cr5zD9m2/cpGw/JFzTehCdiZQjzjcwyC4IFsukeSJOuiKD5xqomID84nGQJtKzgcsPTFDt0SYLbIUeLTYEgCKsuSjRvdQDg+KnGCfgARM9x/T2yXgLh/II0BIgBckbpsEpOI43gGAyE8ua77La2GvpgASK6QRQzxZAsH1dTYcBxHVgSErNI0dSixUOha47RVYMzIW0bvZp7nx3r30yzL6JQ3GJI+AHysF+kWjTxMzMT3/Tll5pceZfvRjaSOT3kW7RefemhUQ97UXYiYtS6/urtL1nbFI/ttMcQ7UZkgWx8bl6zl+KocHUN3QGp5/tN7Txn/AP8GdrjFeWrhEjvr11ZGV7JehnCLL6/NwFC88TPU7pehHbF/qK/acbvWj46hP8RApehW+HAaAAAAAElFTkSuQmCC"
-												width="18" height="14" alt="추천 상점 아이콘">상점검색 &gt;<span
-												class="storeSrchTxt"></span><span class="storeSrchGo">상점명으로
-													검색</span></a>
-										</div>
-										<div class="storeSrchEx">
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-											<a class="srchExGo"><span class="srchTxt">마이비 교통카드</span></a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="closeBox">
-								<a class="closeBtn">닫기</a><a class="removeBtn"><img
-									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAAAAXNSR0IArs4c6QAAAOBJREFUSA3tVgEOwyAInEsf0Yf4lX2jj+k39hX/0f5i41xHWiI2rNY0iyYmciJwQILupqwQwoOuRtq9oiLhmYDBe/+UF5DvKXDBLE7wBAHhTXJ1SfQDRiYUocvo8BVl4EWCyj7HiI2UOLgfamH1G2sHR1OOstWqoj+jRqZaKIZU+Fu7ajX6P0fVmgGpG2ijBc9asb3ZOLpj6RDGjhykves0g4xsT9aycB1GWoRWvDGyZoz1W+o4FdZDS501Y6yf+9dFJfmv25PZsjhUq9GaEQZUX3ImkT0eqGtGpSftZrK+AWoUS5rz8CTIAAAAAElFTkSuQmCC"
-									width="13" height="15" alt="쓰레기통 아이콘">검색어 전체삭제</a>
-							</div>
-						</div>
 					</div>
 					<div class="rightMenu">
-						<button class="zeusTalk">
-							<img
-								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAwCAYAAABuZUjcAAAAAXNSR0IArs4c6QAAA59JREFUaAXtmU1S2zAUxyWnDaawSJfAJj1BzddMl2TXpblBQg9QOAFwAth2QZ0bQJddkWVn+GiOQDfADnemfIROrP6fx8o4Tkw86AnSTjWTSHqSpZ/+fnpyHCmS5HletVQqbaLq41PR9jHKm91ud7vdbp8Rk6SvhYWFupRyB8VxBCZEnUKl1Mbp6WlTJkp/R8u4Q/fgofx8aW5ujpR+p61/Qe46jlORi4uLKgNLvrQBXwoz9meppvZePQ0wAA7o1+MCrUEBX0HguNJ1yp10hcrjBp3HNACeXci41v+DF7kzt4FbpU+RvqP6PJniv4KXHg6P/cnG3dkoqCLtL4p0Mu1zu+fWAR3gdK6ZjqWvt6749Z67paQKMGELarf0xKa5NcWvAlEpi/KOVKpOkFC7YQqbvt4KOEFPqIlDTOTFk0mxy+XbGp4dnDahoxyC1g9tYUd0tvWEXDkr+HVQ9qWS5M8aWgglWq50vVuyJqkruuF043db1x+Ts4Hf7E2sA5KeNPuTFD4iip8ynuFXwGqq/qgiCziUDgBdL0DQ6sjO6uuGCAv0fbCLMThOwpUoEj+UELEfS6HeQtG0wjEAQmJzqnHPFlmMwZPY3NLy3HyOo4muxjn8vvFqrdPsMxpWjMHT89PmhMuspGxhJKPa9JrZRkyN1yuynZwUu6FsenO24c9vTKNHjzRTYAMvR+46xq7S+OTPgK5xbEIab1hicRV6VEXI+xhPoMTG1Nr97rDJOG0s4JGINiVCCZReBfQBJ2DeWMbgFA6hthdvQsPTMA9ymN0YXESi2nHs+rMV8MkPd81hA9u2sUUV26DZ8f8dcHprlF3dc9eHMQ0ojlddO8M6Phd88votfSLHKPTucB8lnwGseXJyMvLpb2lpicIn/UIySQd4Y+vEj6MmoyTX1kmEp7hbxOwcHR21ocBIpQouzIerHdqEJ1Zijn2c/prAKuYBx3Fce5bgyT3miZVElPRlkpaXl70oishns9EoxEQ1Usdk/LxrB6JKXsc8e3zbAIj2LGCFFkQLy7vWxG6suJ48CVukfBa090+Z7suRs4ETzAPwgjaV9k8O8BLHIHqMy8vLu4uLi0+zs7NV2PqUx7tDf2Zm5ifav+n+JjkruAYB3Jcc+Pf4e7Jyfn7+Vfd9bG68OfMmplMUKm9n2+EyfXci2160bg2cAI6Pj7cYD7e+NVkFp5loQ9qAtw6u4eE2FOtDqnOkJwEnULhNi05SFFng/wBaR0Y/O/3CZQAAAABJRU5ErkJggg=="
-								width="23" height="24" alt="번개톡버튼 이미지">번개톡
-						</button>
 						<a class="myShopBtn" href="./myshop1.jsp"><img
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAwCAYAAABuZUjcAAAAAXNSR0IArs4c6QAABCNJREFUaAXtWUtS20AQtWxXJSEbZ8XWuYH4rcEnwNzALg6Q5AQJy6yAE1icIOYEmDWf6AbRispSqwSqAOU91QwetUbWSAFjqpgq10z39OdNT89P9hqPVNbW1vowtY2fr36m5RAEf8cXFxdjs6Nu26urqPVWV1cHnud9Bd3VvJI6SpJk7/LyMiiRm9ldG/jGxoZ/f38/gnVGuE4Jm83m8OzsjDNRudQCrkCfwFunssesQgzwvTrgKwMvAR0jbQKkwinqmBjR7qC9iXoA0jbQWuArAfd9v9NqtX5ZAMQAxrw9QF9hwXr4jEFwPcgBxHd3dx/DMEwHW2jA6Gga7dImQO9DSDplrvbKQNM4ZSiLZkjaKAwIbTsX54gj2l0VbdN45UhRuWjmVNQj00FR2zniAM0pzhRM+06V6dXK1KGupnVt86H7ZO0MHIp9oRycn59PBM+ZVLqBUJA+RPeUdAK+vr6+BRWZ28dTM7Vb0kZH+So16AQcB40vLT3G0W2zYfMlfZN2Ao6dQEZ7YjNWk5exZfFlNdu2cisw/4ze7DeSise+1wiXhjdfKrjJif43cAV6K2d5FiOZ1enW55QqyLtYmJvmfNKQC0yIWsisztQWRC2+LAbcczwU2h3eWcjzmt4YVSz6Z5Gx0mkoGx1TGDkemnRR2ynitv0akflEo++G1xHSZa/IQY4P2VQHHdqGKWPzZfbrthNwJRxoJVUPdNSXdm8OksQrBU8ZylJf6Q6ULV0FulFWOwPHEX0kjSFiI947yH+/e/0NMj1EfyzlyGMfZdhHHepKOZsPKaNp50sWFfCu/IGqr5VVHeJy1JN3lr+jt93rxnX8YZjNf3XBOoGuL+yMcSDtCF4hWQk4nPKG+BPW0igbVmO0h7aT0JDhwDloRjqnj8GvYPCRKT+rXQk4DfEugUcDI2YrfAgfcme4vb2NKNBut7tICx9pwMXcJU8WppHrotS6lYFTUb3sczmqjVapMdBhnRd/LeAExl0BkWTOd0nXKBFmZqfOQ5m+WjUcpipXV1e/l5eXj5DzN2D4+L11tMVHxHfkNCMdOerkxGpH3LTEnQLR44ehTfC38MstPvAmSItTzFIgdyD0LU7hInZ9FCwO6lckxRGYmePMXezDXHhzLzgHsBSKPxBZgat9mgfGs4A2ohTyQLPt8xngam/mwfLcgA3saZNfyzJfdh+AK9A8yuVWJo08Fx0D/MOX3RR4CegYSMM5o+WM2wL4AD59LKu7sRTkhYlfYIM5g07dFfzToe/xK17Bhcl6x573AIru7ryYNXFMbwtA/AKbexgImbmQ3A6JBc5i0yEx8+nWF8zDWfunKTuPNrEA6KHw1be9OSdCaBHIHCYb8EUAmsGgX1Mm80UAR7pEJmi2XwRwCfoVuC0iT817TZWnjrC0/2Ij/g8RGqgJ9UrG3gAAAABJRU5ErkJggg=="
 							width="23" height="24" alt="내상점버튼 이미지">내상점</a><a
@@ -516,8 +284,8 @@ div {
 							<!-- 대분류 -->
 							<div class="category" id="big_category">
 								<div class="big_category_top">
-									전체 카테고리 
-									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
+									전체 카테고리 <img
+										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAYAAABvqT8MAAAAAXNSR0IArs4c6QAAAX9JREFUKBWdkz1LA0EQhmf2Ei6msBEb/4JgPi4fhYUpRIn4gYpY2ajYKbZa5S9YKzZWIgoqCIpFLKxyMQb0Z0hEQnIbcjfuLtyykmDEhbt7571ndvZm9wDE4MnMIU9mD6QeOLyUs9dOOCQvoXcHJTAIcEJDARy1U5lNHfcRzF6e3wHAc/mOhMCAjnk6u96HVRYqsFCI8EbzioAWZIyIXWC4Enup3CrKuDEFlMtde2x0TYCPMiaiCPjBhZfKThuskqpCaJLjxD0fH0TGpPQQoWUBzkRf3eeQURXCAKvVVsy25gRYlR4RxH2Au04672gmFOaTcrkR3gmexNLGlY/4wQin7Hrl/UcFM6lHR0ktvyeB8vlh3vHvw9lFI74sZs3arvsmJ/n/R1OxaHMfr3WHxBEDZEtmh3QFkhv32bwUy1hUptw4hNVYzb2RsTkYlUrMazTPNAzidCFs9INlInqJzIk4ElsqkK1nuD1Uc0/NWU3NgFFdGwz2f4M1J3+ev/5A37oEmInyqvw0AAAAAElFTkSuQmCC"
 										width="6" height="9" alt="화살표 아이콘">
 								</div>
 								<div class="category_list">
@@ -573,35 +341,103 @@ div {
 			<div class="zzimSideBox2">
 				<div class="zzim1">
 					<div class="zzim1Txt">찜한상품</div>
+					<%
+	memberDTO.setIdx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
+	String zzimCnt = memberDAO.zzimcnt(m_idx);;
+	if(zzimCnt != null){
+		String[] zzimArr = zzimCnt.split(" ");
+
+%>
 					<div class="zzim1Num">
 						<a class="zzim1Btn" href="./myshop3.jsp"><img
 							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAAEhyb7BAAAAAXNSR0IArs4c6QAAAhBJREFUOBGdVL9v01AQvjs7cRp1QiDBhFClqFsS7AwBIVWABJWYGCohRsTA1LFTgYkBCdQFxMDE1KlCqH9BJyBOkyxIpWLq0IEfGRroC2193Nn1i5sQQfsGv/u+++587+7ZAJmFplKbZ46WLLdb9lkBmnKwAcifXAYuAUPJSlA0a4KuWEb1CkzZP5BoUnui00Rk3z9n9vE5OrlFjPbuamicXhW6YmliJs84j1URXY9pZpZSg6cKkGdmJk13ZycJEAJxXwTuAMMXMt3eZkronhUkGKaSmiv+T2YoZsWpjTmcjkUpYQtTAuH+RLv5OvWBqQavpAM/uHrpvJL9sr8gRb/lev2UYjl8sC2VnFXwt1Uo5ovSkPECDer/+r060rXhbIww/U8RAj4hx3Hrw9EWI3wrtMMXlF//8J4I71jHoSG96UsLziiMX+e1wmUieJgVFjrNQhZbW9rx5khDDz3JFajWrgFHy3LzTtsINRC2yYEbHMFl8T0bHR1uOUS3862PIe5Wgscy+UdHEhwTyLkWdXLfZTDxGI8ZP5BLN0nO1howJ7OQMSTP5VkZ4OeTpdCPBppe6cIte73NxdpNiKJ30tDc/ySVwB4hXc23Gw3V20RpsKn6D2RKL1M8vMtne4CEc956YyXrG0mUOk3FX5Lq5lOsOyEueO0w/jFkebXHJlKn/ETcfre3IqKvXie8p9y49QcxxqrZMCDi2QAAAABJRU5ErkJggg=="
-							width="9" height="9" alt="찜 아이콘">15</a>
+							width="9" height="9" alt="찜 아이콘"><%=zzimArr.length%></a>
+					</div>
+					<%
+						}else{
+					%>
+				<div class="zzim1Num">
+					<a class="zzim1Btn2" href="./main.jsp"><img
+						src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAX1JREFUOBGdk7FLw0AUxnPXFhdHRdBdVJBCGgedBP8GoYJQHMRBRNBF1EGnTkopXcRBBEFB/A+cnNuIhEBHQcFBnHRolsTfqwZiWmLSg8t733vf++7d5U4Zv8NxnDHP846Ai8xxpdRDEAT7lmU5YKPZbE5hlonPYfPknrB18m9YQ8nHtu0l3/dvcEcER8ZnLpcrUzTLPGYORXLifmity6Zp3ivXdYc7nU4b0kSMlArS4Tu1MxqR7UFFZCVqRxE71DjzqZZOJi1o1CaTOamy0xraSypqAoldPcvWHhM4aVO2LhQKNbb3lbYizqPWI1bVxWLxla4O4oQMeI9L2ZYzMnDqXKxqhuIuVWpKpVJNQPdmhwI8gxP8nRD/Y09pYDfk/BGSYKvVarDVzZDQz3IuDTrZiuZ6hBBRvL0z7HqUGPqInPO2NrBBGBPbIyRBEaOzC9yK4Mi4pJO1uIjk+wpJAjGN2BXuimDGNSKriPg/MMMXsTw/4BbBO/EzlA5O/QbfD5IxtG4t8AAAAABJRU5ErkJggg=="
+						width="9" height="9" alt="찜 아이콘">0</a>
+				</div>
+				<%
+						}
+				%>
+			</div>
+				<div class="zzimSideBox3">
+					<div class="zzim2Txt">최근본상품</div>
+					<!-- 페이징 및 카운팅 하면 변경 및 수정
+					<div class="zzim2NumBox">
+						<div class="zzim2Num">3</div>
+					</div>
+					 -->
+					<%
+		int rcp_memidx = (Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
+		List<String> recentIdx = recentproductDAO.recentIdx(rcp_memidx);
+
+		if(recentIdx.size() == 0){
+			%>
+			<div class="zzimSideBox1">
+			<div class="zzimSideBox2">
+				<div class="zzim1">
+					<div class="zzim1Txt">찜한상품</div>
+					<div class="zzim1Num"><!--img src 경로 수정(20210405)-->
+						<a class="zzim1Btn1" href="#"><img
+							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAX1JREFUOBGdk7FLw0AUxnPXFhdHRdBdVJBCGgedBP8GoYJQHMRBRNBF1EGnTkopXcRBBEFB/A+cnNuIhEBHQcFBnHRolsTfqwZiWmLSg8t733vf++7d5U4Zv8NxnDHP846Ai8xxpdRDEAT7lmU5YKPZbE5hlonPYfPknrB18m9YQ8nHtu0l3/dvcEcER8ZnLpcrUzTLPGYORXLifmity6Zp3ivXdYc7nU4b0kSMlArS4Tu1MxqR7UFFZCVqRxE71DjzqZZOJi1o1CaTOamy0xraSypqAoldPcvWHhM4aVO2LhQKNbb3lbYizqPWI1bVxWLxla4O4oQMeI9L2ZYzMnDqXKxqhuIuVWpKpVJNQPdmhwI8gxP8nRD/Y09pYDfk/BGSYKvVarDVzZDQz3IuDTrZiuZ6hBBRvL0z7HqUGPqInPO2NrBBGBPbIyRBEaOzC9yK4Mi4pJO1uIjk+wpJAjGN2BXuimDGNSKriPg/MMMXsTw/4BbBO/EzlA5O/QbfD5IxtG4t8AAAAABJRU5ErkJggg=="
+							width="9" height="9" alt="찜 아이콘">0</a>
 					</div>
 				</div>
 				<div class="zzimSideBox3">
 					<div class="zzim2Txt">최근본상품</div>
 					<div class="zzim2NumBox">
-						<div class="zzim2Num">3</div>
+						<div class="zzim2Num"></div>
 					</div>
+					<div class="zzimnobox"> <!--img src 경로 수정(20210405), div class명 변경 및 삭제-->
+						<img width="28" height="16" src="data:image/png;base64,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"
+							alt="빈 최근본상품 아이콘"> 
+							<div>최근 본 상품이 없습니다.</div>
+					</div>
+				</div>
+			</div>
+			<div class="zzimTop"> <!--화살표 div 삭제-->
+				<a href="#" class="zzimTopBtn">TOP</a>
+			</div>
+		</div>
+	</div>
+	</div>
+		<%
+		}else{
+		for(String rct : recentIdx){
+
+			HashMap<String,String> rctList = recentproductDAO.recentphoto(rct);
+
+%>
+
 					<div class="zzim3Box1">
-						<a class="zzim3Btn"
-							href="/products/149157703?content_position=0&amp;content_owner=7918163"><img
-							src="https://media.bunjang.co.kr/product/149157703_1_1616050689_w140.jpg"
-							alt="상품 이미지">
+						<a class="zzim3Btn" href="productDetail.jsp?p_idx=<%=rct%>">
+						<%
+						out.print("<img src='./uploads/" + rctList.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
+						%>	
 							<div class="zzim3Box2"></div>
+							<!-- 
 							<div class="zzim3Box3">
 								<button class="zzim3Box3Btn">
 									<img
 										src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC"
 										width="10" height="12" alt="삭제 버튼 이미지">
 								</button>
-								<div class="zzim3Box3Txt">갤럭시폴더2판매합니다</div>
-								<div class="zzim3Box3P">80,000원</div>
+								<div class="zzim3Box3Txt"><%=rctList.get("p_content")%></div>
+								<div class="zzim3Box3P"><%=rctList.get("p_price")%></div>
 							</div>
+							 -->
 					</div>
 					</a>
+					<%
+						}
+					%>
 				</div>
+				<!-- 
 				<div class="zzim4Box">
 					<button disabled="" class="zzim4BoxBtn1">
 						<img
@@ -615,10 +451,14 @@ div {
 							width="5" height="9" alt="화살표 아이콘">
 					</button>
 				</div>
+				 -->
 			</div>
 			<div class="zzimTop">
-				<button class="zzimTopBtn">TOP</button>
+				<a href="#" class="zzimTopBtn">TOP</a>
 			</div>
+			<%
+		}
+			%>
 		</div>
 	</div>
 	</div>
@@ -676,7 +516,7 @@ div {
                 </div> 
             <div class="category_container_result">
                 <div class="result_name_box"><span class="result_name">선택카테고리</span>의 추천상품</div>
-                <div class="right">
+<!--                 <div class="right">
                     <a class="new" href="#">
                         최신순
                     </a>
@@ -689,7 +529,7 @@ div {
                     <a class="new" href="#">
                         고가순
                     </a>
-                </div>
+                </div> -->
             </div>
     		
     		<%
@@ -732,7 +572,7 @@ div {
                 
             </div>
     
-            <div class="category_paging_box">
+            <!-- <div class="category_paging_box">
                 <div class="category_paging">
                     <a href="#" class="cate_paging_num"><img src="./img/번개장터이미지/좌측화살표.png"></a>
                     <a href="#" class="cate_paging_num">1</a>
@@ -747,7 +587,7 @@ div {
                     <a href="#" class="cate_paging_num">10</a>
                     <a href="#" class="cate_paging_num"><img src="./img/번개장터이미지/우측화살표.png"></a>
                 </div>
-            </div>
+            </div> -->
         </div>
         </div>
 
