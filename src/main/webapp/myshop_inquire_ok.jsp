@@ -2,30 +2,33 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	String username= null;
+	String m_idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		m_idx = String.valueOf(session.getAttribute("idx"));
+	}
 %>
 <jsp:useBean id="inquire" class="com.koreait.inquire.inquireDTO"/>
 <jsp:useBean id="dao" class="com.koreait.inquire.inquireDAO"/>
 <jsp:setProperty property="*" name="inquire"/>
     
-
-
 <%
-	String i_productidx = request.getParameter("i_productidx");
-	String i_content = request.getParameter("i_content");
-		if(dao.reply(inquire) == 1){
+
+	if(dao.reply(inquire, m_idx) == 1){
 %>
-			<script>
-				alert('등록되었습니다.');
-				location.href='myshop2.jsp';
-			</script>
+	<script>
+		alert('등록되었습니다.');
+		location.href='myshop2.jsp';
+	</script>
 <%			
-		}else{
+	}else{
 %>
-			<script>
-				alert('실패했습니다.');
-				history.back();
-			</script>
+	<script>
+		alert('실패했습니다.'); 
+		history.back();
+	</script>
 <%
-		}
+	}
 	
 %>

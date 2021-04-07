@@ -725,7 +725,7 @@ div {
     <div class="searchContainer">
         <div class="con_kate">
             <div class="kate">
-                <div class="kate_sc">
+                <!-- <div class="kate_sc">
                     <div class="kate_seach">카테고리</div>
                     <div class="kate_gori">
                         <div class="kate_gori1">
@@ -778,7 +778,7 @@ div {
 
                     </div>
                     
-                </div>
+                </div> -->
                 
                 <%
                 	// 검색한 텍스트와 현재 지역으로 리스트 가져오기
@@ -846,7 +846,7 @@ div {
                     <div class="container_sc">
                         <div class="container_sch"><span class="container_sch1"><%=searchText%></span>의 검색결과 <span class="container_sch2"><%=searchCnt%>개</span>
                             </div>
-                            <div class="sch_chk">
+                            <%-- <div class="sch_chk">
                                 <span class="container_sch1"><%=searchText%>&nbsp;</span>
                                 <span class="container_sch2">키워드 알림 받기</span>
                                 <button class="openBtn"> <input type="checkbox" id="chk1"><label for="chk1"><span>키워드</span></label></span></button>
@@ -856,7 +856,7 @@ div {
                         <a href="#" class="sch_menu1">최신순</a>
                         <a href="#" class="sch_menu1">저가순</a>
                         <a href="#" class="sch_menu1">고가순</a>
-                    </div>
+                    </div> --%>
                     </div>
                 </div>
                 

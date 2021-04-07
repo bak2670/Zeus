@@ -171,6 +171,24 @@ public class memberDAO {
 		return 0;
 	}
 	
+	// 내상점 찜부분
+	public List<HashMap<String, String>> zzimList(String m_idx){
+		List<HashMap<String,String>> zzimList= new ArrayList<>();
+		// 찜한 번호들 받아서 배열로 만들기
+		String zzimStr = sqlsession.selectOne("member.zzimString",m_idx);
+		System.out.println("zzimStr  : " + zzimStr);
+		if(zzimStr != null) {
+			String[] zzimArr = zzimStr.split(" ");
+			
+			for(String str : zzimArr) {
+				HashMap<String, String> dataMap = sqlsession.selectOne("product.info", str);
+				zzimList.add(dataMap);
+			}
+		}else {
+			return null;
+		}
+		return zzimList;
+	}
 	// 회원번호 입력 받아서 회원 정보 DTO 리턴
 	public memberDTO info(String m_idx) {
 		HashMap<String, String> dataMap = new HashMap<>();

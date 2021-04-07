@@ -41,16 +41,17 @@ public class inquireDAO {
 		return myshop_inquire_name;
 	}
 
-	public int reply(inquireDTO inquire) {
+	// 내상점에 내가 남기는 상점문의 i_storeidx에 i_memidx가 i_content로 문의 남김
+	public int reply(inquireDTO inquire, String m_idx) {
 		HashMap<String, String> dataMap = new HashMap<>();
-		dataMap.put("i_memidx", "1");
-		dataMap.put("i_productidx", "1");
-		dataMap.put("i_storeidx", "1");
+		dataMap.put("i_memidx", m_idx);
+		dataMap.put("i_storeidx", m_idx);
 		dataMap.put("i_content", inquire.getContent());
 
 		return sqlsession.insert("member.myshop_inquire3", dataMap);
 	}
 
+	
 	// 상품상세 문의하기 입력부분
 	public int proinq(String m_idx, String p_idx, String p_memidx, String i_content) {
 		try {
@@ -73,6 +74,7 @@ public class inquireDAO {
 		return 0;
 	}
 
+	
 	// 상품상세 문의하기 출력부분
 	public List<HashMap<String, String>> inquire(String idx) {
 		List<HashMap<String, String>> inquireList = sqlsession.selectList("member.inquire", idx);

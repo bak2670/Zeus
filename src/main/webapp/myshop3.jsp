@@ -41,6 +41,9 @@
 	int followingCnt = followingDAO.followingcnt(idx);
 	int followCnt = followingDAO.followcnt(idx);
 	
+	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
+	
+	
 %>
 <html lang="en">
 
@@ -654,7 +657,7 @@
                 <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
                 <div class="myshop_name" id="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                 <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
-                <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
+                <div class="myshop_bottom"><a href="trade.jsp" >거래내역</a></div>
             </div>
             <div class="myshop_text">
                 <div class="myshop_text_top"> 
@@ -757,7 +760,7 @@
                 <div class="bar" id="bar3">
                     <a class="b3" href="./myshop3.jsp">
                         찜
-                        <span class="b3_1">3</span>
+                        <span class="b3_1"><%=zzimList.size() %></span>
                     </a>
                 </div>
                 <div class="bar" id="bar4">
@@ -781,13 +784,13 @@
             </div>
             <div class="menubar2">
                 <div class="mn1">
-                    찜<span class="mn_1">0</span>
+                    찜<span class="mn_1"><%=zzimList.size() %></span>
                 </div>
             </div>                
         </div>
 
         <div class="favorites_box">
-            <div class="favorites_top">
+            <!-- <div class="favorites_top">
                 <ul>
                     <li><img src="./img/번개장터이미지/arrow.png"></li>
                     <button>선택삭제</button>
@@ -806,107 +809,36 @@
                         <span>고가순</span>
                     </a>
                 </div>
-            </div>
+            </div> -->
             <div class="favorites_list">
-                    <div  class="favorites_list_item">
-                    <a href="#">
+            	<% 
+            		// 찜 리스트 가져와서 보여주기
+            		
+            		for(HashMap product : zzimList){
+            	%>
+            	
+            	<div class="favorites_list_item">
+                    <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>">
                         <div class="favorites_list_item_img">
-                            <img src="./img/번개장터이미지/dog.jpg">
+                            <img src="./uploads/<%=product.get("p_picture")%>">
                         </div>
                         <div class="favorites_list_item_text">
-                            
                             <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1">제목</li>
-                                <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li>
+                                <li class="favorites_list_text_title_1"><%=product.get("p_name") %></li>
+                                <!-- <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li> -->
                             </ul>
-                            <div class="favorites_list_text_price">9000</div>
-                            <div class="favorites_list_text_time">2시간전</div>
+                            <div class="favorites_list_text_price"><%=product.get("p_price") %></div>
+                            <div class="favorites_list_text_time"><%=product.get("p_regdate") %></div>
                             <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> 위치정보
+                                <img src="./img/번개장터이미지/위치.png"> <%=product.get("p_deallocation") %>
                             </div>
                         </div>
                     </a>
                 </div>
+                <%
+            		}
+                %>
 
-                <div  class="favorites_list_item">
-                    <a href="#">
-                        <div class="favorites_list_item_img">
-                            <img src="./img/번개장터이미지/dog.jpg">
-                        </div>
-                        <div class="favorites_list_item_text">
-                            
-                            <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1">제목</li>
-                                <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li>
-                            </ul>
-                            <div class="favorites_list_text_price">9000</div>
-                            <div class="favorites_list_text_time">2시간전</div>
-                            <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> 위치정보
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div  class="favorites_list_item">
-                    <a href="#">
-                        <div class="favorites_list_item_img">
-                            <img src="./img/번개장터이미지/dog.jpg">
-                        </div>
-                        <div class="favorites_list_item_text">
-                            
-                            <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1">제목</li>
-                                <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li>
-                            </ul>
-                            <div class="favorites_list_text_price">9000</div>
-                            <div class="favorites_list_text_time">2시간전</div>
-                            <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> 위치정보
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div  class="favorites_list_item">
-                    <a href="#">
-                        <div class="favorites_list_item_img">
-                            <img src="./img/번개장터이미지/dog.jpg">
-                        </div>
-                        <div class="favorites_list_item_text">
-                            
-                            <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1">제목</li>
-                                <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li>
-                            </ul>
-                            <div class="favorites_list_text_price">9000</div>
-                            <div class="favorites_list_text_time">2시간전</div>
-                            <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> 위치정보
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div  class="favorites_list_item">
-                    <a href="#">
-                        <div class="favorites_list_item_img">
-                            <img src="./img/번개장터이미지/dog.jpg">
-                        </div>
-                        <div class="favorites_list_item_text">
-                            
-                            <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1">제목</li>
-                                <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li>
-                            </ul>
-                            <div class="favorites_list_text_price">9000</div>
-                            <div class="favorites_list_text_time">2시간전</div>
-                            <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> 위치정보
-                            </div>
-                        </div>
-                    </a>
-                </div>
 
             </div>
 

@@ -1176,7 +1176,7 @@
 				                        <div class="inquiryDiv">
 				                            <div class="inquiryHeader">
 
-				                                <div class="inquiryMem"><%=inquireDAO.inquire1(String.valueOf(inq.get("i_memidx"))) %></div>
+				                                <div class="inquiryMem"><%=memberDAO.storeName(Integer.parseInt(String.valueOf((inq.get("i_memidx")))))%></div>
 				                                <div class="inquiryTime"><%=inq.get("i_regdate") %></div>
 				                            </div>
 				                            <div class="inquiryText"><%=inq.get("i_content") %></div>

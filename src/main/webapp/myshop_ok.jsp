@@ -21,15 +21,10 @@ System.out.println(memberIdx);
 
 	if(dao.member_edit(member) != 1){
 		System.out.println("상점명데이터없어");
-		
 	}else{
 		System.out.println("상점명데이터넘어왔어");
-		
-		
 		out.println(name_value);
 	}
-
-	
 %>
 
 

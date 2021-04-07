@@ -22,6 +22,7 @@
 <jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
 <jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="reviewDAO" class="com.koreait.review.reviewDAO"/>
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
 <%
 	if(dao.myshop(member, idx) != null){
 		System.out.println("데이터왔어");
@@ -35,9 +36,14 @@
 	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(idx);
 	int questionCnt = reviewList.size();
 	
+	List<HashMap<String, String>> inquireList1 = inquireDAO.myshop_inquire(idx);
+	int inquireCnt1 = inquireList1.size();    
+	
 	followingDTO.setMemidx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
 	int followingCnt = followingDAO.followingcnt(idx);
 	int followCnt = followingDAO.followcnt(idx);
+	
+	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
 %>
 <html lang="en">
 
@@ -654,7 +660,7 @@ div {
                         <a href="#" class="myshop_img"><img src="./img/번개장터이미지/상점.png"></a>
                         <div class="myshop_name" id="myshop_name"><%=dao.storeName(member.getIdx())%> </div>
                         <div class="myshop_star"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"><img src="./img/번개장터이미지/별.png" width="15" height="14" alt="작은별점"></div>
-                        <div class="myshop_bottom"><a href="#" >내상점 관리</a></div>
+                        <div class="myshop_bottom"><a href="trade.jsp" >거래내역</a></div>
                     </div>
                     <div class="myshop_text">
                         <div class="myshop_text_top"> 
@@ -750,13 +756,13 @@ div {
                     <div class="bar" id="bar2">
                         <a class="b2" href="./myshop2.jsp">
                             상점문의
-                            <span class="b2_1">2</span>
+                            <span class="b2_1"><%=inquireCnt1 %></span>
                         </a>
                     </div>
                     <div class="bar" id="bar3">
                         <a class="b3" href="./myshop3.jsp">
                             찜
-                            <span class="b3_1">3</span>
+                            <span class="b3_1"><%=zzimList.size() %></span>
                         </a>
                     </div>
                     <div class="bar" id="bar4">

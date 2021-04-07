@@ -5612,7 +5612,7 @@ clear: both;}
     font-weight: bold;
     display: flex;}
     
-.favorites_list_text_price::after{content: "원"; font-size: 13px;}
+.favorites_list_text_price::after{content: "원"; font-size: 16px;}
 
 .favorites_list_text_time{width: 279px; height: 40px;
     display: flex;

@@ -79,7 +79,6 @@
 	</select>
 
 	<!-- 상점문의 -->
-
 	<select id="myshop_inquire" parameterType="string" resultType="map">
 		select * from tb_inquire where i_storeidx=#{i_storeidx}
 	</select>
@@ -92,9 +91,9 @@
 
 
 	<insert id="myshop_inquire3" parameterType="map">
-		insert into tb_inquire (i_memidx, i_productidx, i_storeidx, i_content)
-		values (#{i_memidx},#{i_productidx},#{i_storeidx},#{i_content})
+		insert into tb_inquire (i_memidx, i_storeidx, i_content, i_productidx) values (#{i_memidx},#{i_storeidx},#{i_content},10000)
 	</insert>
+	
 	
 	<select id="inquire" parameterType="string" resultType="map">
 		select * from tb_inquire where i_productidx=#{i_productidx}
