@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="recentproduct">
+ 
+  	<insert id="join" parameterType="map">
+  	insert into tb_recentProduct (rcp_memidx, rcp_productidx) values (#{rcp_memidx}, #{rcp_productidx})
+  	</insert>
+  	
+  		<select id="recentCheck" parameterType="map" resultType="int">
+		select count(rcp_idx) from tb_recentProduct where rcp_productidx=#{rcp_productidx}
+	</select>
+	
+	<delete id="recentdel" parameterType="map">
+		delete from tb_recentProduct where rcp_productidx=#{rcp_productidx}
+	</delete> 
+	
+	<select id="recentIdx" parameterType="int" resultType="string">
+		select rcp_productidx from tb_recentProduct where rcp_memidx=#{rcp_memidx} order by rcp_idx desc limit 0,3;
+	</select>
+	
+	<select id="recentphoto" resultType="map" parameterType="string">
+		select * from tb_product where p_idx= #{rcp_productidx}
+	</select>
+	
+	<delete id="logoutdel" parameterType="map">
+		delete from tb_recentProduct where rcp_memidx=#{rcp_memidx}
+	</delete>
+      
+  </mapper>

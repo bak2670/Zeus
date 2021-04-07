@@ -92,5 +92,40 @@ public class followingDAO {
 		
 		return followList;
 	}
+	
+	
+	public int followingup(int f_memidx, int f_follow) {		
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("f_memidx", String.valueOf(f_memidx));
+		dataMap.put("f_follow", String.valueOf(f_follow));
+	
+		return sqlsession.insert("follow.followingup", dataMap);
+		
+	}
+	
+	public int followingdown(int f_memidx, int f_follow) {
+		HashMap<String, String> dataMap = new HashMap<>(); 
+		dataMap.put("f_memidx", String.valueOf(f_memidx));
+		dataMap.put("f_follow", String.valueOf(f_follow));
+
+		
+		return sqlsession.delete("follow.followingdown", dataMap); 
+	}
+	
+	
+	public int followingYN(String f_memidx, int f_follow) {
+		
+		HashMap<String, String> dataMap = new HashMap<>(); 
+		
+		dataMap.put("f_memidx", String.valueOf(f_memidx));
+		dataMap.put("f_follow", String.valueOf(f_follow));
+			
+				
+		if(sqlsession.selectOne("follow.followingYN", dataMap) == null) {
+			return -1;
+		}
+
+		return sqlsession.selectOne("follow.followingYN", dataMap); 
+	}
 
 }

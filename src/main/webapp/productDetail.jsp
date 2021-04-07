@@ -30,10 +30,23 @@
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="member" class="com.koreait.member.memberDTO"/>
 <jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
+<jsp:useBean id="rpDAO" class="com.koreait.recentProduct.recentProductDAO"/>
+
 <%
 	String p_idx = request.getParameter("p_idx");
 	productDTO product = new productDTO();
 	product = pDAO.info(p_idx);
+%>
+<%
+	int rcp_productidx = (Integer.parseInt(String.valueOf(request.getParameter("p_idx"))));
+	int rcp_memidx = (Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
+	if(rpDAO.recentCheck(rcp_productidx) == 1){
+		rpDAO.recentdel(rcp_productidx);
+
+		rpDAO.recentProduct(rcp_memidx, rcp_productidx);
+	}else{
+	rpDAO.recentProduct(rcp_memidx, rcp_productidx);
+	}
 %>
 <head>
     <meta charset="UTF-8">

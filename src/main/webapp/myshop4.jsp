@@ -46,6 +46,12 @@
 	int followCnt = followingDAO.followcnt(idx);
 	
 	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
+	int zzimCnt;
+	if(zzimList == null){
+		zzimCnt = 0;
+	}else{
+		zzimCnt = zzimList.size();
+	}
 %>
 <html lang="en">
 
@@ -769,7 +775,7 @@ div {
                     <div class="bar" id="bar3">
                         <a class="b3" href="./myshop3.jsp">
                             찜
-                            <span class="b3_1"><%=zzimList.size() %></span>
+                            <span class="b3_1"><%=zzimCnt %></span>
                         </a>
                     </div>
                     <div class="bar" id="bar4">

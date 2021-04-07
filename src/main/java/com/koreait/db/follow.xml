@@ -33,13 +33,27 @@
  	<select id="youfollow" parameterType="int" resultType="String">
  		select count(f_memidx) from tb_following where f_follow=#{m_idx}
 	</select>
+	
 	<delete id="followingdel" parameterType="map">
 		delete from tb_following where f_follow=#{m_idx}
 	</delete> 
+	
 	<select id="followingphoto" resultType="map" parameterType="string">
 		select * from tb_product where p_memidx= #{m_idx} order by p_regdate desc limit 0,3;
 	</select>
 
+	<insert id="followingup" parameterType="map">insert into tb_following
+		(f_memidx, f_follow) values (#{f_memidx}, #{f_follow}) 
+		</insert>
+		
+	<delete id="followingdown" parameterType="map">
+		delete from tb_following where f_memidx=#{f_memidx} and f_follow=#{f_follow}
+	</delete> 
+	
+	<select id="followingYN" parameterType="map" resultType="int">
+ 		select count(f_idx) from tb_following where f_memidx=#{f_memidx} and f_follow=#{f_follow}
+	</select>
+	
 <!--	<select resultType="string" parameterType="string"
 		id="followingList">select f_follow from tb_following where f_memidx=#{f_memidx}
 	</select>

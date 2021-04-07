@@ -61,12 +61,20 @@
                             <option value="LG">LG</option>
                         </select>
                     </div>
+                    <script>
+                    	function injeung_send(){
+                    		alert('인증번호를 발송했습니다.');
+                    	}
+                    	function injeung_ok(){
+                    		alert('인증번호가 확인되었습니다.');
+                    	}
+                    </script>
                     <input type="text" name="hp" id="hp" placeholder=" ' - ' 없이 휴대폰번호를 입력해주세요.">
-                	<input type="button" value="인증번호 받기" id="injeung"></input>
+                	<input type="button" value="인증번호 받기" id="injeung" onclick="injeung_send()"></input>
                 </div>
                 <div class="hp_injeung">
                     <input type="text" name="injeung_num" id="injeung_num" placeholder="인증번호를 입력하세요.">
-                    <input type="button" value="인증번호 확인" id="injeung_check" name="injeung_check">
+                    <input type="button" value="인증번호 확인" id="injeung_check" name="injeung_check" onclick="injeung_ok()">
                 </div>
             </div>
             <table id="table1">

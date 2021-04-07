@@ -176,7 +176,6 @@ public class memberDAO {
 		List<HashMap<String,String>> zzimList= new ArrayList<>();
 		// 찜한 번호들 받아서 배열로 만들기
 		String zzimStr = sqlsession.selectOne("member.zzimString",m_idx);
-		System.out.println("zzimStr  : " + zzimStr);
 		if(zzimStr != null) {
 			String[] zzimArr = zzimStr.split(" ");
 			
@@ -330,5 +329,19 @@ public class memberDAO {
 		return sqlsession.delete("member.update_myshop", dataMap);
 	}
 	
+	// 20210405 zzim dao 추가
+	public String zzimcnt(String m_idx) {
+		HashMap<Object, Object> dataMap = new HashMap<>();
+		String followcnt = sqlsession.selectOne("member.zzimcnt",m_idx);
+		
+		return followcnt;
+	}
 	
+	// 20210405 로그인 시간 없데이트
+	public int lastlogin(String m_idx) {
+		HashMap<String, String> dataMap = new HashMap<>();
+		dataMap.put("m_idx", m_idx);
+		
+		return sqlsession.update("member.lastlogin", dataMap);
+	}
 }

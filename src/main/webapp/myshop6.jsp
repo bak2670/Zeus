@@ -44,6 +44,12 @@
 	int followCnt = followingDAO.followcnt(idx);
 	
 	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
+	int zzimCnt;
+	if(zzimList == null){
+		zzimCnt = 0;
+	}else{
+		zzimCnt = zzimList.size();
+	}
 %>
 <html lang="en">
 
@@ -762,7 +768,7 @@ div {
                     <div class="bar" id="bar3">
                         <a class="b3" href="./myshop3.jsp">
                             찜
-                            <span class="b3_1"><%=zzimList.size() %></span>
+                            <span class="b3_1"><%=zzimCnt %></span>
                         </a>
                     </div>
                     <div class="bar" id="bar4">
@@ -810,18 +816,80 @@ div {
                                 <a href="#" class="followers_menu_1">상품<%=followingDAO.productcnt(Integer.parseInt(String.valueOf(fMember.get("m_idx")))) %></a>
                                 <a href="#" class="followers_menu_2">팔로워<%=followingDAO.youfollow(Integer.parseInt(String.valueOf(fMember.get("m_idx")))) %></a>
                             </div>
-                            <div class="followers_btn">
-                                <button><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            <%
+        	                int followck = followingDAO.followingYN(idx, Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
+
+                            if(followck == 1){
+                            %>
+                            <div class="followers_btn" style="display: none;">
+                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
                             </div>
-                            <div class="followings_btn1">
-                                <button class=><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            <div class="followings_btn1" style="display: block;">
+                                <button onclick="fdown(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
                             </div>
+                           
+                            <%
+                         	   }else{
+                            %>
+                             <div class="followers_btn">
+                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            </div>
+                            <div class="followings_btn1" style="display: none;">
+                                <button onclick="fdown(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            </div>
+                            <%
+                          	  }
+                            %>
                     	</div>
-                    </div>
+                    </div>   
+                      <script>
+								function followingN(){
+									$(".followings_btn").hide()
+									$(".followings_btn1").show()
+								}
+								function followingY(){
+									$(".followings_btn").hide()
+									$(".followings_btn1").show()
+								}
+								function fup(i){
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'following_up.jsp?f_memidx='+i, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert(<%=fMember.get("m_idx")%>);
+											//document.getElementById('zzim').innerHTML = httpRequest.responseText;	
+											//let zzimCnt = xhr.responseText;
+											//console.log(zzimCnt);
+											//document.getElementById('zzim').innerHTML = zzimCnt;
+										}
+									}
+								}
+		                        
+								function fdown(i){
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'following_down.jsp?f_memidx='+i, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											//let zzimCnt = xhr.responseText;
+											//console.log(zzimCnt);
+											alert('팔로우 취소!');
+											//document.getElementById('zzim').innerHTML = zzimCnt;	
+										}
+									}
+									
+								}
+
+							</script>    
 					<%
-					}
-					}
-					%>
+						}
+						}
+					%> 
                     
                 </div>
             </div>

@@ -102,4 +102,13 @@
 	<select id="inquire1" parameterType="string" resultType="string">
 		select m_store from tb_member where m_idx=#{m_idx}
 	</select>
+	
+	<!-- zzim 사이드 카운트(20210405) -->
+	<select resultType="String" parameterType="String" id="zzimcnt">select m_zzim from tb_member where m_idx=#{m_idx} </select>
+ 
+ 
+ 	<!-- 라스트 로그인 (20210405) -->
+ 	<update id="lastlogin" parameterType="map">
+ 	update tb_member set m_lastlogin=now() where m_idx=#{m_idx};
+ 	</update>
 </mapper>

@@ -38,6 +38,12 @@
 	int followCnt = followingDAO.followcnt(idx);
 	
 	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
+	int zzimCnt;
+	if(zzimList == null){
+		zzimCnt = 0;
+	}else{
+		zzimCnt = zzimList.size();
+	}
 	
 	if(dao.myshop(member, idx) != null){
 	         
@@ -758,7 +764,7 @@ div {
                     <div class="bar" id="bar3">
                         <a class="b3" href="./myshop3.jsp">
                             찜
-                            <span class="b3_1"><%=zzimList.size() %></span>
+                            <span class="b3_1"><%=zzimCnt %></span>
                         </a>
                     </div>
                     <div class="bar"  id="bar4">
@@ -790,13 +796,13 @@ div {
                 </div> -->
             </div>
             <div class="followings_box">
-            	<%
-            		List<String> followingList = followingDAO.followingIdx(idx);
-            		for(String following : followingList){
-            			List<HashMap<String,String>> followingMember = followingDAO.followingInfo(following);
-            			for(HashMap fMember : followingMember){
-            				//System.out.println(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
-            	%>
+           	<%
+           		List<String> followingList = followingDAO.followingIdx(idx);
+           		for(String following : followingList){
+           			List<HashMap<String,String>> followingMember = followingDAO.followingInfo(following);
+           			for(HashMap fMember : followingMember){
+           				//System.out.println(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
+           	%>
                 <div class="followings_item">
                     <div class="followings_profile">
                             <a href="#" class="followings_img">
@@ -808,32 +814,74 @@ div {
                                 <a href="#" class="followings_menu_2">팔로워<%=followingDAO.youfollow(Integer.parseInt(String.valueOf(fMember.get("m_idx")))) %></a>
                             </div>
                             <div class="followings_btn">
-                                <button class=><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                                <button onclick="fdown(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
                                 <%
                                 	followingDAO.followingdel(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
                                 %>
                             </div>
                             <div class="followers_btn1">
-                                <button><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
-                            	
-                            
+                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>   
                             </div>
                     </div>
-                    <%
+                <%
                     List<HashMap<String,String>> followingPhoto = followingDAO.followingphoto(following);
         			for(HashMap fPhoto : followingPhoto){
-                    %>
+                %>
                     <div class="followings_item_img">
-                    <a href="productDetail.jsp?p_idx=<%=fPhoto.get("p_idx")%>">
+	                    <a href="productDetail.jsp?p_idx=<%=fPhoto.get("p_idx")%>">
 						<%
-						out.print("<img src='./uploads/" + fPhoto.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
+							out.print("<img src='./uploads/" + fPhoto.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
 						%>
-					</a>
+						</a>
                     </div>
-					<%
+				<%
         			}
-					%>
+				%>
                     </div>
+                    <script>
+								function followingN(){
+									$(".followings_btn").hide()
+									$(".followings_btn1").show()
+								}
+								function followingY(){
+									$(".followings_btn").hide()
+									$(".followings_btn1").show()
+								}
+								function fup(i){
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'following_up.jsp?f_memidx='+i, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											alert(<%=fMember.get("m_idx")%>);
+											//document.getElementById('zzim').innerHTML = httpRequest.responseText;	
+											//let zzimCnt = xhr.responseText;
+											//console.log(zzimCnt);
+											//document.getElementById('zzim').innerHTML = zzimCnt;
+										}
+									}
+								}
+		                        
+								function fdown(i){
+									const xhr = new XMLHttpRequest();
+									xhr.open('GET', 'following_down.jsp?f_memidx='+i, true);
+									xhr.send();
+									
+									
+									xhr.onreadystatechange = function(){
+										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+											//let zzimCnt = xhr.responseText;
+											//console.log(zzimCnt);
+											alert('팔로우 취소!');
+											//document.getElementById('zzim').innerHTML = zzimCnt;	
+										}
+									}
+									
+								}
+
+							</script>
 				<%
             			}
             		}

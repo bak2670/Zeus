@@ -42,7 +42,12 @@
 	int followCnt = followingDAO.followcnt(idx);
 	
 	List<HashMap<String, String>> zzimList = dao.zzimList(idx);
-	
+	int zzimCnt;
+	if(zzimList == null){
+		zzimCnt = 0;
+	}else{
+		zzimCnt = zzimList.size();
+	}
 	
 %>
 <html lang="en">
@@ -760,7 +765,7 @@
                 <div class="bar" id="bar3">
                     <a class="b3" href="./myshop3.jsp">
                         찜
-                        <span class="b3_1"><%=zzimList.size() %></span>
+                        <span class="b3_1"><%=zzimCnt%></span>
                     </a>
                 </div>
                 <div class="bar" id="bar4">
@@ -784,7 +789,7 @@
             </div>
             <div class="menubar2">
                 <div class="mn1">
-                    찜<span class="mn_1"><%=zzimList.size() %></span>
+                    찜<span class="mn_1"><%=zzimCnt%></span>
                 </div>
             </div>                
         </div>
@@ -813,31 +818,31 @@
             <div class="favorites_list">
             	<% 
             		// 찜 리스트 가져와서 보여주기
-            		
-            		for(HashMap product : zzimList){
-            	%>
-            	
-            	<div class="favorites_list_item">
-                    <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>">
-                        <div class="favorites_list_item_img">
-                            <img src="./uploads/<%=product.get("p_picture")%>">
-                        </div>
-                        <div class="favorites_list_item_text">
-                            <ul class="favorites_list_text_title">
-                                <li class="favorites_list_text_title_1"><%=product.get("p_name") %></li>
-                                <!-- <li class="zzim_check"><img src="./img/번개장터이미지/check.png"></li> -->
-                            </ul>
-                            <div class="favorites_list_text_price"><%=product.get("p_price") %></div>
-                            <div class="favorites_list_text_time"><%=product.get("p_regdate") %></div>
-                            <div class="favorites_list_text_location">
-                                <img src="./img/번개장터이미지/위치.png"> <%=product.get("p_deallocation") %>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <%
+            		if(zzimList != null){
+	            		for(HashMap product : zzimList){
+	            	%>
+	            	
+	            	<div class="favorites_list_item">
+	                    <a href="productDetail.jsp?p_idx=<%=product.get("p_idx") %>">
+	                        <div class="favorites_list_item_img">
+	                            <img src="./uploads/<%=product.get("p_picture")%>">
+	                        </div>
+	                        <div class="favorites_list_item_text">
+	                            <ul class="favorites_list_text_title">
+	                                <li class="favorites_list_text_title_1"><%=product.get("p_name") %></li>
+	                            </ul>
+	                            <div class="favorites_list_text_price"><%=product.get("p_price") %></div>
+	                            <div class="favorites_list_text_time"><%=product.get("p_regdate") %></div>
+	                            <div class="favorites_list_text_location">
+	                                <img src="./img/번개장터이미지/위치.png"> <%=product.get("p_deallocation") %>
+	                            </div>
+	                        </div>
+	                    </a>
+	                </div>
+	                <%
+	            		}
             		}
-                %>
+	                %>
 
 
             </div>

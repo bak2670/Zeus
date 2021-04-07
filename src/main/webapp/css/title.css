@@ -591,7 +591,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
 .myShopBtn > img, .myShopBtn1 > img {
     margin-right: 5px;
 }
-.myShopBtn::after, .myShopBtn1::after {
+/* .myShopBtn::after, .myShopBtn1::after {
     content: "";
     width: 1px;
     height: 10px;
@@ -599,7 +599,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     position: absolute;
     top: 8px;
     right: -15px;
-}
+} */
 .sellBtn, .sellBtn1{
     margin-left: 30px;
     display: flex;
@@ -688,7 +688,7 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     -webkit-box-pack: center;
     justify-content: center;
 }
-.zzim1Btn, .zzim1Btn1 {
+.zzim1Btn{
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -696,7 +696,16 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
     font-weight: 600;
     color: rgb(247, 0, 0);
 }
-.zzim1Btn img, .zzim1Btn1 img {
+.zzim1Btn1, .zzim1Btn2{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgb(204, 204, 204);
+}
+
+.zzim1Btn img, .zzim1Btn1 img, .zzim1Btn2 img{
     margin-right: 5px;
 }
 .zzimSideBox3{
@@ -735,6 +744,25 @@ header{border-bottom:1px solid rgb(238, 238, 238); text-decoration: none; color:
 .zzim3Box1 {
     width: 100%;
     box-sizing: border-box;
+}
+.zzimnobox{
+	height: 120px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(204, 204, 204);
+    font-size: 12px;
+}
+.zzimnobox img {
+    margin-bottom: 5px;
+}
+.zzimnobox div {
+    white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.4;
 }
 .zzim3Btn:last-child {
     margin-bottom: 0px;
