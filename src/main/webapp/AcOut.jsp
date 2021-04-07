@@ -1,12 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String username= null;
+	String idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		idx = String.valueOf(session.getAttribute("idx"));
+	}
+%>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<%
+	if(dao.myshop(member, idx) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+    
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/title.css">
+    <link rel="stylesheet" href="./css/AcOut.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/script.js"></script>
     <title>Document</title>
     <style>
         @font-face {
@@ -37,7 +59,20 @@
                     <br>
                     <p>[잠깐!]</p>
                     <span>- 상점명 변경 및 휴대폰번호 변경은 내정보 수정에서 가능합니다.<br>- 이용 중 불편사항이 있으셨다면 설정 > 1:1상담하기로 문의주시기 바랍니다.<br>- 탈퇴 시 계정의 모든 정보는 삭제되며 재가입시에도 복구되지 않습니다.</span>
-                    <a href="#"><div><button type="button">탈퇴</button></div></a>
+                    <a href="#"><div><button type="button" value="탈퇴" id="popOpenBtn">>탈퇴</button></div></a>
+                </div>
+                <div id ="popup_mask"></div>
+                <div id="popupDiv"> <!-- 팝업창 -->
+                   <form method="post" action="AcOut_ok.jsp?m_idx=<%=member.getIdx()%>">
+                    <div>
+                        <p><img src="./img/번개장터이미지/arrow.png">회원탈퇴</p>
+                        <hr>
+                        <h2>탈퇴하시겠습니까?</h2>
+                        <textarea name="w_reason" placeholder="탈퇴사유를 작성해주세요."></textarea>
+                    </div>
+                    <input type="submit" class="popCloseBtn" value="탈퇴">
+                    <input type="button" class="popCloseBtn" value="취소">
+                    </form>	
                 </div>
         </div>
 

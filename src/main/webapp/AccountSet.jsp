@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String username= null;
+	String idx = null;
+	if(session.getAttribute("username") != null){
+		username= (String)session.getAttribute("username");
+		idx = String.valueOf(session.getAttribute("idx"));
+	}
+%>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO" scope="page"/>
+<jsp:useBean id="dao" class="com.koreait.member.memberDAO"/>
+<%
+	if(dao.myshop(member, idx) != null){
+		System.out.println("데이터왔어");
+	}else{
+		System.out.println("데이터없어");
+	}
+    
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 

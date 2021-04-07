@@ -1,0 +1,51 @@
+/*계정설정 탈퇴페이지*/
+.AcOutwarp{background-color : rgb(243, 241, 241);}
+.AcOuttop{width: 940px; height: 520px; border:1px solid rgb(243, 241, 241); margin:0 auto;}
+.AcOuttop_intext{width: 695px; height: 323px;  line-height: 160%; font-size: 20px; margin:0 auto; margin-top: 140px;}
+.AcOuttop_intext p {font-weight: bold;}
+.AcOuttop_intext button{display: block;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    border: 1px solid #d22c1c;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background: #ff3021;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid white; margin-top: 15px}
+.AcOutbottom{width: 940px; height: 307px;  margin:0 auto;}
+.AcOut_footer {width: 750px; border-top:1px solid #e4e2e2; margin: 0 auto; text-align: center;
+    font-size: 10px; margin-top:50px; padding-top: 10px;}
+.AcOut_footer_menu{margin:0; padding: 0; box-sizing: border-box;  }
+.AcOut_footer_menu a::after{content: "|"; padding: 0 10px; font-size: 10px; color: #a2a3a3; position: relative; top:-2px;}
+.AcOut_footer_menu a:last-child::after{content:""; display: none;}
+.AcOut_footer p {font-size: 12px; color: #757575;}
+.AcOut_footer p b {font-weight: bold;}
+
+
+#popupDiv {  /* 팝업창 css */
+    top : 0px;
+    position: absolute;
+    background: #fff;
+    width: 500px;
+    height: 500px;
+    display: none; 
+    padding: 20px;
+    text-align: center;
+}
+
+#popup_mask { /* 팝업 배경 css */
+    position: fixed;
+    width: 100%;
+    height: 1000px;
+    top: 0px;
+    left: 0px;
+    display: none; 
+    background-color:#000;
+    opacity: 0.8;
+}
+#popupDiv p { text-align: left; }
+#popupDiv textarea { width: 450px; height: 300px;}
+#popupDiv button { width: 100px; height: 30px; margin-top: 20px; }
