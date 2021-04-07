@@ -6,6 +6,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.koreait.product.productDTO"%>
+<jsp:useBean id="categoryDAO" class="com.koreait.category.categoryDAO"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -27,6 +28,8 @@
 %>
 <jsp:useBean id="pDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
+<jsp:useBean id="member" class="com.koreait.member.memberDTO"/>
+<jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
 <%
 	String p_idx = request.getParameter("p_idx");
 	productDTO product = new productDTO();
@@ -263,7 +266,7 @@
     <div class="productDetailBox">
     	<div class="productDetailContainer">
     	
-	        <div class="selectContainer">
+	        <!-- <div class="selectContainer">
 	            <div class="selectList">
 	                <div class="selectHome">
 	                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkRJREFUSA3tlb9LHEEUx2/vzhQXESxsTau1aWxsFDkQA0ljEcv78RfY2EQbwT/hflU2KjGkCASRgI1FQEVstNU2QkD0YnXn5x03x7vZXXfnXGzMwPBm3pv5fubNj10vNUCpVCpDTNuibpfL5e8DSKTSrpME6nneDvOWqLv1en3RVUPGO4ENtN1uf2RukzrUarW+4l8QMZcSG2xBb9Lp9DSgdRbxBrtH5nkXsBdncAB0tlgsnstcYmuYL2z/A/UD/gPxR5VI8FNQI27g9P9lMpnFQqHwy8TC7JPgOFAjrOBNjmGBzA9NLMiGnrELVIR5VmuYdWqOc//Bmc/QDi2BGbtCtbrK/I5tz7PtRzpu2r6MnwMVUZX5ME/tZ6PRkNvvK30ZPxeq1VXmt/jnWdBvHe9lnCRUACrzEbr7ZP5egzsZW9AU7zFfKpX29cBB29Vq9Vv3S/cXjTkWdCpaWRsqTsA3Yk1hTI4nMmn6YZYzvUf4UseB/un2R9E9YCGzJHWWRXCF4DjOE6yI5/REaQsU0WPbb/dFA1/flqoxsqB7GJsk8jnLQ9/AITXFao4JTEk7pDQRv7BjzHmLb8L26z6LX4YlC+uUrGnEsQJlm3wZ1Wq1qTg7ohm9W62dL9H+D36JXe4wnC4Xt3eMi1SyV8fFemf7ovpOYMTGgVSiROPEY4GBydenGiXIc7uKGmPiscB8Bq+ZUDaTkrCv7zkFbjVn+kk+g0lsKS9hkuqTCgQzahW4b3CSjj4wt1J+2r0/SJKg7svoST4CXawe/d9nd+gAAAAASUVORK5CYII="
@@ -305,7 +308,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	        </div>
+	        </div> -->
     
     
 	        <div class="photoContainer">
@@ -1103,7 +1106,7 @@
 			                                    width="16" height="18" alt="카테고리 아이콘">카테고리
 			                            </div>
 			                            <div class="choose">
-			                                <a href="/categories/310130030?order=date&amp;page=1"><span class="chooseDash"><%=product.getCategory()%></span></a>
+			                                <span class="chooseDash"><%=categoryDAO.categorySmall(Integer.parseInt(p_idx))%></span>
 			                            </div>
 			                        </div>
 			                        <div class="chooseBox">
@@ -1122,8 +1125,9 @@
 				                상품문의 <span class="enquirySub">0</span>
 				            </div>
 				            <div class="enquiryBox1">
+				                <form method="post" action="productDetail_inquire_ok.jsp?m_idx=<%=m_idx %>&p_idx=<%=product.getIdx()%>&p_memidx=<%=product.getMemidx()%>">
 				                <div class="enquiryBox2">
-				                    <textarea placeholder="상품문의 입력" class="enquiryTxt" id="enquiryTxt"></textarea>
+				                    <textarea name="i_content" placeholder="상품문의 입력" class="enquiryTxt" id="enquiryTxt"></textarea>
 				                </div>
 				                <div class="enquiryBox3">
 				                    <div class="enquiryCnt">0 / 100</div>
@@ -1132,6 +1136,7 @@
 				                            width="15" height="16" alt="문의등록버튼 아이콘">등록
 				                    </button>
 				                </div>
+				                </form>
 				            </div>
 				            <!-- 여기부터 수정 --> 
 				            <div class="productInquiry">
@@ -1159,7 +1164,38 @@
 				                            </div>
 				                        </div>
 				                    </div>
-				                </div>
+									<%   
+										List<HashMap<String, String>> inquireList = inquireDAO.inquire(p_idx);
+										int inquireCnt = inquireList.size();
+										for(HashMap inq : inquireList){
+									%>
+									<div class="inquiryContent">
+				                        <a class="inquiryImg" href="/shop/1/reviews"><img
+				                                src="https://media.bunjang.co.kr/images/crop/199870305_w{res}.jpg" width="48" height="48"
+				                                alt="프로필 이미지"></a>
+				                        <div class="inquiryDiv">
+				                            <div class="inquiryHeader">
+
+				                                <div class="inquiryMem"><%=inquireDAO.inquire1(String.valueOf(inq.get("i_memidx"))) %></div>
+				                                <div class="inquiryTime"><%=inq.get("i_regdate") %></div>
+				                            </div>
+				                            <div class="inquiryText"><%=inq.get("i_content") %></div>
+				                            <div class="inquiryFooter">
+				                                <div class="inquiryComment">
+				                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAAAXNSR0IArs4c6QAABIFJREFUSA2tl0lok0EUx5M0tVYpsVvqRhQFe6gH0VKkWrFKl1TrQaSggsvR/eAKoiJCbxZRwV0Ul4N6UbCLbU314EatC0b0oJY0Rg1aEcS0DWn9vfRLnH79EmPNwMt787b5z8z7ZiZmUwLN5XJZ+/r6ivr7+xfhPn9gYGAi3G42m7OQf8D99L9Aj5Cb8XtQVVXVSz/hZo7n2dTUZA+FQptJvpEBs+P5qjb8f9I/Q0wdgLyqLZZsCERWoLe3dx+JdkGjteB++EvonnAG+2qxWL4ij2YF8vCbhG4BfCG6DMhEPwg7YbPZ9hQXFwdEF6sNA9LS0jIjGAxeJeEcCSKZDzoJnaqoqJAtiNtkEj09PdU4ySTmijOxr1NSUlaXl5c/jxU8BEhjY2MBwS4ol2CZTa3D4agtKCjoi5Ugnp6tdbJaZ8k3kXyyXeVOp/OhUUwUiKwEBXkfpzzIQ2A1QbIV/9WYXBZgLpJkKTmlsBdVVlZ26JNaRAFiC9txCTEPx3epqaklyQAhuRm02263LyfvTcaxAep6e3v7GLGpLQwE1NtwKsLwi710lpWVeVSn/5ULCwuDbHENYJ6Qa5rf7z+gz2l2u92jPB6PDyDZfAVbmMFxvVNDQ0O7XpdIn1UtVP2kBlmRDgBZIAdjfYrYrV6vt0pAYPDyVZyIGFSOPfwFqbqRyAzsZlJyvmwifiVUF8ljBWGN1rkAmFDEoHK2a8jMVNu/yoA4R4wAWQX9AUJnBiStaZAN/2Wlng7XjkzDSfuMVekkeiagmLt5QDJZIYcIKDuFG7VEa0RfE0a5NN07xpva1tYmR8Vn0VlRjBUhPT1djmvDhk9SakRJ7hOZa0Tur0EgLE0XA+VzmE1A+UEc9C2ZNaLlFgCmtLQ0ubHDTVZEzox8inYa3BBIMmtkcFjTdHigtLQ0ugtSI61QGbRMk2FDW6I1MjTKZDKqGXLlyw6wE7dVfwFyBarFuIrDbafRBYctmTWyTgNwXeNhZpWHCyhvM1h1V1fXbrSHVAeRk1Ujra2tUyjQrayGj1P8hjpO+PYFyFSAuDFYGXQONfFKdUqGTH6zTJhcTkCs4ZSVSzbawpcee9mJZi80iqJtqK+vl2JKagPEURI6WY1bTPSyPnkYiCjZoiM41YF8MryNC2q23nmkfUAcJnYz9Dg3N3cl+cOnqZovCkSUrMx2nI4KGOgRYPbxdkhVA0YikytF4sh9kyfBL6Mc0ReaamRrVtA/DWVCH6FjGRkZp0tKSr4jx23Nzc22zMzMoDqg9m9AHtzZgFrC6t/RJzEEIk5U+CRO2/2IawlOg4dIJJffXegt5EffjW6sDEBf3hqLkYvQf6MgD+bk5JyTRxE2E5Obi60RWzrdDYA5L/pIiwkk4sCrfHwgENhIkqXoZpHorzGRWGK68b8GKBf0DKCy5TegLHxO8oTcHlm5hJNKckDlcA7MQ5wM2UkoS93DID/gPj79Fwz2Htt6+E643K4xG0DfQKv5lDv+CUjMjAYG7f/NYgDK6302fDp8HFy2WQpXVusj/AMT2PEbeA0W2gj2azwAAAAASUVORK5CYII="
+				                                        width="17" height="14" alt="댓글달기 버튼 이미지">댓글달기
+				                                </div>
+				                                <div class="inquiryComment">
+				                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAgtJREFUSA3tVrtOAkEUdQnKkvADFGtpIR01DYXyMLGwVisLjFEbE42FhYWJiY0YEwsqtLYwkZcFf2C3FJZuwQdIAvgAz8EdGHZZwpJIInGS3blzzzn3zty5m6wyM8Iol8tqs9lca7Vaq6CHFUUJUtZut6uYnj0ez4PP57uPRqMN+ocNZRhILJ/Pr2M6Q3BtGBebMIAfJxKJu6E8JxCn8tbr9SvgKXIQsIIpg7kUCARe6avVavPYyDLMLcyL9GHc+P3+XZz282fZ//b2L3srkQwJPuA9iMfj17C/eoyOpeOtI1m6UCjswL6AnYKW4DZf1jGwpCwjhLdMhvtZicViT1bhoHWxWFzCPT9COwvtxqDy2hKyQRqNxgtEGkT7EKVFcF3X5wzDOAW2SR/wrKZpJ6FQ6F1wsNk94JfADFVVF6yN5BFEMbMbzWQVllH4OTMZTnAIPMiHNn0yxyx9hTEYS8Zo2xKarU+MDdJ3ZwjSORlBMaw+U5MhLsUSdHtCIGGiEJa6LJeGpO3EkuW2E4Lc+ahF68tkYFl5TXuQT2hFLFljS4gSBUiIRCJvMpE2GwRde45AVT606bPyhFbEknHH71AmCdvsxiOs+Yw1bCccK4oL0X9CF8UajTr9JXX8LHK5XHu0IrljTbyk7rb3F9nKb92VUzEmfofdLk0mk7bfDaddjuMXlZz4Caf/Dr8BRaXTUmgtW58AAAAASUVORK5CYII="
+				                                        width="14" height="14" alt="신고하기 버튼 이미지">신고하기
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+									<%
+										}
+									%> 
+								</div>
 				                <div class="enquiryReport">
 				                    <div class="enquireReportContainer">
 				                        <div class="ReportTitle">

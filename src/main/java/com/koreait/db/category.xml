@@ -19,4 +19,16 @@
 	<select id="searchCateIdx" parameterType="map" resultType="int">
 		select c_idx from tb_category where c_big=#{big} and c_middle=#{mid} and c_small=#{small};
 	</select>
+
+	<!-- 상품 idx -> 올린 상점 idx -->
+	<select id="categoryIdx" parameterType="int" resultType="int">
+		select
+		p_category from tb_product where p_idx=#{p_idx}
+	</select>
+
+	<!-- 카테고리 이름 가져오는 sql -->
+
+	<select id="categorySmall" parameterType="int" resultType="string">
+		select c_small from tb_category where c_idx = #{c_idx}
+	</select>
 </mapper> 

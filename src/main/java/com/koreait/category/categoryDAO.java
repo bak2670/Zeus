@@ -72,5 +72,11 @@ public class categoryDAO {
 		//System.out.println(cateIdx);
 		return cateIdx;
 	}
+	public String categorySmall(int p_idx) {
+		int c_idx = sqlsession.selectOne("category.categoryIdx", p_idx);				
+		String cate = sqlsession.selectOne("category.categorySmall", c_idx);
+						
+		return cate;
+	}
 
 }

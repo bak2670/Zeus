@@ -12,5 +12,18 @@
 		select * from tb_inquire where i_productidx=#{i_idx}
 	</select>
 
+	<!-- 상품상세 입력부분 -->
+	<insert id="proinq" parameterType="map">
+		insert into tb_inquire (i_memidx, i_productidx, i_storeidx, i_content)
+		values (#{m_idx},#{p_idx},#{p_memidx},#{i_content})
+	</insert>
+	
+	<!-- 상품상세 출력부분 -->
+	<select id="inquire" parameterType = "string" resultType="map">
+		select * from tb_inquire where i_productidx=#{i_productidx}
+	</select>
 
+	<select id="inquire1" parameterType = "string" resultType="string">
+		select m_store from tb_member where m_idx=#{m_idx}
+	</select>
 </mapper>
