@@ -13,12 +13,12 @@
 	
 	<!-- 구매내역 -->
 	<select id="selectBuy" parameterType="string" resultType="map">
-		select tb_payment.pm_regdate, tb_product.p_name, tb_product.p_price, tb_product.p_picture, tb_member.m_username as seller 
+		select tb_payment.pm_regdate, tb_product.p_name, tb_member.m_idx, tb_product.p_price, tb_product.p_picture, tb_member.m_username as seller 
 		from tb_payment join tb_product on tb_payment.pm_productIdx = tb_product.p_idx  join tb_member on tb_payment.pm_sellerIdx = tb_member.m_idx where pm_buyerIdx = #{m_idx};
 	</select>
 	<!-- 판매내역 -->
 	<select id="selectSell" parameterType="string" resultType="map">
-		select tb_payment.pm_regdate, tb_product.p_name, tb_product.p_price, tb_product.p_picture, tb_member.m_username as seller 
+		select tb_payment.pm_regdate, tb_product.p_name, tb_member.m_idx, tb_product.p_price, tb_product.p_picture, tb_member.m_username as seller 
 		from tb_payment join tb_product on tb_payment.pm_productIdx = tb_product.p_idx 
 		join tb_member on tb_payment.pm_buyerIdx = tb_member.m_idx where pm_sellerIdx = #{m_idx};
 	</select>

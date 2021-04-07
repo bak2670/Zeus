@@ -40,6 +40,9 @@
 	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(store_idx);
 	int questionCnt = reviewList.size();
 	
+	followingDTO.setMemidx(Integer.parseInt(store_idx));
+	int followCnt = followingDAO.followcnt(store_idx);
+	
 	if(memberDAO.myshop(storeMember, m_idx) != null){
 	         
 %>
@@ -498,7 +501,7 @@
                     </div>
                     <ul class="myshop_text_center">
                         <li class="myshop_text_center1">
-                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=storeMember.getJoindate().substring(0,10) %>
                         </li>
                         <li class="myshop_text_center2">
                             <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -519,10 +522,10 @@
                     </div>
                 </div>
         </div>
-<%
-	followingDTO.setMemidx(Integer.parseInt(String.valueOf(session.getAttribute("idx"))));
-	int followCnt = followingDAO.followingcnt(m_idx);
-%>
+		<%
+			followingDTO.setMemidx(Integer.parseInt(store_idx));
+			int followingCnt = followingDAO.followingcnt(store_idx);
+		%>
 
             <div class="contens2">
                 <div class="menubar">
@@ -547,26 +550,26 @@
                     <div class="yourshopbar" id="bar5">
                         <a class="b5" href="./yourshop5.jsp?m_idx=<%=store_idx%>">
                             팔로잉
-                            <span class="b5_1">1</span>
+                            <span class="b5_1"><%=followingCnt %></span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar6">
                         <a class="b6" href="./yourshop6.jsp?m_idx=<%=store_idx%>">
                             팔로워
-                            <span class="b6_1">5</span>
+                            <span class="b6_1"><%=followCnt%></span>
                         </a>
                     </div>
                 </div>
                 <div class="menubar2">
                     <div class="mn1">
-                        팔로잉<span class="mn_1"><%=followCnt%></span>
+                        팔로잉<span class="mn_1"><%=followingCnt%></span>
                     </div>
                 </div>
                
                 </div> 
                    <div class="followings_box">
             	<%
-            		List<String> followingList = followingDAO.followingIdx(m_idx);
+            		List<String> followingList = followingDAO.followingIdx(store_idx);
             		for(String following : followingList){
             			List<HashMap<String,String>> followingMember = followingDAO.followingInfo(following);
             			for(HashMap fMember : followingMember){

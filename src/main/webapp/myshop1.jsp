@@ -629,26 +629,6 @@
                     </div>
 
                 </div>
-                <!-- <div class="menubar3">
-                    <div class="left">
-                        <div class="left_cnt">전체</div>
-                        <div class="cnt"><%=productCnt %>개</div>
-                    </div>
-                    <div class="right">
-                        <a class="new" href="#">
-                            최신순
-                        </a>
-                        <a class="new" href="#">
-                            인기순
-                        </a>
-                        <a class="new" href="#">
-                            저가순
-                        </a>
-                        <a class="new" href="#">
-                            고가순
-                        </a>
-                    </div> 
-                </div>-->
                     <!--상품나열-->
                     
                     <!-- 상품 가져와서 보여주기 -> 순서는 일단 인덱스 순서 -->
@@ -667,6 +647,11 @@
                             <div class="item_text">
                                 <div class = "text_top">
                                     <%=product.get("p_name")%>
+                                    <%
+                                    	if((product.get("p_salesStatus")).equals("판매완료")){
+                                    		out.println("  <b style='color: red;'>판매완료</b>");
+                                    	}
+                                    %>
                                 </div>
                                 <div class="text_bottom">
                                     <div class="text_bottom1">

@@ -152,7 +152,7 @@
 															<%=trade.get("p_name") %>
 														</span>
 														<span class="tradeProductPrice tradeProductPriceee"><strong><%=trade.get("p_price") %></strong>원</span>
-														<span class="tradeProductUserName hfRDV"><%=trade.get("buyer") %></span>
+														<span class="tradeProductUserName hfRDV"><%=trade.get("seller") %></span>
 														<span class="tradeProductDate dCroum"><time datetime="1615020591000"><%=String.valueOf(trade.get("pm_regdate")) %></time></span>
 													</aside>
 												</div>

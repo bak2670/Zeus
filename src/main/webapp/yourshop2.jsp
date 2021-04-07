@@ -7,6 +7,7 @@
 <jsp:useBean id="yourshopdto" class="com.koreait.yourshop.YourshopDTO"/>  <!-- 객체생성 -->
 <jsp:useBean id="memberDAO" class="com.koreait.member.memberDAO"/>
 <jsp:useBean id="followingDAO" class="com.koreait.following.followingDAO"/>
+<jsp:useBean id="followingDTO" class="com.koreait.following.followingDTO" />
 <jsp:useBean id="productDAO" class="com.koreait.product.productDAO"/>
 <jsp:useBean id="storeMember" class="com.koreait.member.memberDTO"/>
 <jsp:useBean id="inquireDAO" class="com.koreait.inquire.inquireDAO"/>
@@ -39,6 +40,12 @@
 
 	List<HashMap<String, String>> reviewList = reviewDAO.myshop_question1(store_idx);
 	int questionCnt = reviewList.size();
+	
+	followingDTO.setMemidx(Integer.parseInt(store_idx));
+	int followingCnt = followingDAO.followingcnt(store_idx);
+	
+	followingDTO.setMemidx(Integer.parseInt(store_idx));
+	int followCnt = followingDAO.followcnt(store_idx);
 %>
 <html lang="en">
 
@@ -498,7 +505,7 @@
                     </div>
                     <ul class="myshop_text_center">
                         <li class="myshop_text_center1">
-                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 00 일 전
+                            <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=storeMember.getJoindate().substring(0,10) %>
                         </li>
                         <li class="myshop_text_center2">
                             <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수 0 명
@@ -544,13 +551,13 @@
                     <div class="yourshopbar" id="bar5">
                         <a class="b5" href="./yourshop5.jsp?m_idx=<%=store_idx%>">
                             팔로잉
-                            <span class="b5_1">1</span>
+                            <span class="b5_1"><%=followingCnt%></span>
                         </a>
                     </div>
                     <div class="yourshopbar" id="bar6">
                         <a class="b6" href="./yourshop6.jsp?m_idx=<%=store_idx%>">
                             팔로워
-                            <span class="b6_1">5</span>
+                            <span class="b6_1"><%=followCnt%></span>
                         </a>
                     </div>
                 </div>
