@@ -30,11 +30,11 @@ public class ProductDAO {
 	public List<ProductDTO> mem_detail(int start, int pagePerCount, String m_idx){
 	      try {
 	         conn = Dbconn.getConnection();
-	         sql = "select * from tb_product order by p_idx desc limit ?, ? where p_memidx =?";
+	         sql = "select * from tb_product where p_memidx = ? order by p_idx desc limit ?, ? ";
 	         pstmt = conn.prepareStatement(sql); 
-	         pstmt.setInt(1, start);
-	            pstmt.setInt(2, pagePerCount);
-	            pstmt.setString(3, m_idx);
+	         pstmt.setString(1, m_idx);
+             pstmt.setInt(2, start);
+             pstmt.setInt(3, pagePerCount);
 	         rs = pstmt.executeQuery();
 	         
 	         while(rs.next()) {
@@ -209,20 +209,24 @@ public class ProductDAO {
 	}
 	
 	// 검색
-	   public List<ProductDTO> searchProduct(String pro_search, String searchPro) {
+	   public List<ProductDTO> searchProduct(String pro_search, String searchPro, int start, int pagePerCount) {
 	       
 	      try { 
 	         conn = Dbconn.getConnection();
 	            //System.out.print(searchPro);
 	            if (pro_search.equals("상품명")) {
-	               sql = "select * from tb_product where p_name LIKE '%' ? '%' order by p_idx desc";
+	               sql = "select * from tb_product where p_name LIKE '%' ? '%' order by p_idx desc limit ?, ?";
 	               pstmt = conn.prepareStatement(sql);
 	               pstmt.setString(1, searchPro);
+		   		   pstmt.setInt(2, start);
+				   pstmt.setInt(3, pagePerCount);
 	               rs = pstmt.executeQuery();
 	            } else if (pro_search.equals("상점명")) {
-	               sql = "select * from tb_product join tb_member on tb_product.p_memidx = tb_member.m_idx  where m_store like '%' ? '%' order by m_idx desc;";
+	               sql = "select * from tb_product join tb_member on tb_product.p_memidx = tb_member.m_idx  where m_store like '%' ? '%' order by m_idx desc limit ?, ?";
 	               pstmt = conn.prepareStatement(sql);
-	               pstmt.setString(1, searchPro);
+	               pstmt.setString(1, searchPro);			
+	               pstmt.setInt(2, start);
+	               pstmt.setInt(3, pagePerCount);
 	               rs = pstmt.executeQuery();
 	            }
 	         
