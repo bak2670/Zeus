@@ -891,7 +891,7 @@
 	                                </div>
 	                            </div>
 	                        </li>
-	                        <li class="tagMain">
+<!-- 	                        <li class="tagMain">
 	                            <div class="tagTitle">
 	                                연관태그
 	                            </div>
@@ -928,7 +928,7 @@
 	                                    </li>
 	                                </ul>
 	                            </div>
-	                            </li>
+	                            </li> -->
 	                            <li class="quantityMain"> 
 	                                <div class="quantityTitle">
 	                                    수량

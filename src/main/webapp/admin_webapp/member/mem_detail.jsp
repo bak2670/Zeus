@@ -162,7 +162,7 @@
 						for(ProductDTO product : productList){
 %>		
                         
-                        <div onclick="location.href='../product/product_detail.jsp?p_idx=<%=product.getIdx()%>'"><img src='../uploads/<%=product.getPicture()%>' alt="상품이미지"><p><%= product.getName() %></p><p><%= product.getPrice() %>원</p></div>
+                        <div onclick="location.href='../product/product_detail.jsp?p_idx=<%=product.getIdx()%>'"><img src='../../uploads/<%=product.getPicture()%>' alt="상품이미지"><p><%= product.getName() %></p><p><%= product.getPrice() %>원</p></div>
 <%
 						}
 %>

@@ -10,6 +10,6 @@
 %>
 <!--20210405 수정-->
 <script>
-	/* location.href="main.jsp" */
-	window.location=document.referrer;
+	location.href="main.jsp"
+	/* window.location=document.referrer; */
 </script>

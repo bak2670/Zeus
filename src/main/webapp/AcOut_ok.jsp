@@ -11,21 +11,19 @@
 	String m_idx = request.getParameter("m_idx");
 	String w_reason = request.getParameter("w_reason");
 
+	if(wdao.memdraw(m_idx, w_reason) == 1){
 %>
-<% 
-			if(wdao.memdraw(m_idx, w_reason) == 1 ){
-%>
-			<script>
-				alert('탈퇴신청되었습니다');
-				location.href='logout.jsp';
-			</script>
+	<script>
+		alert('탈퇴신청되었습니다');
+		location.href='logout.jsp';
+	</script>
 <%
-		}else{	
+	}else{	
 %>
-<script>
-				alert('안됨유');
-				history.back();
-			</script>
+	<script>
+		alert('탈퇴신청에 실패했습니다');
+		history.back();
+	</script>
 <%
 }
 %>

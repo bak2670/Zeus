@@ -72,7 +72,7 @@
 	                <div class="pro_detail1">
 	                    <table>
 	                        <tr>
-	                            <td rowspan="5"><img src="../uploads/<%=product.getPicture()%>" alt='상품이미지'></td>
+	                            <td rowspan="5"><img src="../../uploads/<%=product.getPicture()%>" alt='상품이미지'></td>
 	                            <th>상품명</th>
 	                            <td><input type="text" name="p_name" value="<%=product.getName()%>"></td>
 	                            <th>등록일</th>
@@ -111,9 +111,7 @@
 	                            </select></td>
 	                            <th>판매상태</th>
 	                            <td><select name="p_salesStatus">
-	                                <option value="상품삭제">상품삭제</option>
 	                                <option value="판매중">판매중</option>
-	                                <option value="예약중">예약중</option>
 	                                <option value="판매완료">판매완료</option>
 	                            </select></td>
 	                        </tr>

@@ -70,7 +70,7 @@
  
 %>
 	<script>
-		alert("업로드 되었습니다.")
+		alert("상품이 등록되었습니다.")
 		location.href="main.jsp" // 임의, 정해진 곳으로 고쳐줘야함
 		
 	</script>
@@ -80,7 +80,7 @@
 		}else{
 %>
 	<script>
-		alert("업로드 실패.")
+		alert("상품 등록에 실패했습니다.")
 		history.back(); 
 				
 	</script>

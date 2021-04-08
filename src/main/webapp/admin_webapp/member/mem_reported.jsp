@@ -128,20 +128,37 @@
 							}
 %>
                             
-                            <td><input type="button" value="차단" class="block" onclick="location.href='./mem_block_ok.jsp?m_idx=<%= report.getMemidx() %>&&page=mem_reported'"></td>
+                            <td><input type="button" value="차단" class="block" id="popOpenBtn"></td>
                             <td><input type="button" value="삭제" class="userDel" onclick="location.href='./mem_delete_ok.jsp?m_idx=<%= report.getMemidx() %>&&page=mem_reported'"></td>
                         </tr>
-<%
+						<div id="popup_mask"></div>
+						<div id="popupDiv">
+							<!-- 팝업창 -->
+							<form method="post"
+								action="mem_block_ok.jsp?m_idx=<%=report.getMemidx()%>&&page=mem_detail">
+								<div>
+									<p>
+										<img src="../images/arrow.png">회원차단
+									</p>
+									<hr>
+									<h2>회원을 차단하시겠습니까?</h2>
+									<textarea name="blockReason" onclick="this.value=''">차단사유를 작성해주세요.</textarea>
+								</div>
+								<input type="submit" class="popCloseBtn" value="차단"> <input
+									type="button" class="popCloseBtn" value="취소">
+							</form>
+						</div>
+						<%
 						}
 
 						int pageNums = 0;
-						if(totalCount % pagePerCount == 0){
-							pageNums = (totalCount / pagePerCount);
-							
-						}else{
-							pageNums = (totalCount / pagePerCount) + 1;
+						if (totalCount % pagePerCount == 0) {
+						pageNums = (totalCount / pagePerCount);
+
+						} else {
+						pageNums = (totalCount / pagePerCount) + 1;
 						}
-%>
+						%>
                     </table>
                 </div>
             </div>

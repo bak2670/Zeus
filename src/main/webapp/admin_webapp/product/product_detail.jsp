@@ -185,7 +185,7 @@ for(HashMap inq : inquireList){
 <%   
   System.out.println(product.getMemidx());
 
-List<HashMap<String, String>> reviewList = reviewDAO.review("1");
+List<HashMap<String, String>> reviewList = reviewDAO.review(p_idx);
 int reviewCnt = reviewList.size();
 
 for(HashMap rev : reviewList){

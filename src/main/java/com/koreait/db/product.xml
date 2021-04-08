@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="mainProduct" resultType="map">
-		select * from tb_product where p_salesStatus = '판매중'
+		select * from tb_product where p_salesStatus = '판매중' order by p_idx desc  
 	</select>
 	
 	<insert id="uploadproduct" parameterType="map">
