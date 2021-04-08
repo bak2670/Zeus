@@ -6,12 +6,12 @@
 
 
 	<select id="searchProduct" parameterType="string" resultType="map">
-		select * from tb_product where p_name LIKE CONCAT('%', #{searchText}, '%') and p_salesStatus = '판매중'
+		select * from tb_product where (p_name LIKE CONCAT('%', #{searchText}, '%') or p_deallocation LIKE CONCAT('%', #{searchText}, '%')) and p_salesStatus = '판매중'
 	</select>
 
 	<!-- 검색어 + 지역 검색 -->
 	<select id="searchProductArea" parameterType="map" resultType="map">
-		select * from tb_product where p_name LIKE CONCAT('%', #{searchText}, '%') and p_deallocation=#{cLocation} and p_salesStatus = '판매중'
+		select * from tb_product where (p_name LIKE CONCAT('%', #{searchText}, '%') or p_deallocation LIKE CONCAT('%', #{searchText}, '%')) and p_deallocation=#{cLocation} and p_salesStatus = '판매중'
 	</select>
 
 	<select id="mainProduct" resultType="map">
