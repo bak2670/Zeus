@@ -24,10 +24,15 @@
 		// tb_payment에 넣어야지
 		if(paymentDAO.buyProduct(m_idx, p_idx) == 1){
 		%>
-		
+             <script>
+           	function popupp(){
+           		window.open('trade.jsp','asdf','location=yes');
+           	}
+           </script>
 			<script>
 				alert('구매되었습니다');
 				location.href='./trade.jsp';
+				/* popupp(); */
 			</script>
 		<%	
 		}

@@ -71,7 +71,7 @@
 %>
 	<script>
 		alert("업로드 되었습니다.")
-		location.href="product.jsp" // 임의, 정해진 곳으로 고쳐줘야함
+		location.href="main.jsp" // 임의, 정해진 곳으로 고쳐줘야함
 		
 	</script>
 			

@@ -1529,6 +1529,12 @@ function sendit(){
     if(document.getElementById("hpselect1").selected){
         document.getElementById("hpselect_hidden").value = 1
     }
+        if(document.getElementById("hpselect2").selected){
+        document.getElementById("hpselect_hidden").value = 1
+    }
+        if(document.getElementById("hpselect3").selected){
+        document.getElementById("hpselect_hidden").value = 1
+    }
 
     if(hpselect_hidden.value == '2'){
         alert('통신사를 선택해주세요')

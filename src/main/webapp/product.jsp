@@ -802,8 +802,8 @@
 	
 										<div class="place">
 	                                    <button type="button" class="placebutton" onclick="getLocation()">내 위치</button>
-	                                    <button type="button" class="placebutton">최근지역</button>
-	                                    <button type="button" class="placebutton">주소 검색</button>
+<!-- 	                                    <button type="button" class="placebutton">최근지역</button>
+	                                    <button type="button" class="placebutton">주소 검색</button> -->
 	                                </div>
 	                                <input type="text" name="p_deallocation" placeholder="선호 거래 지역을 검색해주세요." class="placesearch" value="">
 	                            </div>
