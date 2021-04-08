@@ -437,21 +437,7 @@ div {
 						}
 					%>
 				</div>
-				<!-- 
-				<div class="zzim4Box">
-					<button disabled="" class="zzim4BoxBtn1">
-						<img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAAEVsH/dAAAAAXNSR0IArs4c6QAAAWZJREFUKBVjYACChoaG7SBiIYgDBo2NjftgbGQaqOgkiM8EFZRDloSwZ86cycXQ3t6ugCnV2dnJiyIKtObG/v37WcCCIFf09PSIoKgACn5FEYBxgNawAiWvgviMMEEQDbRaiYWF5SVcrLu7Wwxo0Qa4AMgZQIEjcIFVq1axwcyCCwJVvIBzoAwmRkbGCU1NTZboEgxA1TOANqtgk9jS1tYmDJJAcSfQwtNCQkI2KILI2oHOlPn+/fthoNix+vr6WAyFQPsEf/78eQDoqJeCgoK+eXl5P1Gs6evr4/z8+fP2////83JwcDhVVFR8RLaBEehx5mvXrq0CChpwcnLalpeXP0NWAGOzXL9+PQ3I8WFmZvbFpQikGO5GoO86gfw0VlZW++rq6ksgSWQAVwgSBLqPCRiAS4FMC2DU2dTU1DyFKUZRCBOcP38+x6NHj3YA+VxAjzkDnfQZq0KYBlAM/P79eynQ9HgA91p/71jKrhEAAAAASUVORK5CYII="
-							width="5" height="9" alt="화살표 아이콘">
-					</button>
-					<div class="zzim4Txt">1/1</div>
-					<button disabled="" class="zzim4BoxBtn2">
-						<img
-							src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAASCAYAAAEVsH/dAAAAAXNSR0IArs4c6QAAAVhJREFUKBVtUC1Pw0AYvtJ2mRkYRAVYkhrAkjASxPYDCFTjZhBYmjb9TGiTOhAoSkKCWAIa12SC4HB0CQqNwC0touW5pnespSfu3ufj3i/iOM4tYQfgmeA6YUT7tW37k3IrtfDQNJRlKXAmiqL1ypfn+QbxPO+YS0jzzcFyEMdxH+Ib5f4yAaCpu16v51Zm13XPQBxWgF4AIw7qgJYewrnTFggK3Pu+v9klJEEQrFGhXf1dVdVdNjapB13VNO2Hp/k3FdpacJUGcOQNAkBAj+fI54uiODYM46VtYJh3hCxXIDV82DdN84MZ2MuNlEiSRJrNZk8It2RZHuq6/tVpZGQYhoMsyxLgTFGU8WQyWTQyMiN9p9OpmKbpI8JtSZL2Oo1YwzUMGsofoPycfmwYsQG9KIoLZBhhA6/UwI5EAxhOsaIbQRCOMP2AicuvBOESprllWf1loR3/AksYejyOGFk5AAAAAElFTkSuQmCC"
-							width="5" height="9" alt="화살표 아이콘">
-					</button>
-				</div>
-				 -->
+
 			</div>
 			<div class="zzimTop">
 				<a href="#" class="zzimTopBtn">TOP</a>
@@ -472,69 +458,20 @@ div {
                  <div class="kate">
                     <div class="kate_gori">
                     	<p><%=big %> &nbsp; > &nbsp;<%=mid %>&nbsp; >&nbsp; <%=small %></p>
-                        <!-- <div class="kate_gori1">
-                            <img src="./img/번개장터이미지/카테고리홈.png">홈
-                        </div>
-                        <div class="kate_gori2">
-                            <img src="./img/번개장터이미지/카테고리화살표.png">
-                            <div class="kate_select">
-                                <select name="select">
-                                    <option value="#">여성의류</option>
-                                    <option value="#">패션잡화</option>
-                                    <option value="#">남성의류</option>
-                                    <option value="#">디지털/가전</option>
-                                    <option value="#">도서/디켓</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="kate_gori2">
-                            <img src="./img/번개장터이미지/카테고리화살표.png">
-                            <div class="kate_select">
-                                <select name="select">
-                                    <option value="#">여성가방</option>
-                                    <option value="#">운동화/캐주얼화</option>
-                                    <option value="#">주얼리/액세서리</option>
-                                    <option value="#">여성화</option>
-                                    <option value="#">지갑</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="kate_gori2">
-                            <img src="./img/번개장터이미지/카테고리화살표.png">
-                            <div class="kate_select">
-                                <select name="select">
-                                    <option value="#">캐주얼화</option>
-                                    <option value="#">기타(운동화)</option>
-                                    <option value="#">런닝화/워커화</option>
-                                    <option value="#">농구화</option>
-                                    <option value="#">슬리퍼</option>
-                                </select>
-                            </div>
-                        </div> -->
+                        
                     </div>
         
                 </div> 
             <div class="category_container_result">
                 <div class="result_name_box"><span class="result_name">선택카테고리</span>의 추천상품</div>
-<!--                 <div class="right">
-                    <a class="new" href="#">
-                        최신순
-                    </a>
-                    <a class="new" href="#">
-                        인기순
-                    </a>
-                    <a class="new" href="#">
-                        저가순
-                    </a>
-                    <a class="new" href="#">
-                        고가순
-                    </a>
-                </div> -->
+
             </div>
     		
     		<%
     			int cateIdx = categoryDAO.searchCateIdx(big, mid, small);
     			List<HashMap<String,String>> cateProductList = productDAO.cateProduct(cateIdx);
+    			System.out.println(cateProductList);
+    			System.out.println(cateIdx);
     		%>
             <div class="category_item_box">
             	<%

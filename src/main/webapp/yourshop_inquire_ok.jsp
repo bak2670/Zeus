@@ -17,16 +17,31 @@
 	String rContent = request.getParameter("content");
 	inquire.setContent(rContent);
 	
-	//String storeIdx = request.getParameter("storeIdx");
-	
-	if(dao.reply(inquire, m_idx, m_idx) == 1){
-	%>
+	// yourshop
+	if(request.getParameter("storeIdx") != null){
+		System.out.println("yourshop");
+		String storeIdx = request.getParameter("storeIdx");
+		System.out.println(storeIdx);
+		
+		if(dao.reply(inquire, m_idx, storeIdx) == 1){
+			%>
+				<script>
+					alert('등록되었습니다.');
+					/* location.href='myshop2.jsp'; */
+					/* window.location=document.referrer; */
+					location.href="yourshop2.jsp?m_idx=<%=storeIdx%>";
+				</script>
+			<%			
+		}else{
+			%>
 		<script>
-			alert('등록되었습니다.');
-			location.href='myshop2.jsp';
-/* 			window.location=document.referrer; */
+			alert('실패했습니다.'); 
+			history.back();
 		</script>
-	<%			
+			<%
+		}
+		
+	
 	}else{
 		%>
 	<script>
@@ -36,5 +51,3 @@
 		<%
 	}
 %>
-	
-	

@@ -553,6 +553,7 @@ autoplaySpeed: 2000,
 				<a href="productDetail.jsp?p_idx=<%=product.get("p_idx")%>"
 					class="item">
 					<div class="item_img">
+					<%System.out.println(product.get("p_picture")); %>
 						<%
 						out.print("<img src='./uploads/" + product.get("p_picture") + "' alt='상품이미지'>"); // 상대경로. 얘만됨
 						%>

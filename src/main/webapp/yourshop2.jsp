@@ -567,7 +567,8 @@
                 </div>
             </div>
             
-            <form action="myshop_inquire_ok.jsp">
+            <form action="yourshop_inquire_ok.jsp">
+            	<input type="hidden" value=<%=store_idx %> name="storeIdx">
                 <div class="this_bot">
                     <textarea id ="myshop2_content"  name="content"></textarea>
                     <div class="this_bot2"><span id="myshop2_counter">0/100</span> 

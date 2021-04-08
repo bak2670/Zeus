@@ -118,7 +118,12 @@
                         </tr>
                         <tr>
                         	<th>판매자</th>
-                        	<td>oo</td>
+	                        <%
+	                           String seller = "";
+	                           seller = dao.getSeller(product.getMemidx());
+	                           
+	                        %>
+	                        <td><%= seller %></td>
                             <th>배송비</th>
                             <td><%= delcharge %></td>
                         </tr>

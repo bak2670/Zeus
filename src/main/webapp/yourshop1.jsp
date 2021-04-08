@@ -602,6 +602,11 @@
                             <div class="item_text">
                                 <div class = "text_top">
                                     <%=product.get("p_name")%>
+                                    <%
+                                    	if((product.get("p_salesStatus")).equals("판매완료")){
+                                    		out.println("  <b style='color: red;'>판매완료</b>");
+                                    	}
+                                    %>
                                 </div>
                                 <div class="text_bottom">
                                     <div class="text_bottom1">

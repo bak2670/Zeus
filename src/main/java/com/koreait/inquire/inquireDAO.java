@@ -41,16 +41,29 @@ public class inquireDAO {
 		return myshop_inquire_name;
 	}
 
-	// 내상점에 내가 남기는 상점문의 i_storeidx에 i_memidx가 i_content로 문의 남김
-	public int reply(inquireDTO inquire, String m_idx) {
+	// 내상점에 내가 남기는 상점문의 i_storeidx에 i_memidx가 i_content로 문의 남김 i_productIdx는 10000으로 통일
+	public int reply(inquireDTO inquire, String m_idx, String i_storeidx) {
 		HashMap<String, String> dataMap = new HashMap<>();
 		dataMap.put("i_memidx", m_idx);
-		dataMap.put("i_storeidx", m_idx);
+		dataMap.put("i_storeidx", i_storeidx);
 		dataMap.put("i_content", inquire.getContent());
 
+		System.out.println(dataMap);
+		
 		return sqlsession.insert("member.myshop_inquire3", dataMap);
 	}
 
+//	public int replyYourshop(inquireDTO inquire, String m_idx, String i_storeidx, String p_idx) {
+//		HashMap<String, String> dataMap = new HashMap<>();
+//		dataMap.put("i_memidx", m_idx);
+//		dataMap.put("i_storeidx", i_storeidx);
+//		dataMap.put("i_productidx", p_idx);
+//		dataMap.put("i_content", inquire.getContent());
+//
+//		System.out.println(dataMap);
+//		
+//		return sqlsession.insert("member.myshop_inquire3", dataMap);
+//	}
 	
 	// 상품상세 문의하기 입력부분
 	public int proinq(String m_idx, String p_idx, String p_memidx, String i_content) {

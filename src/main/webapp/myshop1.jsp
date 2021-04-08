@@ -532,15 +532,15 @@
                         <li class="myshop_text_center1">
                             <img src="./img/번개장터이미지/shop.png" width="14" height="13">상점오픈일 <%=member.getJoindate().substring(0,10) %>
                         </li>                                              
-                        <li class="myshop_text_center2">
+<!--                         <li class="myshop_text_center2">
                             <img src="./img/번개장터이미지/상점방문수.png" width="14" height="13">상점방문수0명
-                        </li>
+                        </li> -->
                         <li class="myshop_text_center3">
                             <img src="./img/번개장터이미지/상품판매.png" width="14" height="13">상품판매 0 회
                         </li>
-                        <li class="myshop_text_center4">
+<!--                         <li class="myshop_text_center4">
                             <img src="./img/번개장터이미지/택배발송.png" width="14" height="13">택배발송 0 회
-                        </li>
+                        </li> -->
                     </ul>
                     
                     

@@ -585,15 +585,31 @@
                                 <a href="#" class="followings_menu_1">상품<%=followingDAO.productcnt(Integer.parseInt(String.valueOf(fMember.get("m_idx")))) %></a>
                                 <a href="#" class="followings_menu_2">팔로워<%=followingDAO.youfollow(Integer.parseInt(String.valueOf(fMember.get("m_idx")))) %></a>
                             </div>
-                            <div class="followings_btn">
+                                                        <%
+        	                int followck = followingDAO.followingYN(m_idx, Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
+
+                            if(followck == 1){
+                            %>
+                            <div class="followers_btn" style="display: none;">
+                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
+                            </div>
+                            <div class="followings_btn1" style="display: block;">
                                 <button onclick="fdown(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
-                                <%
-                                	followingDAO.followingdel(Integer.parseInt(String.valueOf(fMember.get("m_idx"))));
-                                %>
                             </div>
-                            <div class="followers_btn1">
-                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>   
+                           
+                            <%
+                         	   }else{
+                            %>
+                             <div class="followers_btn">
+                                <button onclick="fup(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로우.png">팔로우</button>
                             </div>
+                            <div class="followings_btn1" style="display: none;">
+                                <button onclick="fdown(<%=fMember.get("m_idx")%>)"><img src="./img/번개장터이미지/팔로잉.png">팔로잉</button>
+                            </div>
+                            <%
+                          	  }
+                            %>
+
                     </div>
                     <%
 	                    List<HashMap<String,String>> followingPhoto = followingDAO.followingphoto(following);
@@ -632,6 +648,7 @@
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
 											//document.getElementById('zzim').innerHTML = zzimCnt;
+											location.reload();
 										}
 									}
 								}
@@ -646,7 +663,8 @@
 										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
-											alert('팔로우 취소!');
+											//alert('팔로우 취소!');
+											location.reload();
 											//document.getElementById('zzim').innerHTML = zzimCnt;	
 										}
 									}

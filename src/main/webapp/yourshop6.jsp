@@ -637,11 +637,12 @@
 									
 									xhr.onreadystatechange = function(){
 										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
-											alert(<%=fMember.get("m_idx")%>);
+											//alert(<%=fMember.get("m_idx")%>);
 											//document.getElementById('zzim').innerHTML = httpRequest.responseText;	
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
 											//document.getElementById('zzim').innerHTML = zzimCnt;
+											location.reload();
 										}
 									}
 								}
@@ -656,8 +657,9 @@
 										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
-											alert('팔로우 취소!');
+											//alert('팔로우 취소!');
 											//document.getElementById('zzim').innerHTML = zzimCnt;	
+											location.reload();
 										}
 									}
 									

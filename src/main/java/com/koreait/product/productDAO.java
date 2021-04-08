@@ -222,6 +222,20 @@ public class productDAO {
 		return dataMap;
 	}
 	
+	public String storeNum(String p_idx) {
+		String m_idx = sqlsession.selectOne("product.storeNum", p_idx);
+				
+		return m_idx;
+	}
+	
+	public String hpcall(String p_memidx) {
+		String m_hp = sqlsession.selectOne("member.hpcall", p_memidx);
+		
+		
+				
+		return m_hp;
+
+	}
 	
 	
 /*	public reviewDTO rev(reviewDTO review) {

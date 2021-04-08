@@ -624,7 +624,7 @@ div {
                 </div>
                 <div class="menubar2">
                     <div class="mn1">
-                        팔로잉<span class="mn_1"><%=followCnt%></span>
+                        팔로잉<span class="mn_1"><%=followingCnt%></span>
                     </div>
                 </div>
                 <!-- <div class="this_bot">
@@ -691,7 +691,7 @@ div {
 									
 									xhr.onreadystatechange = function(){
 										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
-											alert(<%=fMember.get("m_idx")%>);
+											//alert(<%=fMember.get("m_idx")%>);
 											//document.getElementById('zzim').innerHTML = httpRequest.responseText;	
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
@@ -710,7 +710,7 @@ div {
 										if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
 											//let zzimCnt = xhr.responseText;
 											//console.log(zzimCnt);
-											alert('팔로우 취소!');
+											//alert('팔로우 취소!');
 											//document.getElementById('zzim').innerHTML = zzimCnt;	
 										}
 									}

@@ -1486,41 +1486,89 @@ $(document).ready(function() {
 
 
 
-function sendit() {
-	const nameCheck = RegExp(/^[가-힣]+$/);
-	const hpCheck = RegExp(/^[0-9]*$/);
+function sendit(){
+	const userid = document.getElementById('userid');
+	const ssn1 = document.getElementById('ssn1');
+	const ssn2 = document.getElementById('ssn2');
+    const isSsn = document.getElementById('isSsn');
+    const hp = document.getElementById('hp');
 
+	// 정규식
+	const expNameText = /^[가-힣]*$/;  // 이름
+	const expSsn1Text= /^[0-9]/g
+	const expSsn2Text= /^[0-9]/g
+	const expHpText = /^\d{1,11}$/;
 
-	// 이름
-	if (!nameCheck.test($('#userid').val())) {
-		alert('이름은 한글로 입력하세요');
-		$('#username').val('');
-		$('#username').focus();
-		return false;
-	}
+	// 이름 검증
+    if(!expNameText.test(userid.value)){
+        alert('이름 형식을 확인하세요.')
+        userid.focus();
+        return false;
+    }
 
-	// 주민번호
-	if ($('#ssn1').val() == "" || $('#ssn2').val() == "") {
-		alert('주민등록번호를 입력하세요');
-		$('#ssn1').focus();
-		return false;
-	}
-	if ($('#isSsn').val() == 'n') {
-		alert('주민등록번호 유효성 체크를 눌러주세요');
-		return false;
-	}
+    if(userid.value == ''){
+        alert('이름을 입력하세요.')
+        userid.focus();
+        return false;
+    }
+    
+    // 주민번호 검증
+    if(!expSsn1Text.test(ssn1.value) && !expSsn2Text.test(ssn2.value)){
+        alert('주민번호 형식을 확인하세요.')
+        ssn1.focus();
+        return false;
+    }
 
+    if(isSsn.value == 'n'){
+        alert('주민등록번호 검증버튼을 눌러주세요.')
+        ssn1.focus();
+        return false;
+    }
+    
+     // 통신사 체크
+    if(document.getElementById("hpselect1").selected){
+        document.getElementById("hpselect_hidden").value = 1
+    }
 
-	// 휴대폰 
-	if (!hpCheck.test($('#hp').val())) {
-		alert('숫자만 입력하세요');
-		$('#hp').val('');
-		$('#hp').focus();
-		return false;
-	}
-	return true;
+    if(hpselect_hidden.value == '2'){
+        alert('통신사를 선택해주세요')
+        hpselect.focus();
+        return false;
+    }
+    
+    // 휴대폰 검증
+    if(!expHpText.test(hp.value)){
+        alert('휴대폰번호 형식을 확인하세요.')
+        hp.focus();
+        return false;
+    }
+
+    if(hp.value == ''){
+        alert('휴대폰번호를 입력하세요.')
+        hp.focus();
+        return false;
+    }
+    
+     // 동의함 체크
+    if(document.getElementById("custom1").checked){
+        document.getElementById("custom1_hidden").value = 1
+    }
+
+    if(custom1_hidden.value == '2'){
+        alert('필수항목을 동의해주세요.')
+        custom1.focus();
+        return false;
+    }
+    
+     if(injeung_hidden.value == '2'){
+        alert('휴대폰 인증을 해주세요')
+        injeung_num.focus();
+        return false;
+    }
+    
+    return true;
+    
 }
-
 
 // 주민번호 유효성 검사
 $(function() {
@@ -1560,6 +1608,29 @@ $(function() {
 	});
 });
 
+function ssnChange(){
+    const isSsn = document.getElementById('isSsn');
+    isSsn.value = 'n';
+}
+function hpbtn(){ 
+	hpNumber = Math.floor(Math.random() * 10000 + 1);
+
+	alert('인증번호 : ' + hpNumber);
+	
+}
+
+function hpjoin(){
+	hpNumber1 = $('#injeung_num').val();
+	
+		if(hpNumber1 == hpNumber){
+			alert('인증되었습니다.');
+			 document.getElementById("injeung_hidden").value = 1
+		}else{
+			alert('인증실패.');
+		}												
+	}
+	
+	
 //카테고리 상점 최신순,인기순,저가순,고가순 부분
 
 $(document).ready(function() {

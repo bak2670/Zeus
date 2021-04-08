@@ -94,6 +94,9 @@
 		insert into tb_inquire (i_memidx, i_storeidx, i_content, i_productidx) values (#{i_memidx},#{i_storeidx},#{i_content},10000)
 	</insert>
 	
+	<insert id="yourshop_inquire" parameterType="map">
+		insert into tb_inquire (i_memidx, i_storeidx, i_content, i_productidx) values (#{i_memidx},#{i_storeidx},#{i_content},10000)
+	</insert>
 	
 	<select id="inquire" parameterType="string" resultType="map">
 		select * from tb_inquire where i_productidx=#{i_productidx}
@@ -111,4 +114,8 @@
  	<update id="lastlogin" parameterType="map">
  	update tb_member set m_lastlogin=now() where m_idx=#{m_idx};
  	</update>
+ 	
+ 	<select id="hpcall" parameterType="string" resultType="string">
+		select m_hp from tb_member where m_idx=#{p_memidx}
+	</select>
 </mapper>

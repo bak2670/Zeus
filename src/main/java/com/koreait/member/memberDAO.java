@@ -207,7 +207,7 @@ public class memberDAO {
 			member.setSsn2(dataMap.get("m_ssn2"));
 			member.setStore(dataMap.get("m_store"));
 			member.setIntro(dataMap.get("m_intro"));
-			
+			member.setJoindate(String.valueOf(dataMap.get("m_joindate")));
 			return member;
 		}
 		return null;

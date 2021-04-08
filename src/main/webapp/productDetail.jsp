@@ -726,24 +726,24 @@
 	                        <div class="fDCCka"></div>
 	                    </div>
 	                    <div class="kkpfSe"></div>
-	                    <button direction="prev" class="prevButton">
+	                    <!-- <button direction="prev" class="prevButton">
 	                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAYAAAB/nHhDAAAAAXNSR0IArs4c6QAAARZJREFUWAntl9ENgkAMhpF32IFBYAwHYB7dBjdxCyfw6fx+c0dOSIghLQZDk6ZE49drf0qxKJzt5MUPITSwzy584C3+wIN5Apg9/hQcG8wSACvxi6jRrsTSJAGgCr9FsE7fm4AFAdbg9whX3ztL+ChmTKI7x8YA5mKqPbUJGdAh5ryTtGW/Ymoak+13Mtu5Kis/oRebilmtPOfnzzi1JtNHTKUC7vOYTXWQQKbHrJ2YCU602TgZcHbJyQeVgNluopQJ8FRk7VX7yoBOF4jNbZoqUSRJh7/fZ4jas3YrMCUSNMIJTncX4Bp3n49D/CTrdxFN/ld8u12dN5OWHZOfN2T5+leTv434y7Wv/JaWje9X+/wjnhf+Ap3Avf1JQDIIAAAAAElFTkSuQmCC"
 	                            width="12" height="22" alt="이전 페이지 이동 버튼 아이콘">
 	                    </button>
 	                    <button direction="next" class="nextButton">
 	                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAYAAAB/nHhDAAAAAXNSR0IArs4c6QAAAQVJREFUWAntl9EJg0AQRMV/7SGFaDE2kSaSbkwn6SIV+HV5Q7IgeiCRXcFwC8PJobPrzK3nVVV0pJSu4BKWB3LFC3QhSSAelYGYwOCeBNIa3IHFjYs6ItEAsd5C8QBNRJIeYvmheAJ/80X6JWcIMh/iFkgmRTF/e60gUzF/Wya7A7mWna+vQOl8E2g9Is//dv4x5q9FdZiZd77/+v0UmBzqzFNQ/XxnHPN37ZhVNwPt5xZ+JsPYgJgNCuJlo/U7BMg/AnkHYn4SIJ6bKXnafBk/zkJUzFxrhiznNVPdaHHezvQ7+aDFoWb6HECoWp0ZY6ZWPOQxn1lrJxIoQo+xsQdxe5Oo8Q2tG8U3KxMfPwAAAABJRU5ErkJggg=="
 	                            width="12" height="22" alt="다음 페이지 이동 버튼 아이콘">
-	                    </button>
-	                    <button class="zoomButton">
+	                    </button> -->
+	                    <!-- <button class="zoomButton">
 	                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAqBJREFUWAntlk9LFlEUxp0yyFRERKjADxC5CIncpIuWQUHt2pQfIFolEi3cuPMD1DcIWkRBS/FdFNIiWvUF7I9F0R/KQjKdfo+eA/O+c2fmzuvYygeeuddzn/PcM3+85016SpCm6RDLF+FleBqehAPwI3wHW/BJkiQvGZsDGw/AefgTxuAFouluKkg6kzCaIPYYjmXWPjDX3equ1+FxeApOwV7ouM/kFk9k0wO1Rja/BH9BxzKTKZgrVMbEh+Es/AodLSb9tTY2swkSffMN5jOxJmhH4BJ0PGISLDroiVjv/I1la/Pa75OcXvjQPDTMBTcLBRHPK8MwE9LExMjvg6/M5wfjaGUeoiHoX/tyZUKFAK9J6FiskO98SNdczXi+MiFCgM9T81ytlCN8YOI1xvgPp8QZnxvmqeFMibTnEIs64YQW/7/p7nTP1+yrdP+gqQrQ8SrokGkKaxhtm9mJMlMVoLNd0AnXCHiSWxhtmJn7B71VgBqLoOO1EfDeBzE6ZmbuH/RWAf7odbY3hazX+zJTFaAmI+jMH96d7vmq9i38hc92ZkUXNj0LHbNFutg4RkfhWzNcispDrH4uqKuNRCUViMi/IyPDlQJZexjxtGcwqqtle3y7uOQv8/ljXisl0vwSSfcsUYO6Wl9eVRxBr5v4AoV1OF6sDqyQcAS2oENdbTIgbQuh0TvXY/c732b+HdYrQK4k9UP9mMhCjeU6HIOHTTfI/BxcgP7BMU1/62L4xNhVEQmJc1D9vBNbBPxXU+faCoFxeDez0F0RdpejGC3C1Yxh53STgD7aq8px8Hd0EVHtF0O1VHU1NRad7TpedcI959z/xpiDiiC4YAufGS+gfZ0T7megzpPYtzoOivBHe/AkCp7ETY//19Fex21t+g8EN1dBluPf8gAAAABJRU5ErkJggg=="
 	                            width="16" height="16" alt="확대 버튼 아이콘">확대
-	                    </button>
-	                    <div class="photoOrder">
+	                    </button> -->
+	                    <!-- <div class="photoOrder">
 	                        <button class="pothoClick ptClickOn"></button>
 	                        <button class="pothoClick"></button>
 	                        <button class="pothoClick"></button>
 	                        <button class="pothoClick"></button>
-	                    </div>
+	                    </div> -->
 	                    <div class="reImgModal">
 	                        <div class="reImgBox1">
 	                            <button type="button" class="reImgCancle">
@@ -835,7 +835,7 @@
 	                                        </div> --%>
 	                                        <div class="icon">
 	                                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAuRJREFUWAnFV01rE1EUzUwSMWATENpFRNyIi0YI+eiui4LoogWFgkvBH6Dgpip+dONKgivdC3XlpkWELkTQRVw1H4QwWQmhLrKwq1IwxHyM54zvDck4mc6bTO3AY97MO/eeM/e9d+c+LeLzqlQq8Wg0ujIajW6ZprkIs7SmaRfQN9HvsOG5pev6h+Fw+LVYLPb9uNaOAzUajYXBYPAcPHeATR2HF+OHEPMuFou9yGazP71spgowDONMt9t9BOMNtDkvJx5jRxgrJRKJl5lM5rcbzlVArVabR6i3YbDsZhTgXRlTs57P5w+ctv8IAPkiwr2LdskJnuUZU7KPtgoRrXE/EwL45SDeC5tcEgoRS+OR0OUg55xhPyly8tA3OcgleW0BYsEpzTnm9THaknTm874suCy4JYBbDU9c7UoXvugzwllRMvoL3hCcEUsA9zneB91qAfgjc4IzojPD4UuYZP7rRU5y60yvYPab4cIUmSK3ztweplcVX+TWEYqMilGYWHJzEabDdKroK60jO52aAHLbiUhReShwTIHJNcBiYqYLX/IxoIMOIxBYANLweRIXCoWb2FJrEPJdUUiHa8BQNLLh2EY7+IM+a7fbZ3O53G4ymbwKf08B+GWDPDrAtrR6vX4dNdwnD5yfoR9w9hCReE9ws9m82Ov1XqF728sYUbuhMR0CxEoljGz4DdPyQP6gqtXqXayxt1NEHOL9vFWQAPgawHtTgEqvEQm4Mrcg5An6VxDdL24OMPYGEbtvCeCvsd/vcwGF+UdkZRyFmHMuAo7i8fhlVsxWHhClc8kFOMur1BRy+izJct1ORCydMVCehdGnbVlwWXBbAOt2zNs6wrbv05EyjL7JMX5GsAXQG6tVgFZPQgR90vd4RUzOCQFCRAtAFpphTkeZPkE+cSZwFSBEHGCerqG/icbjVdCLtpv05fxy6dDahvLB7X5qh1OnGMfxnFUUj+dWLYHtJo/nBhaZ0vH8D6NELRJSWvu9AAAAAElFTkSuQmCC"
-	                                                width="16" height="16" alt="상품 상태 아이콘">5일 전
+	                                                width="16" height="16" alt="상품 상태 아이콘"><%=product.getRegdate().substring(0,10)%>
 	                                        </div>
 	                                    </div>
 	                                    <button class="report">
@@ -906,6 +906,7 @@
 											let zzimCnt = xhr.responseText;
 											console.log(zzimCnt);
 											document.getElementById('zzim').innerHTML = zzimCnt;
+											location.reload();
 										}
 									}
 								}
@@ -977,27 +978,21 @@
 						<%
 	                        }
 	                    %>
-	                        
-	                        
-<%--  	                        <div class="zzimContainer">
-	                            <div class="zzimBox">
-	                                <button class="zzimButton1"  id="zzim" onclick="up()">
-	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
-	                                        width="16" height="16" alt="찜 아이콘"> 
-	                                    <span>찜</span>
-	                                    <span id=""><%=product.getZzim()%></span>
-	                                </button>
-	
-	                                <button class="zzimButton2" style="display: none;" id="zzim" onclick="down()">
-	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K"
-	                                        width="16" height="16" class="yesC" alt="찜 아이콘"> <span>찜</span><span><%=product.getZzim()%></span>
-	                                </button>
-	                                <div class="zzimNo">
-	                                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo="
-	                                        width="14" height="14" alt="찜 아이콘"> <span class="zzimNoTxt"></span> 되었습니다
-	                                </div> --%>
+							<script>
+	                        function hpcall(aaa){ 
+								console.log(aaa)
+	                        	alert('연락처 : ' + aaa );
+	                        	
+	                        }
+	                        </script>                     
+
 	                            </div>
-	                            <button class="callButton">연락하기</button>
+	                            <%
+	                            String p_memidx = pDAO.storeNum(p_idx);
+	                            String call = String.valueOf(pDAO.hpcall(p_memidx));
+	                            
+	                            %>
+	                            <button class="callButton" onclick="hpcall('<%=call%>');">연락하기</button>
 	                            <a class="buyButton" href="buy.jsp?p_idx=<%=p_idx%>">바로구매</a>
 	                        </div>
 	                        
@@ -1816,7 +1811,7 @@
 		                        %>
 		                            <div class="pdAdd">
 		                                <a data-pid="135395297" class="addLink"
-		                                    href="/products/135395297?ref=%EC%83%81%ED%92%88%EB%82%B4%EC%83%81%EC%A0%90%EC%83%81%ED%92%88">
+		                                    href="./productDetail.jsp?p_idx=<%=pList.get("p_idx") %>" >
 		                                    <img src='./uploads/<%=pList.get("p_picture") %>' width="102" height="107" alt="상품 이미지">
 		                                    <div class="pdAddPrice">
 		                                        <span><%=pList.get("p_price")%></span>원
@@ -1910,7 +1905,7 @@
 		                    </div>
 		                </div>
 		                <div class="sideButton">
-		                    <button class="callBtn">연락하기</button>
+		                    <button class="callBtn"  onclick="hpcall('<%=call%>')">연락하기</button>
 		                    <a class="buyBtn" href="buy.jsp?p_idx=<%=p_idx%>">바로구매</a>
 		                </div>
 		            </div>

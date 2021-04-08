@@ -5984,7 +5984,7 @@ input[type="radio"] {
     -webkit-box-pack: center;
     justify-content: center;
     padding-top: 30px;
-background: rgb(249, 249, 249); height: 2000px;}
+background: rgb(249, 249, 249); /* height: 2000px; */}
 .kate { width: 1030px; }
 .kate_gori { display: flex;
     -webkit-box-align: center;
