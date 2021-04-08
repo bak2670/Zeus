@@ -15,9 +15,9 @@
     </environment>
   </environments>
   <mappers>
-     <mapper resource="com/koreait/db/review.xml"/>
-    <mapper resource="com/koreait/db/member.xml"/>
-    <mapper resource="com/koreait/db/category.xml"/>
-    <mapper resource="com/koreait/db/onetoone.xml"/>
+    <mapper resource="com/koreait/admin/db/review.xml"/>
+    <mapper resource="com/koreait/admin/db/member.xml"/>
+    <mapper resource="com/koreait/admin/db/category.xml"/>
+    <mapper resource="com/koreait/admin/db/onetoone.xml"/>
   </mappers>
 </configuration>

@@ -104,7 +104,7 @@
                 <div class="pro_detail1">
                     <table>
                         <tr>
-                            <td rowspan="5"><img src="../uploads/<%=product.getPicture()%>" alt='상품이미지'></td>
+                            <td rowspan="5"><img src="../../uploads/<%=product.getPicture()%>" alt='상품이미지'></td>
                             <th>상품명</th>
                             <td><%=product.getName()%></td>
                             <th>상품상태</th>
@@ -118,7 +118,7 @@
                         </tr>
                         <tr>
                         	<th>판매자</th>
-                        	<td>ㅇㅇ</td>
+                        	<td>oo</td>
                             <th>배송비</th>
                             <td><%= delcharge %></td>
                         </tr>
