@@ -113,6 +113,7 @@ public class PaymentDAO {
 	}
 	public String getProduct(int p_idx) {
 		String product = "";
+		
 		try {
 			conn = Dbconn.getConnection();
 			sql = "select p_name as product from tb_product where p_idx = ?";
@@ -122,6 +123,7 @@ public class PaymentDAO {
 			if(rs.next()){
 				if(rs.getString("product")!=null) {
 					product = rs.getString("product");
+					
 				}else {
 					product = "삭제된 상품";
 				}
@@ -132,7 +134,24 @@ public class PaymentDAO {
 		return product; 
 	}
 	
-	
+	public String getPrice(int p_idx) {
+		String price = "";
+		
+		try {
+			conn = Dbconn.getConnection();
+			sql = "select p_price from tb_product where p_idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, p_idx);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				int p_price = rs.getInt("p_price");
+				price = String.valueOf(p_price) + "원";
+			} 
+		}catch(Exception e) { 
+			e.printStackTrace();
+		}
+		return price; 
+	}
 		
 	public int page() {
 		int totalCount = 0;

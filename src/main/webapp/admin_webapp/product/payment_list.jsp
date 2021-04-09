@@ -100,6 +100,7 @@ request.setCharacterEncoding("UTF-8");
                             <th>판매자</th>
                             <th>상품명</th>
                             <th>구매자</th>
+                            <th>가격</th>
                             <th>결제시각</th>
                         </tr>
 <%
@@ -109,6 +110,7 @@ request.setCharacterEncoding("UTF-8");
 							String buyerName = dao.getMemname(payment.getBuyerIdx());
 							String buyerStore = "("+dao.getMemstore(payment.getBuyerIdx())+")";
 							String product = dao.getProduct(payment.getProductIdx());
+							String price = dao.getPrice(payment.getProductIdx());
 							
 							if(sellerName == ""){
 								sellerName = "<span class='redtxt'>탈퇴한 유저</span>";
@@ -127,6 +129,7 @@ request.setCharacterEncoding("UTF-8");
                             <td><%= sellerName %><%= sellerStore %></td>
                             <td><%= product %></td>
                             <td><%= buyerName %><%= buyerStore %></td>
+                            <td><%= price%></td>
                             <td><%= payment.getRegdate() %></td>
                         </tr>
 <%

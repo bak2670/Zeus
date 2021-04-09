@@ -1,5 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.koreait.admin.product.ProductDTO" %>
+<jsp:useBean id="dao" class="com.koreait.admin.product.ProductDAO"/>
+<jsp:useBean id="dto" class="com.koreait.admin.product.ProductDTO"/>
+<jsp:setProperty property="*" name="dto"/>
+<%
+   request.setCharacterEncoding("UTF-8");
+   int totalCount = 0;
+   int pagePerCount = 10;
+   int start = 0;
+   
+   String pageNum = request.getParameter("pageNum");
+   String m_idx = request.getParameter("m_idx");
+   List<ProductDTO> productList = dao.mem_detail(start, pagePerCount, m_idx);
+   if(pageNum != null && !pageNum.equals("")){
+      start = (Integer.parseInt(pageNum)-1) * pagePerCount;
+   }else{
+      pageNum = "1";
+      start = 0;
+   } 
+   int int_idx = Integer.parseInt(m_idx);
+   int proCnt = dao.proCnt(int_idx); 
+   
+   totalCount = proCnt;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,19 +70,31 @@
             <h1><img src="../images/arrow.png">전체회원관리</h1>
             <div class="mem_products">
                 <div class="products_list">
-                    <h3>상품 <span class="redtxt">8개</span></h3>
-                    <div onclick="location.href='../product/product_detail.jsp'"><a href="../product/product_detail.jsp"><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></a></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <div><img src="../images/상품.PNG"><p>아이폰 12,12프로 실리콘케이스</p><p>4,000원</p></div>
-                    <input type="button" value="돌아가기" onclick="location.href='./mem_detail.jsp'">
-                    <p class="pageNum">1 2 3 4 5</p>
+                    <h3>상품 <span class="redtxt"></span></h3>
+                    <%
+                    for(ProductDTO product : productList){
+                       
+
+                    %>
+                    
+                    <div onclick="location.href='../product/product_detail.jsp?p_idx=%=product.getIdx()%>'"><img src="../../uploads/<%=product.getPicture()%>"><p><%= product.getName() %></p><p><%= product.getPrice() %></p></div>
+<%
+                    }
+               int pageNums = 0;
+               if(totalCount % pagePerCount == 0){
+                  pageNums = (totalCount / pagePerCount);
+                  
+               }else{
+                  pageNums = (totalCount / pagePerCount) + 1;
+               }
+%>
+                    <input type="button" value="돌아가기" onclick="location.href='./mem_detail.jsp?m_idx=<%=m_idx%>'">
+                    <p class="pageNum">
+                    <%
+            for(int i=1;i<=pageNums;i++){
+               out.print("<a href='mem_products.jsp?pageNum=" + i + "'>[" + i + "]</a>" + "&nbsp;&nbsp;");
+            }
+         %></p>
                 </div>
             </div>
         </div>

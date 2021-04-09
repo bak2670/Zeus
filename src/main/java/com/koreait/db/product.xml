@@ -48,7 +48,7 @@
 	</select>
 	
 	<select id="cateProduct" parameterType="int" resultType="map">
-		select * from tb_product where p_category = #{c_idx};
+		select * from tb_product where p_category = #{c_idx} order by p_idx desc;
 	</select>
 
 	<!-- 지헌님 상품상세 -->

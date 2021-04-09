@@ -470,8 +470,7 @@ div {
     		<%
     			int cateIdx = categoryDAO.searchCateIdx(big, mid, small);
     			List<HashMap<String,String>> cateProductList = productDAO.cateProduct(cateIdx);
-    			System.out.println(cateProductList);
-    			System.out.println(cateIdx);
+
     		%>
             <div class="category_item_box">
             	<%

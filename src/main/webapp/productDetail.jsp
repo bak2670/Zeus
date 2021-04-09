@@ -1603,10 +1603,13 @@
 			                    </div>
 			                </div>
 						</div>
-					
+					<%
+					List<HashMap<String, String>> inquireList = inquireDAO.inquire(p_idx);
+					int inquireCnt = inquireList.size();
+					%>
 				        <div class="enquiryContainer">
 				            <div class="enquiryTitle">
-				                상품문의 <span class="enquirySub">0</span>
+				                상품문의 <span class="enquirySub"><%=inquireCnt %></span>
 				            </div>
 				            <div class="enquiryBox1">
 				                <form method="post" action="productDetail_inquire_ok.jsp?m_idx=<%=m_idx %>&p_idx=<%=product.getIdx()%>&p_memidx=<%=product.getMemidx()%>">
@@ -1649,8 +1652,7 @@
 				                        </div>
 				                    </div>
 									<%   
-										List<HashMap<String, String>> inquireList = inquireDAO.inquire(p_idx);
-										int inquireCnt = inquireList.size();
+
 										for(HashMap inq : inquireList){
 									%>
 									<div class="inquiryContent">
