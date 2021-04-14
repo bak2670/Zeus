@@ -504,6 +504,7 @@
                     <div class="yourshop_product"><a href="./yourshop1.jsp?m_idx=<%=store_idx%>" >상품 <%=memberDAO.memProductCnt(store_idx)%> | </a><a href="./yourshop5.jsp?m_idx=<%=store_idx %>" >팔로워 <%=productDAO.storeFollwer(Integer.parseInt(store_idx))%></a></div> 
                     <div class="myshop_bottom yourshop_bottom"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAcCAYAAAATFf3WAAAAAXNSR0IArs4c6QAAAWNJREFUWAntVrsNwjAUxBSpYAd6FmACtqCjRKxCwzRI1BTULMAK0KJwBzzJEPvFL04kFzzpFP/u3vFsGY9GiVHX9RzYARfg9gHbHJsnyvS/DMkrYA88gFhwjmsqqwMRtPJe65kQOIpIwpdrTSZFs6tBVsUae0syEbdwpHo8c9q2ivbvl5zkMynkmMFxbALja0Cbj1HJIbeX0AwsMzLkcL/Suq+e10Hpb+hOvCFL8+6cm/oEbqXfT21rFUzVGHSdZvCakbnBRUWDITmCkxjUDB6E3OGbw01LhyNTxDWjuoXJci9qOofBsv/qPJNlPhb8/f+cyfKeW77Jf1urALZwDGyBM8AXc25Qg1rU1O5bzdZ7DgIz4AQMFdSetTsJrACRlRvSnPxo5jBXkoQNsAh473uIOZjLFDS4MjHyFptzOZQ9591ntdt4J7YJ0GCnh2SbcGyez6rYXGjcfGhDIkOO/Q3mVvcJF79v57FKjKAAAAAASUVORK5CYII=" width="20" height="14" alt="팔로우 추가" class="follow_img"><a href="#" >팔로우</a></div>
                     <!-- <div class="myshop_bottom yourshop_bottom"><a href="#" >번개톡</a></div> -->
+                    
                 </div>
                 <div class="myshop_text">
                     <div class="myshop_text_top"> 
