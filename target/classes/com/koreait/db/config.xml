@@ -8,18 +8,35 @@
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
 				<property name="url"
 					value="jdbc:mysql://localhost:3306/zeus" />
 				<property name="username" value="root" />
 				<property name="password" value="1234" />
+				<property name="poolMaximumActiveConnections" value="20"/>
+	            <property name="poolMaximumIdleConnections" value="20"/>
+	            <property name="poolMaximumCheckoutTime" value="10000"/>
+	            <property name="poolPingEnabled" value="true"/>
+	            <property name="poolPingQuery" value="select 1"/>
+	            <property name="poolPingConnectionsNotUsedFor" value="10000"/>
+	            <property name="poolTimeToWait" value="15000"/>
+
 			</dataSource>
 		</environment>
 	</environments>
 	<mappers>
 		<!-- sql을 모아놓을 xml -->
-		<mapper resource="com/koreait/db/category.xml" />
+ 		<mapper resource="com/koreait/db/category.xml" />
 		<mapper resource="com/koreait/db/product.xml" />
 		<mapper resource="com/koreait/db/member.xml" />
+		<mapper resource="com/koreait/db/follow.xml" />
+		<mapper resource="com/koreait/db/yourshop.xml" />
+		<mapper resource="com/koreait/db/payment.xml" />
+		<mapper resource="com/koreait/db/recentproduct.xml" />
+		<mapper resource="com/koreait/db/report.xml" />
+		<mapper resource="com/koreait/db/block.xml" />
+  		<!--<mapper resource="com.koreait/db/review.xml" />
+
+	   <mapper resource="com.koreait/db/inquire.xml" /> -->
 	</mappers>
 </configuration>

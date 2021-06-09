@@ -14,7 +14,7 @@ public class Dbconn {
 			String uid = "root";
 			String upw = "1234";
 			
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(url, uid, upw);
 		}catch(Exception e) {
 			e.printStackTrace();

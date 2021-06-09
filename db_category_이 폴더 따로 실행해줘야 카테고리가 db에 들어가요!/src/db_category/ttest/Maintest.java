@@ -11,7 +11,7 @@ public class Maintest {
 	public static void main(String[] args) {
 		
 		Scanner sc;
-		String file1 = "C:/CODE/ZEUS/db_category/src/category.txt";
+		String file1 = "D:/beak/ZEUS/db_category_이 폴더 따로 실행해줘야 카테고리가 db에 들어가요!/src/category.txt";
 		String c_big = "";
 		String c_middle = "";
 		// String c_small = "";

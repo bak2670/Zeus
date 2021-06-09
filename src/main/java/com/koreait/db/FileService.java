@@ -5,7 +5,7 @@ import com.koreait.product.*;
 
 public class FileService {
 	private productDAO productDAO = null;
-	public static String SAVE_PATH = "C:/CODE/ZEUS/ZEUS/src/main/webapp/uploads";  // 원하는 위치 파일 경로 넣어주기
+	public static String SAVE_PATH = "D:/beak/ZEUS/src/main/webapp/uploads";  // 원하는 위치 파일 경로 넣어주기
 
 	public FileService() {
 		productDAO = new productDAO();		
